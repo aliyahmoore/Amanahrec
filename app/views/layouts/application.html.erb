@@ -18,6 +18,21 @@
   </head>
 
   <body>
+    <nav class="navbar">
+    <div class="nav-wrapper">
+      <!-- Logo or brand name -->
+      <a class="brand" href="<%= root_path %>">MyApp</a>
+
+      <!-- Navigation Links -->
+      <ul class="nav-links">
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "Activities", "#" %></li>
+        <li><%= link_to "Events", "#" %></li>
+        <li><%= link_to "About", "#" %></li>
+        <li><%= link_to "Contact", "#" %></li>
+      </ul>
+    </div>
+  </nav>
     <%= yield %>
   </body>
 </html>
