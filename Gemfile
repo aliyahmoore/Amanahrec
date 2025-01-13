@@ -55,3 +55,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem 'boring_generators'
+gem "devise", "~> 4.9"
