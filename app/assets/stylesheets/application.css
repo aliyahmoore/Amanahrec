@@ -18,10 +18,11 @@
 
 /* The main navbar container */
 .navbar {
-    background-color: #333; 
-    color: #fff;            
+    background-color: #403f2b; 
+    color: #DACCB1;            
     padding: 0.75rem 1rem;
-    font-family: Arial, sans-serif;
+    font-family: phosphate;
+    font-weight: inline;
   }
   .nav-wrapper {
     display: flex;
@@ -34,12 +35,13 @@
     font-size: 1.25rem;
     font-weight: bold;
     text-decoration: none;
-    color: #fff; /* Matches navbar text color */
+    color: #DACCB1; /* Matches navbar text color */
   }
   
   /* The list of nav links */
   .nav-links {
     list-style: none;
+    color:#DACCB1;
     display: flex;
     gap: 1.5rem; /* Space between links */
     margin: 0;   /* Remove default list margins */
@@ -53,7 +55,7 @@
   
   /* Anchor tags in the nav list */
   .nav-links a {
-    color: #fff;
+    color: #DACCB1;
     text-decoration: none;
     font-weight: 600;
     transition: color 0.2s ease;
@@ -61,7 +63,7 @@
   
   /* Hover effect for links */
   .nav-links a:hover {
-    color: #ccc; /* Lighten on hover */
+    color: #E9E2D8; /* Lighten on hover */
   }
   
   /* Responsive adjustments: stack links on smaller screens */
