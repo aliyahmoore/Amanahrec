@@ -1,0 +1,18 @@
+  .heading {
+    text-align: center;
+    font-size: 2em;
+    color: #57573F;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #57573F;
+    width: 50%; 
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
+  }
+ 
+  .news-image {
+    display: block; 
+    margin: 20px auto; 
+    max-width: 40%; 
+  }
+  
