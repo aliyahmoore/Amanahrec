@@ -3,19 +3,58 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
+  <!-- First Name -->
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", placeholder: "Enter your first name" %>
   </div>
 
+  <!-- Last Name -->
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", placeholder: "Enter your last name" %>
+  </div>
+
+  <!-- Email -->
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Enter your email address" %>
+  </div>
+
+  <!-- Phone Number -->
+  <div class="field">
+    <%= f.label :phone_number %><br />
+    <%= f.text_field :phone_number, placeholder: "e.g., +1 (123) 456-7890" %>
+  </div>
+
+  <!-- Gender -->
+  <div class="field">
+    <%= f.label :gender %><br />
+    <%= f.text_field :gender, placeholder: "e.g., Male, Female" %>
+  </div>
+
+  <!-- Age Range -->
+  <div class="field">
+    <%= f.label :age_range %><br />
+    <%= f.text_field :age_range, placeholder: "e.g., 18-25, 26-35" %>
+  </div>
+
+  <!-- Ethnicity -->
+  <div class="field">
+    <%= f.label :ethnicity %><br />
+    <%= f.text_field :ethnicity, placeholder: "e.g., Asian, Hispanic" %>
+  </div>
+
+  <!-- Password -->
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
+  <!-- Password Confirmation -->
   <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
