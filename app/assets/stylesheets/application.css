@@ -13,3 +13,67 @@
  *= require_tree .
  *= require_self
  */
+
+ 
+
+/* The main navbar container */
+.navbar {
+    background-color: #333; 
+    color: #fff;            
+    padding: 0.75rem 1rem;
+    font-family: Arial, sans-serif;
+  }
+  .nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* The brand/logo link */
+  .brand {
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff; /* Matches navbar text color */
+  }
+  
+  /* The list of nav links */
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem; /* Space between links */
+    margin: 0;   /* Remove default list margins */
+    padding: 0;  /* Remove default list padding */
+  }
+  
+  /* Each nav link */
+  .nav-links li {
+    display: inline-block;
+  }
+  
+  /* Anchor tags in the nav list */
+  .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+  }
+  
+  /* Hover effect for links */
+  .nav-links a:hover {
+    color: #ccc; /* Lighten on hover */
+  }
+  
+  /* Responsive adjustments: stack links on smaller screens */
+  @media (max-width: 768px) {
+    .nav-wrapper {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .nav-links {
+      flex-direction: column;
+      margin-top: 1rem;
+      gap: 0.75rem;
+    }
+  }
+  
