@@ -8,7 +8,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.2]
       t.string :last_name, null: false, limit: 255
       t.string :email, null: false, default: "", limit: 255
       t.string :phone_number, null: true, limit: 15
-      t.boolean :member, null: false, default: false 
+      t.boolean :member, null: false, default: false
       t.string :gender, null: true, limit: 50
       t.string :age_range, null: true, limit: 50
       t.string :ethnicity, null: true, limit: 100
