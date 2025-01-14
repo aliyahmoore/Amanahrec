@@ -15,14 +15,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_14_184049) do
   enable_extension "plpgsql"
 
   create_table "users", force: :cascade do |t|
-    t.string "first_name", null: false
-    t.string "last_name", null: false
-    t.string "email", default: "", null: false
-    t.string "phone_number"
+    t.string "first_name", limit: 255, null: false
+    t.string "last_name", limit: 255, null: false
+    t.string "email", limit: 255, default: "", null: false
+    t.string "phone_number", limit: 15
     t.boolean "member", default: false, null: false
-    t.string "gender"
-    t.string "age_range"
-    t.string "ethnicity"
+    t.string "gender", limit: 50
+    t.string "age_range", limit: 50
+    t.string "ethnicity", limit: 100
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"

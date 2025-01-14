@@ -4,14 +4,14 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.2]
   def change
     create_table :users do |t|
       ## Custom Fields
-      t.string :first_name, null: false
-      t.string :last_name, null: false
-      t.string :email, null: false, default: ""
-      t.string :phone_number, null: true 
+      t.string :first_name, null: false, limit: 255
+      t.string :last_name, null: false, limit: 255
+      t.string :email, null: false, default: "", limit: 255
+      t.string :phone_number, null: true, limit: 15
       t.boolean :member, null: false, default: false 
-      t.string :gender, null: true
-      t.string :age_range, null: true 
-      t.string :ethnicity, null: true
+      t.string :gender, null: true, limit: 50
+      t.string :age_range, null: true, limit: 50
+      t.string :ethnicity, null: true, limit: 100
 
       ## Devise Fields
       t.string :encrypted_password, null: false, default: ""
