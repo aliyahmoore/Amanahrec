@@ -1,40 +1,3 @@
-h1 {
-    color: darkgreen; 
-    text-align: center;
-    margin-top: 2rem;
-  }
-  
-  p {
-    text-align: center;
-    font-size: 1.1rem;
-    margin-top: 1rem;
-  }
-  /* Hero Section */
-.hero-section {
-    width: 100%;
-    overflow: hidden;
-  }
-  
-  .hero-image {
-    position: relative;
-  }
-  
-  /* The hero image stretches to fill the screen width */
-  .hero-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  /* The logo is positioned absolutely over the hero image */
-  .hero-logo {
-    position: absolute;
-    top: 50%;  /* Adjust as desired to place your logo vertically */
-    left: 50%;
-    transform: translate(-50%, -50%); 
-    /* Center the logo horizontally and vertically */
-  }
-  
 
 * {
     margin: 0;
@@ -42,26 +5,74 @@ h1 {
     box-sizing: border-box;
   }
   
-  /* Styling for the heading */
+ 
+  body {
+    background-color: #E9E2D8;  /* Brand background */
+    font-family: "Phosphate", Arial, sans-serif;
+    color: #403F2B; /* Default text color (brownish) */
+  }
+  
+  /* Headings */
+  h1, h2, h3 {
+    font-family: "Phosphate", Arial, sans-serif; 
+    color: #403F2B; /* brand accent text color */
+  }
+  
+  /* Example of adjusting the existing h1 heading */
   h1 {
     text-align: center;
     margin: 2rem 0 1rem;
-    font-family: Arial, sans-serif;
+    /* color can stay #403F2B or you can try #57573F if you like */
+    font-size: 2.5rem; /* Adjust as needed */
   }
   
-  /* Container for the three cards */
+  /* Paragraphs */
+  p {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    color: #57573F; /* second brand accent color for body text */
+  }
+  
+  /* Hero Section */
+  .hero-section {
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  /* The hero image container */
+  .hero-image {
+    position: relative;
+  }
+  
+  /* The hero image itself */
+  .hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* The logo (centered on the hero image) */
+  .hero-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* Card Section Container */
   .card-section {
     display: flex;
-    justify-content: space-around; /* Space the cards out horizontally */
-    align-items: flex-start;       /* Align them at the top */
+    justify-content: space-around;
+    align-items: flex-start;
     margin: 2rem auto;
-    width: 80%;                   /* Adjust width to taste */
-    max-width: 1200px;           /* Prevents the section from growing too wide */
+    width: 80%;
+    max-width: 1200px;
   }
   
-  /* Individual card styling */
+  /* Individual Cards */
   .card {
-    background-color: #f4f4f4;
+    background-color: #DACCB1;  /* third brand accent color for the card background */
     width: 30%;
     margin: 0 0.5rem;
     padding: 1rem;
@@ -70,7 +81,7 @@ h1 {
     text-align: center;
   }
   
-  /* Optional image styling */
+  /* Card image styling (if you add images) */
   .card img {
     max-width: 100%;
     height: auto;
@@ -78,44 +89,55 @@ h1 {
     margin-bottom: 1rem;
   }
   
-  /* Text in each card */
+  /* Card titles */
   .card h3 {
     margin-bottom: 0.5rem;
-    font-size: 1.25rem;
-    color: #333;
+    font-size: 1.5rem;
+    color: #403F2B;
   }
   
+  /* Card paragraphs */
   .card p {
     font-size: 1rem;
-    color: #555;
+    color: #57573F;
   }
-
+  
+  /* Upcoming Events Container */
   .upcoming-events {
     width: 80%;
     max-width: 1200px;
     margin: 2rem auto;
     padding: 1rem;
-    background-color: #eef2f5;
+    background-color: #DACCB1;
     border-radius: 6px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
+  
+  /* Upcoming Events Heading */
   .upcoming-events h2 {
     margin-bottom: 1rem;
     font-size: 1.5rem;
     text-align: left;
+    color: #403F2B;
   }
+  
+  /* Events list styling */
   .upcoming-events ul {
     list-style-type: none;
   }
+  
   .upcoming-events li {
     padding: 0.75rem 0;
     border-bottom: 1px solid #ccc;
     font-size: 1rem;
+    color: #57573F;
   }
+  
   .upcoming-events li:last-child {
     border-bottom: none;
+  }
   
-  /* Responsive Adjustments (optional) */
+  /* Responsive Adjustments */
   @media (max-width: 768px) {
     .card-section {
       flex-direction: column;
@@ -126,4 +148,4 @@ h1 {
       margin-bottom: 1.5rem;
     }
   }
-  }
+  
