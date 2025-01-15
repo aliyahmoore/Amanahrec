@@ -41,9 +41,18 @@
   
   <!-- Ethnicity -->
   <div class="field">
-    <%= f.label :ethnicity %><br />
-    <%= f.select :ethnicity, options_for_select([["African", "African"], ["Central Asian", "Central Asian"], ["East Asian", "East Asian"], ["European", "European"], ["Middle Eastern", "Middle Eastern"], ["North African", "North African"], ["South Asian", "South Asian"], ["Southeast Asian", "Southeast Asian"], ["Other", "Other"]]), { prompt: "Select Ethnicity" } %>
-  </div>
+  <%= f.label :ethnicity %><br />
+  <%= f.select :ethnicity, options_for_select([
+    ["White", "White"],
+    ["Black or African American", "Black or African American"],
+    ["Asian", "Asian"],
+    ["American Indian or Alaska Native", "American Indian or Alaska Native"],
+    ["Native Hawaiian or Other Pacific Islander", "Native Hawaiian or Other Pacific Islander"],
+    ["Hispanic or Latino", "Hispanic or Latino"],
+    ["Other", "Other"],
+    ["Prefer not to say", "Prefer not to say"]
+  ]), { prompt: "Select Ethnicity" } %>
+</div>
 
   <!-- Password -->
   <div class="field">
