@@ -5,58 +5,66 @@
 
   <!-- First Name -->
   <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", placeholder: "Enter your first name" %>
+    <%= f.label :first_name %> <span style="color: red;">*</span><br />
+    <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", placeholder: "Enter your first name", required: true %>
+    <small style="color: red;">First name is a required field</small>
   </div>
-
+  
   <!-- Last Name -->
   <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", placeholder: "Enter your last name" %>
+    <%= f.label :last_name %> <span style="color: red;">*</span><br />
+    <%= f.text_field :last_name, autocomplete: "last_name", placeholder: "Enter your last name", required: true %>
+    <small style="color: red;">Last name is a required field</small>
   </div>
-
+  
   <!-- Email -->
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Enter your email address" %>
-  </div>
+    <%= f.label :email %> <span style="color: red;">*</span><br />
+    <%= f.email_field :email, autocomplete: "email", placeholder: "Enter your email address", required: true %>
+    <small style="color: red;">Email is a required field</small>
+  </div>  
 
   <!-- Password -->
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+<div class="field">
+  <%= f.label :password %> <span style="color: red;">*</span>
+  <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+  <% end %><br />
+  <%= f.password_field :password, autocomplete: "new-password", required: true %>
+  <small style="color: red;">Password is a required field</small>
+</div>
 
-  <!-- Password Confirmation -->
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+<!-- Password Confirmation -->
+<div class="field">
+  <%= f.label :password_confirmation %> <span style="color: red;">*</span><br />
+  <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true %>
+  <small style="color: red;">Password confirmation is a required field</small>
+</div>
 
-  <!-- Phone Number -->
-  <div class="field">
-    <%= f.label :phone_number %><br />
-    <%= f.text_field :phone_number, placeholder: "e.g., +1 (123) 456-7890" %>
-  </div>
+<!-- Phone Number -->
+<div class="field">
+  <%= f.label :phone_number %> <span style="color: red;">*</span><br />
+  <%= f.text_field :phone_number, placeholder: "e.g., +1 (123) 456-7890", required: true %>
+  <small style="color: red;">Phone number is a required field</small>
+</div>
 
-  <!-- Gender -->
-  <div class="field">
-    <%= f.label :gender %><br />
-    <%= f.select :gender, options_for_select([["Male", "Male"], ["Female", "Female"]]), { prompt: "Select Gender" } %>
-  </div>
-  
-  <!-- Age Range -->
-  <div class="field">
-    <%= f.label :age_range %><br />
-    <%= f.select :age_range, options_for_select([["18-25", "18-25"], ["26-35", "26-35"], ["36-45", "36-45"], ["46-55", "46-55"], ["56+", "56+"]]), { prompt: "Select Age Range" } %>
-  </div>
-  
-  <!-- Ethnicity -->
-  <div class="field">
-  <%= f.label :ethnicity %><br />
+<!-- Gender -->
+<div class="field">
+  <%= f.label :gender %> <span style="color: red;">*</span><br />
+  <%= f.select :gender, options_for_select([["Male", "Male"], ["Female", "Female"]]), { prompt: "Select Gender" }, required: true %>
+  <small style="color: red;">Gender is a required field</small>
+</div>
+
+<!-- Age Range -->
+<div class="field">
+  <%= f.label :age_range %> <span style="color: red;">*</span><br />
+  <%= f.select :age_range, options_for_select([["18-25", "18-25"], ["26-35", "26-35"], ["36-45", "36-45"], ["46-55", "46-55"], ["56+", "56+"]]), { prompt: "Select Age Range" }, required: true %>
+  <small style="color: red;">Age range is a required field</small>
+</div>
+
+<!-- Ethnicity -->
+<div class="field">
+  <%= f.label :ethnicity %> <span style="color: red;">*</span><br />
   <%= f.select :ethnicity, options_for_select([
     ["White", "White"],
     ["Black or African American", "Black or African American"],
@@ -66,7 +74,8 @@
     ["Hispanic or Latino", "Hispanic or Latino"],
     ["Other", "Other"],
     ["Prefer not to say", "Prefer not to say"]
-  ]), { prompt: "Select Ethnicity" } %>
+  ]), { prompt: "Select Ethnicity" }, required: true %>
+  <small style="color: red;">Ethnicity is a required field</small>
 </div>
 
   <div class="actions">
