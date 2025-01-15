@@ -1,4 +1,4 @@
-.events-section {
+.activities-section {
     display: flex;                 
     flex-wrap: wrap;                /* Allow wrapping of items */
     justify-content: space-around;  
@@ -10,4 +10,3 @@
     max-width: 1200px;              /* Prevents the section from growing too wide */
     gap: 1.5rem;                    /* Adds gap between items both vertically and horizontally */
   }
-  
