@@ -1,0 +1,21 @@
+<div class="container mt-2">
+  <%= javascript_include_tag "donation", type: "module" %> <!-- Load the donation.js.erb file -->
+  <h1 class="text-center mb-4">Support Our Blog!</h1>
+  
+  <%= form_with url: donations_path, method: :post, local: true, id: "payment-form", class: "p-4 border rounded shadow-sm bg-light" do |form| %>
+    <%= form.hidden_field :csrf_token, value: form_authenticity_token %> <!-- Ensure the CSRF token is included -->
+    <div class="mb-3">
+      <%= form.label :amount, "Donation Amount:", class: "form-label" %>
+      <%= form.number_field :amount, min: 1, required: true, class: "form-control" %>
+    </div>
+    <div class="mb-4">
+      <%= form.label :card, "Credit or Debit Card:", class: "form-label" %>
+      <div id="card-element" class="form-control" style="height: 40px;">
+        <!-- Stripe will place the card input here -->
+      </div>
+    </div>
+    <div class="d-grid gap-2">
+      <%= form.submit "Donate", class: "btn btn-primary btn-lg" %>
+    </div>
+  <% end %>
+</div>
