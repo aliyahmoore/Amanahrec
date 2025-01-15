@@ -45,3 +45,34 @@
     <li><strong>Kayaking</strong> – Friday, January 12, 2025</li>
   </ul>
 </div>
+
+<% if user_signed_in? %>
+  <li>
+  <span>
+  <%= "#{current_user.first_name}, You are signed in" %>
+</span>
+    <ul>
+      <li>
+        <%= button_to edit_user_registration_path, method: :get do %>
+          Edit Profile
+        <% end %>
+      </li>
+      <li>
+        <%= button_to destroy_user_session_path, method: :delete do %>
+          Sign Out
+        <% end %>
+      </li>
+    </ul>
+  </li>
+<% else %>
+  <li>
+    <%= link_to new_user_session_path do %>
+      Sign In
+    <% end %>
+  </li>
+  <li>
+    <%= link_to new_user_registration_path do %>
+      Sign Up
+    <% end %>
+  </li>
+<% end %>
