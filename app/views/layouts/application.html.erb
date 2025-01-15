@@ -20,5 +20,8 @@
   <body>
     <%= yield %>
     <%= yield :javascript%>
+    <% flash.each do |key, message| %>
+      <p class="alert <%= key == 'notice' ? 'notice-class' : 'alert-class' %>"><%= message %></p>
+    <% end %>
   </body>
 </html>
