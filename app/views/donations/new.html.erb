@@ -7,7 +7,7 @@
   <script src="https://js.stripe.com/v3/"></script>
   
   <div>
-  <h1>Support Our Blog!</h1>
+  <h1>Support Us!</h1>
   
   <%= form_with url: donations_path, method: :post, local: true, id: "payment-form" do |form| %>
     <%= form.hidden_field :csrf_token, value: form_authenticity_token %> <!-- Ensure the CSRF token is included -->
