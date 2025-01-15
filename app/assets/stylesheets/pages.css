@@ -1,60 +1,75 @@
 body {
     font-family: "Tahoma", sans-serif;
-    background-color: #fdfdfd;
-    color: #333;
+    background-color: #f6f6f6;
+    color: #403F2B;
     padding: 20px;
-   }
-   
-   
-   h2 {
+}
+
+h2 {
     color: #57573F;
     font-size: 24px;
     margin-bottom: 8px;
     text-align: center;
-   }
-   
-   
-   p {
+}
+
+p {
     font-size: 16px;
-    line-height: 1.5;
-   }
-   
-   .about-page .mission,
-   .about-page .vision,
-   .about-page .founder-box {
-    background-color: #E9E2D8;
+    margin-bottom: 30px;
+    line-height: 2;
+    text-align: center;
+}
+
+.about-page .mission,
+.about-page .vision,
+.about-page .founder-box {
+    background-color: #d7d1c5;
     padding: 20px;
     border-radius: 8px;
-    margin: 20px auto;
+    margin: 80px auto;
     max-width: 800px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-   }
-   
-   
-   .about-page .founder-box {
-    display: flex;
-    align-items: flex-start;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.about-page .mission:hover,
+.about-page .vision:hover,
+.about-page .founder-box:hover {
+    text-align: center;
     background-color: #E9E2D8;
+}
+
+.about-page .founder-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     color: #57573F;
+    padding: 20px;
+    background-color: #d7d1c5;
+    border-radius: 8px;
     max-width: 800px;
-   }
-   
-   
-   .about-page .founder-box h2 {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+}
+
+.about-page .founder-box h2 {
     color: #57573F;
     margin-bottom: 10px;
-   }
-   
-   
-   .about-page .founder-box p {
+}
+
+.about-page .founder-box p {
     color: #333;
     flex: 1;
-   }
-   
-   
-   .about-page .founder-box img {
-    max-width: 200px;
+}
+
+.about-page .about-image {
+    margin: 30px auto;
+    text-align: center;
+    position: relative;
+    top: -30px;
+}
+
+.about-page .about-image img {
+    max-width: 420px;
     height: auto;
-    margin-left: 20px;
     border-radius: 8px;
-   }   
+}
