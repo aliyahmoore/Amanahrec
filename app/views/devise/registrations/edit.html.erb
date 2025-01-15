@@ -24,25 +24,25 @@
   <!-- Phone Number -->
   <div class="field">
     <%= f.label :phone_number %><br />
-    <%= f.text_field :phone_number, value: resource.phone_number, placeholder: "e.g., +1 (123) 456-7890" %>
+    <%= f.text_field :phone_number, value: resource.phone_number, placeholder: "e.g., +1(123)456-7890" %>
   </div>
 
   <!-- Gender -->
   <div class="field">
     <%= f.label :gender %><br />
-    <%= f.text_field :gender, value: resource.gender, placeholder: "e.g., Male, Female" %>
+    <%= f.select :gender, options_for_select([["Male", "Male"], ["Female", "Female"]]), { prompt: "Select Gender" } %>
   </div>
-
+  
   <!-- Age Range -->
   <div class="field">
     <%= f.label :age_range %><br />
-    <%= f.text_field :age_range, value: resource.age_range, placeholder: "e.g., 18-25, 26-35" %>
+    <%= f.select :age_range, options_for_select([["18-25", "18-25"], ["26-35", "26-35"], ["36-45", "36-45"], ["46-55", "46-55"], ["56+", "56+"]]), { prompt: "Select Age Range" } %>
   </div>
-
+  
   <!-- Ethnicity -->
   <div class="field">
     <%= f.label :ethnicity %><br />
-    <%= f.text_field :ethnicity, value: resource.ethnicity, placeholder: "e.g., Asian, Hispanic" %>
+    <%= f.select :ethnicity, options_for_select([["African", "African"], ["Central Asian", "Central Asian"], ["East Asian", "East Asian"], ["European", "European"], ["Middle Eastern", "Middle Eastern"], ["North African", "North African"], ["South Asian", "South Asian"], ["Southeast Asian", "Southeast Asian"], ["Other", "Other"]]), { prompt: "Select Ethnicity" } %>
   </div>
 
   <!-- Password -->
