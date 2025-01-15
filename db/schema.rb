@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_14_184049) do
     t.string "first_name", limit: 255, null: false
     t.string "last_name", limit: 255, null: false
     t.string "email", limit: 255, default: "", null: false
-    t.string "phone_number", limit: 15
+    t.string "phone_number", limit: 20
     t.boolean "member", default: false, null: false
     t.string "gender", limit: 50
     t.string "age_range", limit: 50
