@@ -1,0 +1,73 @@
+<%= form_with(model: event, local: true) do |form| %>
+  <div class="event-form-container">
+    <% if event.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+        <ul>
+          <% event.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <h1><%= event.new_record? ? 'Create New Event' : 'Edit Event' %></h1>
+
+    <div class="form-group">
+      <%= form.label :title, "Event Title" %>
+      <%= form.text_field :title, class: "form-control", placeholder: "Enter event title" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :description, "Description" %>
+      <%= form.text_area :description, class: "form-control", placeholder: "Enter a detailed description of the event" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :time, "Event Time" %>
+      <%= form.time_field :time, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :date, "Event Date" %>
+      <%= form.date_field :date, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :location, "Event Location" %>
+      <%= form.text_field :location, class: "form-control", placeholder: "Enter the event location" %>
+    </div>
+
+    <div class="form-group">
+    <%= form.label :end_time, "End Time" %>
+    <%= form.time_field :end_time, class: "form-control" %>
+    </div>
+  
+
+    <div class="form-group">
+      <%= form.label :rsvp_deadline, "RSVP Deadline" %>
+      <%= form.date_field :rsvp_deadline, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :childcare, "Childcare Available?" %>
+      <%= form.check_box :childcare, class: "form-check-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :sponsors, "Event Sponsors" %>
+      <%= form.text_field :sponsors, class: "form-control", placeholder: "Enter event sponsors" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :cost, "Event Cost" %>
+      <%= form.number_field :cost, step: 0.01, min: 0, class: "form-control", placeholder: "Enter the event cost" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.submit class: "btn btn-primary" %>
+    </div>
+  </div>
+
+  <%= link_to 'Back to Events', events_path, class: "btn btn-secondary" %>
+<% end %>
