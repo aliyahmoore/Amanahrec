@@ -27,6 +27,22 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_16_033146) do
     t.decimal "cost", precision: 8, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "duration"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.time "time"
+    t.date "date"
+    t.string "location"
+    t.date "rsvp_deadline"
+    t.boolean "childcare"
+    t.string "sponsors"
+    t.decimal "cost", precision: 8, scale: 2
+    t.time "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "events", force: :cascade do |t|

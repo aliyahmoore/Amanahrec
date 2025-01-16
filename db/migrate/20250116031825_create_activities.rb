@@ -12,6 +12,8 @@ class CreateActivities < ActiveRecord::Migration[7.2]
       t.text :notes
       t.decimal :cost, precision: 8, scale: 2
       t.timestamps
+      t.integer :duration
+      
     end
   end
 end
