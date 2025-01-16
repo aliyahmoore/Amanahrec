@@ -36,6 +36,7 @@ p {
 .about-page .founder-box:hover {
     text-align: center;
     background-color: #f1e4d3;
+    transition: all 0.5s ease-in-out;
 }
 
 .about-page .founder-box {
