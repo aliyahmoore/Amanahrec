@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  time: 2025-01-15 21:18:25
+  date: 2025-01-15
+  location: MyString
+  capacity: 1
+  what_to_bring: MyText
+  rules: MyText
+  notes: MyText
+  cost: 9.99
+
+two:
+  title: MyString
+  description: MyText
+  time: 2025-01-15 21:18:25
+  date: 2025-01-15
+  location: MyString
+  capacity: 1
+  what_to_bring: MyText
+  rules: MyText
+  notes: MyText
+  cost: 9.99
