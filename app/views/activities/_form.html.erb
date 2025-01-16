@@ -1,0 +1,85 @@
+<%= form_with(model: @activity, local: true, html: { class: 'activity-form' }) do |form| %>
+    <% if @activity.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
+        <ul>
+          <% @activity.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+   
+   
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title, class: "input-field" %>
+    </div>
+   
+   
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_area :description, class: "input-field" %>
+    </div>
+   
+   
+    <div class="field">
+    <%= form.label :time %>
+      <div class="time-field">
+        <%= form.time_field :time, class: "form-control" %>
+      </div>
+    </div>
+   
+   
+    <div class="field">
+      <%= form.label :date %>
+      <%= form.date_select :date, class: "input-field" %>
+    </div>
+   
+   
+    <div class="field">
+      <%= form.label :location %>
+      <%= form.text_field :location, class: "input-field" %>
+    </div>
+   
+   
+    <div class="field">
+      <%= form.label :capacity %>
+      <%= form.number_field :capacity, class: "input-field" %>
+    </div>
+   
+   
+    <div class="field">
+      <%= form.label :what_to_bring %>
+      <%= form.text_area :what_to_bring, class: "input-field" %>
+    </div>
+   
+   
+    <div class="field">
+      <%= form.label :rules %>
+      <%= form.text_area :rules, class: "input-field" %>
+    </div>
+   
+   
+    <div class="field">
+      <%= form.label :notes %>
+      <%= form.text_area :notes, class: "input-field" %>
+    </div>
+   
+   
+    <div class="field">
+      <%= form.label :cost %>
+      <%= form.number_field :cost, step: 0.01, class: "input-field" %>
+    </div>
+   
+   
+    <div class="field">
+      <%= form.label :duration, "Duration (in hours)" %>
+      <%= form.number_field :duration, class: "input-field" %>
+    </div>
+   
+   
+    <div class="actions">
+      <%= form.submit "Save Activity", class: "submit-button" %>
+    </div>
+   <% end %>
