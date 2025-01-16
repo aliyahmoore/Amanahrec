@@ -1,6 +1,6 @@
 body {
     font-family: "Tahoma", sans-serif;
-    background-color: #f6f6f6;
+    background-color: #E9E2D8;
     color: #403F2B;
     padding: 20px;
 }
@@ -22,7 +22,7 @@ p {
 .about-page .mission,
 .about-page .vision,
 .about-page .founder-box {
-    background-color: #d7d1c5;
+    background-color: #DACCB1;
     padding: 20px;
     border-radius: 8px;
     margin: 80px auto;
@@ -35,7 +35,7 @@ p {
 .about-page .vision:hover,
 .about-page .founder-box:hover {
     text-align: center;
-    background-color: #E9E2D8;
+    background-color: #f8eddf;
 }
 
 .about-page .founder-box {
@@ -44,7 +44,7 @@ p {
     align-items: center;
     color: #57573F;
     padding: 20px;
-    background-color: #d7d1c5;
+    background-color: #DACCB1;
     border-radius: 8px;
     max-width: 800px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
