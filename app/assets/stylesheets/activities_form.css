@@ -1,0 +1,95 @@
+.activity-form {
+    background-color: #E9E2D8;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+   .activity-form h1, .activity-form h2, .activity-form h3 {
+    color: #403F2B;
+  }
+   .activity-form label {
+    font-size: 1.2rem;
+    color: #403F2B;
+    margin-bottom: 5px;
+  }
+   .activity-form input, .activity-form textarea, .activity-form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #57573F;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #E9E2D8;
+    color: #403F2B;
+  }
+   .activity-form input[type="checkbox"] {
+    margin-right: 10px;
+  }
+   .activity-form input[type="submit"], .activity-form button {
+    background-color: #57573F;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+   .activity-form input[type="submit"]:hover, .activity-form button:hover {
+    background-color: #403F2B;
+  }
+   .activity-form .error {
+    color: red;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+   .activity-form #error_explanation {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 15px;
+    border-radius: 5px;
+  }
+   .activity-form #error_explanation ul {
+    list-style-type: none;
+    padding: 0;
+  }
+   .activity-form #error_explanation li {
+    font-size: 1rem;
+    color: #721c24;
+  }
+   .activity-form .actions {
+    margin-top: 20px;
+  }
+ 
+ 
+    .activity-form .time-field {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+   
+    .activity-form .time-select select {
+        width: 60px;
+        padding: 8px;
+        font-size: 1rem;
+        background-color: #E9E2D8;
+        border: 1px solid #57573F;
+        border-radius: 5px;
+        color: #403F2B;
+    }
+   
+    .activity-form .time-select select:focus {
+        border-color: #403F2B;
+        outline: none;
+    }
+   
+    .activity-form .time-select select.ampm {
+        width: 80px;
+    }
+   
+    .activity-form .time-field label {
+        margin-bottom: 5px;
+    }
+ 
