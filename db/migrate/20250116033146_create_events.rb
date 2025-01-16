@@ -10,6 +10,7 @@ class CreateEvents < ActiveRecord::Migration[7.2]
       t.boolean :childcare
       t.string :sponsors
       t.decimal :cost, precision: 8, scale: 2
+      t.time :end_time
 
       t.timestamps
     end
