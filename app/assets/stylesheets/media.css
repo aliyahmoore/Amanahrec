@@ -22,7 +22,7 @@
 }
 
 body {
-  background-color: #f2f2f2;  
+  background-color: #E9E2D8;  
 }
 
 .square-container {
@@ -32,7 +32,7 @@ body {
 }
 
 .square {
-  background-color: #D7D1C5; 
+  background-color: #DACCB1; 
   width: 60%; 
   padding: 25px;
   box-sizing: border-box;
@@ -55,4 +55,10 @@ body {
 .square h2, .square p {
   font-family: "Tahoma", sans-serif; 
   color: #403F2B;
+}
+
+.square:hover {
+  text-align: center;
+  background-color: #f1e4d3;
+  transition: all 0.5s ease-in-out;
 }
