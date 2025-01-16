@@ -1,0 +1,54 @@
+.activity-show {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #E9E2D8;  /* Light beige background */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .activity-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #403F2B;  /* Dark brown color */
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .activity-details p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #57573F;  /* Olive green for text */
+    margin: 10px 0;
+  }
+  
+  .activity-details strong {
+    color: #403F2B;  /* Dark brown for labels */
+  }
+  
+  .activity-actions {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .activity-actions .back-button {
+    background-color: #57573F;  /* Olive green */
+    color: white;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .activity-actions .back-button:hover {
+    background-color: #403F2B;  /* Dark brown on hover */
+  }
+  
+  .activity-details p {
+    background-color: #DACCB1;  /* Lighter beige background for individual items */
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
