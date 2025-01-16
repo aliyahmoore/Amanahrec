@@ -65,6 +65,35 @@
   .nav-links a:hover {
     color: #E9E2D8; /* Lighten on hover */
   }
+  /* Style for Donate and Sign Up buttons */
+.navbar-btn-link {
+  display: inline-flex; /* Use inline-flex to align with other inline elements */
+  align-items: center; /* Center text vertically */
+  justify-content: center; /* Center text horizontally */
+  padding: 0.5rem 1rem; /* Adjust padding for consistent height */
+  background-color: #DACCB1; /* Button background */
+  color: #403f2b !important; /* Button text color */
+  border: 2px solid #403f2b; /* Button border */
+  border-radius: 4px; /* Rounded corners */
+  text-decoration: none; /* Remove underline */
+  font-weight: bold; /* Bold text */
+  font-size: 0.875rem; /* Match font size with other links */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  height: auto; /* Ensure it adapts to content size */
+}
+
+/* Hover effect for buttons */
+.navbar-btn-link:hover {
+  background-color: #E9E2D8; /* Slightly lighter background */
+  color: #403f2b; /* Keep text readable */
+}
+
+/* Ensure alignment with navigation links */
+.nav-links {
+  display: flex; /* Flexbox for consistent alignment */
+  align-items: center; /* Vertically align items */
+  gap: 1rem; /* Adjust spacing between links */
+}
   
   /* Responsive adjustments: stack links on smaller screens */
   @media (max-width: 768px) {
