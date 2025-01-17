@@ -1,6 +1,3 @@
-/* app/assets/stylesheets/event_show.css */
-
-/* Container for the show page */
 .event-show-container {
     background-color: #E9E2D8;
     padding: 40px;
@@ -10,7 +7,7 @@
     margin: 50px auto;
   }
   
-  /* Title for the Event */
+  
   .event-show-container h1 {
     color: #403F2B;
     font-size: 3em;
@@ -18,7 +15,7 @@
     margin-bottom: 40px;
   }
   
-  /* Section headers for the event details */
+  
   .event-show-container h2 {
     color: #57573F;
     font-size: 1.8em;
@@ -27,7 +24,7 @@
     padding-bottom: 5px;
   }
   
-  /* Styling for each event detail */
+
   .event-show-container p {
     font-size: 1.2em;
     margin-bottom: 15px;
@@ -35,8 +32,16 @@
     color: #57573F;
   }
   
-  /* Style for Back to Events Button */
-  .event-show-container .btn {
+ 
+  .event-actions {
+    display: flex;
+    justify-content: center; 
+    align-items: center;      
+    margin-top: 30px;       
+    gap: 20px;                
+  }
+  
+  .event-actions .btn {
     background-color: #403F2B;
     color: #E9E2D8;
     padding: 12px 20px;
@@ -44,12 +49,13 @@
     border-radius: 6px;
     cursor: pointer;
     font-size: 1.1em;
-    margin-top: 20px;
+    margin: 0px;             
   }
   
-  .event-show-container .btn:hover {
+  .event-actions .btn:hover {
     background-color: #57573F;
   }
+  
   
   /* Styling for Event Cost */
   .event-show-container .cost {
@@ -64,4 +70,6 @@
     color: #57573F;
     font-size: 1.1em;
   }
+  
+
   

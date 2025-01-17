@@ -1,33 +1,36 @@
-/* app/assets/stylesheets/form_specific.css */
-
-/* Styling the Form Container */
 .event-form-container {
+    font-family: Arial, sans-serif;  
     background-color: #E9E2D8;
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     max-width: 900px;
     margin: 0 auto;
+    font-size: 1em; 
+    line-height: 1.6; 
   }
   
   /* Styling for Form Title */
   .event-form-container h1 {
     color: #403F2B;
-    font-size: 2.5em;
+    font-size: 2.5em; 
     text-align: center;
     margin-bottom: 30px;
+    font-weight: bold; 
   }
   
-  /* Form Group (Each input field block) */
+
   .event-form-container .form-group {
     margin-bottom: 20px;
   }
   
-  /* Label styling */
+ 
   .event-form-container label {
     color: #57573F;
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 1.1em; 
+    display: block; 
+    margin-bottom: 8px; 
   }
   
   /* Input fields, text areas, and checkboxes */
@@ -43,13 +46,17 @@
     border: 1px solid #DACCB1;
     border-radius: 6px;
     background-color: #fff;
-    font-size: 1em;
+    font-size: 1em; /* Consistent font size for inputs and textareas */
+    font-family: inherit; /* Inherit font family from parent */
   }
   
   /* Styling for checkboxes */
   .event-form-container input[type="checkbox"] {
     width: auto;
     margin-right: 10px;
+    padding: 0;  /* Remove unnecessary padding for checkboxes */
+    font-size: 1em; /* Ensure checkbox font size is the same */
+    vertical-align: middle;  /* Align checkbox with label */
   }
   
   /* Submit Button Styling */
@@ -60,7 +67,7 @@
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 1.1em;
+    font-size: 1.1em; /* Consistent font size for buttons */
     text-transform: uppercase;
     margin-top: 20px;
   }
@@ -77,11 +84,11 @@
     border-radius: 5px;
     margin-bottom: 20px;
     font-size: 1em;
+    font-family: inherit; /* Keep error message font consistent */
   }
   
   /* Custom margin for the last submit button */
   .event-form-container .form-group:last-child {
     margin-bottom: 0;
   }
-
   
