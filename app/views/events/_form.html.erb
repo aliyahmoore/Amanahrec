@@ -28,16 +28,16 @@
       <%= form.text_area :description, class: "form-control", placeholder: "Enter a detailed description of the event" %>
     </div>
 
-    <!-- Event Time -->
-    <div class="form-group">
-      <%= form.label :time, "Event Time" %>
-      <%= form.time_field :time, class: "form-control" %>
-    </div>
-
     <!-- Event Date -->
     <div class="form-group">
       <%= form.label :date, "Event Date" %>
       <%= form.date_field :date, class: "form-control" %>
+    </div>
+
+    <!-- Event Time -->
+    <div class="form-group">
+      <%= form.label :time, "Event Time" %>
+      <%= form.time_field :time, class: "form-control" %>
     </div>
 
     <!-- Event Location -->
@@ -83,7 +83,8 @@
 
   </div>
 
-  <!-- Back to Events Link -->
-  <%= link_to 'Back to Events', events_path, class: "btn btn-secondary" %>
+    <div class="event-actions">
+      <%= link_to 'Back to Events', events_path, class: "btn btn-secondary" %>
+   </div>
 
 <% end %>

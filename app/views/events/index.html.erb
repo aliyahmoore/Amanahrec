@@ -10,7 +10,7 @@
           <p><strong>Date:</strong> <%= event.date.strftime("%B %d, %Y") %></p>
           <p><strong>Time:</strong> <%= event.time.strftime("%I:%M %p") %></p>
           <p><strong>Location:</strong> <%= event.location %></p>
-          <p><strong>Cost:</strong> $<%= event.cost %></p>
+          <p><strong>Cost:</strong> <%= number_to_currency(event.cost, precision: 2) %></p>
 
           <!-- Link to View Event Details -->
           <%= link_to 'View Event', event_path(event), class: "btn-view" %>
