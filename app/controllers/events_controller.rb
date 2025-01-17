@@ -29,8 +29,9 @@ class EventsController < ApplicationController
 
     # GET /events/:id/edit
     def edit
-      # @event is already set by before_action
+      @event = Event.find(params[:id])
     end
+    
 
     # PATCH/PUT /events/:id
     def update
