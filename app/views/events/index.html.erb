@@ -1,0 +1,26 @@
+<div class="event-index-container">
+  <h1>Upcoming Events</h1>
+
+  <!-- Check if there are events to display -->
+  <% if @events.any? %>
+    <div class="event-listing">
+      <% @events.each do |event| %>
+        <div class="event-card">
+          <h3><%= event.title %></h3>
+          <p><strong>Date:</strong> <%= event.date.strftime("%B %d, %Y") %></p>
+          <p><strong>Time:</strong> <%= event.time.strftime("%I:%M %p") %></p>
+          <p><strong>Location:</strong> <%= event.location %></p>
+          <p><strong>Cost:</strong> $<%= event.cost %></p>
+
+          <!-- Link to View Event Details -->
+          <%= link_to 'View Event', event_path(event), class: "btn-view" %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>No upcoming events at the moment.</p>
+  <% end %>
+
+  <!-- Back Button -->
+  <%= link_to 'Back to Home', root_path, class: "btn-back" %>
+</div>

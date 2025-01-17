@@ -23,4 +23,6 @@ Rails.application.routes.draw do
       patch :unapprove
     end
   end
+
+  resources :events
 end

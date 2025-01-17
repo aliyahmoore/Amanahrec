@@ -1,0 +1,26 @@
+<div class="event-show-container">
+    <h1><%= @event.title %></h1>
+    
+    <!-- Event Details Section -->
+    <div class="event-details">
+      <h2>Description</h2>
+      <p><%= @event.description %></p>
+  
+      <h2>Event Information</h2>
+      <p><strong>Location:</strong> <%= @event.location %></p>
+      <p><strong>Time:</strong> <%= @event.time.strftime("%I:%M %p") %></p>
+      <p><strong>Date:</strong> <%= @event.date.strftime("%B %d, %Y") %></p>
+      <p><strong>End Date:</strong> <%= @event.end_date.strftime("%B %d, %Y") %></p>
+      <p class="time-info"><strong>RSVP Deadline:</strong> <%= @event.rsvp_deadline.strftime("%B %d, %Y") %></p>
+      
+      <h2>Childcare & Sponsors</h2>
+      <p><strong>Childcare Available:</strong> <%= @event.childcare ? 'Yes' : 'No' %></p>
+      <p><strong>Sponsors:</strong> <%= @event.sponsors %></p>
+  
+      <h2>Cost</h2>
+      <p class="cost">$<%= @event.cost %></p>
+  
+      <!-- Back to Events Link -->
+      <%= link_to 'Back to Events', events_path, class: "btn btn-secondary" %>
+      </div>
+  
