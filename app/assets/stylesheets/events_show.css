@@ -1,0 +1,67 @@
+/* app/assets/stylesheets/event_show.css */
+
+/* Container for the show page */
+.event-show-container {
+    background-color: #E9E2D8;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: 50px auto;
+  }
+  
+  /* Title for the Event */
+  .event-show-container h1 {
+    color: #403F2B;
+    font-size: 3em;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  /* Section headers for the event details */
+  .event-show-container h2 {
+    color: #57573F;
+    font-size: 1.8em;
+    margin-top: 30px;
+    border-bottom: 2px solid #DACCB1;
+    padding-bottom: 5px;
+  }
+  
+  /* Styling for each event detail */
+  .event-show-container p {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #57573F;
+  }
+  
+  /* Style for Back to Events Button */
+  .event-show-container .btn {
+    background-color: #403F2B;
+    color: #E9E2D8;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    margin-top: 20px;
+  }
+  
+  .event-show-container .btn:hover {
+    background-color: #57573F;
+  }
+  
+  /* Styling for Event Cost */
+  .event-show-container .cost {
+    font-weight: bold;
+    font-size: 1.3em;
+    color: #403F2B;
+  }
+  
+  /* Styling for the RSVP Deadline and End Time */
+  .event-show-container .time-info {
+    font-style: italic;
+    color: #57573F;
+    font-size: 1.1em;
+  }
+  
