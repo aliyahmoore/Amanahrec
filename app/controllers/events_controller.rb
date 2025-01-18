@@ -31,7 +31,7 @@ class EventsController < ApplicationController
     def edit
       @event = Event.find(params[:id])
     end
-    
+
 
     # PATCH/PUT /events/:id
     def update

@@ -9,5 +9,4 @@ class Event < ApplicationRecord
     validates :rsvp_deadline, presence: true
     validates :sponsors, presence: true
     validates :cost, numericality: { greater_than_or_equal_to: 0 }
-
 end
