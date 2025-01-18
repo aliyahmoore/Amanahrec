@@ -6,15 +6,21 @@
   <img src="https://voyageminnesota.com/wp-content/uploads/2024/08/c-1722429958481-nasrieen_habib_dsc09767.jpg" alt="Image Description" class="news-image">
 </div>
 
+<% if flash[:alert] %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
 <div class="square-container">
   <div class="square">
     <% if @media.any? %>
       <ul>
-        <% @media.each do |item| %>  
+        <% @media.each do |medium| %>  
           <li>
-            <h3><%= item.name %></h3> 
-            <p><%= item.description %></p> 
-            <a href="<%= item.url %>" target="_blank">View Link</a> 
+            <h3><%= medium.name %></h3> 
+            <p><%= medium.description %></p> 
+            <a href="<%= medium.link %>" target="_blank">View Link</a> 
           </li>
         <% end %>
       </ul>
