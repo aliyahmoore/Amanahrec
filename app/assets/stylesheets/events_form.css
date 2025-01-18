@@ -53,11 +53,34 @@
 
 /* Specific Checkbox Styling */
 .event-form-container input[type="checkbox"] {
-  width: auto; /* Make the checkbox not stretch */
+  width: 25px;  /* Increased width */
+  height: 25px; /* Increased height */
+  display: inline-block;
+  vertical-align: middle;
   margin-right: 10px; /* Space between checkbox and label */
-  font-size: 1.3em; /* Make the checkbox itself larger */
-  vertical-align: middle; /* Align it with the label text */
-  display: inline-block; /* Keep it inline */
+  cursor: pointer;
+  border: 2px solid #DACCB1;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+/* Add a checkmark when checked */
+.event-form-container input[type="checkbox"]:checked {
+  background-color: #403F2B; /* Dark background when checked */
+  border-color: #403F2B; /* Border color when checked */
+  box-shadow: inset 0 0 0 3px #fff; /* Add a white shadow to show the checkmark */
+}
+
+/* Checkmark inside the checkbox */
+.event-form-container input[type="checkbox"]:checked::before {
+  content: "\2713"; /* Unicode character for checkmark */
+  font-size: 1.3em; /* Make the checkmark bigger */
+  color: #fff; /* White checkmark color */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the checkmark */
+  display: inline-block;
 }
 
 /* Submit Button Styling */
