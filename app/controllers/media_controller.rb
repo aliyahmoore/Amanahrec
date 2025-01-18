@@ -8,44 +8,39 @@ class MediaController < ApplicationController
   def show
   end
 
-  def new
-    @medium = Medium.new
-  end
-
   def create
     @medium = Medium.new(medium_params)
     if @medium.save
-      redirect_to @medium, notice: "Media post was successfully created."
+      redirect_to media_path, notice: "Media post was successfully created."
     else
-      render :new
+      # Add the errors to the flash message
+      flash[:alert] = "There was an error creating the media post."
+      render :index  # Instead of redirecting, render the index page again
     end
-  end
-
-  def edit
   end
 
   def update
     if @medium.update(medium_params)
-      redirect_to @medium, notice: "Media post was successfully updated."
+      redirect_to media_path, notice: "Media post was successfully updated."
     else
-      render :edit
+      # Add the errors to the flash message
+      flash[:alert] = "There was an error updating the media post."
+      render :index  # Instead of redirecting, render the index page again
     end
   end
 
   def destroy
     @medium.destroy
-    redirect_to media_url, notice: "Media post was successfully deleted."
+    redirect_to media_path, notice: "Media post was successfully deleted."
   end
 
   private
 
-  # Set the medium for the actions that require it
   def set_medium
     @medium = Medium.find(params[:id])
   end
 
-  # Permit only title, description, and URL parameters for media posts
   def medium_params
-    params.require(:medium).permit(:title, :description, :url)
+    params.require(:medium).permit(:name, :description, :link)
   end
 end
