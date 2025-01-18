@@ -2,8 +2,7 @@ class Event < ApplicationRecord
     # Validations
     validates :title, presence: true
     validates :description, presence: true
-    validates :time, presence: true
-    validates :date, presence: true
+    validates :event_datetime, presence: true
     validates :end_date, presence: true
     validates :location, presence: true
     validates :rsvp_deadline, presence: true

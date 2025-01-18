@@ -1,4 +1,4 @@
-<%= form_with(model: @event, local: true) do |form| %>
+<%= form_with(model: @event, local: true, html: { id: 'event_form' }) do |form| %>
   <div class="event-form-container">
 
     <!-- Display Error Messages -->
@@ -28,16 +28,10 @@
       <%= form.text_area :description, class: "form-control", placeholder: "Enter a detailed description of the event" %>
     </div>
 
-    <!-- Event Date -->
+    <!-- Event Date and Time (Combined) -->
     <div class="form-group">
-      <%= form.label :date, "Event Date" %>
-      <%= form.date_field :date, class: "form-control" %>
-    </div>
-
-    <!-- Event Time -->
-    <div class="form-group">
-      <%= form.label :time, "Event Time" %>
-      <%= form.time_field :time, class: "form-control" %>
+      <%= form.label :event_datetime, "Event Date and Time" %>
+      <%= form.datetime_local_field :event_datetime, class: "form-control" %>
     </div>
 
     <!-- Event Location -->
@@ -55,14 +49,17 @@
     <!-- RSVP Deadline -->
     <div class="form-group">
       <%= form.label :rsvp_deadline, "RSVP Deadline" %>
-      <%= form.date_field :rsvp_deadline, class: "form-control" %>
+      <%= form.date_field :rsvp_deadline, class: "form-control", id: "rsvp_deadline" %>
+      <div id="rsvp-error-message" style="color: red; display: none;">
+        The RSVP deadline cannot be after the event date.
+      </div>
     </div>
 
     <!-- Childcare Available -->
     <div class="form-group">
-    <%= form.label :childcare, "Childcare Available?" %>
-    <%= form.check_box :childcare, class: "form-check-input" %>
-  </div>
+      <%= form.label :childcare, "Childcare Available?" %>
+      <%= form.check_box :childcare, class: "form-check-input" %>
+    </div>
 
     <!-- Event Sponsors -->
     <div class="form-group">
@@ -78,13 +75,14 @@
 
     <!-- Submit Button -->
     <div class="form-group">
-      <%= form.submit "Save Event", class: "btn btn-primary" %>
+      <%= form.submit "Save Event", class: "btn btn-primary", id: "submit_btn" %>
     </div>
 
   </div>
 
-    <div class="event-actions">
-      <%= link_to 'Back to Events', events_path, class: "btn btn-secondary" %>
-   </div>
+  <div class="event-actions">
+    <%= link_to 'Back to Events', events_path, class: "btn btn-secondary" %>
+  </div>
 
 <% end %>
+
