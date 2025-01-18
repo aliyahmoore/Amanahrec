@@ -1,0 +1,5 @@
+  /* Black Loppet logo */
+  #loppet img {
+    filter: grayscale(100%) brightness(0) contrast(100%);
+    max-height: 100px;
+  }
