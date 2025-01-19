@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag 'media', media: 'all' %>
+
 <h1 class="heading">Amanah Rec Latest News...</h1>
 
 <div class="image-container">
@@ -6,9 +8,18 @@
 
 <div class="square-container">
   <div class="square">
-    <h2 class="title">Kare 11</h2>
-    <p class="description">Description here</p>
-    <h2 class="title">REI</h2>
-    <p class="description">Description here</p>
+    <% if @media.any? %>
+      <ul>
+        <% @media.each do |item| %>  
+          <li>
+            <h3><%= item.name %></h3> 
+            <p><%= item.description %></p> 
+            <a href="<%= item.url %>" target="_blank">View Link</a> 
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No Updates Available At This Time.</p>
+    <% end %>
   </div>
 </div>
