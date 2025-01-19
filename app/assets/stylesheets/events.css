@@ -1,0 +1,12 @@
+.activities-section {
+    display: flex;                 
+    flex-wrap: wrap;                /* Allow wrapping of items */
+    justify-content: space-around;  
+    align-items: flex-start;        /* Align items to the top of the row */
+    align-content: space-between;   /* Space out the rows vertically */
+    margin: 2rem auto;              
+    padding: 2rem 0;                
+    width: 80%;                     /* Adjust width to taste */
+    max-width: 1200px;              /* Prevents the section from growing too wide */
+    gap: 1.5rem;                    /* Adds gap between items both vertically and horizontally */
+  }
