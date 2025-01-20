@@ -14,6 +14,7 @@
  *= require_self
  */
 
+<<<<<<< HEAD
  
 
 /* The main navbar container */
@@ -47,11 +48,46 @@
   }
   
   /* Each nav link */
+=======
+ .navbar {
+    background-color: #222;  
+    color: #fff;
+    padding: 0.5rem 1rem;
+  }
+  
+  /* Flex container for brand + links */
+  .nav-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  /* Style the brand/logo link */
+  .brand {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  /* Navigation links */
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1rem; /* Space between links */
+    margin: 0;
+  }
+  
+>>>>>>> 4ec9ca8 (Add navigation bar to application layout)
   .nav-links li {
     display: inline-block;
   }
   
+<<<<<<< HEAD
   /* Anchor tags in the nav list */
+=======
+  /* Anchor tags in the nav */
+>>>>>>> 4ec9ca8 (Add navigation bar to application layout)
   .nav-links a {
     color: #fff;
     text-decoration: none;
@@ -61,6 +97,7 @@
   
   /* Hover effect for links */
   .nav-links a:hover {
+<<<<<<< HEAD
     color: #ccc; /* Lighten on hover */
   }
   
@@ -76,4 +113,11 @@
       gap: 0.75rem;
     }
   }
+=======
+    text-decoration: underline;
+  }
+  
+
+ 
+>>>>>>> 4ec9ca8 (Add navigation bar to application layout)
   
