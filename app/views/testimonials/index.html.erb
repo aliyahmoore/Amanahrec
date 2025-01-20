@@ -1,0 +1,14 @@
+<h1>Testimonials</h1>
+
+<% @testimonials.each do |testimonial| %>
+  <div>
+    <p><%= testimonial.text %></p>
+    <small>By: <%= testimonial.user.first_name %> <%= testimonial.user.last_name %></small>
+
+    <% if current_user&.member && !testimonial.approved %>
+      <%= button_to "Approve", approve_testimonial_path(testimonial), method: :patch, class: "btn btn-success" %>
+    <% end %>
+  </div>
+  <hr>
+<% end %>
+
