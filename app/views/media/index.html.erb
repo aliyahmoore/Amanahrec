@@ -5,7 +5,7 @@
 <div class="image-container text-center mb-5">
   <img src="https://voyageminnesota.com/wp-content/uploads/2024/08/c-1722429958481-nasrieen_habib_dsc09767.jpg" 
        alt="Latest News Image" 
-       class="news-image img-fluid rounded shadow">
+       class="news-image">
 </div>
 
 <% if flash[:alert] %>
@@ -19,9 +19,9 @@
     <% if @media.any? %>
       <ul class="list-unstyled">
         <% @media.each do |medium| %>
-          <li class="media-item mb-5 p-4 border rounded shadow" id="media-<%= medium.id %>" style="background-color: #FFF; max-width: 800px; margin: 0 auto;">
+          <li class="media-item mb-5 p-4 border rounded shadow" id="media-<%= medium.id %>" style="background-color: #FFF;">
             <div class="d-flex justify-content-between align-items-center mb-3">
-              <h3 class="media-title font-weight-bold" style="color: #403f2b;"><%= medium.name %></h3>
+              <h3><%= medium.name %></h3>
               <div>
                 <%= link_to 'Edit', '#', 
                             class: 'btn btn-sm text-white edit-button text-decoration-none', 
@@ -29,7 +29,7 @@
                             data: { medium_id: medium.id } %>
               </div>
             </div>
-            <p class="media-description mb-4" style="color: #403f2b; font-size: 1.1rem;"><%= medium.description %></p>
+            <p class="media-description mb-4"><%= medium.description %></p>
 
             <div class="mb-3">
               <a href="<%= medium.link %>" target="_blank" 
