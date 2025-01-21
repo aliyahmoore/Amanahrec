@@ -1,57 +1,64 @@
 <%= stylesheet_link_tag 'media', media: 'all' %>
 
-<h1 class="heading text-center" style="color: #403f2b;">Amanah Rec Latest News...</h1>
+<h1 class="heading text-center my-5" style="color: #403f2b;">Amanah Rec Latest News...</h1>
 
-<div class="image-container text-center my-4">
+<div class="image-container text-center mb-5">
   <img src="https://voyageminnesota.com/wp-content/uploads/2024/08/c-1722429958481-nasrieen_habib_dsc09767.jpg" 
        alt="Latest News Image" 
-       class="news-image img-fluid rounded shadow-sm">
+       class="news-image img-fluid rounded shadow">
 </div>
 
 <% if flash[:alert] %>
-  <div class="alert alert-danger text-center">
+  <div class="alert alert-danger text-center mb-4">
     <%= flash[:alert] %>
   </div>
 <% end %>
 
-<div class="square-container mt-4">
-  <div class="square p-3">
+<div class="square-container mt-5">
+  <div class="square p-4" style="background-color: #DACCB1;">
     <% if @media.any? %>
       <ul class="list-unstyled">
         <% @media.each do |medium| %>
-          <li class="media-item mb-4 p-3 border rounded shadow-sm" id="media-<%= medium.id %>">
-            <div class="d-flex justify-content-between">
+          <li class="media-item mb-5 p-4 border rounded shadow" id="media-<%= medium.id %>" style="background-color: #FFF; max-width: 800px; margin: 0 auto;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
               <h3 class="media-title font-weight-bold" style="color: #403f2b;"><%= medium.name %></h3>
               <div>
-                <%= link_to 'Edit', '#', class: 'btn btn-sm text-white edit-button', style: 'background-color: #e86c00; border-color: #e86c00; margin-top: -10px;', data: { medium_id: medium.id } %>
+                <%= link_to 'Edit', '#', 
+                            class: 'btn btn-sm text-white edit-button text-decoration-none', 
+                            style: 'background-color: #e86c00; border-color: #e86c00;', 
+                            data: { medium_id: medium.id } %>
               </div>
             </div>
-            <p class="media-description text-muted" style="color: #403f2b;"><%= medium.description %></p>
+            <p class="media-description mb-4" style="color: #403f2b; font-size: 1.1rem;"><%= medium.description %></p>
 
-            <div>
-              <a href="<%= medium.link %>" target="_blank" class="media-link text-decoration-underline" style="color: #403f2b;">View Link</a>
+            <div class="mb-3">
+              <a href="<%= medium.link %>" target="_blank" 
+                 class="media-link text-decoration-underline fw-bold" 
+                 style="color: #403f2b;">View Link</a>
             </div>
 
             <div class="text-center">
-              <%= button_to 'Delete', medium_path(medium), method: :delete, class: 'btn btn-danger btn-sm ml-2 text-white', data: { confirm: 'Are you sure you want to delete this media?' } %>
+              <%= button_to 'Delete', medium_path(medium), method: :delete, 
+                            class: 'btn btn-danger btn-lg text-white', 
+                            data: { confirm: 'Are you sure you want to delete this media?' } %>
             </div>
             
-            <div class="edit-form-container" id="edit-form-<%= medium.id %>" style="display: none;">
+            <div class="edit-form-container mt-4" id="edit-form-<%= medium.id %>" style="display: none;">
               <%= form_with model: medium, url: medium_path(medium), method: :patch do |f| %>
-                <div>
-                  <%= f.label :name, style: "color: #403f2b;" %>
+                <div class="mb-3">
+                  <%= f.label :name, class: 'form-label', style: "color: #403f2b;" %>
                   <%= f.text_field :name, class: 'form-control' %>
                 </div>
-                <div>
-                  <%= f.label :description, style: "color: #403f2b;" %>
-                  <%= f.text_area :description, class: 'form-control' %>
+                <div class="mb-3">
+                  <%= f.label :description, class: 'form-label', style: "color: #403f2b;" %>
+                  <%= f.text_area :description, class: 'form-control', rows: 4 %>
                 </div>
-                <div>
-                  <%= f.label :link, "Media Link", style: "color: #403f2b;" %>
+                <div class="mb-3">
+                  <%= f.label :link, "Media Link", class: 'form-label', style: "color: #403f2b;" %>
                   <%= f.url_field :link, class: 'form-control' %>
                 </div>
-                <div>
-                  <%= f.submit "Update", class: "btn btn-secondary btn-sm text-white" %>
+                <div class="text-center">
+                  <%= f.submit "Update", class: "btn btn-secondary btn-lg text-white" %>
                 </div>
               <% end %>
             </div>
@@ -59,28 +66,30 @@
         <% end %>
       </ul>
     <% else %>
-      <p class="text-center text-muted">No Updates Available At This Time.</p>
+      <p class="text-center text-muted fs-5">No Updates Available At This Time.</p>
     <% end %>
   </div>
 </div>
 
-<div style="border: 2px solid #6c757d; padding: 20px; border-radius: 8px; background-color: #f8f9fa; max-width: 500px; margin: 50px auto 0;">
-  <div style="text-align: center">
-    <h2 style="color: #403f2b;">Add New Media</h2>
+
+<div class="card shadow-sm p-4 mx-auto mt-5" style="max-width: 500px;">
+  <div class="text-center mb-3">
+    <h2 class="text-dark">Add New Media</h2>
   </div>
+
   <%= form_with model: @medium, url: media_path, local: true do |f| %>
-    <div>
-      <%= f.label :name, style: "color: #403f2b;" %>
+    <div class="mb-3">
+      <%= f.label :name, class: "form-label text-dark" %>
       <%= f.text_field :name, required: true, class: "form-control" %>
     </div>
 
-    <div>
-      <%= f.label :description, style: "color: #403f2b;" %>
+    <div class="mb-3">
+      <%= f.label :description, class: "form-label text-dark" %>
       <%= f.text_area :description, required: true, class: "form-control" %>
     </div>
 
-    <div>
-      <%= f.label :link, "Media Link", style: "color: #403f2b;" %>
+    <div class="mb-3">
+      <%= f.label :link, "Media Link", class: "form-label text-dark" %>
       <%= f.url_field :link, required: true, class: "form-control" %>
     </div>
 
@@ -89,3 +98,4 @@
     </div>
   <% end %>
 </div>
+
