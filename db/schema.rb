@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.2].define(version: 2025_01_23_004342) do
-  # These are extensions that must be enabled in order to support this database
+# These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -55,6 +55,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_23_004342) do
     t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "published_date"
+    t.string "organization_name"
   end
 
   create_table "events", force: :cascade do |t|
