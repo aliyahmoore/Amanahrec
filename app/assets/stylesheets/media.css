@@ -18,8 +18,8 @@ body {
   display: block;
   margin: 30px auto;
   max-width: 35%;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .square-container {
@@ -34,7 +34,6 @@ body {
   background-color: #DACCB1; 
   width: 80%;
   max-width: 800px;
-  padding: 25px;
   box-sizing: border-box;
   border-radius: 12px;
   font-family: "Tahoma", sans-serif;
@@ -45,10 +44,6 @@ body {
 .square:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-.square li {
-  margin-bottom: 15px;
 }
 
 .square h3 {
