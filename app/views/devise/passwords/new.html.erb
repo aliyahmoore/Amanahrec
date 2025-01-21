@@ -1,12 +1,12 @@
 <h2 class="text-center mb-4">Forgot your password?</h2>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "w-50 mx-auto" }) do |f| %>
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "w-25 mx-auto form-container", style: "border: 2px solid #808080; padding: 15px; border-radius: 5px;" }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <!-- Email -->
   <div class="mb-3">
     <%= f.label :email, class: "form-label" %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Enter your email address", required: true, class: "form-control" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Enter your email address", required: true, class: "form-control", style: "background-color: #ffffff;" %>
     <small class="text-danger">Email is a required field</small>
   </div>
 
@@ -14,8 +14,10 @@
   <div class="mb-3 text-center">
     <%= f.submit "Send me reset password instructions", class: "btn btn-secondary text-white px-4" %>
   </div>
+
 <% end %>
 
+<!-- Centered Links (Inside the border) -->
 <div class="text-center">
   <%= render "devise/shared/links" %>
 </div>

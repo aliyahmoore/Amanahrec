@@ -1,7 +1,7 @@
-<h2 class="text-center mb-4">Sign in here or sign up below.</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "w-50 mx-auto" }) do |f| %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "w-25 mx-auto form-container", style: "border: 2px solid #808080; padding: 15px; border-radius: 5px;" }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
+
+  <h2 class="text-center mb-4">Sign in here or sign up below.</h2>
 
   <!-- Email -->
   <div class="mb-3">
@@ -29,9 +29,9 @@
   <div class="mb-3 text-center">
     <%= f.submit "Log in", class: "btn btn-secondary text-white px-4" %>
   </div>
-<% end %>
 
-<!-- Centered Links -->
-<div class="text-center">
-  <%= render "devise/shared/links" %>
-</div>
+  <!-- Centered Links (Inside the border) -->
+  <div class="text-center">
+    <%= render "devise/shared/links" %>
+  </div>
+<% end %>
