@@ -7,21 +7,21 @@
     <!-- First Name -->
     <div class="mb-3">
       <%= f.label :first_name, class: "form-label" %>
-      <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", placeholder: "Enter your first name", required: true, class: "form-control" %>
+      <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", placeholder: "Enter your first name", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
       <small class="text-danger">First name is a required field</small>
     </div>
     
     <!-- Last Name -->
     <div class="mb-3">
       <%= f.label :last_name, class: "form-label" %>
-      <%= f.text_field :last_name, autocomplete: "last_name", placeholder: "Enter your last name", required: true, class: "form-control" %>
+      <%= f.text_field :last_name, autocomplete: "last_name", placeholder: "Enter your last name", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
       <small class="text-danger">Last name is a required field</small>
     </div>
     
     <!-- Email -->
     <div class="mb-3">
       <%= f.label :email, class: "form-label" %>
-      <%= f.email_field :email, autocomplete: "email", placeholder: "Enter your email address", required: true, class: "form-control" %>
+      <%= f.email_field :email, autocomplete: "email", placeholder: "Enter your email address", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
       <small class="text-danger">Email is a required field</small>
     </div>  
 
@@ -31,35 +31,35 @@
       <% if @minimum_password_length %>
         <em class="text-muted">(Minimum <%= @minimum_password_length %> characters)</em>
       <% end %><br />
-      <%= f.password_field :password, autocomplete: "new-password", required: true, class: "form-control" %>
+      <%= f.password_field :password, autocomplete: "new-password", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
       <small class="text-danger">Password is a required field</small>
     </div>
 
     <!-- Password Confirmation -->
     <div class="mb-3">
       <%= f.label :password_confirmation, class: "form-label" %>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, class: "form-control" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
       <small class="text-danger">Password confirmation is a required field</small>
     </div>
 
     <!-- Phone Number -->
     <div class="mb-3">
       <%= f.label :phone_number, class: "form-label" %>
-      <%= f.text_field :phone_number, placeholder: "e.g., +1 (123) 456-7890", required: true, class: "form-control" %>
+      <%= f.text_field :phone_number, placeholder: "e.g., +1 (123) 456-7890", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
       <small class="text-danger">Phone number is a required field</small>
     </div>
 
     <!-- Gender -->
     <div class="mb-3">
       <%= f.label :gender, class: "form-label" %>
-      <%= f.select :gender, options_for_select([["Male", "Male"], ["Female", "Female"]]), { prompt: "Select Gender" }, required: true, class: "form-select" %>
+      <%= f.select :gender, options_for_select([["Male", "Male"], ["Female", "Female"]]), { prompt: "Select Gender" }, required: true, class: "form-select", style: "background-color: #f0f0f0;" %>
       <small class="text-danger">Gender is a required field</small>
     </div>
 
     <!-- Age Range -->
     <div class="mb-3">
       <%= f.label :age_range, class: "form-label" %>
-      <%= f.select :age_range, options_for_select([["18-25", "18-25"], ["26-35", "26-35"], ["36-45", "36-45"], ["46-55", "46-55"], ["56+", "56+"]]), { prompt: "Select Age Range" }, required: true, class: "form-select" %>
+      <%= f.select :age_range, options_for_select([["18-25", "18-25"], ["26-35", "26-35"], ["36-45", "36-45"], ["46-55", "46-55"], ["56+", "56+"]]), { prompt: "Select Age Range" }, required: true, class: "form-select", style: "background-color: #f0f0f0;" %>
       <small class="text-danger">Age range is a required field</small>
     </div>
 
@@ -75,7 +75,7 @@
         ["Hispanic or Latino", "Hispanic or Latino"],
         ["Other", "Other"],
         ["Prefer not to say", "Prefer not to say"]
-      ]), { prompt: "Select Ethnicity" }, required: true, class: "form-select" %>
+      ]), { prompt: "Select Ethnicity" }, required: true, class: "form-select", style: "background-color: #f0f0f0;" %>
       <small class="text-danger">Ethnicity is a required field</small>
     </div>
 
