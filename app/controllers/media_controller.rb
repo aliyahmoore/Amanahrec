@@ -1,11 +1,16 @@
+# app/controllers/media_controller.rb
 class MediaController < ApplicationController
-  before_action :set_medium, only: [ :update, :destroy ]
+  before_action :set_medium, only: [ :show, :edit, :update, :destroy ]
 
   def index
     @media = Medium.all
+    @medium = Medium.new
   end
 
   def show
+  end
+
+  def edit
   end
 
   def create
@@ -23,15 +28,15 @@ class MediaController < ApplicationController
     if @medium.update(medium_params)
       redirect_to media_path, notice: "Media post was successfully updated."
     else
-      # Add the errors to the flash message
       flash[:alert] = "There was an error updating the media post."
-      render :index  # Instead of redirecting, render the index page again
+      render :index
     end
   end
 
   def destroy
+    @medium = Medium.find(params[:id])
     @medium.destroy
-    redirect_to media_path, notice: "Media post was successfully deleted."
+    redirect_to media_path, notice: "Media deleted successfully."
   end
 
   private
