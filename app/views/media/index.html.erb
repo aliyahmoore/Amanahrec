@@ -16,7 +16,7 @@
 
 <div class="square-container mt-5">
   <div class="square p-4" style="background-color: #DACCB1;">
-    <% if @media.any? %>
+    <% if @media.present? %>
       <ul class="list-unstyled">
         <% @media.each do |medium| %>
           <li class="media-item mb-5 p-4 border rounded shadow" id="media-<%= medium.id %>" style="background-color: #FFF;">
@@ -78,24 +78,25 @@
   </div>
 
   <%= form_with model: @medium, url: media_path, local: true do |f| %>
-    <div class="mb-3">
-      <%= f.label :name, class: "form-label text-dark" %>
-      <%= f.text_field :name, required: true, class: "form-control" %>
-    </div>
+  <div class="mb-3">
+    <%= f.label :name, class: "form-label text-dark" %>
+    <%= f.text_field :name, required: true, class: "form-control" %>
+  </div>
 
-    <div class="mb-3">
-      <%= f.label :description, class: "form-label text-dark" %>
-      <%= f.text_area :description, required: true, class: "form-control" %>
-    </div>
+  <div class="mb-3">
+    <%= f.label :description, class: "form-label text-dark" %>
+    <%= f.text_area :description, class: "form-control" %> 
+  </div>
 
-    <div class="mb-3">
-      <%= f.label :link, "Media Link", class: "form-label text-dark" %>
-      <%= f.url_field :link, required: true, class: "form-control" %>
-    </div>
+  <div class="mb-3">
+    <%= f.label :link, "Media Link", class: "form-label text-dark" %>
+    <%= f.url_field :link, required: true, class: "form-control" %>
+  </div>
 
-    <div class="text-center mt-3">
-      <%= f.submit "Add Media", class: "btn btn-secondary text-white" %>
-    </div>
-  <% end %>
+  <div class="text-center mt-3">
+    <%= f.submit "Add Media", class: "btn btn-secondary text-white" %>
+  </div>
+<% end %>
 </div>
+
 
