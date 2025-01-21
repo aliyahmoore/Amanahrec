@@ -1,12 +1,10 @@
-# app/controllers/media_controller.rb
 class MediaController < ApplicationController
   before_action :set_medium, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @media = Medium.all
+    @media = Medium.all.presence || []
     @medium = Medium.new
   end
-
   def show
   end
 
@@ -15,12 +13,11 @@ class MediaController < ApplicationController
 
   def create
     @medium = Medium.new(medium_params)
+
     if @medium.save
-      redirect_to media_path, notice: "Media post was successfully created."
+      redirect_to media_path, notice: "Media post created successfully."
     else
-      # Add the errors to the flash message
-      flash[:alert] = "There was an error creating the media post."
-      render :index  # Instead of redirecting, render the index page again
+      render :index
     end
   end
 
