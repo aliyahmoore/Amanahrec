@@ -30,7 +30,9 @@
               </div>
             </div>
             <p class="media-description mb-4"><%= medium.description %></p>
-
+            <p><strong>Organization:</strong> <%= medium.organization_name %></p>
+            <p><strong>Published Date:</strong> <%= medium.published_date.strftime("%B %d, %Y") %></p>
+            
             <div class="mb-3">
               <a href="<%= medium.link %>" target="_blank" 
                  class="media-link text-decoration-underline fw-bold" 
@@ -86,6 +88,16 @@
   <div class="mb-3">
     <%= f.label :description, class: "form-label text-dark" %>
     <%= f.text_area :description, class: "form-control" %> 
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :organization_name, "Organization Name", class: "form-label text-dark" %>
+    <%= f.text_field :organization_name, required: true, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :published_date, class: "form-label text-dark" %>
+    <%= f.date_field :published_date, required: true, class: "form-control" %>
   </div>
 
   <div class="mb-3">
