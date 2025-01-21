@@ -6,6 +6,12 @@
 
 .footer-custom {
   color: #403f2b; 
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff; 
+  z-index: 999;
 }
 
 .footer-custom a[href^="mailto:"]:hover {
