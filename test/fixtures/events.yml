@@ -3,11 +3,10 @@
 one:
   title: MyString
   description: MyText
-  time: 2025-01-16 18:42:04
-  date: 2025-01-16
-  end_date: 2025-01-16
+  event_datetime: 2025-01-22 07:53:12
+  end_datetime: 2025-01-22 07:53:12
   location: MyString
-  rsvp_deadline: 2025-01-16
+  rsvp_deadline: 2025-01-22
   childcare: false
   sponsors: MyString
   cost: 9.99
@@ -15,11 +14,10 @@ one:
 two:
   title: MyString
   description: MyText
-  time: 2025-01-16 18:42:04
-  date: 2025-01-16
-  end_date: 2025-01-16
+  event_datetime: 2025-01-22 07:53:12
+  end_datetime: 2025-01-22 07:53:12
   location: MyString
-  rsvp_deadline: 2025-01-16
+  rsvp_deadline: 2025-01-22
   childcare: false
   sponsors: MyString
   cost: 9.99
