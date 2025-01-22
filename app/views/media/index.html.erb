@@ -29,11 +29,22 @@
                             data: { medium_id: medium.id } %>
               </div>
             </div>
-            <p class="media-description mb-4"><%= medium.description %></p>
-            <p><strong>Organization:</strong> <%= medium.organization_name %></p>
+            <p><strong>News Organization:</strong> <%= medium.organization_name %></p>
             <p><strong>Published Date:</strong> <%= medium.published_date.strftime("%B %d, %Y") %></p>
-            
+
             <div class="mb-3">
+              <% if medium.link.present? %>
+                <iframe 
+                  src="<%= medium.link %>" 
+                  title="<%= medium.name %> Article Snippet" 
+                  width="100%" 
+                  height="300" 
+                  frameborder="0" 
+                  style="border: 1px solid #ccc; border-radius: 8px; margin-top: 10px;">
+                </iframe>
+              <% else %>
+                <p class="text-muted">No preview available.</p>
+              <% end %>
               <a href="<%= medium.link %>" target="_blank" 
                  class="media-link text-decoration-underline fw-bold" 
                  style="color: #403f2b;">View Link</a>
@@ -46,23 +57,7 @@
             </div>
             
             <div class="edit-form-container mt-4" id="edit-form-<%= medium.id %>" style="display: none;">
-              <%= form_with model: medium, url: medium_path(medium), method: :patch do |f| %>
-                <div class="mb-3">
-                  <%= f.label :name, class: 'form-label', style: "color: #403f2b;" %>
-                  <%= f.text_field :name, class: 'form-control' %>
-                </div>
-                <div class="mb-3">
-                  <%= f.label :description, class: 'form-label', style: "color: #403f2b;" %>
-                  <%= f.text_area :description, class: 'form-control', rows: 4 %>
-                </div>
-                <div class="mb-3">
-                  <%= f.label :link, "Media Link", class: 'form-label', style: "color: #403f2b;" %>
-                  <%= f.url_field :link, class: 'form-control' %>
-                </div>
-                <div class="text-center">
-                  <%= f.submit "Update", class: "btn btn-secondary btn-lg text-white" %>
-                </div>
-              <% end %>
+              <%= render 'media/form', medium: medium %>
             </div>
           </li>
         <% end %>
@@ -73,42 +68,10 @@
   </div>
 </div>
 
-
 <div class="card shadow-sm p-4 mx-auto mt-5" style="max-width: 500px;">
   <div class="text-center mb-3">
     <h2 class="text-dark">Add New Media Post</h2>
   </div>
 
-  <%= form_with model: @medium, url: media_path, local: true do |f| %>
-  <div class="mb-3">
-    <%= f.label :name, class: "form-label text-dark" %>
-    <%= f.text_field :name, required: true, class: "form-control" %>
-  </div>
-
-  <div class="mb-3">
-    <%= f.label :description, class: "form-label text-dark" %>
-    <%= f.text_area :description, class: "form-control" %> 
-  </div>
-
-  <div class="mb-3">
-    <%= f.label :organization_name, "Organization Name", class: "form-label text-dark" %>
-    <%= f.text_field :organization_name, required: true, class: "form-control" %>
-  </div>
-
-  <div class="mb-3">
-    <%= f.label :published_date, class: "form-label text-dark" %>
-    <%= f.date_field :published_date, required: true, class: "form-control" %>
-  </div>
-
-  <div class="mb-3">
-    <%= f.label :link, "Media Link", class: "form-label text-dark" %>
-    <%= f.url_field :link, required: true, class: "form-control" %>
-  </div>
-
-  <div class="text-center mt-3">
-    <%= f.submit "Add Media", class: "btn btn-secondary text-white" %>
-  </div>
-<% end %>
+  <%= render 'media/form', medium: @medium %>
 </div>
-
-

@@ -2,7 +2,7 @@ class MediaController < ApplicationController
   before_action :set_medium, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @media = Medium.all.presence || []
+    @media = Medium.all
     @medium = Medium.new
   end
   def show
@@ -17,6 +17,7 @@ class MediaController < ApplicationController
     if @medium.save
       redirect_to media_path, notice: "Media post created successfully."
     else
+      flash.now[:alert] = "There was an error creating the media post."
       render :index
     end
   end
@@ -43,6 +44,6 @@ class MediaController < ApplicationController
   end
 
   def medium_params
-    params.require(:medium).permit(:name, :description, :link, :published_date, :organization_name)
+    params.require(:medium).permit(:name, :link, :published_date, :organization_name)
   end
 end
