@@ -62,7 +62,11 @@
     <button class="next">&#10095;</button>
   </div>
   <% if user_signed_in? %>
-  <%= link_to 'Submit a Testimonial', new_testimonial_path, class: 'btn btn-secondary' %>
+  <% if current_user.role.name == 'admin' %>
+    <%= link_to 'View Testimonials', testimonials_path, class: 'btn btn-secondary' %>
+  <% else %>
+    <%= link_to 'Submit a Testimonial', new_testimonial_path, class: 'btn btn-secondary' %>
+  <% end %>
 <% end %>
 
 </div>

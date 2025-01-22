@@ -1,7 +1,7 @@
 class TestimonialsController < ApplicationController
     before_action :authenticate_user!, except: [:index]
     before_action :set_testimonial, only: [:edit, :update, :destroy, :approve]
-    before_action :authorize_admin!, only: [:approve, :destroy]
+    before_action :authorize_admin!, only: [:approve, :unapprove, :destroy]
   
     # Display approved testimonials to everyone and unapproved to admin
     def index
@@ -33,7 +33,13 @@ class TestimonialsController < ApplicationController
       @testimonial.update(approved: true)
       redirect_to testimonials_path, notice: "Testimonial approved successfully."
     end
-  
+    
+    #Admin: unapprove a testimonial
+    def unapprove
+        @testimonial = Testimonial.find(params[:id])
+        @testimonial.update(approved: false)
+        redirect_to testimonials_path, notice: "Testimonial unapproved successfully."
+      end
     # Admin or User: Edit a testimonial
     def edit
     end
