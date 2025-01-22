@@ -3,9 +3,14 @@ class TestimonialsController < ApplicationController
     before_action :set_testimonial, only: [:edit, :update, :destroy, :approve]
     before_action :authorize_admin!, only: [:approve, :destroy]
   
-    # Public: Display approved testimonials
+    # Display approved testimonials to everyone and unapproved to admin
     def index
-      @testimonials = Testimonial.where(approved: true).order(created_at: :desc)
+        if current_user&.role&.name == 'admin'
+            @testimonials = Testimonial.order(created_at: :desc)
+          else
+            @testimonials = Testimonial.where(approved: true).order(created_at: :desc)
+          end
+
     end
   
     # Form for creating a new testimonial
@@ -59,7 +64,8 @@ class TestimonialsController < ApplicationController
     end
   
     def authorize_admin!
-      redirect_to root_path, alert: "Not authorized!" unless current_user&.member
+        redirect_to root_path, alert: "Not authorized!" unless current_user&.role&.name == 'admin'
+
     end
   end
   
