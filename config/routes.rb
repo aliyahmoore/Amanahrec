@@ -15,14 +15,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  root "home#index"
-
-  resources :testimonials, only: [ :index, :new, :create, :edit, :update, :destroy ] do
-    member do
-      patch :approve
-      patch :unapprove
-    end
-  end
+  root "pages#home"
 
   resources :events
 end
