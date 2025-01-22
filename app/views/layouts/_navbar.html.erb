@@ -1,16 +1,24 @@
-<nav class="navbar navbar-expand-lg" style="background-color: #403f2b;">
+<nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
-    <a class="navbar-brand ms-5" href="<%= root_path %>">Amanahrec</a>
+  <a class="navbar-brand ms-5" href="<%= root_path %>">
+  <img src="/AmanahRecProject3_Final.svg" alt="Amanahrec Logo" height="150" class="me-2"> <!-- Adjust height as needed -->
+  Amanahrec
+</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <!-- Navigation Links -->
       <ul class="navbar-nav lead d-flex align-items-center mx-auto">
-        <li class="nav-item"><%= link_to "About", "#", class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to "About", pages_about_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "Activities", "#", class: "nav-link" %></li>
+<<<<<<< HEAD
         <li class="nav-item"><%= link_to "Events", events_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "Calendar", "#", class: "nav-link" %></li>
+=======
+        <li class="nav-item"><%= link_to "Events", "#", class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to "Calendar", pages_calendar_path,  class: "nav-link" %></li>
+>>>>>>> origin/main
         <li class="nav-item"><%= link_to "Eco Jariyah", "https://www.ecojariyah.com/", class: "nav-link", target: "_blank" %></li>
         <li class="nav-item"><%= link_to "Become a Member", "#", class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "Donate", "#", class: "nav-link", id: "donate" %></li>
