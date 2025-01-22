@@ -45,3 +45,59 @@
     <li><strong>Kayaking</strong> – Friday, January 12, 2025</li>
   </ul>
 </div>
+
+<!-- Testimonials Section -->
+<div class="testimonials-section">
+  <h2>What Our Members Say</h2>
+  <div class="testimonial-slider">
+    <% @testimonials.each do |testimonial| %>
+      <div class="testimonial-slide">
+        <p class="testimonial-text"><%= testimonial.text %></p>
+        <p class="testimonial-author">- <%= testimonial.user.first_name %> <%= testimonial.user.last_name %></p>
+      </div>
+    <% end %>
+  </div>
+  <div class="testimonial-navigation">
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+  </div>
+  <% if user_signed_in? %>
+  <%= link_to 'Submit a Testimonial', new_testimonial_path, class: 'btn btn-secondary' %>
+<% end %>
+
+</div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.testimonial-slide');
+    const prevButton = document.querySelector('.prev');
+    const nextButton = document.querySelector('.next');
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.style.display = (i === index) ? 'block' : 'none';
+      });
+    }
+
+    function nextSlide() {
+      slideIndex = (slideIndex + 1) % slides.length;
+      showSlide(slideIndex);
+    }
+
+    function prevSlide() {
+      slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+      showSlide(slideIndex);
+    }
+
+    prevButton.addEventListener('click', prevSlide);
+    nextButton.addEventListener('click', nextSlide);
+
+    // Initialize the slider
+    showSlide(slideIndex);
+
+    // Optional: Auto-play functionality
+    setInterval(nextSlide, 5000); // Change slide every 5 seconds
+  });
+</script>
