@@ -6,8 +6,8 @@
 
 .footer-custom {
   color: #403f2b; 
-  position: fixed;
-  bottom: 0;
+  position: relative;
+  bottom: auto;
   left: 0;
   width: 100%;
   background-color: #ffffff; 
