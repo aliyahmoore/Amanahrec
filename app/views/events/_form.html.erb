@@ -30,8 +30,8 @@
 
     <!-- Event Date and Time (Combined) -->
     <div class="form-group">
-      <%= form.label :event_datetime, "Event Date and Time" %>
-      <%= form.datetime_local_field :event_datetime, class: "form-control" %>
+      <%= form.label :datetime, "Event Date and Time" %>
+      <%= form.datetime_local_field :datetime, class: "form-control" %>
     </div>
 
     <!-- Event Location -->
@@ -40,10 +40,10 @@
       <%= form.text_field :location, class: "form-control", placeholder: "Enter the event location" %>
     </div>
 
-    <!-- End Date -->
+    <!-- End Date and Time -->
     <div class="form-group">
-      <%= form.label :end_date, "End Date" %>
-      <%= form.date_field :end_date, class: "form-control" %>
+      <%= form.label :end_datetime, "End Date and Time" %>
+      <%= form.datetime_local_field :end_datetime, class: "form-control" %>
     </div>
 
     <!-- RSVP Deadline -->
