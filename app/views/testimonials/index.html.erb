@@ -1,5 +1,4 @@
 <h1>Testimonials</h1>
-<p>Current User Role: <%= current_user&.role&.name %></p>
 
 <% @testimonials.each do |testimonial| %>
   <div>
@@ -14,7 +13,6 @@
     <p>Status: Approved</p>
   <% end %>
 <% else %>
-  <p>Current user is not an admin or not logged in.</p>
 <% end %>
 
   </div>

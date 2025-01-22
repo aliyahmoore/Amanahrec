@@ -22,7 +22,7 @@ class TestimonialsController < ApplicationController
     def create
       @testimonial = current_user.testimonials.build(testimonial_params)
       if @testimonial.save
-        redirect_to testimonials_path, notice: "Your testimonial has been submitted for review."
+        redirect_to root_path, notice: "Your testimonial has been submitted for review."
       else
         render :new
       end
