@@ -44,37 +44,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_22_135312) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "media", force: :cascade do |t|
-    t.string "name"
-    t.string "link"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.date "published_date"
-    t.string "organization_name"
-  end
-
-  create_table "meetings", force: :cascade do |t|
-    t.string "name"
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "payments", force: :cascade do |t|
-    t.string "stripe_payment_id"
-    t.decimal "amount"
-    t.string "status"
-    t.bigint "event_id", null: false
+  create_table "events_users", id: false, force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.boolean "is_recurring"
-    t.string "recurring_type"
-    t.datetime "payment_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_payments_on_event_id"
-    t.index ["user_id"], name: "index_payments_on_user_id"
+    t.bigint "event_id", null: false
+    t.index ["event_id", "user_id"], name: "index_events_users_on_event_id_and_user_id"
+    t.index ["user_id", "event_id"], name: "index_events_users_on_user_id_and_event_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -95,6 +69,4 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_22_135312) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
-  add_foreign_key "payments", "users"
 end
