@@ -10,10 +10,10 @@
     <p><strong>Location:</strong> <%= @event.location %></p>
     
     <!-- Display Combined Date and Time -->
-    <p><strong>Date and Time:</strong> <%= @event.datetime.strftime("%B %d, %Y at %I:%M %p") %></p>
+    <p><strong>Date and Time:</strong> <%= @event.start_date.strftime("%B %d, %Y at %I:%M %p") %></p>
     
-    <p><strong>End Date:</strong> <%= @event.end_datetime.strftime("%B %d, %Y at %I:%M %p") %></p>
-    <p class="time-info"><strong>RSVP Deadline:</strong> <%= @event.rsvp_deadline.strftime("%B %d, %Y") %></p>
+    <p><strong>End Date:</strong> <%= @event.end_date.strftime("%B %d, %Y at %I:%M %p") %></p>
+    <p class="time-info"><strong>RSVP Deadline:</strong> <%= @event.rsvp_deadline.strftime("%B %d, %Y at %I:%M %p") %></p>
     
     <h2>Childcare & Sponsors</h2>
     <p><strong>Childcare Available:</strong> <%= @event.childcare ? 'Yes' : 'No' %></p>
