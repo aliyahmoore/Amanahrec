@@ -1,47 +1,91 @@
 .activity-show {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #E9E2D8;  /* Light beige background */
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-   .activity-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #403F2B;  /* Dark brown color */
-    text-align: center;
-    margin-bottom: 20px;
-  }
-   .activity-details p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #57573F;  /* Olive green for text */
-    margin: 10px 0;
-  }
-   .activity-details strong {
-    color: #403F2B;  /* Dark brown for labels */
-  }
-   .activity-actions {
-    text-align: center;
-    margin-top: 20px;
-  }
-   .activity-actions .back-button {
-    background-color: #57573F;  /* Olive green */
-    color: white;
-    padding: 12px 20px;
-    font-size: 1.2rem;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-  }
-   .activity-actions .back-button:hover {
-    background-color: #403F2B;  /* Dark brown on hover */
-  }
-   .activity-details p {
-    background-color: #DACCB1;  /* Lighter beige background for individual items */
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-  }
- 
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #E9E2D8;  /* Light beige background */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.activity-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #403F2B;  /* Dark brown color */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.activity-details p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #57573F;  /* Olive green for text */
+  margin: 10px 0;
+}
+
+.activity-details strong {
+  color: #403F2B;  /* Dark brown for labels */
+}
+
+.activity-actions {
+  text-align: center;
+  margin-top: 30px;  /* Increased margin for better separation */
+}
+
+/* General Button Styling */
+.activity-actions a,
+.activity-actions button {
+  padding: 12px 25px;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  display: inline-block;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  margin: 10px 0;  /* Vertical spacing between buttons */
+}
+
+/* Edit Button */
+.activity-actions .edit-button {
+  background-color: #A9B17E;  /* Muted olive green */
+  color: #403F2B;  /* Dark brown for text */
+}
+
+.activity-actions .edit-button:hover {
+  background-color: #8C9A5B;  /* Slightly darker olive green on hover */
+  opacity: 0.9;
+}
+
+/* Delete Button */
+.activity-actions .delete-button {
+  background-color: #D2B09C;  /* Light brownish-red */
+  color: #403F2B;  /* Dark brown for text */
+}
+
+.activity-actions .delete-button:hover {
+  background-color: #B09A7A;  /* Slightly darker brownish-red on hover */
+  opacity: 0.9;
+}
+
+/* Back Button */
+.activity-actions .back-button {
+  background-color: #57573F;  /* Olive green */
+  color: white;
+  padding: 12px 25px;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.activity-actions .back-button:hover {
+  background-color: #403F2B;  /* Dark brown on hover */
+}
+
+/* Activity details paragraph background */
+.activity-details p {
+  background-color: #DACCB1;  /* Lighter beige background for individual items */
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}

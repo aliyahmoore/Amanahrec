@@ -67,9 +67,9 @@
     </div>
    
    
-    <div class="field">
-      <%= form.label :cost %>
-      <%= form.number_field :cost, step: 0.01, class: "input-field" %>
+    <div class="form-group">
+      <%= form.label :cost, "Cost" %>
+      <%= form.text_field :cost, value: number_to_currency(@activity.cost, unit: "$", precision: 2), class: 'form-control' %>
     </div>
    
    
