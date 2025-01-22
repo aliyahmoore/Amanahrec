@@ -17,10 +17,10 @@ Rails.application.routes.draw do
   # root "posts#index"
   root "home#index"
 
-  resources :testimonials, only: [:index, :new, :create, :edit, :update, :destroy] do
+  resources :testimonials, only: [ :index, :new, :create, :edit, :update, :destroy ] do
     member do
       patch :approve
-      patch :unapprove 
+      patch :unapprove
     end
   end
 end
