@@ -33,10 +33,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_22_135312) do
   create_table "events", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.datetime "datetime"
-    t.datetime "end_datetime"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.string "location"
-    t.date "rsvp_deadline"
+    t.datetime "rsvp_deadline"
     t.boolean "childcare"
     t.string "sponsors"
     t.decimal "cost", precision: 8, scale: 2

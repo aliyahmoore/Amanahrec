@@ -49,7 +49,7 @@
     <!-- RSVP Deadline -->
     <div class="form-group">
       <%= form.label :rsvp_deadline, "RSVP Deadline" %>
-      <%= form.date_field :rsvp_deadline, class: "form-control", id: "rsvp_deadline" %>
+      <%= form.datetime_local_field :rsvp_deadline, class: "form-control", id: "rsvp_deadline" %>
       <div id="rsvp-error-message" style="color: red; display: none;">
         The RSVP deadline cannot be after the event date.
       </div>
