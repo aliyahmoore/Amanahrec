@@ -72,5 +72,5 @@ p {
 .about-page .about-image img {
     max-width: 420px;
     height: auto;
-    border-radius: 8px;
+    border-radius: 50%;
 }
