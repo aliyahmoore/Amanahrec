@@ -27,5 +27,9 @@ Rails.application.routes.draw do
       patch :unapprove
     end
   end
-  resources :events, :activities
+
+  resources :activities
+  resources :events do
+    resources :payments, only: [:new, :create]
+  end
 end
