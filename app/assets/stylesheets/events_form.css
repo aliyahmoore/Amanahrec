@@ -115,3 +115,8 @@
 .event-form-container .form-group:last-child {
   margin-bottom: 0;
 }
+
+.required {
+  color: red;
+  font-weight: bold;
+}
