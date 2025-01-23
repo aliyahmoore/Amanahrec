@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "payments/new"
+  get "payments/create"
   devise_for :users
   get "pages/home"
   get "pages/about"
