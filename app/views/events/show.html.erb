@@ -22,6 +22,19 @@
     <h2>Cost</h2>
     <p><strong>Cost:</strong> <%= number_to_currency(@event.cost, precision: 2) %></p>
 
+    <% if @event.images.attached? %>
+    <div class="event-images">
+      <% @event.images.each do |image| %>
+        <div class="event-image">
+          <%= image_tag image, alt: "Event Image", class: "img-fluid" %> <!-- Display each image -->
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>No images uploaded for this event.</p>
+  <% end %>
+  
+
   </div>
 </div>
 
