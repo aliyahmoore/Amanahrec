@@ -18,41 +18,54 @@
 
     <!-- Event Title -->
     <div class="form-group">
-      <%= form.label :title, "Event Title" %>
-      <%= form.text_field :title, class: "form-control", placeholder: "Enter event title" %>
+      <%= form.label :title do %>
+        Event Title <span class="required">*</span>
+      <% end %>
+      <%= form.text_field :title, class: "form-control", placeholder: "Enter event title", required: true %>
     </div>
-
+    
+    
     <!-- Event Description -->
     <div class="form-group">
-      <%= form.label :description, "Description" %>
-      <%= form.text_area :description, class: "form-control", placeholder: "Enter a detailed description of the event" %>
+      <%= form.label :description do %>
+        Description <span class="required">*</span>
+      <% end %>
+      <%= form.text_area :description, class: "form-control", placeholder: "Enter a detailed description of the event", required: true %>
     </div>
 
-    <!-- Event Date and Time (Combined) -->
+    <!-- Event Date and Time -->
     <div class="form-group">
-      <%= form.label :start_date, "Event Date" %> <!-- Fixed label -->
-      <%= form.datetime_local_field :start_date, class: "form-control" %>
+    <%= form.label :start_date do %>
+      Event Date <span class="required">*</span> <!-- Red asterisk next to the label -->
+    <% end %>
+    <%= form.datetime_local_field :start_date, class: "form-control", required: true %>
     </div>
 
     <!-- Event Location -->
     <div class="form-group">
-      <%= form.label :location, "Event Location" %>
-      <%= form.text_field :location, class: "form-control", placeholder: "Enter the event location" %>
-    </div>
+    <%= form.label :location do %>
+      Event Location <span class="required">*</span> 
+    <% end %>
+    <%= form.text_field :location, class: "form-control", placeholder: "Enter the event location", required: true %>
+  </div>
 
     <!-- End Date and Time -->
     <div class="form-group">
-      <%= form.label :end_date, "End Date and Time" %>
-      <%= form.datetime_local_field :end_date, class: "form-control" %>
-    </div>
+    <%= form.label :end_date do %>
+      End Date and Time <span class="required">*</span> 
+    <% end %>
+    <%= form.datetime_local_field :end_date, class: "form-control", required: true %>
+  </div>
 
     <!-- RSVP Deadline -->
     <div class="form-group">
-      <%= form.label :rsvp_deadline, "RSVP Deadline" %>
-      <%= form.datetime_local_field :rsvp_deadline, class: "form-control", id: "rsvp_deadline" %>
-      <div id="rsvp-error-message" style="color: red; display: none;">
-        The RSVP deadline cannot be after the event date.
-      </div>
+    <%= form.label :rsvp_deadline do %>
+      RSVP Deadline <span class="required">*</span> 
+    <% end %>
+    <%= form.datetime_local_field :rsvp_deadline, class: "form-control", id: "rsvp_deadline", required: true %>
+    <div id="rsvp-error-message" style="color: red; display: none;">
+      The RSVP deadline cannot be after the event date.
+    </div>
     </div>
 
     <!-- Childcare Available -->
@@ -69,9 +82,11 @@
 
     <!-- Event Cost -->
     <div class="form-group">
-      <%= form.label :cost, "Event Cost" %>
-      <%= form.number_field :cost, step: 0.01, min: 0, class: "form-control", placeholder: "Enter the event cost" %>
-    </div>
+    <%= form.label :cost do %>
+      Event Cost <span class="required">*</span> 
+    <% end %>
+    <%= form.number_field :cost, step: 0.01, min: 0, class: "form-control", placeholder: "Enter the event cost", required: true %>
+  </div>
 
     <!-- Multiple image upload -->
     <div>

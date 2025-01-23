@@ -7,6 +7,12 @@
       <% @events.each do |event| %>
         <div class="event-card">
           <h3><%= event.title %></h3>
+
+          <% if event.images.attached? %>
+            <div class="event-image">
+              <%= image_tag event.images.first, class: "event-image" %>
+            </div>
+          <% end %>
           
           <!-- Combine date and time -->
           <p><strong>Date and Time:</strong> <%= event.start_date.strftime("%B %d, %Y at %I:%M %p") %></p>
