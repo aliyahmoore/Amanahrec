@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get "payments/new"
-  get "payments/create"
   devise_for :users
   get "pages/home"
   get "pages/about"
@@ -21,5 +19,8 @@ Rails.application.routes.draw do
   # root "posts#index"
   root "pages#home"
 
-  resources :events, :activities
+  resources :activities
+  resources :events do
+    resources :payments, only: [:new, :create]
+  end
 end
