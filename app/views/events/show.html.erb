@@ -35,6 +35,9 @@
   <% end %>
   
 
+    <button id="checkout-button" data-event-id= "<%= @event.id %>">
+  Pay Now $<%= number_with_precision(@event.cost, precision: 2) %>
+</button>
   </div>
 </div>
 
