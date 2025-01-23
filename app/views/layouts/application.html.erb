@@ -24,6 +24,7 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= render 'layouts/navbar' %>
+    <%= yield :javascript%>
     <%= yield %>
     <%= render 'layouts/footer' %>
   </body>
