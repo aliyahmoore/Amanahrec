@@ -1,39 +1,48 @@
-<nav class="navbar">
-  <div class="nav-wrapper">
-    <!-- Add Logo or brand name -->
-    <a class="brand" href="<%= root_path %>">Amanahrec</a>
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+  <a class="navbar-brand ms-5" href="<%= root_path %>">
+  <img src="/AmanahRecProject3_Final.svg" alt="Amanahrec Logo" height="150" class="me-2"> <!-- Adjust height as needed -->
+  Amanahrec
+</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Navigation Links -->
+      <ul class="navbar-nav lead d-flex align-items-center mx-auto">
+        <li class="nav-item"><%= link_to "About", pages_about_path, class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to "Activities", "#", class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to "Events", "#", class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to "Calendar", pages_calendar_path,  class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to "Eco Jariyah", "https://www.ecojariyah.com/", class: "nav-link", target: "_blank" %></li>
+        <li class="nav-item"><%= link_to "Become a Member", "#", class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to "Donate", "#", class: "nav-link", id: "donate" %></li>
+      </ul>
 
-    <!-- Navigation Links -->
-    <ul class="nav-links">
-      <li><%= link_to "Home", root_path %></li>
-      <li><%= link_to "About", "#" %></li>
-      <li><%= link_to "Activities", activities_path %></li>
-      <li><%= link_to "Events", "#" %></li>
-      <li><%= link_to "Calendar", "#" %></li>
-      <li><%= link_to "EcoJariyah", "https://www.ecojariyah.com/", target: "_blank" %></li>
-      <li><%= link_to "Become a Member", "#" %></li>
-      <li><%= link_to "Donate", "#", class: "navbar-btn-link" %></li>
-
-    <% if user_signed_in? %>
-      <li>
-        <span><%= "#{current_user.first_name}, You are signed in" %></span>
-        <ul>
-          <li>
-            <%= link_to "Edit Profile", edit_user_registration_path %>
+      <!-- User Links -->
+      <ul class="navbar-nav lead d-flex align-items-center ms-auto">
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-user"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <li class="dropdown-header">
+                Hi, <%= current_user.first_name %>!
+              </li>
+              <li>
+                <%= link_to "Edit Profile", edit_user_registration_path, class: "dropdown-item" %>
+              </li>
+              <li>
+                <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+              </li>
+            </ul>
           </li>
-          <li>
-            <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-          </li>
-        </ul>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "Sign In", new_user_session_path %>
-      </li>
-      <li>
-        <%= link_to "Sign Up", new_user_registration_path %>
-      </li>
-      <% end %>
-    </ul>
+        <% else %>
+          <li class="nav-item"><%= link_to "Sign In", new_user_session_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %></li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 </nav>

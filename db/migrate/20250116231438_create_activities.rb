@@ -3,8 +3,7 @@ class CreateActivities < ActiveRecord::Migration[7.2]
     create_table :activities do |t|
       t.string :title
       t.text :description
-      t.time :time
-      t.date :date
+      t.datetime :date
       t.string :location
       t.integer :capacity
       t.text :what_to_bring

@@ -24,16 +24,8 @@
    
    
     <div class="field">
-    <%= form.label :time %>
-      <div class="time-field">
-        <%= form.time_field :time, class: "form-control" %>
-      </div>
-    </div>
-   
-   
-    <div class="field">
       <%= form.label :date %>
-      <%= form.date_select :date, class: "input-field" %>
+      <%= form.datetime_local_field :date, value: Time.now.strftime("%Y-%m-%dT%H:%M"), class: "input-field" %>
     </div>
    
    

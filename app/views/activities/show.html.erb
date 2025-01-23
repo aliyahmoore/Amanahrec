@@ -4,7 +4,6 @@
 
  <div class="activity-details">
    <p><strong>Description:</strong> <%= @activity.description %></p>
-   <p><strong>Time:</strong> <%= @activity.time.strftime("%I:%M %p") %></p>
    <p><strong>Date:</strong> <%= @activity.date %></p>
    <p><strong>Location:</strong> <%= @activity.location %></p>
    <p><strong>Capacity:</strong> <%= @activity.capacity %></p>
@@ -12,7 +11,7 @@
    <p><strong>Rules:</strong> <%= @activity.rules %></p>
    <p><strong>Notes:</strong> <%= @activity.notes %></p>
    <p><strong>Cost:</strong> <%= number_to_currency(@activity.cost, unit: "$", precision: 2) %></p>
-   <p><strong>Duration:</strong> <%= @activity.duration %> minutes</p>
+   <p><strong>Duration:</strong> <%= @activity.duration %> hours</p>
  </div>
 
  <div class="activity-actions">
