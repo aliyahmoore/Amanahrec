@@ -59,3 +59,5 @@ end
 gem "devise", "~> 4.9"
 
 gem "stripe", "~> 13.3"
+
+gem 'dotenv-rails', :groups => [:development, :test]
