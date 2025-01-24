@@ -70,7 +70,8 @@ p {
 }
 
 .about-page .about-image img {
-    max-width: 420px;
-    height: auto;
+    width: 320px;
+    height: 320px;
     border-radius: 50%;
+    object-fit: cover; 
 }
