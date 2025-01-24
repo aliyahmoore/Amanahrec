@@ -111,6 +111,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_02_233602) do
     t.index ["user_id"], name: "index_testimonials_on_user_id"
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name", limit: 255, null: false
     t.string "last_name", limit: 255, null: false

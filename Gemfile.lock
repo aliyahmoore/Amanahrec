@@ -107,6 +107,10 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    dotenv (3.1.7)
+    dotenv-rails (3.1.7)
+      dotenv (= 3.1.7)
+      railties (>= 6.1)
     drb (2.2.1)
     erubi (1.13.1)
     ffi (1.17.1-aarch64-linux-gnu)
@@ -338,6 +342,7 @@ DEPENDENCIES
   devise (~> 4.9)
   htmlbeautifier (~> 1.4)
   image_processing (~> 1.2)
+  dotenv-rails
   importmap-rails
   jbuilder
   pg (~> 1.1)
