@@ -10,5 +10,4 @@ class PagesController < ApplicationController
 
   def partners
   end
-  
 end
