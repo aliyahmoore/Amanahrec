@@ -1,19 +1,17 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "w-25 mx-auto form-container", style: "border: 2px solid #808080; padding: 15px; border-radius: 5px;" }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <h2 class="text-center mb-4">Sign in here or sign up below.</h2>
+  <h2 class="text-center mb-4">Sign in</h2>
 
   <!-- Email -->
   <div class="mb-3">
-    <%= f.label :email, class: "form-label" %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Enter your email address", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email address*", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
     <small class="text-danger">Email is a required field</small>
   </div>
 
   <!-- Password -->
   <div class="mb-3">
-    <%= f.label :password, class: "form-label" %>
-    <%= f.password_field :password, autocomplete: "current-password", placeholder: "Enter your password", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
+    <%= f.password_field :password, autocomplete: "current-password", placeholder: "Password*", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
     <small class="text-danger">Password is a required field</small>
   </div>
 
@@ -27,7 +25,7 @@
 
   <!-- Submit Button -->
   <div class="mb-3 text-center">
-    <%= f.submit "Log in", class: "btn btn-secondary text-white px-4" %>
+    <%= f.submit "Sign in", class: "btn btn-secondary text-white px-4" %>
   </div>
 
   <!-- Centered Links (Inside the border) -->
