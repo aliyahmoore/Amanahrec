@@ -28,9 +28,7 @@
   <% end %>
   
 
-    <button id="checkout-button" data-event-id= "<%= @event.id %>">
-  Pay Now $<%= number_with_precision(@event.cost, precision: 2) %>
-</button>
+   <%= button_to 'Pay Now', event_payments_path(@event), method: :post, class: 'btn btn-primary', data: { turbo: false } %>
   </div>
 </div>
 <div class="event-actions">
