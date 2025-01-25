@@ -1,0 +1,111 @@
+<%= form_with(model: @event, local: true, html: { id: 'event_form' }) do |form| %>
+  <div class="event-form-container">
+
+    <!-- Display Error Messages -->
+    <% if @event.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+        <ul>
+          <% @event.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <!-- Form Title -->
+    <h1><%= @event.new_record? ? 'Create New Event' : 'Edit Event' %></h1>
+
+    <!-- Event Title -->
+    <div class="form-group">
+      <%= form.label :title do %>
+        Event Title <span class="required">*</span>
+      <% end %>
+      <%= form.text_field :title, class: "form-control", placeholder: "Enter event title", required: true %>
+    </div>
+    
+    
+    <!-- Event Description -->
+    <div class="form-group">
+      <%= form.label :description do %>
+        Description <span class="required">*</span>
+      <% end %>
+      <%= form.text_area :description, class: "form-control", placeholder: "Enter a detailed description of the event", required: true %>
+    </div>
+
+    <!-- Event Date and Time -->
+    <div class="form-group">
+    <%= form.label :start_date do %>
+      Event Date <span class="required">*</span> <!-- Red asterisk next to the label -->
+    <% end %>
+    <%= form.datetime_local_field :start_date, class: "form-control", required: true %>
+    </div>
+
+    <!-- Event Location -->
+    <div class="form-group">
+    <%= form.label :location do %>
+      Event Location <span class="required">*</span> 
+    <% end %>
+    <%= form.text_field :location, class: "form-control", placeholder: "Enter the event location", required: true %>
+  </div>
+
+    <!-- End Date and Time -->
+    <div class="form-group">
+    <%= form.label :end_date do %>
+      End Date and Time <span class="required">*</span> 
+    <% end %>
+    <%= form.datetime_local_field :end_date, class: "form-control", required: true %>
+  </div>
+
+    <!-- RSVP Deadline -->
+    <div class="form-group">
+    <%= form.label :rsvp_deadline do %>
+      RSVP Deadline <span class="required">*</span> 
+    <% end %>
+    <%= form.datetime_local_field :rsvp_deadline, class: "form-control", id: "rsvp_deadline", required: true %>
+    <div id="rsvp-error-message" style="color: red; display: none;">
+      The RSVP deadline cannot be after the event date.
+    </div>
+    </div>
+
+    <!-- Childcare Available -->
+    <div class="form-group">
+      <%= form.label :childcare, "Childcare Available?" %>
+      <%= form.check_box :childcare, class: "form-check-input" %>
+    </div>
+
+    <!-- Event Sponsors -->
+    <div class="form-group">
+      <%= form.label :sponsors, "Event Sponsors" %>
+      <%= form.text_field :sponsors, class: "form-control", placeholder: "Enter event sponsors" %>
+    </div>
+
+    <!-- Event Cost -->
+    <div class="form-group">
+    <%= form.label :cost do %>
+      Event Cost <span class="required">*</span> 
+    <% end %>
+    <%= form.number_field :cost, step: 0.01, min: 0, class: "form-control", placeholder: "Enter the event cost", required: true %>
+  </div>
+
+    <!-- Multiple image upload -->
+    <div>
+      <%= form.label :images %>
+      <%= form.file_field :images, multiple: true %>
+    </div>
+  
+    <!-- Submit Button -->
+    <div class="form-group">
+      <%= form.submit "Save Event", class: "btn btn-primary", id: "submit_btn" %>
+    </div>
+
+
+  </div>
+
+  <div class="event-actions">
+    <%= link_to 'Back to Events', events_path, class: "btn btn-secondary" %>
+  </div>
+
+<% end %>
+
+

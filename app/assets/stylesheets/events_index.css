@@ -1,0 +1,100 @@
+.event-index-container {
+    background-color: #E9E2D8;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 1100px;
+    margin: 50px auto;
+  }
+  
+  .event-index-container h1 {
+    color: #403F2B;
+    font-size: 3em;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .event-listing {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-around;
+  }
+  
+ 
+  .event-card {
+    background-color: #DACCB1;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    min-width: 250px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .event-card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .event-card h3 {
+    color: #403F2B;
+    font-size: 1.8em;
+    margin-bottom: 10px;
+  }
+  
+  
+  .event-card p {
+    font-size: 1.2em;
+    color: #57573F;
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  
+  .event-card .cost {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #403F2B;
+  }
+  
+ 
+  .event-card .btn-view {
+    background-color: #403F2B;
+    color: #E9E2D8;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+  }
+  
+  .event-card .btn-view:hover {
+    background-color: #57573F;
+  }
+  
+ 
+  .event-index-container .btn-back {
+    background-color: #403F2B;
+    color: #E9E2D8;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    margin-top: 30px;
+    display: block;
+    text-align: center;
+  }
+  
+  .event-index-container .btn-back:hover {
+    background-color: #57573F;
+  }
+  
+  .event-card .event-image img {
+    width: 100%;       
+    height: auto;      
+    border-radius: 8px; 
+    margin-bottom: 15px; 
+  }
+  
