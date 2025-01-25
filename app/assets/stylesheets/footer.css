@@ -13,6 +13,9 @@
   background-color: #ffffff; 
   z-index: 999;
 }
+.footer-custom a[href^="mailto:"] {
+  color: #403f2b !important; 
+}
 
 .footer-custom a[href^="mailto:"]:hover {
   text-decoration: underline; /* Underline email on hover */
