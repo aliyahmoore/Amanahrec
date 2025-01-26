@@ -21,8 +21,10 @@ class EventsController < ApplicationController
       @event = Event.new(event_params)
 
       if @event.save
+        Rails.logger.info "Event was successfully created: #{@event.inspect}"
         redirect_to @event, notice: "Event was successfully created."
       else
+        Rails.logger.info "Event creation failed: #{@event.errors.full_messages}"
         render :new
       end
     end
@@ -61,8 +63,8 @@ class EventsController < ApplicationController
     # Only allow a list of trusted parameters through
     def event_params
       params.require(:event).permit(
-        :title, :description, :event_datetime, :end_date, :location,
-        :rsvp_deadline, :childcare, :sponsors, :cost
+        :title, :description, :start_date, :end_date, :location,
+        :rsvp_deadline, :childcare, :sponsors, :cost, images: []
       )
     end
 end

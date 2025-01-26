@@ -7,9 +7,15 @@
       <% @events.each do |event| %>
         <div class="event-card">
           <h3><%= event.title %></h3>
+
+          <% if event.images.attached? %>
+            <div class="event-image">
+              <%= image_tag event.images.first, class: "event-image" %>
+            </div>
+          <% end %>
           
           <!-- Combine date and time -->
-          <p><strong>Date and Time:</strong> <%= event.event_datetime.strftime("%B %d, %Y at %I:%M %p") %></p>
+          <p><strong>Date and Time:</strong> <%= event.start_date.strftime("%B %d, %Y at %I:%M %p") %></p>
           
           <p><strong>Location:</strong> <%= event.location %></p>
           <p><strong>Cost:</strong> <%= number_to_currency(event.cost, precision: 2) %></p>

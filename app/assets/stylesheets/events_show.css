@@ -72,4 +72,22 @@
   }
   
 
+  .event-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  .event-image {
+    width: 100%;
+    max-width: 300px; /* Optional: limit the image size */
+    margin-bottom: 15px;
+  }
+  
+  .event-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Ensures the image fills the container without distortion */
+  }
+  
   

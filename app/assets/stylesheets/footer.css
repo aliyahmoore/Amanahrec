@@ -1,0 +1,40 @@
+/* Black Loppet logo */
+#loppet img {
+  filter: grayscale(100%) brightness(0) contrast(100%);
+  max-height: 100px;
+}
+
+.footer-custom {
+  color: #403f2b; 
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff; 
+  z-index: 999;
+}
+.footer-custom a[href^="mailto:"] {
+  color: #403f2b !important; 
+}
+
+.footer-custom a[href^="mailto:"]:hover {
+  text-decoration: underline; /* Underline email on hover */
+  color: #403f2b; 
+}
+
+.footer-custom a {
+  color: #403f2b; 
+  text-decoration: none; 
+}
+
+.footer-custom a:hover {
+  color: #e9e2d8;
+}
+
+.footer-custom i {
+  color: #403f2b;
+}
+
+.footer-custom i:hover {
+  color: #e9e2d8; 
+}
