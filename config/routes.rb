@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   resources :testimonials, only: [:index, :new, :create, :edit, :update, :destroy] do
     member do
       patch :approve
+      patch :unapprove
     end
   end
+  resources :events
+
 end
