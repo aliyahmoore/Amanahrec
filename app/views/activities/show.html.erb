@@ -1,27 +1,36 @@
 <div class="activity-show">
- <h1 class="activity-title"><%= @activity.title %></h1>
+  <h1 class="activity-title"><%= @activity.title %></h1>
 
+  <!-- Activity Image Section -->
+  <div class="activity-images">
+    <% if @activity.images.attached? %>
+      <% @activity.images.each do |image| %>
+        <div class="activity-image">
+          <%= image_tag image, class: "activity-image-preview" %>
+        </div>
+      <% end %>
+    <% else %>
+      <p>No images uploaded for this activity.</p>
+    <% end %>
+  </div>
 
- <div class="activity-details">
-   <p><strong>Description:</strong> <%= @activity.description %></p>
-   <p><strong>Date:</strong> <%= @activity.date %></p>
-   <p><strong>Location:</strong> <%= @activity.location %></p>
-   <p><strong>Capacity:</strong> <%= @activity.capacity %></p>
-   <p><strong>What to Bring:</strong> <%= @activity.what_to_bring %></p>
-   <p><strong>Rules:</strong> <%= @activity.rules %></p>
-   <p><strong>Notes:</strong> <%= @activity.notes %></p>
-   <p><strong>Cost:</strong> <%= number_to_currency(@activity.cost, unit: "$", precision: 2) %></p>
-   <p><strong>Duration:</strong> <%= @activity.duration %> hours</p>
- </div>
+  <!-- Activity Details -->
+  <div class="activity-details">
+    <p><strong>Description:</strong> <%= @activity.description %></p>
+    <p><strong>Date:</strong> <%= @activity.date %></p>
+    <p><strong>Location:</strong> <%= @activity.location %></p>
+    <p><strong>Capacity:</strong> <%= @activity.capacity %></p>
+    <p><strong>What to Bring:</strong> <%= @activity.what_to_bring %></p>
+    <p><strong>Rules:</strong> <%= @activity.rules %></p>
+    <p><strong>Notes:</strong> <%= @activity.notes %></p>
+    <p><strong>Cost:</strong> <%= number_to_currency(@activity.cost, unit: "$", precision: 2) %></p>
+    <p><strong>Duration:</strong> <%= @activity.duration %> hours</p>
+  </div>
 
- <div class="activity-actions">
- <!-- Edit Button -->
- <%= link_to 'Edit', edit_activity_path(@activity), class: "edit-button" %>
-
- <!-- Delete Button -->
- <%= button_to 'Delete', @activity, method: :delete, data: { confirm: 'Are you sure you want to delete this activity?' }, class: "delete-button" %>
-
- <!-- Back Button -->
- <%= link_to 'Back to Activities', activities_path, class: "back-button" %>
+  <!-- Action Buttons (Edit, Delete, Back) -->
+  <div class="activity-actions">
+    <%= link_to 'Edit', edit_activity_path(@activity), class: "edit-button" %>
+    <%= button_to 'Delete', @activity, method: :delete, data: { confirm: 'Are you sure you want to delete this activity?' }, class: "delete-button" %>
+    <%= link_to 'Back to Activities', activities_path, class: "back-button" %>
+  </div>
 </div>
- </div>

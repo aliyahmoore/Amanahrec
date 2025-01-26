@@ -1,86 +1,85 @@
-<h2>Sign up</h2>
+<div class="d-flex justify-content-center">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "w-50 form-container", style: "border: 2px solid #808080; padding: 20px; border-radius: 5px;" }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <h2 class="text-center mb-4">Sign up</h2>
 
-  <!-- First Name -->
-  <div class="field">
-    <%= f.label :first_name %> <span style="color: red;">*</span><br />
-    <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", placeholder: "Enter your first name", required: true %>
-    <small style="color: red;">First name is a required field</small>
-  </div>
-  
-  <!-- Last Name -->
-  <div class="field">
-    <%= f.label :last_name %> <span style="color: red;">*</span><br />
-    <%= f.text_field :last_name, autocomplete: "last_name", placeholder: "Enter your last name", required: true %>
-    <small style="color: red;">Last name is a required field</small>
-  </div>
-  
-  <!-- Email -->
-  <div class="field">
-    <%= f.label :email %> <span style="color: red;">*</span><br />
-    <%= f.email_field :email, autocomplete: "email", placeholder: "Enter your email address", required: true %>
-    <small style="color: red;">Email is a required field</small>
-  </div>  
+    <!-- First and Last Name on the Same Line -->
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <%= f.label :first_name, class: "form-label" %><span style="color: red;">*</span>
+        <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
+        <small class="text-danger">First name is a required field</small>
+      </div>
+      <div class="col-md-6">
+        <%= f.label :last_name, class: "form-label" %><span style="color: red;">*</span>
+        <%= f.text_field :last_name, autocomplete: "last_name", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
+        <small class="text-danger">Last name is a required field</small>
+      </div>
+    </div>
 
-  <!-- Password -->
-<div class="field">
-  <%= f.label :password %> <span style="color: red;">*</span>
-  <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-  <% end %><br />
-  <%= f.password_field :password, autocomplete: "new-password", required: true %>
-  <small style="color: red;">Password is a required field</small>
+    <!-- Email and Phone Number on the Same Line -->
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <%= f.label :email, class: "form-label" %><span style="color: red;">*</span>
+        <%= f.email_field :email, autocomplete: "email", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
+        <small class="text-danger">Email is a required field</small>
+      </div>
+      <div class="col-md-6">
+        <%= f.label :phone_number, class: "form-label" %><span style="color: red;">*</span>
+        <%= f.text_field :phone_number, placeholder: "e.g., +1 (123) 456-7890", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
+        <small class="text-danger">Phone number is a required field</small>
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="mb-3">
+      <%= f.label :password, class: "form-label" %><span style="color: red;">*</span>
+      <% if @minimum_password_length %>
+        <em class="text-muted">(Minimum <%= @minimum_password_length %> characters)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "new-password", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
+      <small class="text-danger">Password is a required field</small>
+    </div>
+
+    <!-- Password Confirmation -->
+    <div class="mb-3">
+      <%= f.label :password_confirmation, class: "form-label" %><span style="color: red;">*</span>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
+      <small class="text-danger">Password confirmation is a required field</small>
+    </div>
+
+    <!-- Gender, Age Range, and Ethnicity on the Same Line -->
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <%= f.label :gender, class: "form-label" %><span style="color: red;">*</span>
+        <%= f.select :gender, options_for_select([["Male", "Male"], ["Female", "Female"]]), { prompt: "Select Gender" }, required: true, class: "form-select", style: "background-color: #f0f0f0;" %>
+        <small class="text-danger">Gender is a required field</small>
+      </div>
+      <div class="col-md-4">
+        <%= f.label :age_range, class: "form-label" %><span style="color: red;">*</span>
+        <%= f.select :age_range, options_for_select([["18-25", "18-25"], ["26-35", "26-35"], ["36-45", "36-45"], ["46-55", "46-55"], ["56+", "56+"]]), { prompt: "Select Age Range" }, required: true, class: "form-select", style: "background-color: #f0f0f0;" %>
+        <small class="text-danger">Age range is a required field</small>
+      </div>
+      <div class="col-md-4">
+        <%= f.label :ethnicity, class: "form-label" %><span style="color: red;">*</span>
+        <%= f.select :ethnicity, options_for_select([
+          ["White", "White"],
+          ["Black or African American", "Black or African American"],
+          ["Asian", "Asian"],
+          ["American Indian or Alaska Native", "American Indian or Alaska Native"],
+          ["Native Hawaiian or Other Pacific Islander", "Native Hawaiian or Other Pacific Islander"],
+          ["Hispanic or Latino", "Hispanic or Latino"],
+          ["Other", "Other"],
+          ["Prefer not to say", "Prefer not to say"]
+        ]), { prompt: "Select Ethnicity" }, required: true, class: "form-select", style: "background-color: #f0f0f0;" %>
+        <small class="text-danger">Ethnicity is a required field</small>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="mb-3 text-center">
+      <%= f.submit "Sign up", class: "btn btn-secondary text-white px-4" %>
+    </div>
+  <% end %>
 </div>
-
-<!-- Password Confirmation -->
-<div class="field">
-  <%= f.label :password_confirmation %> <span style="color: red;">*</span><br />
-  <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true %>
-  <small style="color: red;">Password confirmation is a required field</small>
-</div>
-
-<!-- Phone Number -->
-<div class="field">
-  <%= f.label :phone_number %> <span style="color: red;">*</span><br />
-  <%= f.text_field :phone_number, placeholder: "e.g., +1 (123) 456-7890", required: true %>
-  <small style="color: red;">Phone number is a required field</small>
-</div>
-
-<!-- Gender -->
-<div class="field">
-  <%= f.label :gender %> <span style="color: red;">*</span><br />
-  <%= f.select :gender, options_for_select([["Male", "Male"], ["Female", "Female"]]), { prompt: "Select Gender" }, required: true %>
-  <small style="color: red;">Gender is a required field</small>
-</div>
-
-<!-- Age Range -->
-<div class="field">
-  <%= f.label :age_range %> <span style="color: red;">*</span><br />
-  <%= f.select :age_range, options_for_select([["18-25", "18-25"], ["26-35", "26-35"], ["36-45", "36-45"], ["46-55", "46-55"], ["56+", "56+"]]), { prompt: "Select Age Range" }, required: true %>
-  <small style="color: red;">Age range is a required field</small>
-</div>
-
-<!-- Ethnicity -->
-<div class="field">
-  <%= f.label :ethnicity %> <span style="color: red;">*</span><br />
-  <%= f.select :ethnicity, options_for_select([
-    ["White", "White"],
-    ["Black or African American", "Black or African American"],
-    ["Asian", "Asian"],
-    ["American Indian or Alaska Native", "American Indian or Alaska Native"],
-    ["Native Hawaiian or Other Pacific Islander", "Native Hawaiian or Other Pacific Islander"],
-    ["Hispanic or Latino", "Hispanic or Latino"],
-    ["Other", "Other"],
-    ["Prefer not to say", "Prefer not to say"]
-  ]), { prompt: "Select Ethnicity" }, required: true %>
-  <small style="color: red;">Ethnicity is a required field</small>
-</div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>

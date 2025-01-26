@@ -1,0 +1,122 @@
+/* General container style */
+.event-form-container {
+  font-family: Arial, sans-serif;
+  background-color: #E9E2D8;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 1em;
+  line-height: 1.6;
+}
+
+/* Form Title */
+.event-form-container h1 {
+  color: #403F2B;
+  font-size: 2.5em;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+/* General Form Group Style */
+.event-form-container .form-group {
+  margin-bottom: 20px;
+}
+
+/* Label Style */
+.event-form-container label {
+  color: #57573F;
+  font-weight: bold;
+  font-size: 1.1em;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Input fields, text areas, and checkboxes */
+.event-form-container input[type="text"],
+.event-form-container input[type="date"],
+.event-form-container input[type="time"],
+.event-form-container input[type="number"],
+.event-form-container textarea,
+.event-form-container input[type="checkbox"] {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #DACCB1;
+  border-radius: 6px;
+  background-color: #fff;
+  font-size: 1em; /* Consistent font size for inputs and textareas */
+  font-family: inherit; /* Inherit font family from parent */
+}
+
+/* Specific Checkbox Styling */
+.event-form-container input[type="checkbox"] {
+  width: 25px;  /* Increased width */
+  height: 25px; /* Increased height */
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px; /* Space between checkbox and label */
+  cursor: pointer;
+  border: 2px solid #DACCB1;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+/* Add a checkmark when checked */
+.event-form-container input[type="checkbox"]:checked {
+  background-color: #403F2B; /* Dark background when checked */
+  border-color: #403F2B; /* Border color when checked */
+  box-shadow: inset 0 0 0 3px #fff; /* Add a white shadow to show the checkmark */
+}
+
+/* Checkmark inside the checkbox */
+.event-form-container input[type="checkbox"]:checked::before {
+  content: "\2713"; /* Unicode character for checkmark */
+  font-size: 1.3em; /* Make the checkmark bigger */
+  color: #fff; /* White checkmark color */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the checkmark */
+  display: inline-block;
+}
+
+/* Submit Button Styling */
+.event-form-container .btn {
+  background-color: #403F2B;
+  color: #E9E2D8;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.1em; /* Consistent font size for buttons */
+  text-transform: uppercase;
+  margin-top: 20px;
+}
+
+.event-form-container .btn:hover {
+  background-color: #57573F;
+}
+
+/* Styling for error messages */
+.event-form-container #error_explanation {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-size: 1em;
+  font-family: inherit; /* Keep error message font consistent */
+}
+
+/* Custom margin for the last submit button */
+.event-form-container .form-group:last-child {
+  margin-bottom: 0;
+}
+
+.required {
+  color: red;
+  font-weight: bold;
+}

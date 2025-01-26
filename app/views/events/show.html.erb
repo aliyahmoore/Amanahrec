@@ -1,0 +1,45 @@
+<div class="event-show-container">
+  <h1><%= @event.title %></h1>
+  
+  <!-- Event Details Section -->
+  <div class="event-details">
+    <h2>Description</h2>
+    <p><%= @event.description %></p>
+
+    <h2>Event Information</h2>
+    <p><strong>Location:</strong> <%= @event.location %></p>
+    
+    <!-- Display Combined Date and Time -->
+    <p><strong>Date and Time:</strong> <%= @event.start_date.strftime("%B %d, %Y at %I:%M %p") %></p>
+    
+    <p><strong>End Date:</strong> <%= @event.end_date.strftime("%B %d, %Y at %I:%M %p") %></p>
+    <p class="time-info"><strong>RSVP Deadline:</strong> <%= @event.rsvp_deadline.strftime("%B %d, %Y at %I:%M %p") %></p>
+    
+    <h2>Childcare & Sponsors</h2>
+    <p><strong>Childcare Available:</strong> <%= @event.childcare ? 'Yes' : 'No' %></p>
+    <p><strong>Sponsors:</strong> <%= @event.sponsors %></p>
+
+    <h2>Cost</h2>
+    <p><strong>Cost:</strong> <%= number_to_currency(@event.cost, precision: 2) %></p>
+
+    <% if @event.images.attached? %>
+    <div class="event-images">
+      <% @event.images.each do |image| %>
+        <div class="event-image">
+          <%= image_tag image, alt: "Event Image", class: "img-fluid" %> <!-- Display each image -->
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>No images uploaded for this event.</p>
+  <% end %>
+  
+
+  </div>
+</div>
+
+<div class="event-actions">
+  <%= link_to 'Back to Events', events_path, class: "btn btn-secondary" %>
+  <%= button_to 'Delete Event', event_path(@event), method: :delete, data: { confirm: 'Are you sure you want to delete this event?' }, class: "btn btn-danger" %>
+  <%= link_to 'Edit Event', edit_event_path(@event), class: "btn btn-primary" %>
+</div>

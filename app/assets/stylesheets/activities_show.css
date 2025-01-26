@@ -1,91 +1,127 @@
+/* General Container Styling for the activity page */
 .activity-show {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #E9E2D8;  /* Light beige background */
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #E9E2D8;  /* Light beige background (same as event show) */
+  padding: 40px;  /* Padding similar to event page */
+  border-radius: 10px;  /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  /* Subtle shadow */
+  max-width: 900px;  /* Similar to event max-width */
+  margin: 50px auto;  /* Center container with margin */
 }
 
+/* Title Styling (Matching Event Title Style) */
 .activity-title {
-  font-size: 2.5rem;
+  font-size: 3em;  /* Same size as event title */
   font-weight: bold;
   color: #403F2B;  /* Dark brown color */
   text-align: center;
+  margin-bottom: 40px;  /* Space below title */
+}
+
+/* Image Container Styling */
+.activity-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;  /* Center images */
   margin-bottom: 20px;
 }
 
-.activity-details p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #57573F;  /* Olive green for text */
-  margin: 10px 0;
+/* Individual Image Container (Matching Event Images) */
+.activity-image {
+  width: 100%;
+  max-width: 300px;  /* Max width for image containers */
+  height: 200px;  /* Fixed height */
+  overflow: hidden;
+  border-radius: 10px;  /* Rounded corners */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  /* Subtle shadow */
 }
 
+/* Image Preview Styling */
+.activity-image-preview {
+  width: 100%;  /* Image fills container width */
+  height: 100%;  /* Image fills container height */
+  object-fit: cover;  /* Ensures image fills the container without distortion */
+  object-position: center;  /* Center the image */
+  border-radius: 10px;  /* Rounded corners */
+}
+
+/* Activity Details Section */
+.activity-details p {
+  font-size: 1.2em;  /* Matching font size for details */
+  margin-bottom: 15px;
+  line-height: 1.6;
+  color: #57573F;  /* Olive green for text */
+}
+
+/* For bolded labels in activity details */
 .activity-details strong {
+  font-weight: bold;
   color: #403F2B;  /* Dark brown for labels */
 }
 
-.activity-actions {
-  text-align: center;
-  margin-top: 30px;  /* Increased margin for better separation */
+/* Activity Cost Section (Styled similar to event cost) */
+.activity-details .cost {
+  font-weight: bold;
+  font-size: 1.3em;
+  color: #403F2B;
 }
 
-/* General Button Styling */
+/* Action Buttons Section */
+.activity-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;  /* Space before buttons */
+  gap: 20px;  /* Space between buttons */
+}
+
+/* Common Button Styling (Matching Event Buttons) */
 .activity-actions a,
 .activity-actions button {
-  padding: 12px 25px;
-  font-size: 1.2rem;
-  border-radius: 5px;
-  text-decoration: none;
-  text-align: center;
+  background-color: #403F2B;
+  color: #E9E2D8;  /* Light beige for text */
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
-  display: inline-block;
-  transition: background-color 0.3s ease, opacity 0.3s ease;
-  margin: 10px 0;  /* Vertical spacing between buttons */
+  font-size: 1.1em;
+  margin: 0px;
+  text-align: center;
 }
 
-/* Edit Button */
+.activity-actions a:hover,
+.activity-actions button:hover {
+  background-color: #57573F;  /* Dark olive-green hover effect */
+}
+
+/* Button Specific Styling */
 .activity-actions .edit-button {
   background-color: #A9B17E;  /* Muted olive green */
-  color: #403F2B;  /* Dark brown for text */
+  color: #403F2B;
 }
 
 .activity-actions .edit-button:hover {
-  background-color: #8C9A5B;  /* Slightly darker olive green on hover */
-  opacity: 0.9;
+  background-color: #8C9A5B;  /* Slightly darker green on hover */
 }
 
-/* Delete Button */
 .activity-actions .delete-button {
   background-color: #D2B09C;  /* Light brownish-red */
-  color: #403F2B;  /* Dark brown for text */
+  color: #403F2B;
 }
 
 .activity-actions .delete-button:hover {
   background-color: #B09A7A;  /* Slightly darker brownish-red on hover */
-  opacity: 0.9;
 }
 
-/* Back Button */
 .activity-actions .back-button {
   background-color: #57573F;  /* Olive green */
   color: white;
-  padding: 12px 25px;
-  font-size: 1.2rem;
-  border-radius: 5px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
 }
 
 .activity-actions .back-button:hover {
   background-color: #403F2B;  /* Dark brown on hover */
 }
 
-/* Activity details paragraph background */
-.activity-details p {
-  background-color: #DACCB1;  /* Lighter beige background for individual items */
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 10px;
-}
