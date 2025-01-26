@@ -1,0 +1,13 @@
+<h1>Edit Testimonial</h1>
+
+<%= form_with(model: @testimonial, local: true) do |form| %>
+  <div class="form-group">
+    <%= form.label :text, "Testimonial" %>
+    <%= form.text_area :text, class: "form-control", rows: 5 %>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit "Update Testimonial", class: "btn btn-primary" %>
+    <%= link_to "Cancel", testimonials_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

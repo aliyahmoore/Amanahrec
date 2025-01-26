@@ -1,7 +1,7 @@
 class TestimonialsController < ApplicationController
     before_action :authenticate_user!, except: [ :index ]
     before_action :set_testimonial, only: [ :edit, :update, :destroy, :approve ]
-    before_action :authorize_admin!, only: [ :approve, :unapprove, :destroy ]
+    before_action :authorize_admin!, only: [ :approve, :unapprove, :edit, :destroy ]
 
     # Display approved testimonials to everyone and unapproved to admin
     def index
