@@ -29,3 +29,45 @@
   .navbar-toggler {
     border-color: #DACCB1 !important;  
   }
+
+  .dropdown-menu {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+  
+  .dropdown:hover .dropdown-menu {
+    display: block;
+    opacity: 1;
+  }
+  
+
+
+  /* Dropdown Menu Background and Border */
+.dropdown-menu {
+  background-color: #f8f9fa; /* Light background color */
+  border: 1px solid #e0e0e0; /* Light border for definition */
+  border-radius: 0.25rem; /* Slightly rounded corners */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Dropdown Menu Items */
+.dropdown-item {
+  color: #403f2b; /* Neutral text color */
+  font-size: 1rem; /* Adjust font size */
+  padding: 0.5rem 1rem; /* Add padding for better spacing */
+  transition: background-color 0.2s ease, color 0.2s ease; /* Smooth transition on hover */
+}
+
+/* Hover Effect for Dropdown Items */
+.dropdown-item:hover {
+  background-color: #dacdb1; /* Slight color change on hover */
+  color: #000;
+}
+
+
+.dropdown-item.active {
+  background-color: #daccb1; 
+  color: #000; 
+  font-weight: bold; 
+}
