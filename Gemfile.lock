@@ -119,6 +119,7 @@ GEM
     ffi (1.17.1-x86_64-linux-musl)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    htmlbeautifier (1.4.3)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     image_processing (1.13.0)
@@ -334,6 +335,7 @@ DEPENDENCIES
   capybara
   debug
   devise (~> 4.9)
+  htmlbeautifier (~> 1.4)
   image_processing (~> 1.2)
   importmap-rails
   jbuilder

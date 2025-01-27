@@ -1,0 +1,77 @@
+body {
+    font-family: "Tahoma", sans-serif;
+    background-color: #E9E2D8;
+    color: #403F2B;
+    padding: 20px;
+}
+
+h2 {
+    color: #57573F;
+    font-size: 24px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+p {
+    font-size: 16px;
+    margin-bottom: 30px;
+    line-height: 2;
+    text-align: center;
+}
+
+.about-page .mission,
+.about-page .vision,
+.about-page .founder-box {
+    background-color: #DACCB1;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 80px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease-in-out;
+}
+
+.about-page .mission:hover,
+.about-page .vision:hover,
+.about-page .founder-box:hover {
+    text-align: center;
+    background-color: #f1e4d3;
+    transition: all 0.5s ease-in-out;
+}
+
+.about-page .founder-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #57573F;
+    padding: 20px;
+    background-color: #DACCB1;
+    border-radius: 8px;
+    max-width: 800px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+}
+
+.about-page .founder-box h2 {
+    color: #57573F;
+    margin-bottom: 10px;
+}
+
+.about-page .founder-box p {
+    color: #333;
+    flex: 1;
+}
+
+.about-page .about-image {
+    margin: 30px auto;
+    text-align: center;
+    position: relative;
+    top: -30px;
+}
+
+.about-page .about-image img {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    object-fit: cover; 
+}
