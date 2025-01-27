@@ -2,6 +2,12 @@ class PaymentsController < ApplicationController
   before_action :set_event, only: [ :create, :success ]
 
   def create
+  # Ensure the user is logged in before proceeding
+  unless user_signed_in?
+    redirect_to new_user_session_path, alert: "You must be signed in to register for this event."
+    return
+  end
+
   # Check if the user has already paid for the event
   if user_has_paid_for_event?
     redirect_to event_path(@event), alert: "You have already registered for this event."
