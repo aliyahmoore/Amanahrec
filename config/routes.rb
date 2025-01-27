@@ -18,7 +18,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   root "pages#home"
-
   resources :events do
     resources :payments, only: [ :create ] do
       collection do
@@ -27,4 +26,6 @@ Rails.application.routes.draw do
       end
     end
   end
+  
+  resources :activities
 end
