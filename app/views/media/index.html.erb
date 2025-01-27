@@ -8,11 +8,8 @@
        class="news-image">
 </div>
 
-<% if flash[:alert] %>
-  <div class="alert alert-danger text-center mb-4">
-    <%= flash[:alert] %>
-  </div>
-<% end %>
+
+
 
 <div class="square-container mt-5">
   <div class="square p-4" style="background-color: #DACCB1;">
@@ -67,11 +64,5 @@
     <% end %>
   </div>
 </div>
-
-<div class="card shadow-sm p-4 mx-auto mt-5" style="max-width: 500px;">
-  <div class="text-center mb-3">
-    <h2 class="text-dark">Add New Media Post</h2>
-  </div>
-
-  <%= render 'media/form', medium: @medium %>
+  
 </div>
