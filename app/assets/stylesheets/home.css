@@ -65,10 +65,14 @@ h1 {
     background-color: #f4f4f4;
     width: 30%;
     margin: 0 0.5rem;
-    padding: 1rem;
+    padding: 1rem; /* Padding stays on the card */
     border-radius: 6px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
+    min-height: 100px; /* Ensure all cards have a uniform height */
+    display: flex; /* Flexbox ensures content stays centered */
+    flex-direction: column; /* Stack content vertically */
+    justify-content: space-between; /* Evenly space content */
   }
   
   /* Optional image styling */
@@ -189,3 +193,17 @@ h1 {
     background-color: #555;
   }
   
+  
+  /* Make the entire card clickable */
+  .card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    border-radius: 6px;
+  }
+
+/* Add hover effect for interactivity */
+.card a:hover {
+  background-color: #e9e2d8; /* Light blue highlight */
+  transition: background-color 0.3s ease;
+}

@@ -55,6 +55,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_26_215558) do
     t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "published_date"
+    t.string "organization_name"
   end
 
   create_table "activities_users", id: false, force: :cascade do |t|
