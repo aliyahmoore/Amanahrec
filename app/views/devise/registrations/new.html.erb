@@ -1,9 +1,7 @@
 <div class="d-flex justify-content-center">
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "w-50 form-container", style: "border: 2px solid #808080; padding: 20px; border-radius: 5px;" }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
-
     <h2 class="text-center mb-4">Sign up</h2>
-
     <!-- First and Last Name on the Same Line -->
     <div class="row mb-3">
       <div class="col-md-6">
@@ -17,7 +15,6 @@
         <small class="text-danger">Last name is a required field</small>
       </div>
     </div>
-
     <!-- Email and Phone Number on the Same Line -->
     <div class="row mb-3">
       <div class="col-md-6">
@@ -31,7 +28,6 @@
         <small class="text-danger">Phone number is a required field</small>
       </div>
     </div>
-
     <!-- Password -->
     <div class="mb-3">
       <%= f.label :password, class: "form-label" %><span style="color: red;">*</span>
@@ -41,14 +37,12 @@
       <%= f.password_field :password, autocomplete: "new-password", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
       <small class="text-danger">Password is a required field</small>
     </div>
-
     <!-- Password Confirmation -->
     <div class="mb-3">
       <%= f.label :password_confirmation, class: "form-label" %><span style="color: red;">*</span>
       <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
       <small class="text-danger">Password confirmation is a required field</small>
     </div>
-
     <!-- Gender, Age Range, and Ethnicity on the Same Line -->
     <div class="row mb-3">
       <div class="col-md-4">
@@ -76,7 +70,6 @@
         <small class="text-danger">Ethnicity is a required field</small>
       </div>
     </div>
-
     <!-- Submit Button -->
     <div class="mb-3 text-center">
       <%= f.submit "Sign up", class: "btn btn-secondary text-white px-4" %>
