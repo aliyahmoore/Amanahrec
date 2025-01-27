@@ -343,6 +343,7 @@ DEPENDENCIES
   htmlbeautifier (~> 1.4)
   image_processing (~> 1.2)
   dotenv-rails
+  image_processing (~> 1.2)
   importmap-rails
   jbuilder
   pg (~> 1.1)
