@@ -45,12 +45,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_23_004342) do
   create_table "activities", force: :cascade do |t|
     t.string "title"
     t.text "description"
-<<<<<<< HEAD
     t.datetime "date"
-=======
-    t.time "time"
-    t.date "date"
->>>>>>> main
     t.string "location"
     t.integer "capacity"
     t.text "what_to_bring"
