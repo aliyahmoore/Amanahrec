@@ -7,4 +7,10 @@ class User < ApplicationRecord
 
 
   validates :first_name, :last_name, :email, :phone_number, :gender, :ethnicity, presence: true
+
+  has_many :payments
+
+  def paid?
+    payments.where(status: "succeeded").exists?
+  end
 end

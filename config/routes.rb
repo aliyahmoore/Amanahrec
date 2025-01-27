@@ -20,10 +20,10 @@ Rails.application.routes.draw do
   root "pages#home"
 
   resources :events do
-    resources :payments, only: [:create] do
+    resources :payments, only: [ :create ] do
       collection do
-        get :success, to: 'payments#success'
-        get :cancel, to: 'payments#cancel'
+        get :success, to: "payments#success"
+        get :cancel, to: "payments#cancel"
       end
     end
   end
