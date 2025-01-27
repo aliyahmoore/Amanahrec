@@ -26,4 +26,10 @@ Rails.application.routes.draw do
 
   get "/payments/success", to: "payments#success"
   get "/payments/cancel", to: "payments#cancel"
+  resources :testimonials, only: [ :index, :new, :create, :edit, :update, :destroy ] do
+    member do
+      patch :approve
+      patch :unapprove
+    end
+  end
 end

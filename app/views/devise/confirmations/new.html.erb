@@ -1,5 +1,5 @@
-<h2 class="text-center mb-4">Resend confirmation instructions</h2>
-<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: "w-50 mx-auto" }) do |f| %>
+<h2 class="text-center mb-4" class="text-center mb-4">Resend confirmation instructions</h2>
+<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: "w-50 mx-auto", class: "w-50 mx-auto" }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
   <!-- Email Field -->
   <div class="mb-3">

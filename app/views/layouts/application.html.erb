@@ -27,6 +27,7 @@
       <% end %>
       <%= render 'layouts/navbar' %> <!-- Moved navbar here, below flash -->
       <%= yield %> <!-- Main content area -->
+      <%= yield :javascript %>
       <%= render 'layouts/footer' %>
     </body>
   </html>
