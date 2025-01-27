@@ -97,4 +97,17 @@
     border-radius: 8px; 
     margin-bottom: 15px; 
   }
+  .activity-image-container {
+    margin-top: 10px;  /* Adds some space between the title and the image */
+    text-align: center;  /* Centers the image horizontally */
+  }
+  
+  .activity-image {
+    width: 100%;  /* Makes the image fill its container */
+    max-width: 500px;  /* Sets a max width for the image */
+    height: auto;  /* Maintains the image's aspect ratio */
+    border-radius: 8px;  /* Optional: rounds the corners of the image */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* Adds a shadow around the image */
+    margin-top: 10px;  /* Adds space above the image */
+  }
   
