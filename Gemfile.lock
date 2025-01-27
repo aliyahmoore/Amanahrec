@@ -339,8 +339,8 @@ DEPENDENCIES
   capybara
   debug
   devise (~> 4.9)
-  image_processing (~> 1.2)
   dotenv-rails
+  image_processing (~> 1.2)
   importmap-rails
   jbuilder
   pg (~> 1.1)
