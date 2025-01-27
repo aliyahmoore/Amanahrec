@@ -57,3 +57,5 @@ group :test do
 end
 
 gem "devise", "~> 4.9"
+
+gem "simple_calendar", "~> 3.1"
