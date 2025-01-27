@@ -8,4 +8,8 @@ class Event < ApplicationRecord
     validates :location, presence: true
     validates :rsvp_deadline, presence: true
     validates :cost, numericality: { greater_than_or_equal_to: 0 }
+
+    def start_time
+        start_date
+    end
 end
