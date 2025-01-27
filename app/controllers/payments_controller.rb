@@ -58,7 +58,8 @@ class PaymentsController < ApplicationController
         price_data: {
           currency: 'usd',
           product_data: {
-            name: @event.title
+            name: @event.title,
+            description: @event.description
           },
           unit_amount: (@event.cost * 100).to_i
         },
@@ -69,7 +70,10 @@ class PaymentsController < ApplicationController
       cancel_url: cancel_url(event_id: @event.id),
       metadata: {
         user_id: current_user.id,
-        event_id: @event.id
+        event_id: @event.id,
+        location: @event.location,
+        start_date: @event.start_date,
+        end_date: @event.end_date
       }
     )
   end
