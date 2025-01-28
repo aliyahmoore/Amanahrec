@@ -2,59 +2,51 @@
 
 <h1 class="heading text-center my-5" style="color: #403f2b;">Amanah Rec Latest News...</h1>
 
-<% if flash[:alert] %>
-  <div class="alert alert-danger text-center mb-4">
-    <%= flash[:alert] %>
-  </div>
-<% end %>
-
-<div class="square-container mt-5">
-  <div class="square p-4" style="background-color: #DACCB1;">
-    <% if @media_mentions.present? %>
-      <ul class="list-unstyled">
-        <% @media_mentions.each do |media_mention| %>
-          <li class="media-item mb-5 p-4 border rounded shadow" id="media-mention-<%= media_mention.id %>" style="background-color: #FFF;">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <h3><%= media_mention.name %></h3>
-              <div>
-                <%= link_to 'Edit', edit_media_mention_path(media_mention), class: 'btn btn-sm text-white edit-button text-decoration-none', style: 'background-color: #e86c00; border-color: #e86c00;' %>
-              </div>
-            </div>
-            <p><strong>News Organization:</strong> <%= media_mention.organization_name %></p>
-            <p><strong>Published Date:</strong> <%= media_mention.published_date.strftime("%B %d, %Y") %></p>
-
-            <div class="mb-3">
-              <% if media_mention.link.present? %>
-                <iframe 
-                  src="<%= media_mention.link %>" 
-                  title="<%= media_mention.name %> Article Snippet" 
-                  width="100%" 
-                  height="300" 
-                  frameborder="0" 
-                  style="border: 1px solid #ccc; border-radius: 8px; margin-top: 10px;">
-                </iframe>
-              <% else %>
-                <p class="text-muted">No preview available.</p>
-              <% end %>
-              <a href="<%= media_mention.link %>" target="_blank" 
-                 class="media-link text-decoration-underline fw-bold" 
-                 style="color: #403f2b;">View Link</a>
-            </div>
-
-            <div class="text-center">
-              <%= button_to 'Delete', media_mention_path(media_mention), method: :delete, 
-                            class: 'btn btn-danger btn-sm text-white', 
-                            data: { confirm: 'Are you sure you want to delete this media mention?' } %>
-            </div>
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <p class="text-center text-muted fs-5">No Updates Available At This Time.</p>
-    <% end %>
-  </div>
-  <div>
-    <%= link_to 'Create New Post', new_media_mention_path, class: 'btn btn-sm text-white edit-button text-decoration-none', style: 'background-color: #f1c40f; border-color: #f1c40f;' %> 
-  </div>
+<div class="text-center mt-4">
+  <%= link_to 'Create New Post', new_media_mention_path, class: 'btn btn-sm text-white edit-button text-decoration-none', style: 'background-color: #f1c40f; border-color: #f1c40f;' %>
 </div>
 
+<div class="square-container mt-5">
+  <% if @media_mentions.present? %>
+    <% @media_mentions.each do |media_mention| %>
+      <div class="square">
+        <div class="media-item p-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3><%= media_mention.name %></h3>
+            <div>
+              <%= link_to 'Edit', edit_media_mention_path(media_mention), class: 'btn btn-sm text-white edit-button text-decoration-none', style: 'background-color: #e86c00; border-color: #e86c00;' %>
+            </div>
+          </div>
+          <p><strong>News Organization:</strong> <%= media_mention.organization_name %></p>
+          <p><strong>Published Date:</strong> <%= media_mention.published_date.strftime("%B %d, %Y") %></p>
+
+          <div class="mb-3">
+            <% if media_mention.link.present? %>
+              <iframe 
+                src="<%= media_mention.link %>" 
+                title="<%= media_mention.name %> Article Snippet" 
+                width="100%" 
+                height="300" 
+                frameborder="0" 
+                style="border: 1px solid #ccc; border-radius: 8px; margin-top: 10px;">
+              </iframe>
+            <% else %>
+              <p class="text-muted">No preview available.</p>
+            <% end %>
+            <a href="<%= media_mention.link %>" target="_blank" 
+               class="media-link text-decoration-underline fw-bold" 
+               style="color: #403f2b;">View Link</a>
+          </div>
+
+          <div class="text-center">
+            <%= button_to 'Delete', media_mention_path(media_mention), method: :delete, 
+                          class: 'btn btn-danger btn-sm text-white', 
+                          data: { confirm: 'Are you sure you want to delete this media mention?' } %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="text-center text-muted fs-5">No Updates Available At This Time.</p>
+  <% end %>
+</div>
