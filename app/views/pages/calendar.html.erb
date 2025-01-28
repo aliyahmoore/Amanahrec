@@ -1,2 +1,27 @@
 <% content_for :title, "Calendar" %>
 <h1>Calendar</h1>
+<div class="container my-4">
+
+
+ <!-- Calendar Wrapper -->
+ <div class="calendar">
+   <%= month_calendar events: @events do |date, events| %>
+     <div class="border p-2 text-center">
+       <!-- Display Date -->
+       <strong class="d-block"><%= date.day %></strong>
+
+
+       <!-- Check if there are any meetings for the date -->
+         <!-- Display Meetings -->
+         <% events.each do |event| %>
+           <div class="mt-2 p-1 rounded bg-light">
+             <%= link_to event.title, event_path(event), class: "text-primary text-decoration-none" %><br>
+             <small class="text-muted">
+               <%= event.start_time.strftime("%I:%M %p") %> 
+             </small>
+           </div>
+       <% end %>
+     </div>
+   <% end %>
+ </div>
+</div>
