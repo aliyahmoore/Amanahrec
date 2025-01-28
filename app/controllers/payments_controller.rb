@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController
-  before_action :set_paymentable, only: [:create, :success]
+  before_action :set_paymentable, only: [ :create, :success ]
 
   def create
     # Ensure the user is logged in before registering
@@ -21,6 +21,7 @@ class PaymentsController < ApplicationController
     redirect_to stripe_session.url, allow_other_host: true
   end
 
+  # Upon completion of payment
   def success
     session_id = params[:session_id]
 
@@ -28,7 +29,7 @@ class PaymentsController < ApplicationController
       return redirect_to @paymentable, alert: "Session ID is missing."
     end
 
-    # Explicitly find the paymentable (Event or Activity) based on parameters
+    # Find the paymentable (Event or Activity)
     if params[:paymentable_type] == "Activity"
       @paymentable = Activity.find_by(id: params[:paymentable_id])
     elsif params[:paymentable_type] == "Event"
@@ -42,7 +43,7 @@ class PaymentsController < ApplicationController
 
   private
 
-  # Set either an event or activity based on the URL params
+  # Set either an event or activity for payment
   def set_paymentable
     if params[:activity_id]
       @paymentable = Activity.find_by(id: params[:activity_id])
@@ -59,9 +60,9 @@ class PaymentsController < ApplicationController
     )
 
     Stripe::Checkout::Session.create(
-      payment_method_types: ["card"],
+      payment_method_types: [ "card" ],
       customer: customer.id,
-      line_items: [{
+      line_items: [ {
         price_data: {
           currency: "usd",
           product_data: {
@@ -71,7 +72,7 @@ class PaymentsController < ApplicationController
           unit_amount: (@paymentable.cost * 100).to_i
         },
         quantity: 1
-      }],
+      } ],
       mode: "payment",
       success_url: success_url(paymentable_type: @paymentable.class.name, paymentable_id: @paymentable.id, session_id: "{CHECKOUT_SESSION_ID}"),
       cancel_url: cancel_url(paymentable_type: @paymentable.class.name, paymentable_id: @paymentable.id),
@@ -79,7 +80,7 @@ class PaymentsController < ApplicationController
         user_id: current_user.id,
         paymentable_id: @paymentable.id,
         paymentable_type: @paymentable.class.name,
-        location: @paymentable.location,
+        location: @paymentable.location
       }
     )
   end
@@ -126,9 +127,9 @@ class PaymentsController < ApplicationController
 
   # Check if the current user has already paid for the event/activity
   def user_has_paid_for_paymentable?
-    Payment.exists?(user_id: current_user.id, 
-                    paymentable_type: @paymentable.class.name, 
-                    paymentable_id: @paymentable.id, 
+    Payment.exists?(user_id: current_user.id,
+                    paymentable_type: @paymentable.class.name,
+                    paymentable_id: @paymentable.id,
                     status: "succeeded")
   end
 end
