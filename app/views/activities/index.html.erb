@@ -23,7 +23,9 @@
               <i class="fa-solid fa-location-dot me-2"></i> <%= activity.location %>
             </p>
             <p class="card-text">
-              <strong>Cost:</strong> <%= activity.cost.present? && activity.cost > 0 ? "$#{activity.cost}" : "Free" %>
+              <i class="fa-sharp-duotone fa-solid fa-money-bill"></i> 
+              <%= activity.cost.present? && activity.cost > 0 ? number_to_currency(activity.cost) : "Free" %>
+
             </p>
             <div class="mt-auto d-flex justify-content-between">
               <%= link_to 'Edit', edit_activity_path(activity), class: 'btn btn-warning btn-sm' %>
