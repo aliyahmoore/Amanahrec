@@ -1,13 +1,12 @@
-  <div>
-    <h2>Add New Media Post</h2>
-  </div>
+<div>
+    <h2>Create New Media Post</h2>
 
-  <div>
-    <p><strong><%= @media_mention.name %></strong></p>
-    <p><strong><%= @media_mention.link %></strong></p>
-    <p><strong><%= @media_mention.published_date %></strong></p>
-    <p><strong><%= @media_mention.organization_name %></strong></p>
-  </div>
+    <div>
+        <p><strong><%= @media_mention.name %></strong></p>
+        <p><strong><%= @media_mention.link %></strong></p>
+        <p><strong><%= @media_mention.published_date %></strong></p>
+        <p><strong><%= @media_mention.organization_name %></strong></p>
+    </div>
 
-  <%= render 'form', media_mention: @media_mention %>
+    <%= render 'form', media_mention: @media_mention %>
 </div>
