@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController
-  before_action :set_event, only: [ :create, :success, :cancel ]
+  before_action :set_event, only: [ :create, :success]
 
   def create
   # Ensure the user is logged in before registering
