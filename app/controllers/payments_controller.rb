@@ -1,16 +1,16 @@
 class PaymentsController < ApplicationController
-  before_action :set_event, only: [ :create, :success ]
+  before_action :set_paymentable, only: [:create, :success]
 
   def create
-  # Ensure the user is logged in before registering
-  unless user_signed_in?
-    redirect_to new_user_session_path, alert: "You must be signed in to register for this event."
-    return
-  end
+    # Ensure the user is logged in before registering
+    unless user_signed_in?
+      redirect_to new_user_session_path, alert: "You must be signed in to register."
+      return
+    end
 
-    # Check if the user has already paid for the event
-    if user_has_paid_for_event?
-      redirect_to event_path(@event), alert: "You have already registered for this event."
+    # Check if the user has already paid for the event/activity
+    if user_has_paid_for_paymentable?
+      redirect_to @paymentable, alert: "You have already registered."
       return
     end
 
@@ -25,7 +25,7 @@ class PaymentsController < ApplicationController
     session_id = params[:session_id]
 
     if session_id.blank?
-      return redirect_to @event, alert: "Session ID is missing."
+      return redirect_to @paymentable, alert: "Session ID is missing."
     end
 
     process_payment_success(session_id)
@@ -33,8 +33,13 @@ class PaymentsController < ApplicationController
 
   private
 
-  def set_event
-    @event = Event.find(params[:event_id])
+  # Set either an event or activity based on the URL params
+  def set_paymentable
+    if params[:event_id]
+      @paymentable = Event.find(params[:event_id])
+    elsif params[:activity_id]
+      @paymentable = Activity.find(params[:activity_id])
+    end
   end
 
   # Initialize the Stripe Checkout session
@@ -45,28 +50,29 @@ class PaymentsController < ApplicationController
     )
 
     Stripe::Checkout::Session.create(
-      payment_method_types: [ "card" ],
+      payment_method_types: ["card"],
       customer: customer.id,
-      line_items: [ {
+      line_items: [{
         price_data: {
           currency: "usd",
           product_data: {
-            name: @event.title,
-            description: @event.description
+            name: @paymentable.title,
+            description: @paymentable.description
           },
-          unit_amount: (@event.cost * 100).to_i
+          unit_amount: (@paymentable.cost * 100).to_i
         },
         quantity: 1
-      } ],
+      }],
       mode: "payment",
-      success_url: success_url(event_id: @event.id, session_id: "{CHECKOUT_SESSION_ID}"),
-      cancel_url: cancel_url(event_id: @event.id),
+      success_url: success_url(paymentable_type: @paymentable.class.name, paymentable_id: @paymentable.id, session_id: "{CHECKOUT_SESSION_ID}"),
+      cancel_url: cancel_url(paymentable_type: @paymentable.class.name, paymentable_id: @paymentable.id),
       metadata: {
         user_id: current_user.id,
-        event_id: @event.id,
-        location: @event.location,
-        start_date: @event.start_date,
-        end_date: @event.end_date
+        paymentable_id: @paymentable.id,
+        paymentable_type: @paymentable.class.name,
+        location: @paymentable.location,
+        start_date: @paymentable.start_date,
+        end_date: @paymentable.end_date
       }
     )
   end
@@ -79,37 +85,44 @@ class PaymentsController < ApplicationController
       if session.payment_status == "paid"
         Payment.create!(
           stripe_payment_id: session.id,
-          amount: @event.cost,
+          amount: @paymentable.cost,
           status: "succeeded",
           user_id: current_user.id,
-          event_id: @event.id,
+          paymentable: @paymentable,  # Polymorphic association
           is_recurring: false,
           recurring_type: nil,
           payment_date: Time.zone.now
         )
 
-        redirect_to event_path(@event), notice: "Payment successful! Thank you for registering."
+        redirect_to @paymentable, notice: "Payment successful! Thank you for registering."
       else
-        redirect_to event_path(@event), alert: "Payment was not completed."
+        redirect_to @paymentable, alert: "Payment was not completed."
       end
     rescue Stripe::InvalidRequestError => e
       Rails.logger.error("Error retrieving session: #{e.message}")
-      redirect_to event_path(@event), alert: "Error retrieving payment details."
+      redirect_to @paymentable, alert: "Error retrieving payment details."
     end
   end
 
   # Generate the success URL
-  def success_url(event_id:, session_id:)
-    "#{root_url}payments/success?event_id=#{event_id}&session_id=#{session_id}"
+  def success_url(paymentable_type:, paymentable_id:, session_id:)
+    "#{root_url}payments/success?paymentable_type=#{paymentable_type}&paymentable_id=#{paymentable_id}&session_id=#{session_id}"
   end
 
   # Generate the cancel URL
-  def cancel_url(event_id:)
-    "#{root_url}events/#{event_id}"
+  def cancel_url(paymentable_type:, paymentable_id:)
+    if paymentable_type == "Event"
+      "#{root_url}events/#{paymentable_id}"
+    else
+      "#{root_url}activities/#{paymentable_id}"
+    end
   end
 
-  # Check if the current user has already paid for the event
-  def user_has_paid_for_event?
-    Payment.exists?(user_id: current_user.id, event_id: @event.id, status: "succeeded")
+  # Check if the current user has already paid for the event/activity
+  def user_has_paid_for_paymentable?
+    Payment.exists?(user_id: current_user.id, 
+                    paymentable_type: @paymentable.class.name, 
+                    paymentable_id: @paymentable.id, 
+                    status: "succeeded")
   end
 end
