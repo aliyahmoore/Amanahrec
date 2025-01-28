@@ -210,3 +210,18 @@
     margin-top: 10px;  /* Adds space above the image */
   }
   
+  /* Dimmed style for member-only events */
+.event-card.member-only {
+  opacity: 0.5;
+  pointer-events: none;
+  filter: grayscale(50%);
+}
+
+/* Alert styling for members-only events */
+.alert-member-only {
+  color: #DA5A5A;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+}

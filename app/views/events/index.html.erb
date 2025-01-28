@@ -1,41 +1,45 @@
 <div class="event-index-container">
   <h1>Upcoming Events</h1>
 
-  <!-- Check if there are events to display -->
   <% if @events.any? %>
     <div class="event-listing">
       <% @events.each do |event| %>
-        <div class="event-card">
+        <!-- Add class to style member-only events -->
+        <div class="event-card <%= 'member-only' if event.early_access_period? && !current_user&.member? %>">
           <h3><%= event.title %></h3>
 
-          <!-- Early Access Notice -->
-          <% if event.early_access_for_members && !current_user&.member? %>
-            <p><em>This event is currently available to members only.</em></p>
+          <!-- Event Image -->
+          <% if event.images.attached? %>
+            <div class="event-image">
+              <%= image_tag event.images.first, class: "event-image" %>
+            </div>
+          <% end %>
+
+          <!-- Event Information -->
+          <p><strong>Date and Time:</strong> <%= event.start_date.strftime("%B %d, %Y at %I:%M %p") %></p>
+          <p><strong>Location:</strong> <%= event.location %></p>
+          <p><strong>Cost:</strong> <%= number_to_currency(event.cost, precision: 2) %></p>
+
+          <!-- Alert for non-members -->
+          <% if event.early_access_period? && !current_user&.member? %>
+            <p class="alert-member-only">This event is currently available to members only.</p>
+          <% end %>
+        <!-- View Event Button -->
+          <% if event.early_access_period? && !current_user&.member? %>
+            <a href="#" class="btn-view non-member-alert" data-event-url="<%= event_path(event) %>">View Event</a>
           <% else %>
-            <!-- Event Image -->
-            <% if event.images.attached? %>
-              <div class="event-image">
-                <%= image_tag event.images.first, class: "event-image" %>
-              </div>
-            <% end %>
-
-            <!-- Combine date and time -->
-            <p><strong>Date and Time:</strong> <%= event.start_date.strftime("%B %d, %Y at %I:%M %p") %></p>
-            <p><strong>Location:</strong> <%= event.location %></p>
-            <p><strong>Cost:</strong> <%= number_to_currency(event.cost, precision: 2) %></p>
-
-            <!-- Link to View Event Details -->
             <%= link_to 'View Event', event_path(event), class: "btn-view" %>
           <% end %>
         </div>
+          
       <% end %>
     </div>
   <% else %>
     <p>No upcoming events at the moment.</p>
   <% end %>
 
-  <!-- Admin View Only Logic-->
- <% if current_user&.role_id == 1 %>
-      <%= link_to 'New Event', new_event_path, class: "btn-back" %>
-    <% end %>
+  <!-- Admin Only: Button to Add New Events -->
+  <% if current_user&.role_id == 1 %>
+    <%= link_to 'New Event', new_event_path, class: "btn-back" %>
+  <% end %>
 </div>

@@ -13,12 +13,13 @@ class Event < ApplicationRecord
     validates :general_registration_start, presence: true, if: -> { early_access_for_members? }
     
     
+     # Check if the event is currently in the early access period
+    def early_access_period?
+        early_access_for_members && Time.current >= early_access_days && Time.current < general_registration_start
+    end
     
-    
-    # Method to calculate the early access start date
-  def early_access_start_date
-    return nil unless general_registration_start && early_access_days
-
-    general_registration_start - early_access_days.days
-  end
+      # Check if general registration is open
+    def general_registration_open?
+        Time.current >= general_registration_start
+    end
 end

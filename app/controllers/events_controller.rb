@@ -3,20 +3,22 @@ class EventsController < ApplicationController
 
     # GET /events
     def index
-      if current_user&.member?
-        # Members can see all events
+        # everyone can see all events
         @events = Event.all
-      else
-        # Non-members can only see events available to the general public
-        @events = Event.where(early_access_for_members: false)
-                       .or(Event.where('general_registration_start <= ?', Time.current))
-      end
     end
 
     # GET /events/:id
     def show
-      # @event is already set by before_action
+      @can_rsvp = if current_user&.member?
+                    # Members can RSVP during early access or general registration
+                    @event.early_access_for_members && Time.current >= @event.early_access_days ||
+                      Time.current >= @event.general_registration_start
+                  else
+                    # Non-members can only RSVP during the general registration period
+                    Time.current >= @event.general_registration_start
+                  end
     end
+    
 
     # GET /events/new
     def new
