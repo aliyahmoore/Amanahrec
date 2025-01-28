@@ -8,7 +8,7 @@ class CreatePayments < ActiveRecord::Migration[7.2]
       t.boolean :is_recurring
       t.string :recurring_type
       t.datetime :payment_date
-
+      t.references :paymentable, polymorphic: true, null: false
       t.timestamps
     end
   end
