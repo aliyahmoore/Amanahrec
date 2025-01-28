@@ -58,6 +58,16 @@
         The RSVP deadline cannot be after the event date.
       </div>
     </div>
+    <div class="form-group">
+    <%= form.label :early_access_for_members, "Enable Early Access for Members" %>
+    <%= form.check_box :early_access_for_members, class: "form-check-input" %>
+  </div>
+
+  <!-- Early Access Days -->
+  <div class="form-group">
+    <%= form.label :early_access_days, "Number of Days for Early Access" %>
+    <%= form.number_field :early_access_days, class: "form-control", min: 0, placeholder: "Enter number of days for early access" %>
+  </div>
     <!-- Childcare Available -->
     <div class="form-group">
       <%= form.label :childcare, "Childcare Available?" %>
