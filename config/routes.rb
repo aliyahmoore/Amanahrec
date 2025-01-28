@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   resources :activities
   resources :events do
-    resources :payments, only: [ :create ] 
+    resources :payments, only: [ :create ]
   end
 
   get "/payments/success", to: "payments#success"
