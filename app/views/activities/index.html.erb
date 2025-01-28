@@ -3,47 +3,27 @@
 
   <%= link_to 'New Activity', new_activity_path, class: 'btn btn-primary mb-3' %>
 
-  <table class="table activity-table">
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Location</th>
-        <th>Date</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @activities.each do |activity| %>
-        <tr>
-          <!-- Activity Title with Link -->
-          <td>
-            <%= link_to activity.title, activity_path(activity), class: 'activity-title' %>
-            
-            <!-- Display Activity Image if Attached -->
-            <% if activity.images.attached? %>
-              <div class="activity-image-container">
-                <%= image_tag activity.images.first, class: 'activity-image' %> 
-              </div>
-            <% end %>
-          </td>
-
-          <!-- Activity Description (Truncated to 100 chars) -->
-          <td><%= activity.description.truncate(100) %></td>
-
-          <!-- Activity Location -->
-          <td><%= activity.location %></td>
-
-          <!-- Activity Date (Formatted) -->
-          <td><%= activity.date.strftime("%B %d, %Y") %></td>
-
-          <!-- Action Links (Edit, Delete) -->
-          <td>
-            <%= link_to 'Edit', edit_activity_path(activity), class: 'btn btn-warning btn-sm' %> |
-            <%= link_to 'Delete', activity_path(activity), method: :delete, data: { confirm: 'Are you sure you want to delete this activity?' }, class: 'btn btn-danger btn-sm' %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class="row">
+    <% @activities.each do |activity| %>
+      <div class="col-lg-8 mb-3">
+        <div class="card">
+          <% if activity.images.attached? %>
+            <%= image_tag activity.images.first, class: 'card-img-top', alt: activity.title %>
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= link_to activity.title, activity_path(activity), class: 'activity-title' %>
+            </h5>
+            <p class="card-text"><%= activity.description.truncate(100) %></p>
+            <p class="card-text"><strong>Location:</strong> <%= activity.location %></p>
+            <p class="card-text"><strong>Date:</strong> <%= activity.date.strftime("%B %d, %Y") %></p>
+            <div class="d-flex justify-content-between">
+              <%= link_to 'Edit', edit_activity_path(activity), class: 'btn btn-warning btn-sm' %>
+              <%= link_to 'Delete', activity_path(activity), method: :delete, data: { confirm: 'Are you sure you want to delete this activity?' }, class: 'btn btn-danger btn-sm' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
