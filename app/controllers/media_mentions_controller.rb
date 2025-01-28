@@ -7,9 +7,15 @@ class MediaMentionsController < ApplicationController
   end
 
   def show
+    @media_mention
   end
 
   def edit
+    @media_mention
+  end
+
+  def new
+    @media_mention = MediaMention.new
   end
 
   def create

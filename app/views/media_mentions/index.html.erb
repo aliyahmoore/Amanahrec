@@ -2,7 +2,6 @@
 
 <h1 class="heading text-center my-5" style="color: #403f2b;">Amanah Rec Latest News...</h1>
 
-
 <% if flash[:alert] %>
   <div class="alert alert-danger text-center mb-4">
     <%= flash[:alert] %>
@@ -18,10 +17,7 @@
             <div class="d-flex justify-content-between align-items-center mb-3">
               <h3><%= media_mention.name %></h3>
               <div>
-                <%= link_to 'Edit', '#', 
-                class: 'btn btn-sm text-white edit-button text-decoration-none', 
-                style: 'background-color: #e86c00; border-color: #e86c00;', 
-                data: { media_mention_id: media_mention.id } %>
+                <%= link_to 'Edit', edit_media_mention_path(media_mention), class: 'btn btn-sm text-white edit-button text-decoration-none', style: 'background-color: #e86c00; border-color: #e86c00;' %>
               </div>
             </div>
             <p><strong>News Organization:</strong> <%= media_mention.organization_name %></p>
@@ -50,7 +46,9 @@
                             class: 'btn btn-danger btn-sm text-white', 
                             data: { confirm: 'Are you sure you want to delete this media mention?' } %>
             </div>
-
+            <div>
+              <%= link_to 'Create New Post', new_media_mention_path, class: 'btn btn-sm text-white edit-button text-decoration-none', style: 'background-color: #e86c00; border-color: #e86c00;' %>
+            </div>
           </li>
         <% end %>
       </ul>
@@ -60,10 +58,3 @@
   </div>
 </div>
 
-<div class="card shadow-sm p-4 mx-auto mt-5" style="max-width: 500px;">
-  <div class="text-center mb-3">
-    <h2 class="text-dark">Add New Media Mention</h2>
-  </div>
-
-  <%= render 'media_mentions/form', media_mention: @media_mention %>
-</div>
