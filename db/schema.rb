@@ -100,16 +100,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_23_183026) do
     t.string "stripe_payment_id"
     t.decimal "amount"
     t.string "status"
-    t.bigint "event_id", null: false
     t.bigint "user_id", null: false
-    t.bigint "activity_id", null: false
     t.boolean "is_recurring"
     t.string "recurring_type"
     t.datetime "payment_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["activity_id"], name: "index_payments_on_activity_id"
-    t.index ["event_id"], name: "index_payments_on_event_id"
     t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
@@ -151,8 +147,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_23_183026) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "payments", "activities"
-  add_foreign_key "payments", "events"
   add_foreign_key "payments", "users"
   add_foreign_key "testimonials", "users"
   add_foreign_key "users", "roles"
