@@ -28,6 +28,15 @@ class PaymentsController < ApplicationController
       return redirect_to @paymentable, alert: "Session ID is missing."
     end
 
+    # Explicitly find the paymentable (Event or Activity) based on parameters
+    if params[:paymentable_type] == "Activity"
+      @paymentable = Activity.find_by(id: params[:paymentable_id])
+    elsif params[:paymentable_type] == "Event"
+      @paymentable = Event.find_by(id: params[:paymentable_id])
+    else
+      return redirect_to root_url, alert: "Invalid paymentable type."
+    end
+
     process_payment_success(session_id)
   end
 
@@ -35,10 +44,10 @@ class PaymentsController < ApplicationController
 
   # Set either an event or activity based on the URL params
   def set_paymentable
-    if params[:event_id]
-      @paymentable = Event.find(params[:event_id])
-    elsif params[:activity_id]
-      @paymentable = Activity.find(params[:activity_id])
+    if params[:activity_id]
+      @paymentable = Activity.find_by(id: params[:activity_id])
+    elsif params[:event_id]
+      @paymentable = Event.find_by(id: params[:event_id])
     end
   end
 
@@ -88,8 +97,7 @@ class PaymentsController < ApplicationController
           user_id: current_user.id,
           paymentable: @paymentable,  # Polymorphic association
           is_recurring: false,
-          recurring_type: nil,
-          payment_date: Time.zone.now
+          recurring_type: nil
         )
 
         redirect_to @paymentable, notice: "Payment successful! Thank you for registering."
