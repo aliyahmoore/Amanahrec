@@ -46,15 +46,15 @@
                             class: 'btn btn-danger btn-sm text-white', 
                             data: { confirm: 'Are you sure you want to delete this media mention?' } %>
             </div>
-            <div>
-              <%= link_to 'Create New Post', new_media_mention_path, class: 'btn btn-sm text-white edit-button text-decoration-none', style: 'background-color: #e86c00; border-color: #e86c00;' %>
-            </div>
           </li>
         <% end %>
       </ul>
     <% else %>
       <p class="text-center text-muted fs-5">No Updates Available At This Time.</p>
     <% end %>
+  </div>
+  <div>
+    <%= link_to 'Create New Post', new_media_mention_path, class: 'btn btn-sm text-white edit-button text-decoration-none', style: 'background-color: #f1c40f; border-color: #f1c40f;' %> 
   </div>
 </div>
 
