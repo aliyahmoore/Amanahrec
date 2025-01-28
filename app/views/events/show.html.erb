@@ -14,10 +14,17 @@
     <p><strong>End Date:</strong> <%= @event.end_date.strftime("%B %d, %Y at %I:%M %p") %></p>
     <p class="time-info"><strong>RSVP Deadline:</strong> <%= @event.rsvp_deadline.strftime("%B %d, %Y at %I:%M %p") %></p>
 
-    <!--Early Access Info-->
-    <% if @event.early_access_for_members && @event.early_access_days %>
-      <p><strong>Early Access for Members Starts:</strong></p>
-    <% end %>
+    <!-- Early Access Info -->
+<% if @event.early_access_for_members && @event.early_access_days %>
+  <% days_remaining = (@event.general_registration_start.to_date - Date.current).to_i %>
+  <% if days_remaining > 0 %>
+    <p><strong>Early Access For Members Ends In:</strong> <strong><%= days_remaining %> Days </strong></p>
+  <% else %>
+   
+  <% end %>
+<% end %>
+
+    
 
     <h2>Childcare & Sponsors</h2>
     <p><strong>Childcare Available:</strong> <%= @event.childcare ? 'Yes' : 'No' %></p>
