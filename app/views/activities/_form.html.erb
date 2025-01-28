@@ -1,0 +1,77 @@
+<%= form_with(model: @activity, local: true, html: { class: 'activity-form', data: { turbo: false } }) do |form| %>
+  <% if @activity.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
+      <ul>
+        <% @activity.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %><span class="required">*</span>
+    <%= form.text_field :title, class: "input-field" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %><span class="required">*</span>
+    <%= form.text_area :description, class: "input-field" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date %><span class="required">*</span>
+    <%= form.datetime_local_field :date, value: Time.now, class: "input-field" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :location %><span class="required">*</span>
+    <%= form.text_field :location, class: "input-field" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :capacity %><span class="required">*</span>
+    <%= form.number_field :capacity, class: "input-field" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :what_to_bring %><span class="required">*</span>
+    <%= form.text_area :what_to_bring, class: "input-field" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rules %><span class="required">*</span>
+    <%= form.text_area :rules, class: "input-field" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :notes %><span class="required">*</span>
+    <%= form.text_area :notes, class: "input-field" %>
+  </div>
+
+  <div class="form-group">
+  <%= form.label :cost, "Cost" %><span class="required">*</span>
+  <%= form.number_field :cost, 
+      value: @activity.cost.nil? ? 0 : @activity.cost, 
+      class: 'form-control', 
+      step: "0.01", 
+      min: "0", 
+      placeholder: "Enter the event cost (0 for free)" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :duration, "Duration (in hours)" %><span class="required">*</span>
+    <%= form.number_field :duration, class: "input-field" %>
+  </div>
+
+  <!-- Image upload section -->
+  <div class="form-group">
+    <%= form.label :images, "Upload Images" %>
+    <%= form.file_field :images, multiple: true, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Save Activity", class: "submit-button" %>
+  </div>
+<% end %>

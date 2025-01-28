@@ -1,16 +1,18 @@
-<h2>Resend confirmation instructions</h2>
-
-<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+<h2 class="text-center mb-4" class="text-center mb-4">Resend confirmation instructions</h2>
+<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: "w-50 mx-auto", class: "w-50 mx-auto" }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+  <!-- Email Field -->
+  <div class="mb-3">
+    <%= f.label :email, class: "form-label" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), required: true, class: "form-control", placeholder: "Enter your email address" %>
+    <small class="text-danger">Email is a required field</small>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Resend confirmation instructions" %>
+  <!-- Submit Button -->
+  <div class="mb-3 text-center">
+    <%= f.submit "Resend confirmation instructions", class: "btn btn-primary px-4" %>
   </div>
 <% end %>
-
-<%= render "devise/shared/links" %>
+<!-- Centered Links -->
+<div class="text-center">
+  <%= render "devise/shared/links" %>
+</div>

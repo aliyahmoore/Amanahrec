@@ -4,28 +4,48 @@
   max-height: 100px;
 }
 
-.footer-custom {
-  color: #403f2b; 
+html, body {
+  height: 100%; /* Uses full height for the page */
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1; /* Pushes the footer to the bottom when content doesn't fill */
+}
+
+footer.footer-custom {
+  background-color: #ffffff;
+  color: #403f2b;
+  text-align: center;
+  padding: 1rem;
+}
+
+.footer-custom a[href^="mailto:"] {
+  color: #403f2b !important; 
+}
+.footer-custom a[href^="mailto:"] {
+  color: #403f2b !important; 
 }
 
 .footer-custom a[href^="mailto:"]:hover {
   text-decoration: underline; /* Underline email on hover */
   color: #403f2b; 
 }
-
 .footer-custom a {
   color: #403f2b; 
   text-decoration: none; 
 }
-
 .footer-custom a:hover {
   color: #e9e2d8;
 }
-
 .footer-custom i {
   color: #403f2b;
 }
-
 .footer-custom i:hover {
   color: #e9e2d8; 
 }

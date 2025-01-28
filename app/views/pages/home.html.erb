@@ -1,0 +1,73 @@
+<% content_for :javascript do %>
+  <script type="module">
+    import "testimonial_slider";
+  </script>
+<% end %>
+<div style="background-image: url('/Homepage_bg.jpg'); background-size: cover; background-position: center; height: 100vh;">
+<h1>Welcome to the Amanahrec Homepage!</h1>
+<!-- Hero Section -->
+<div class="hero-section">
+  <!-- Hero Image -->
+  <div class="hero-image">
+    <!-- insert hero image -->
+    <!-- insert Logo on top of the hero image -->
+    <div class="hero-logo">
+    </div>
+  </div>
+</div>
+<div class="card-section">
+  <!-- Card 1: Activities -->
+  <div class="card">
+    <!-- place activties image tag -->
+    <h3>Activities</h3>
+    <p>Find fun adventures and ways to get involved!</p>
+  </div>
+  <!-- Card 2: Events -->
+  <div class="card">
+    <!-- place events image tag -->
+    <h3>Events</h3>
+    <p>Check out upcoming gatherings and happenings.</p>
+  </div>
+  <!-- Card 3: Latest News -->
+  <div class="card">
+    <!-- place latest news image tag -->
+    <h3>Latest News</h3>
+    <p>Stay up-to-date with current announcements.</p>
+  </div>
+</div>
+<div class="upcoming-events">
+  <h2>Upcoming Events</h2>
+  <ul>
+    <li><strong>Saturday Hike</strong> – Saturday, January 1, 2025</li>
+    <li><strong>Snow Tubing</strong> – Sunday, January 8, 2025</li>
+    <li><strong>Kayaking</strong> – Friday, January 12, 2025</li>
+  </ul>
+</div>
+
+<!-- Testimonials Section -->
+<div class="testimonials-section">
+  <h2>What Our Members Say</h2>
+  <div class="testimonial-slider">
+    <% @testimonials.each do |testimonial| %>
+      <div class="testimonial-slide">
+        <p class="testimonial-text"><%= testimonial.text %></p>
+        <p class="testimonial-author">- <%= testimonial.user.first_name %> <%= testimonial.user.last_name %></p>
+      </div>
+    <% end %>
+  </div>
+  <div class="testimonial-navigation">
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+  </div>
+  <% if user_signed_in? %>
+  <% if current_user.role.id == 1 %>
+    <%= link_to 'View Testimonials', testimonials_path, class: 'btn btn-secondary' %>
+  <% else %>
+    <%= link_to 'Submit a Testimonial', new_testimonial_path, class: 'btn btn-secondary' %>
+  <% end %>
+<% end %>
+
+</div>
+
+
+</div>

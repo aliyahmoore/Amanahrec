@@ -1,0 +1,49 @@
+<div class="activities-index-container">
+  <h1 class="page-title">Activities</h1>
+
+  <%= link_to 'New Activity', new_activity_path, class: 'btn btn-primary mb-3' %>
+
+  <table class="table activity-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Location</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @activities.each do |activity| %>
+        <tr>
+          <!-- Activity Title with Link -->
+          <td>
+            <%= link_to activity.title, activity_path(activity), class: 'activity-title' %>
+            
+            <!-- Display Activity Image if Attached -->
+            <% if activity.images.attached? %>
+              <div class="activity-image-container">
+                <%= image_tag activity.images.first, class: 'activity-image' %> 
+              </div>
+            <% end %>
+          </td>
+
+          <!-- Activity Description (Truncated to 100 chars) -->
+          <td><%= activity.description.truncate(100) %></td>
+
+          <!-- Activity Location -->
+          <td><%= activity.location %></td>
+
+          <!-- Activity Date (Formatted) -->
+          <td><%= activity.date.strftime("%B %d, %Y") %></td>
+
+          <!-- Action Links (Edit, Delete) -->
+          <td>
+            <%= link_to 'Edit', edit_activity_path(activity), class: 'btn btn-warning btn-sm' %> |
+            <%= link_to 'Delete', activity_path(activity), method: :delete, data: { confirm: 'Are you sure you want to delete this activity?' }, class: 'btn btn-danger btn-sm' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

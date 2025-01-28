@@ -7,3 +7,5 @@ pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
 pin_all_from "app/javascript/controllers", under: "controllers"
 # config/importmap.rb
 pin "media_toggle", to: "media_toggle.js"
+pin "testimonial_slider", to: "testimonial_slider.js"
+pin "testimonial_slider", to: "testimonial_slider.js"

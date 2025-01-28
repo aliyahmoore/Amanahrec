@@ -1,0 +1,133 @@
+/* Set a global font family for the form */
+.activity-form {
+  background-color: #E9E2D8;
+  padding: 30px;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif; /* Standardizing the font family */
+  color: #403F2B; /* Default text color */
+}
+
+/* Headings: same font family and color */
+.activity-form h1, .activity-form h2, .activity-form h3 {
+  font-family: 'Arial', sans-serif;
+  color: #403F2B;
+  margin-bottom: 10px;
+}
+
+/* Labels: consistent font size and family */
+.activity-form label {
+  font-size: 1.1rem; /* Slightly smaller than default to maintain hierarchy */
+  font-family: 'Arial', sans-serif;
+  color: #403F2B;
+  margin-bottom: 5px;
+}
+
+/* Inputs, textareas, and selects: same font family and consistent styling */
+.activity-form input, .activity-form textarea, .activity-form select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #57573F;
+  border-radius: 5px;
+  font-family: 'Arial', sans-serif;
+  font-size: 1rem;
+  background-color: #E9E2D8;
+  color: #403F2B;
+}
+
+/* Checkbox input styling */
+.activity-form input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+/* Buttons and submit input: consistent styling */
+.activity-form input[type="submit"], .activity-form button {
+  background-color: #57573F;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-family: 'Arial', sans-serif;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+.activity-form input[type="submit"]:hover, .activity-form button:hover {
+  background-color: #403F2B;
+}
+
+/* Error styling for consistency */
+.activity-form .error {
+  color: red;
+  font-size: 0.9rem;
+  font-family: 'Arial', sans-serif;
+  margin-bottom: 10px;
+}
+
+/* Error explanation box */
+.activity-form #error_explanation {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 15px;
+  border-radius: 5px;
+  font-family: 'Arial', sans-serif;
+}
+
+/* List inside error explanation */
+.activity-form #error_explanation ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* List item styling for error messages */
+.activity-form #error_explanation li {
+  font-size: 1rem;
+  color: #721c24;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Actions section */
+.activity-form .actions {
+  margin-top: 20px;
+}
+
+/* Time field: ensuring consistency in font */
+.activity-form .time-field {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Time selects with uniform font */
+.activity-form .time-select select {
+  width: 60px;
+  padding: 8px;
+  font-size: 1rem;
+  font-family: 'Arial', sans-serif;
+  background-color: #E9E2D8;
+  border: 1px solid #57573F;
+  border-radius: 5px;
+  color: #403F2B;
+}
+
+/* Focus state for time select inputs */
+.activity-form .time-select select:focus {
+  border-color: #403F2B;
+  outline: none;
+}
+
+/* Additional styling for AM/PM select */
+.activity-form .time-select select.ampm {
+  width: 80px;
+}
+
+/* Label styling for time fields */
+.activity-form .time-field label {
+  margin-bottom: 5px;
+  font-family: 'Arial', sans-serif;
+}
