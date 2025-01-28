@@ -3,7 +3,15 @@ class EventsController < ApplicationController
 
     # GET /events
     def index
-      @events = Event.all
+      if current_user&.member?
+        # Members can see all events
+        @events = Event.all
+      else
+        # Non-members can only see events without early access or events within the early access window
+        early_access_days = Event.minimum(:early_access_days) || 0 # Default to 0 if nil
+      @events = Event.where(early_access_for_members: false)
+                     .or(Event.where('start_date <= ? AND early_access_for_members = ?', Time.current + early_access_days.days, true))
+      end
     end
 
     # GET /events/:id
@@ -64,7 +72,7 @@ class EventsController < ApplicationController
     def event_params
       params.require(:event).permit(
         :title, :description, :start_date, :end_date, :location,
-        :rsvp_deadline, :childcare, :sponsors, :cost, images: []
+        :rsvp_deadline, :childcare,:early_access_for_members,:early_access_days,:sponsors, :cost, images: []
       )
     end
 end
