@@ -1,8 +1,8 @@
 class PaymentsController < ApplicationController
-  before_action :set_event, only: [:create, :success, :cancel]
+  before_action :set_event, only: [ :create, :success, :cancel ]
 
   def create
-     # Ensure the user is logged in before registering
+  # Ensure the user is logged in before registering
   unless user_signed_in?
     redirect_to new_user_session_path, alert: "You must be signed in to register for this event."
     return
@@ -45,9 +45,9 @@ class PaymentsController < ApplicationController
     )
 
     Stripe::Checkout::Session.create(
-      payment_method_types: ["card"],
+      payment_method_types: [ "card" ],
       customer: customer.id,
-      line_items: [{
+      line_items: [ {
         price_data: {
           currency: "usd",
           product_data: {
@@ -57,7 +57,7 @@ class PaymentsController < ApplicationController
           unit_amount: (@event.cost * 100).to_i
         },
         quantity: 1
-      }],
+      } ],
       mode: "payment",
       success_url: success_url(event_id: @event.id, session_id: "{CHECKOUT_SESSION_ID}"),
       cancel_url: cancel_url(event_id: @event.id),
