@@ -4,9 +4,7 @@ class CreatePayments < ActiveRecord::Migration[7.2]
       t.string :stripe_payment_id
       t.decimal :amount
       t.string :status
-      t.references :event, null: false, foreign_key: true
       t.references :user, null: false, foreign_key: true
-      t.references :activity, null: false, foreign_key: true
       t.boolean :is_recurring
       t.string :recurring_type
       t.datetime :payment_date

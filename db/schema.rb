@@ -94,6 +94,18 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_02_233602) do
     t.string "organization_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+
+  create_table "payments", force: :cascade do |t|
+    t.string "stripe_payment_id"
+    t.decimal "amount"
+    t.string "status"
+    t.bigint "user_id", null: false
+    t.boolean "is_recurring"
+    t.string "recurring_type"
+    t.datetime "payment_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
