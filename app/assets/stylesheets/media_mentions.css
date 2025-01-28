@@ -15,19 +15,19 @@ body {
   border-bottom: 2px solid #c7ba9c; 
 }
 
-/* Card Container - Limit to 3 cards per row and retain card size */
+/* Card Container - Limit to 3 cards per row */
 .square-container {
   margin-top: 50px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-  padding: 0 20px; /* Optional padding for spacing */
+  padding: 0 20px; 
 }
 
 .square {
   background-color: #DACCB1;
-  width: 20%; /* Set width to 30% to fit 3 cards per row */
+  width: 20%; 
   min-width: 250px; /* Ensure cards are not too small on smaller screens */
   box-sizing: border-box;
   border-radius: 12px;
