@@ -25,9 +25,13 @@
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       <% end %>
-      <%= render 'layouts/navbar' %> <!-- Moved navbar here, below flash -->
-      <%= yield %> <!-- Main content area -->
+      <%= render 'layouts/navbar' %> 
+      <%= yield %> 
       <%= yield :javascript %>
+      <%= button_to "Subscribe to Membership", 
+              payments_path(payable_type: "Membership", payable_id: current_user.id), 
+              method: :post, 
+              class: "btn btn-primary" %>
       <%= render 'layouts/footer' %>
     </body>
   </html>
