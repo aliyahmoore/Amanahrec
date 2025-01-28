@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   resources :activities do
     resources :payments, only: [ :create ]
   end
-  
+
   resources :events do
     resources :payments, only: [ :create ]
   end
