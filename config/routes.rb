@@ -19,7 +19,10 @@ Rails.application.routes.draw do
   # root "posts#index"
   root "pages#home"
 
-  resources :activities
+  resources :activities do
+    resources :payments, only: [ :create ]
+  end
+  
   resources :events do
     resources :payments, only: [ :create ]
   end
