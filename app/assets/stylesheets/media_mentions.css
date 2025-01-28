@@ -1,3 +1,4 @@
+/* Body and global styles */
 body {
   background-color: #E9E2D8;
   font-family: "Tahoma", sans-serif;
@@ -9,33 +10,25 @@ body {
 .heading::after {
   content: '';  
   display: block;
-  width: 40%;   
-  margin: 10px auto 0; 
-  border-bottom: 3px solid #c7ba9c; 
+  width: 20%;   
+  margin: 8px auto 0; 
+  border-bottom: 2px solid #c7ba9c; 
 }
 
-/*
-.news-image {
-  display: block;
-  margin: 30px auto;
-  max-width: 30%;
-  border-radius: 10px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-}
-*/
-
+/* Card Container - Limit to 3 cards per row and retain card size */
 .square-container {
   margin-top: 50px;
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
+  padding: 0 20px; /* Optional padding for spacing */
 }
 
 .square {
-  background-color: #DACCB1; 
-  width: 80%;
-  max-width: 800px;
+  background-color: #DACCB1;
+  width: 20%; /* Set width to 30% to fit 3 cards per row */
+  min-width: 250px; /* Ensure cards are not too small on smaller screens */
   box-sizing: border-box;
   border-radius: 12px;
   font-family: "Tahoma", sans-serif;
@@ -75,4 +68,3 @@ body {
   padding-left: 10px;
   transition: color 0.2s ease;
 }
-
