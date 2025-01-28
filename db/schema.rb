@@ -103,8 +103,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_02_233602) do
     t.boolean "is_recurring"
     t.string "recurring_type"
     t.datetime "payment_date"
+    t.string "paymentable_type", null: false
+    t.bigint "paymentable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["paymentable_type", "paymentable_id"], name: "index_payments_on_paymentable"
     t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
