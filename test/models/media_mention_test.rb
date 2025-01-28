@@ -1,6 +1,6 @@
 require "test_helper"
 
-class MediumTest < ActiveSupport::TestCase
+class MediaMentionTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
