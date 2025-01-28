@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_28_035302) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_28_192605) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -78,6 +78,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_28_035302) do
     t.datetime "updated_at", null: false
     t.boolean "early_access_for_members"
     t.integer "early_access_days"
+    t.datetime "general_registration_start"
   end
 
   create_table "events_users", id: false, force: :cascade do |t|
@@ -95,6 +96,21 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_28_035302) do
     t.datetime "updated_at", null: false
     t.date "published_date"
     t.string "organization_name"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.string "stripe_payment_id"
+    t.decimal "amount"
+    t.string "status"
+    t.bigint "user_id", null: false
+    t.boolean "is_recurring"
+    t.string "recurring_type"
+    t.string "paymentable_type", null: false
+    t.bigint "paymentable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["paymentable_type", "paymentable_id"], name: "index_payments_on_paymentable"
+    t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -135,6 +151,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_28_035302) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "payments", "users"
   add_foreign_key "testimonials", "users"
   add_foreign_key "users", "roles"
 end
