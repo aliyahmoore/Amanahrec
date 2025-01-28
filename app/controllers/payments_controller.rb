@@ -66,11 +66,18 @@ class PaymentsController < ApplicationController
 
     # Set payment mode and pricing based on the paymentable type
     mode = @paymentable.is_a?(Membership) ? "subscription" : "payment"
-    price_data = if @paymentable.is_a?(Membership)
-      {
-        price: "", 
-        quantity: 1
-      }
+    line_items = if @paymentable.is_a?(Membership)
+      [
+        {
+          price_data: {
+            currency: "usd",
+            product: ENV["STRIPE_MEMBERSHIP_PRODUCT_ID"],
+            recurring: { interval: "month" },
+            unit_amount: 1000 # $10 in cents
+          },
+          quantity: 1
+        }
+      ]
     else
       {
         price_data: {
@@ -87,7 +94,7 @@ class PaymentsController < ApplicationController
     Stripe::Checkout::Session.create(
       payment_method_types: [ "card" ],
       customer: customer.id,
-      line_items: [price_data],
+      line_items: line_items,
       mode: mode,
       success_url: success_url(paymentable_type: @paymentable.class.name, paymentable_id: @paymentable.id, session_id: "{CHECKOUT_SESSION_ID}"),
       cancel_url: cancel_url(paymentable_type: @paymentable.class.name, paymentable_id: @paymentable.id),
