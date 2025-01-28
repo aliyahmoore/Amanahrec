@@ -132,22 +132,6 @@ h1 {
     }
   }
   }
-<<<<<<< HEAD
-  
-  /* Make the entire card clickable */
-  .card a {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    border-radius: 6px;
-  }
-
-/* Add hover effect for interactivity */
-.card a:hover {
-  background-color: #e9e2d8; /* Light blue highlight */
-  transition: background-color 0.3s ease;
-}
-=======
 
   /* Testimonials Section */
 .testimonials-section {
@@ -209,4 +193,3 @@ h1 {
     background-color: #555;
   }
   
->>>>>>> origin/main
