@@ -103,7 +103,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_23_183026) do
     t.bigint "user_id", null: false
     t.boolean "is_recurring"
     t.string "recurring_type"
-    t.datetime "payment_date"
     t.string "paymentable_type", null: false
     t.bigint "paymentable_id", null: false
     t.datetime "created_at", null: false
