@@ -71,8 +71,6 @@ class PaymentsController < ApplicationController
         paymentable_id: @paymentable.id,
         paymentable_type: @paymentable.class.name,
         location: @paymentable.location,
-        start_date: @paymentable.start_date,
-        end_date: @paymentable.end_date
       }
     )
   end
