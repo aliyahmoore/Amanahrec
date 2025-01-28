@@ -1,33 +1,35 @@
-<%= form_with model: media_mention, local: true do |f| %>
-  <div class="mb-3">
-    <%= f.label :name, class: "form-label text-dark" do %>
-      Name <span class="text-danger">*</span>
-    <% end %>
-    <%= f.text_field :name, required: true, class: "form-control" %>
-  </div>
+<div class="card shadow-sm p-4 mx-auto mt-5" style="max-width: 500px;">
+  <%= form_with model: media_mention, local: true do |f| %>
+    <div class="mb-3">
+      <%= f.label :name, class: "form-label text-dark" do %>
+        Name <span class="text-danger">*</span>
+      <% end %>
+      <%= f.text_field :name, required: true, class: "form-control" %>
+    </div>
 
-  <div class="mb-3">
-    <%= f.label :organization_name, "Organization Name", class: "form-label text-dark" do %>
-      Organization Name <span class="text-danger">*</span>
-    <% end %>
-    <%= f.text_field :organization_name, required: true, class: "form-control" %>
-  </div>
+    <div class="mb-3">
+      <%= f.label :organization_name, "Organization Name", class: "form-label text-dark" do %>
+        Organization Name <span class="text-danger">*</span>
+      <% end %>
+      <%= f.text_field :organization_name, required: true, class: "form-control" %>
+    </div>
 
-  <div class="mb-3">
-    <%= f.label :published_date, class: "form-label text-dark" do %>
-      Published Date <span class="text-danger">*</span>
-    <% end %>
-    <%= f.date_field :published_date, required: true, class: "form-control" %>
-  </div>
+    <div class="mb-3">
+      <%= f.label :published_date, class: "form-label text-dark" do %>
+        Published Date <span class="text-danger">*</span>
+      <% end %>
+      <%= f.date_field :published_date, required: true, class: "form-control" %>
+    </div>
 
-  <div class="mb-3">
-    <%= f.label :link, "Media Link", class: "form-label text-dark" do %>
-      Media Link <span class="text-danger">*</span>
-    <% end %>
-    <%= f.url_field :link, required: true, class: "form-control" %>
-  </div>
+    <div class="mb-3">
+      <%= f.label :link, "Media Link", class: "form-label text-dark" do %>
+        Media Link <span class="text-danger">*</span>
+      <% end %>
+      <%= f.url_field :link, required: true, class: "form-control" %>
+    </div>
 
-  <div class="text-center mt-3">
-    <%= f.submit "Save", class: "btn btn-secondary text-white" %>
-  </div>
-<% end %>
+    <div class="text-center mt-3">
+      <%= f.submit "Save", class: "btn btn-secondary text-white" %>
+    </div>
+  <% end %>
+</div>
