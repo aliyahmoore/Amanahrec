@@ -1,3 +1,8 @@
+<% content_for :javascript do %>
+  <script type="module">
+    import "non_member_alert";
+  </script>
+<% end %>
 <div class="event-index-container">
   <h1>Upcoming Events</h1>
 
@@ -23,6 +28,8 @@
           <!-- Alert for non-members -->
           <% if event.early_access_period? && !current_user&.member? %>
             <p class="alert-member-only">This event is currently available to members only.</p>
+            <a href="#" class="btn-view">Sign Up for Membership</a>
+            
           <% end %>
         <!-- View Event Button -->
           <% if event.early_access_period? && !current_user&.member? %>
