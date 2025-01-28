@@ -52,10 +52,17 @@ class PaymentsController < ApplicationController
       @paymentable = Activity.find_by(id: params[:activity_id])
     elsif params[:event_id]
       @paymentable = Event.find_by(id: params[:event_id])
-    elsif params[:paymentable_type] == "Membership"
-      @paymentable = Membership.find_or_initialize_by(user: current_user)
+    elsif params[:payable_type] == "Membership"
+      @paymentable = Membership.find_or_create_by(user: current_user)
+    elsif params[:payable_id] && params[:payable_type]
+      @paymentable = params[:payable_type].constantize.find_by(id: params[:payable_id])
+    end
+  
+    unless @paymentable
+      redirect_to root_url, alert: "Unable to find the requested paymentable item."
     end
   end
+  
 
   # Initialize the Stripe Checkout session
   def create_stripe_session
