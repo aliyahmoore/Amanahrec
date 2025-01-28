@@ -30,11 +30,9 @@ Rails.application.routes.draw do
 
   resources :activities
   resources :events do
-    resources :payments, only: [ :create ] do
-      collection do
-        get :success, to: "payments#success"
-        get :cancel, to: "payments#cancel"
-      end
-    end
+    resources :payments, only: [ :create ] 
   end
+
+  get "/payments/success", to: "payments#success"
+  get "/payments/cancel", to: "payments#cancel"
 end
