@@ -14,9 +14,15 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
+  get "/about", to: "pages#about"
   # Defines the root path route ("/")
   # root "posts#index"
   root "pages#home"
-
-  resources :events
+  resources :testimonials, only: [ :index, :new, :create, :edit, :update, :destroy ] do
+    member do
+      patch :approve
+      patch :unapprove
+    end
+  end
+  resources :events, :activities
 end

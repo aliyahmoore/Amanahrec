@@ -1,9 +1,7 @@
 <h2 class="text-center mb-4">Change your password</h2>
-
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "w-50 mx-auto" }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
   <%= f.hidden_field :reset_password_token %>
-
   <!-- New Password -->
   <div class="mb-3">
     <%= f.label :password, "New password", class: "form-label" %>
@@ -13,20 +11,17 @@
     <%= f.password_field :password, autofocus: true, autocomplete: "new-password", required: true, placeholder: "Enter new password", class: "form-control" %>
     <small class="text-danger">Password is a required field</small>
   </div>
-
   <!-- Confirm New Password -->
   <div class="mb-3">
     <%= f.label :password_confirmation, "Confirm new password", class: "form-label" %>
     <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, placeholder: "Re-enter new password", class: "form-control" %>
     <small class="text-danger">Password confirmation is a required field</small>
   </div>
-
   <!-- Submit Button -->
   <div class="mb-3 text-center">
     <%= f.submit "Change my password", class: "btn btn-primary px-4" %>
   </div>
 <% end %>
-
 <!-- Centered Links -->
 <div class="text-center">
   <%= render "devise/shared/links" %>
