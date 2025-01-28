@@ -28,10 +28,10 @@
       <%= render 'layouts/navbar' %> 
       <%= yield %> 
       <%= yield :javascript %>
-      <%= button_to "Subscribe to Membership", 
+      <%= button_to "Become a Member!", 
               payments_path(payable_type: "Membership", payable_id: current_user.id), 
               method: :post, 
-              class: "btn btn-primary" %>
+              class: "btn btn-outline-primary" %>
       <%= render 'layouts/footer' %>
     </body>
   </html>
