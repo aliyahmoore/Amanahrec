@@ -35,4 +35,8 @@ class Event < ApplicationRecord
     return general_registration_open? unless user.member?
     early_access_period? || general_registration_open?
   end
+
+    def start_time
+        start_date
+    end
 end
