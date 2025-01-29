@@ -3,10 +3,7 @@ class PaymentsController < ApplicationController
 
   def create
     # Ensure the user is logged in before registering
-    unless user_signed_in?
-      redirect_to new_user_session_path, alert: "You must be signed in to register."
-      return
-    end
+    return redirect_to new_user_session_path, alert: "You must be signed in to register." unless user_signed_in?
 
     # Check if the user has already paid for the event/activity or has an active membership
     if user_has_paid_for_paymentable?
