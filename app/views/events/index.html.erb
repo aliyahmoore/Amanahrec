@@ -3,6 +3,7 @@
     import "non_member_alert";
   </script>
 <% end %>
+
 <div class="event-index-container">
   <h1>Upcoming Events</h1>
 
@@ -24,13 +25,31 @@
           <p><strong>Date and Time:</strong> <%= event.start_date.strftime("%B %d, %Y at %I:%M %p") %></p>
           <p><strong>Location:</strong> <%= event.location %></p>
           <p><strong>Cost:</strong> <%= number_to_currency(event.cost, precision: 2) %></p>
-
+          
+          <!-- Countdown Timer -->
+          <% if event.early_access_for_members && event.general_registration_start %>
+          <% if Time.current < event.general_registration_start %>
+            <!-- Display countdown if general registration hasn't started -->
+            <p><strong>Member Registrations Only General Registration Opens In:</strong></p>
+            <p id="countdown-<%= event.id %>" 
+               class="countdown" 
+               data-countdown-date="<%= event.general_registration_start %>"></p>
+          <% else %>
+            <!-- Display text if general registration time is met -->
+            <p><strong>General registration is now open!</strong></p>
+          <% end %>
+        <% else %>
+          <!-- If early access is null or false -->
+          <p><strong>General registration is now open!</strong></p>
+        <% end %>
+        
           <!-- Alert for non-members -->
           <% if event.early_access_period? && !current_user&.member? %>
             <p class="alert-member-only">This event is currently available to members only.</p>
             <a href="#" class="btn-view">Sign Up for Membership</a>
             
           <% end %>
+          
         <!-- View Event Button -->
           <% if event.early_access_period? && !current_user&.member? %>
             <a href="#" class="btn-view non-member-alert" data-event-url="<%= event_path(event) %>">View Event</a>
