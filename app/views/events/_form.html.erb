@@ -90,12 +90,12 @@
         <%= form.check_box :childcare, class: "form-check-input" %>
       </div>
     </div>
-
-    <!-- Multiple image upload -->
-    <div>
-      <%= form.label :images %>
-      <%= form.file_field :images, multiple: true %>
-    </div>
+    
+  <!-- Image upload section -->
+  <div class="form-group">
+    <%= form.label :images, "Upload Images" %>
+    <%= form.file_field :images, multiple: true, class: "form-control" %>
+  </div>
 
     <!-- Submit Button -->
     <div class="form-group text-center">
