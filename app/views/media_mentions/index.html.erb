@@ -12,13 +12,8 @@
       <div class="square">
         <div class="media-item p-4">
           <div class="d-flex justify-content-between align-items-center mb-3">
-            <h3><%= media_mention.name %></h3>
-            <div>
-              <%= link_to 'Edit', edit_media_mention_path(media_mention), class: 'btn btn-sm text-white edit-button text-decoration-none', style: 'background-color: #e86c00; border-color: #e86c00;' %>
-            </div>
+            <h3 class="media-title"><%= media_mention.name %></h3>
           </div>
-          <p><strong>News Organization:</strong> <%= media_mention.organization_name %></p>
-          <p><strong>Published Date:</strong> <%= media_mention.published_date.strftime("%B %d, %Y") %></p>
 
           <div class="mb-3">
             <% if media_mention.link.present? %>
@@ -38,13 +33,16 @@
                style="color: #403f2b;">View Link</a>
           </div>
 
-          <div class="text-center">
-            <%= button_to 'Delete', 
-                media_mention_path(media_mention), 
-                method: :delete, 
-                class: 'btn btn-danger btn-sm text-white' %>
-          </div>
+          <p><strong>News Organization:</strong> <%= media_mention.organization_name %></p>
+          <p><strong>Published Date:</strong> <%= media_mention.published_date.strftime("%B %d, %Y") %></p><br>
 
+          <div class="text-center">
+            <%= link_to 'Edit Post', edit_media_mention_path(media_mention), class: 'btn btn-sm edit-button text-decoration-none' %>
+          </div>
+          <br>
+          <div class="text-center">
+            <%= button_to 'Delete', media_mention_path(media_mention), method: :delete, class: 'btn btn-sm delete-button' %>
+          </div>
         </div>
       </div>
     <% end %>
