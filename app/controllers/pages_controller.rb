@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   def home
+    @testimonials = Testimonial.where(approved: true).order(created_at: :desc)
   end
 
   def calendar
@@ -10,5 +11,8 @@ class PagesController < ApplicationController
   end
 
   def partners
+  end
+
+  def board
   end
 end

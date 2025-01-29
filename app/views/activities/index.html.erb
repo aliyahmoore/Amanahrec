@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <h1 class="page-title text-center">Activities</h1>
+
+  <div class="d-flex justify-content-center mb-3">
+    <%= link_to 'New Activity', new_activity_path, class: 'btn btn-primary' %>
+  </div>
+
+  <div class="row d-flex justify-content-center g-3">
+    <% @activities.each do |activity| %>
+      <div class="col-md-6 col-lg-4 d-flex">
+        <div class="card flex-fill activity-card">
+          <% if activity.images.attached? %>
+            <%= image_tag activity.images.first, class: 'card-img-top activity-image', alt: activity.title %>
+          <% end %>
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">
+              <%= link_to activity.title, activity_path(activity), class: 'text-decoration-none text-primary' %>
+            </h5>
+            <p class="card-text text-muted">
+              <i class="fa-regular fa-calendar me-2"></i> <%= activity.date.strftime("%B %d, %Y %I:%M %p") %>
+            </p>
+            <p class="card-text">
+              <i class="fa-solid fa-location-dot me-2"></i> <%= activity.location %>
+            </p>
+            <p class="card-text">
+              <i class="fa-sharp-duotone fa-solid fa-money-bill"></i> 
+              <%= activity.cost.present? && activity.cost > 0 ? number_to_currency(activity.cost) : "Free" %>
+
+            </p>
+            <div class="mt-auto d-flex justify-content-between">
+              <%= link_to 'Edit', edit_activity_path(activity), class: 'btn btn-warning btn-sm' %>
+              <%= link_to 'Delete', activity_path(activity), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
