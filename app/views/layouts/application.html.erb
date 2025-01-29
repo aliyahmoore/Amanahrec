@@ -29,7 +29,7 @@
       <%= yield %> 
       <%= yield :javascript %>
       <%= button_to "Become a Member!", 
-              payments_path(payable_type: "Membership", payable_id: current_user.id), 
+              payments_path(paymentable_type: "Membership", paymentable_id: current_user.id), 
               method: :post, 
               class: "btn btn-outline-primary" %>
       <%= render 'layouts/footer' %>
