@@ -9,9 +9,10 @@
         <div class="col">
           <div class="card custom-card equal-height-card"> 
             <div class="card-body">
-              <h5 class="card-title"><%= media_mention.name %></h5>
-              <p class="card-text"><strong>News Organization:</strong> <%= media_mention.organization_name %></p>
-              <p class="card-text"><strong>Published Date:</strong> <%= media_mention.published_date.strftime("%B %d, %Y") %></p>
+              <h5 class="card-title" style="color: #57573f;"><%= media_mention.name %></h5>
+<p class="card-text close-spaced" style="color: #57573f;">News Organization: <%= media_mention.organization_name %></p>
+<p class="card-text close-spaced" style="color: #57573f;">Published Date: <%= media_mention.published_date.strftime("%B %d, %Y") %></p>
+
 
               <% if media_mention.link.present? %>
                 <iframe 
