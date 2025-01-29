@@ -1,25 +1,27 @@
 <% content_for :title, "Calendar" %>
 <h1>Calendar</h1>
 <div class="container my-4">
-  <!-- Calendar Wrapper -->
-  <div class="calendar">
-    <%= month_calendar events: @events, start_date: Date.today.beginning_of_month do |date, events| %>
-      <div class="border p-2 text-center">
-        <!-- Display Date -->
-        <strong class="d-block"><%= date.day %></strong>
 
-        <!-- Display Events for this date -->
-        <% events_on_date = @events.select { |event| event.start_date.to_date == date } %>
-        <% events_on_date.each do |event| %>
-          <div class="event">
-            <%= link_to event.title, event_path(event), class: "event-title" %><br>
-            <small class="event-time">
-              <%= event.start_time.strftime("%I:%M %p") %>
-            </small>
-          </div>
-        <% end %>
+ <!-- Calendar Wrapper -->
+ <div class="calendar">
+   <%= month_calendar events: @events do |date, events| %>
+     <div class="border p-2 text-center">
+       <!-- Display Date -->
+       <strong class="d-block"><%= date.day %></strong>
 
-        <!-- Display Activities for this date -->
+
+       <!-- Check if there are any meetings for the date -->
+         <!-- Display Meetings -->
+         <% events.each do |event| %>
+           <div class="event">
+             <%= link_to event.title, event_path(event), class: "event-title" %><br>
+             <small class="event-time">
+               <%= event.start_time.strftime("%I:%M %p") %> 
+             </small>
+           </div>
+       <% end %>
+
+       <!-- Display Activities for this date -->
         <% activities_on_date = @activities.select { |activity| activity.date.to_date == date } %>
         <% activities_on_date.each do |activity| %>
           <div class="activity">
@@ -29,7 +31,8 @@
             </small>
           </div>
         <% end %>
-      </div>
-    <% end %>
-  </div>
+
+     </div>
+   <% end %>
+ </div>
 </div>

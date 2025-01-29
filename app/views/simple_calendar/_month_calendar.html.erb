@@ -1,6 +1,7 @@
 <div class="simple-calendar">
  <div class="calendar-heading">
    <h1 class="calendar-title">
+    
      <%= link_to calendar.url_for_previous_view, class: 'prev-link', style: 'text-decoration: none;' do %>
 <span aria-hidden="true" style="font-size: 40px; padding: 5px; color: #989871;">&laquo;</span>
        <span class="visually-hidden"><%= t('simple_calendar.previous', default: 'Previous') %></span>
@@ -21,7 +22,6 @@
     style: 'text-decoration: none; color: #5C5C5C; font-weight: bold; display: inline-block; transition: color 0.3s ease;' 
     %>
 </div>
-
 
  <table class="table table-striped">
    <thead>
@@ -46,4 +46,3 @@
    </tbody>
  </table>
 </div>
-
