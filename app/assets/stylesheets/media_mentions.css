@@ -1,63 +1,16 @@
-/* Body and global styles */
-body {
-  background-color: #E9E2D8;
-  font-family: "Tahoma", sans-serif;
-  color: #403F2B;
-  margin: 0;
-  padding: 0;
+.custom-card {
+  width: 100%;
+  min-height: 100%; /* Ensure cards are aligned properly */
 }
 
-/* Heading Style */
-.heading::after {
-  content: '';  
-  display: block;
-  width: 20%;   
-  margin: 8px auto 0; 
-  border-bottom: 2px solid #c7ba9c; 
+/* Adjust the spacing between cards */
+.row-cols-md-3 .col {
+  padding: 0.5rem; /* Reduces the gap between cards */
 }
 
-/* Card Container */
-.square-container {
-  margin-top: 50px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  padding: 0 20px; 
-}
-
-/* Card Style */
-.square {
-  background-color: #DACCB1;
-  width: 20%; 
-  min-width: 250px; 
-  box-sizing: border-box;
-  border-radius: 12px;
-  font-family: "Tahoma", sans-serif;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.square:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-.square h3 {
-  text-align: left;
-  margin-bottom: 5px;
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #403F2B;
-}
-
-/* Media Title Style */
-.media-title {
-  border-left: 4px solid #403F2B;
-  background-color: #F7F1E1;
-  border-radius: 6px;
-  padding: 5px 15px;
-  margin-bottom: 10px;
+/* Fine-tune the gap between grid columns */
+.g-2 {
+  gap: 2rem; /* Adjusts the column spacing between cards */
 }
 
 /* Button Styles */
@@ -74,6 +27,7 @@ body {
   background-color: #909d6e;
   color: black;
   text-decoration: none;
+  border-color: #909d6e;
 }
 
 .edit-button:hover {
@@ -83,9 +37,21 @@ body {
 
 .delete-button {
   background-color: #95826a;
+  border-color: #95826a;
 }
 
 .delete-button:hover {
   background-color: #a79c87;
+  font-weight: bold;
+} 
+
+.create-post-button {
+  background-color: #f1c40f;
+  border-color: #f1c40f;
+  color: white;
+}
+
+.create-post-button:hover {
+  background-color: #e4d25e;
   font-weight: bold;
 }
