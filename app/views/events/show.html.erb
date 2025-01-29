@@ -27,7 +27,7 @@
     <p>No images uploaded for this event.</p>
   <% end %>
 <div class="text-center">
-  <%= button_to 'Register Now', event_payments_path(@event), method: :post, class: 'event-payments btn btn-primary', data: { turbo: false } %>
+  <%= button_to 'Register Now', event_payments_path(@event, paymentable_type: 'Event', paymentable_id: @event.id), method: :post, class: 'event-payments btn btn-primary', data: { turbo: false } %>
 </div>
   
   </div>

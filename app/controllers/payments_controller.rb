@@ -44,6 +44,7 @@ class PaymentsController < ApplicationController
 
   # Set either an event, activity, or membership for payment
   def set_paymentable
+    Rails.logger.debug("Finding paymentable with type: #{params[:paymentable_type]} and ID: #{params[:paymentable_id]}")
     @paymentable = find_paymentable(params[:paymentable_type], params[:paymentable_id])
 
     unless @paymentable
@@ -53,6 +54,7 @@ class PaymentsController < ApplicationController
 
   # Find the paymentable object
   def find_paymentable(paymentable_type, paymentable_id)
+    Rails.logger.debug("Finding paymentable item - type: #{paymentable_type}, ID: #{paymentable_id}")
     case paymentable_type
     when "Activity"
       Activity.find_by(id: paymentable_id)
