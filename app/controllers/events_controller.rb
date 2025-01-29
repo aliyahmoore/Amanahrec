@@ -3,13 +3,15 @@ class EventsController < ApplicationController
 
     # GET /events
     def index
-      @events = Event.all
+        # everyone can see all events
+        @events = Event.all
     end
 
-    # GET /events/:id
+    
     def show
-      # @event is already set by before_action
+      @can_register = @event.can_register?(current_user)
     end
+    
 
     # GET /events/new
     def new
@@ -64,7 +66,7 @@ class EventsController < ApplicationController
     def event_params
       params.require(:event).permit(
         :title, :description, :start_date, :end_date, :location,
-        :rsvp_deadline, :childcare, :sponsors, :cost, images: []
+        :rsvp_deadline, :childcare,:early_access_for_members,:early_access_days,:general_registration_start,:sponsors, :cost, images: []
       )
     end
 end

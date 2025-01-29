@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_23_183026) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_29_165816) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -69,6 +69,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_23_183026) do
     t.decimal "cost", precision: 8, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "early_access_for_members", default: false, null: false
+    t.integer "early_access_days"
+    t.datetime "general_registration_start"
   end
 
   create_table "events_users", id: false, force: :cascade do |t|
@@ -88,26 +91,18 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_23_183026) do
     t.string "organization_name"
   end
 
-  create_table "meetings", force: :cascade do |t|
-    t.string "name"
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "payments", force: :cascade do |t|
     t.string "stripe_payment_id"
     t.decimal "amount"
     t.string "status"
-    t.bigint "event_id", null: false
     t.bigint "user_id", null: false
     t.boolean "is_recurring"
     t.string "recurring_type"
-    t.datetime "payment_date"
+    t.string "paymentable_type", null: false
+    t.bigint "paymentable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_payments_on_event_id"
+    t.index ["paymentable_type", "paymentable_id"], name: "index_payments_on_paymentable"
     t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
@@ -149,7 +144,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_23_183026) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "payments", "events"
   add_foreign_key "payments", "users"
   add_foreign_key "testimonials", "users"
   add_foreign_key "users", "roles"

@@ -38,35 +38,55 @@
       <% end %>
       <%= form.text_area :description, class: "form-control", placeholder: "Enter a detailed description of the event", required: true %>
     </div>
+    <!-- Event Date and Time -->
+    <div class="form-group">
+      <%= form.label :start_date do %>
+        Event Date <span class="required">*</span> <!-- Red asterisk next to the label -->
+      <% end %>
+      <%= form.datetime_local_field :start_date, class: "form-control", required: true %>
+    </div>
+    <!-- Event Location -->
+    <div class="form-group">
+      <%= form.label :location do %>
+        Event Location <span class="required">*</span>
+      <% end %>
+      <%= form.text_field :location, class: "form-control", placeholder: "Enter the event location", required: true %>
+    </div>
+    <!-- End Date and Time -->
+    <div class="form-group">
+      <%= form.label :end_date do %>
+        End Date and Time <span class="required">*</span>
+      <% end %>
+      <%= form.datetime_local_field :end_date, class: "form-control", required: true %>
+    </div>
+    <!-- RSVP Deadline -->
+    <div class="form-group">
+      <%= form.label :rsvp_deadline do %>
+        RSVP Deadline <span class="required">*</span>
+      <% end %>
+      <%= form.datetime_local_field :rsvp_deadline, class: "form-control", id: "rsvp_deadline", required: true %>
+      <div id="rsvp-error-message" style="color: red; display: none;">
+        The RSVP deadline cannot be after the event date.
+      </div>
+    </div>
+    <div class="form-group">
+  <%= form.label :general_registration_start, "General Registration Start Date" %>
+  <%= form.datetime_local_field :general_registration_start, class: "form-control", required: true, placeholder: "Select the date when general registration starts" %>
+  </div>
+  <!-- Early Access Info -->
+    <div class="form-group">
+    <%= form.label :early_access_for_members, "Enable Early Access for Members" %>
+    <%= form.check_box :early_access_for_members, class: "form-check-input" %>
+  </div>
 
-    <!-- Event Date, End Date, and RSVP Deadline on the Same Line -->
-    <div class="form-group row">
-      <!-- Start Date -->
-      <div class="col-md-4">
-        <%= form.label :start_date do %>
-          Start Date <span class="required">*</span>
-        <% end %>
-        <%= form.datetime_local_field :start_date, class: "form-control", required: true %>
-      </div>
-      
-      <!-- End Date -->
-      <div class="col-md-4">
-        <%= form.label :end_date do %>
-          End Date <span class="required">*</span>
-        <% end %>
-        <%= form.datetime_local_field :end_date, class: "form-control", required: true %>
-      </div>
-
-      <!-- RSVP Deadline -->
-      <div class="col-md-4">
-        <%= form.label :rsvp_deadline do %>
-          RSVP Deadline <span class="required">*</span>
-        <% end %>
-        <%= form.datetime_local_field :rsvp_deadline, class: "form-control", id: "rsvp_deadline", required: true %>
-        <div id="rsvp-error-message" style="color: red; display: none;">
-          The RSVP deadline cannot be after the event date.
-        </div>
-      </div>
+  <div class="form-group">
+    <%= form.label :early_access_days, "Number of Days for Member Early Access" %>
+    <%= form.number_field :early_access_days, class: "form-control", min: 0, placeholder: "Enter number of days for early access" %>
+  </div>
+    <!-- Childcare Available -->
+    <div class="form-group">
+      <%= form.label :childcare, "Childcare Available?" %>
+      <%= form.check_box :childcare, class: "form-check-input" %>
     </div>
 
     <!-- Childcare Available, Checkbox, and Cost on the Same Line -->

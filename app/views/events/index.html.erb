@@ -1,37 +1,69 @@
-<div class="events-index-container">
-  <h1 class="page-title text-center">Upcoming Events</h1>
-  <div class="d-flex justify-content-center mb-3">
-    <%= link_to 'New Event', new_event_path, class: 'btn btn-primary' %>
-  </div>
+<% content_for :javascript do %>
+  <script type="module">
+    import "non_member_alert";
+  </script>
+<% end %>
 
-  <div class="row d-flex justify-content-center g-3">
-    <% @events.each do |event| %>
-      <div class="col-md-6 col-lg-4 d-flex">
-        <div class="card flex-fill event-card">
+<div class="event-index-container">
+  <h1>Upcoming Events</h1>
+
+  <% if @events.any? %>
+    <div class="event-listing">
+      <% @events.each do |event| %>
+        <!-- Add class to style member-only events -->
+        <div class="event-card <%= 'member-only' if event.early_access_period? && !current_user&.member? %>">
+          <h3><%= event.title %></h3>
+
+          <!-- Event Image -->
           <% if event.images.attached? %>
             <%= image_tag event.images.first, class: 'card-img-top event-image', alt: event.title %>
           <% end %>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">
-              <%= link_to event.title, event_path(event), class: 'text-decoration-none text-primary' %>
-            </h5>
-            <p class="card-text text-muted">
-              <i class="fa-regular fa-calendar me-2"></i> <%= event.start_date.strftime("%B %d, %Y %I:%M %p") %>
-            </p>
-            <p class="card-text">
-              <i class="fa-solid fa-location-dot me-2"></i> <%= event.location %>
-            </p>
-            <p class="card-text">
-              <i class="fa-sharp-duotone fa-solid fa-money-bill"></i> 
-              <%= event.cost.present? && event.cost > 0 ? number_to_currency(event.cost) : "Free" %>
-            </p>
-            <div class="mt-auto d-flex justify-content-between">
-              <%= link_to 'Edit', edit_event_path(event), class: 'btn btn-warning btn-sm' %>
-              <%= button_to 'Delete', event_path(event), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
-            </div>
-          </div>
+
+          <!-- Event Information -->
+          <p><strong>Date and Time:</strong> <%= event.start_date.strftime("%B %d, %Y at %I:%M %p") %></p>
+          <p><strong>Location:</strong> <%= event.location %></p>
+          <p><strong>Cost:</strong> <%= number_to_currency(event.cost, precision: 2) %></p>
+          
+          <!-- Countdown Timer -->
+          <% if event.early_access_for_members && event.general_registration_start %>
+          <% if Time.current < event.general_registration_start %>
+            <!-- Display countdown if general registration hasn't started -->
+            <p><strong>Member Registrations Only General Registration Opens In:</strong></p>
+            <p id="countdown-<%= event.id %>" 
+               class="countdown" 
+               data-countdown-date="<%= event.general_registration_start %>"></p>
+          <% else %>
+            <!-- Display text if general registration time is met -->
+            <p><strong>General registration is now open!</strong></p>
+          <% end %>
+        <% else %>
+          <!-- If early access is null or false -->
+          <p><strong>General registration is now open!</strong></p>
+        <% end %>
+        
+          <!-- Alert for non-members -->
+          <% if event.early_access_period? && !current_user&.member? %>
+            <p class="alert-member-only">This event is currently available to members only.</p>
+            <a href="#" class="btn-view">Sign Up for Membership</a>
+            
+          <% end %>
+          
+        <!-- View Event Button -->
+          <% if event.early_access_period? && !current_user&.member? %>
+            <a href="#" class="btn-view non-member-alert" data-event-url="<%= event_path(event) %>">View Event</a>
+          <% else %>
+            <%= link_to 'View Event', event_path(event), class: "btn-view" %>
+          <% end %>
         </div>
-      </div>
-    <% end %>
-  </div>
+          
+      <% end %>
+    </div>
+  <% else %>
+    <p>No upcoming events at the moment.</p>
+  <% end %>
+
+  <!-- Admin Only: Button to Add New Events -->
+  <% if current_user&.role_id == 1 %>
+    <%= link_to 'New Event', new_event_path, class: "btn-back" %>
+  <% end %>
 </div>
