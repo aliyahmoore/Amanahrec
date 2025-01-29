@@ -48,13 +48,11 @@
             
           <% end %>
           
-        <!-- Register Event Button -->
-          <% if event.early_access_period? && !current_user&.member? %>
-            <a href="#" class="btn-view non-member-alert" data-event-url="<%= event_path(event) %>">View Event</a>
-          <% else %>
-          <%= button_to 'Register Now', event_payments_path(event, paymentable_type: 'Event', paymentable_id: event.id) method: :post, class: 'event-payments btn btn-primary', data: { turbo: false } %>
-            
+ <!-- Register Event Button -->
+          <% if event.early_access_period? && current_user&.member? %>
+            <%= button_to 'Register Now', event_payments_path(event, paymentable_type: 'Event', paymentable_id: event.id), method: :post, class: 'btn btn-primary', data: { turbo: false } %>
           <% end %>
+
 <%= link_to 'View Event', event_path(event), class: "btn-view" %>
 
         </div>
