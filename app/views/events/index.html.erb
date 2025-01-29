@@ -10,7 +10,7 @@
   <div>
     <!-- Admin Only: Button to Add New Events -->
   <% if current_user&.role_id == 1 %>
-      <div class="d-flex justify-content-center mb-3">git 
+      <div class="d-flex justify-content-center mb-3">
       <%= link_to 'New Event', new_event_path, class: 'btn btn-primary' %>
     </div>
   <% end %>
