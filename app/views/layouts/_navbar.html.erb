@@ -1,3 +1,8 @@
+<% content_for :javascript do %>
+  <script type="module">
+    import "navbar_dropdown";
+  </script>
+<% end %>
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <a class="navbar-brand ms-5" href="<%= root_path %>">
@@ -10,20 +15,28 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <!-- Navigation Links -->
       <ul class="navbar-nav lead d-flex align-items-center mx-auto">
-        <li class="nav-item"><%= link_to "About", pages_about_path, class: "nav-link" %></li>
-        <li class="nav-item"><%= link_to "Our Partners", pages_partners_path, class: "nav-link" %></li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        About
+      </a>
+      
+          <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+            <li><%= link_to "About Us", pages_about_path, class: "dropdown-item" %></li>
+            <li><%= link_to "Our Partners", pages_partners_path, class: "dropdown-item" %></li>
+            <li><%= link_to "Meet Our Board", pages_board_path, class: "dropdown-item" %></li>
+          </ul>
+        </li>
         <li class="nav-item"><%= link_to "Activities", activities_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "Events", events_path, class: "nav-link" %></li>
-        <li class="nav-item"><%= link_to "Calendar", pages_calendar_path,  class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to "Calendar", pages_calendar_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "Eco Jariyah", "https://www.ecojariyah.com/", class: "nav-link", target: "_blank" %></li>
-        <li class="nav-item"><%= link_to "Latest News", media_path, class: "nav-link" %></li>
-        <li class="nav-item"><%= link_to "Donate", "#", class: "nav-link", id: "donate" %></li>
+        <li class="nav-item"><%= link_to "Donate", "https://kindful.com/", class: "nav-link", id: "donate" %></li>
       </ul>
       <!-- User Links -->
       <ul class="navbar-nav lead d-flex align-items-center ms-auto">
         <% if user_signed_in? %>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-expanded="false">
               <i class="fa-solid fa-user"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">

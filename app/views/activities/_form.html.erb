@@ -10,68 +10,116 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %><span class="required">*</span>
-    <%= form.text_field :title, class: "input-field" %>
+  <!-- Activity Details Section -->
+  <div class="form-section">
+    <h3>Activity Details</h3>
+    <div class="field">
+      <%= form.label :title %><span class="required">*</span>
+      <%= form.text_field :title, class: "input-field" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :description %><span class="required">*</span>
+      <%= form.text_area :description, class: "input-field" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :date %><span class="required">*</span>
+      <%= form.datetime_local_field :date, value: Time.now, class: "input-field" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :description %><span class="required">*</span>
-    <%= form.text_area :description, class: "input-field" %>
+  <!-- Recurrence Section -->
+  <div class="form-section">
+    <h3>Recurrence</h3>
+    <div class="field">    
+      <%= form.label :recurrence_pattern, "Recurring Event?" %><span class="required">*</span>
+      <%= form.select :recurrence_pattern, options_for_select([['None', nil], ['Daily', 'daily'], ['Weekly', 'weekly']], @activity.recurrence_pattern || 'none'), {}, class: "input-field", id: "activity_recurrence_pattern" %>
+    </div>
+
+    <!-- Recurrence Days Checkboxes -->
+    <div class="field" id="recurrence_days_field" style="<%= 'display:none' if @activity.recurrence_pattern != 'weekly' %>">
+      <%= form.label :recurrence_days, "Recurrence Days (Select days)" %>
+      <div class="checkbox-container">
+        <%= form.check_box :recurrence_days, { checked: @activity.recurrence_days.to_s.include?('monday') }, 'monday', nil %>
+        <%= form.label :recurrence_days, "Monday" %>
+      </div>
+      <div class="checkbox-container">
+        <%= form.check_box :recurrence_days, { checked: @activity.recurrence_days.to_s.include?('tuesday') }, 'tuesday', nil %>
+        <%= form.label :recurrence_days, "Tuesday" %>
+      </div>
+      <div class="checkbox-container">
+        <%= form.check_box :recurrence_days, { checked: @activity.recurrence_days.to_s.include?('wednesday') }, 'wednesday', nil %>
+        <%= form.label :recurrence_days, "Wednesday" %>
+      </div>
+      <div class="checkbox-container">
+        <%= form.check_box :recurrence_days, { checked: @activity.recurrence_days.to_s.include?('thursday') }, 'thursday', nil %>
+        <%= form.label :recurrence_days, "Thursday" %>
+      </div>
+      <div class="checkbox-container">
+        <%= form.check_box :recurrence_days, { checked: @activity.recurrence_days.to_s.include?('friday') }, 'friday', nil %>
+        <%= form.label :recurrence_days, "Friday" %>
+      </div>
+      <div class="checkbox-container">
+        <%= form.check_box :recurrence_days, { checked: @activity.recurrence_days.to_s.include?('saturday') }, 'saturday', nil %>
+        <%= form.label :recurrence_days, "Saturday" %>
+      </div>
+      <div class="checkbox-container">
+        <%= form.check_box :recurrence_days, { checked: @activity.recurrence_days.to_s.include?('sunday') }, 'sunday', nil %>
+        <%= form.label :recurrence_days, "Sunday" %>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= form.label :recurrence_time, "Recurrence Time" %>
+      <%= form.time_select :recurrence_time, { default: Time.current.change(hour: 6, min: 0), minute_step: 15, class: "input-field" } %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :date %><span class="required">*</span>
-    <%= form.datetime_local_field :date, value: Time.now, class: "input-field" %>
+  <!-- Location & Capacity Section -->
+  <div class="form-section">
+    <h3>Location & Capacity</h3>
+    <div class="field">
+      <%= form.label :location %><span class="required">*</span>
+      <%= form.text_field :location, class: "input-field" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :capacity %><span class="required">*</span>
+      <%= form.number_field :capacity, class: "input-field" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :location %><span class="required">*</span>
-    <%= form.text_field :location, class: "input-field" %>
+  <!-- Cost & Duration Section -->
+  <div class="form-section">
+    <h3>Cost & Duration</h3>
+    <div class="field">
+      <%= form.label :cost, "Cost" %><span class="required">*</span>
+      <%= form.number_field :cost, value: @activity.cost.nil? ? 0 : @activity.cost, class: 'input-field', step: "0.01", min: "0", placeholder: "Enter the event cost (0 for free)" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :duration, "Duration (in hours)" %><span class="required">*</span>
+      <%= form.number_field :duration, class: "input-field" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :capacity %><span class="required">*</span>
-    <%= form.number_field :capacity, class: "input-field" %>
+  <!-- Image Upload Section -->
+  <div class="form-section">
+    <h3>Upload Images</h3>
+    <div class="field">
+      <%= form.file_field :images, multiple: true, class: "form-control" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :what_to_bring %><span class="required">*</span>
-    <%= form.text_area :what_to_bring, class: "input-field" %>
-  </div>
-
-  <div class="field">
-    <%= form.label :rules %><span class="required">*</span>
-    <%= form.text_area :rules, class: "input-field" %>
-  </div>
-
-  <div class="field">
-    <%= form.label :notes %><span class="required">*</span>
-    <%= form.text_area :notes, class: "input-field" %>
-  </div>
-
-  <div class="form-group">
-  <%= form.label :cost, "Cost" %><span class="required">*</span>
-  <%= form.number_field :cost, 
-      value: @activity.cost.nil? ? 0 : @activity.cost, 
-      class: 'form-control', 
-      step: "0.01", 
-      min: "0", 
-      placeholder: "Enter the event cost (0 for free)" %>
-  </div>
-
-  <div class="field">
-    <%= form.label :duration, "Duration (in hours)" %><span class="required">*</span>
-    <%= form.number_field :duration, class: "input-field" %>
-  </div>
-
-  <!-- Image upload section -->
-  <div class="form-group">
-    <%= form.label :images, "Upload Images" %>
-    <%= form.file_field :images, multiple: true, class: "form-control" %>
-  </div>
-
+  <!-- Submit Button -->
   <div class="actions">
     <%= form.submit "Save Activity", class: "submit-button" %>
   </div>
+<% end %>
+
+<% content_for :javascript do %>
+  <script type="module">
+    import "recurring_activities";  
+  </script>
 <% end %>

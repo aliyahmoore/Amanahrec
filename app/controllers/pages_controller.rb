@@ -12,4 +12,7 @@ class PagesController < ApplicationController
 
   def partners
   end
+
+  def board
+  end
 end
