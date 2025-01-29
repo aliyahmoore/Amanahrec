@@ -25,6 +25,11 @@
   gap: 20rem; /* Adjusts the column spacing between cards */
 }
 
+.close-spaced {
+  color: #57573f;
+  margin-bottom: 5px;
+}
+
 /* Button Styles */
 .btn-sm {
   padding: 5px 10px;
