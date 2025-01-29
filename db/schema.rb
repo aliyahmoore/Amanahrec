@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_23_183026) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_29_142228) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,6 +55,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_23_183026) do
     t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "recurrence_pattern"
+    t.string "recurrence_days"
+    t.time "recurrence_time"
+  end
+
+  create_table "activities_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "activity_id", null: false
+    t.index ["activity_id", "user_id"], name: "index_activities_users_on_activity_id_and_user_id"
+    t.index ["user_id", "activity_id"], name: "index_activities_users_on_user_id_and_activity_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -86,14 +96,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_23_183026) do
     t.datetime "updated_at", null: false
     t.date "published_date"
     t.string "organization_name"
-  end
-
-  create_table "meetings", force: :cascade do |t|
-    t.string "name"
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "payments", force: :cascade do |t|

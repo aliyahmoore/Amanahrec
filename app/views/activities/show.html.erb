@@ -25,6 +25,21 @@
     <p><strong>Notes:</strong> <%= @activity.notes %></p>
     <p><strong>Cost:</strong> <%= number_to_currency(@activity.cost, unit: "$", precision: 2) %></p>
     <p><strong>Duration:</strong> <%= @activity.duration %> hours</p>
+    
+    <% if @activity.recurrence_pattern.present? %>
+      <p><strong>Recurring:</strong> <%= @activity.recurrence_pattern.capitalize %></p>
+
+      <% if @activity.recurrence_pattern == "weekly" && @activity.recurrence_days.present? %>
+        <p><strong>Days:</strong>
+          <% days = @activity.recurrence_days.split(',').map(&:capitalize) %>
+          <%= days.join(', ') %>
+        </p>
+      <% end %>
+
+      <% if @activity.recurrence_time.present? %>
+        <p><strong>Recurring Time:</strong> <%= @activity.recurrence_time.strftime('%I:%M %p') %></p>
+      <% end %>
+    <% end %>
   </div>
 
   <!-- Action Buttons (Edit, Delete, Back) -->
