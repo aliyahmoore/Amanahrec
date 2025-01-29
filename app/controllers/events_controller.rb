@@ -7,16 +7,9 @@ class EventsController < ApplicationController
         @events = Event.all
     end
 
-    # GET /events/:id
+    
     def show
-      @can_rsvp = if current_user&.member?
-                    # Members can RSVP during early access or general registration
-                    @event.early_access_for_members && Time.current >= @event.early_access_days ||
-                      Time.current >= @event.general_registration_start
-                  else
-                    # Non-members can only RSVP during the general registration period
-                    Time.current >= @event.general_registration_start
-                  end
+      @can_register = @event.can_register?(current_user)
     end
     
 
