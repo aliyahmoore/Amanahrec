@@ -1,0 +1,61 @@
+.event {
+    background-color: #E9E2D8; 
+    padding: 8px;
+    border-radius: 5px;
+    margin-top: 5px;
+  }
+  
+  .activity {
+    background-color: #9cb691; 
+    padding: 8px;
+    border-radius: 5px;
+    margin-top: 5px;
+  }
+  
+  .event-title {
+    color: #363636; 
+    text-decoration: none;
+    font-size: 1.2rem; 
+    font-weight: bold; 
+  }
+  
+  .activity-title {
+    color: #363636; 
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold; 
+  }
+  
+  .event-time, .activity-time {
+    color: #5c5c5c; 
+    font-size: 0.9rem;
+  }
+  
+  .calendar {
+    background-color: #E9E2D8; 
+    padding: 10px; 
+    border-radius: 10px; 
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  
+.event:hover {
+    transform: scale(1.05); 
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3); 
+}
+
+.activity:hover {
+    transform: scale(1.05);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.today-link {
+    position: relative;
+    top: -10px; 
+    color: #5C5C5C;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+  }
+  
