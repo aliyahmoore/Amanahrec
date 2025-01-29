@@ -35,5 +35,7 @@ class Event < ApplicationRecord
     return general_registration_open? unless user.member?
     early_access_period? || general_registration_open?
   end
+
+    has_many :payments, as: :paymentable
 end
   

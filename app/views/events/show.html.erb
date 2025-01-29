@@ -1,12 +1,10 @@
 <div class="event-show-container">
   <!-- Event Title -->
   <h1><%= @event.title %></h1>
-  
   <!-- Event Details Section -->
   <div class="event-details">
     <h2>Description</h2>
     <p><%= @event.description %></p>
-
     <h2>Event Information</h2>
     <p><strong>Location:</strong> <%= @event.location %></p>
     
@@ -44,6 +42,10 @@
     <% else %>
       <p>No images uploaded for this event.</p>
     <% end %>
+<div class="text-center">
+  <%= button_to 'Register Now', event_payments_path(@event, paymentable_type: 'Event', paymentable_id: @event.id), method: :post, class: 'event-payments btn btn-primary', data: { turbo: false } %>
+</div>
+  
   </div>
 
   <!-- Event Actions -->
