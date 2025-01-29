@@ -68,7 +68,7 @@ class ActivitiesController < ApplicationController
           :notes,
           :recurrence_pattern,
           :recurrence_time,
-          :images,
+          images: [],
           recurrence_days: []
         )
       end
