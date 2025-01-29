@@ -7,6 +7,7 @@ body {
   padding: 0;
 }
 
+/* Heading Style */
 .heading::after {
   content: '';  
   display: block;
@@ -15,7 +16,7 @@ body {
   border-bottom: 2px solid #c7ba9c; 
 }
 
-/* Card Container - Limit to 3 cards per row */
+/* Card Container */
 .square-container {
   margin-top: 50px;
   display: flex;
@@ -25,10 +26,11 @@ body {
   padding: 0 20px; 
 }
 
+/* Card Style */
 .square {
   background-color: #DACCB1;
   width: 20%; 
-  min-width: 250px; /* Ensure cards are not too small on smaller screens */
+  min-width: 250px; 
   box-sizing: border-box;
   border-radius: 12px;
   font-family: "Tahoma", sans-serif;
@@ -49,22 +51,41 @@ body {
   color: #403F2B;
 }
 
-.square p {
-  text-align: left;
-  margin: 0;
-  padding: 10px 15px;
+/* Media Title Style */
+.media-title {
   border-left: 4px solid #403F2B;
   background-color: #F7F1E1;
   border-radius: 6px;
-  margin-bottom: 15px;
+  padding: 5px 15px;
+  margin-bottom: 10px;
 }
 
-.square a {
-  text-align: left;
-  margin-top: 5px;
+/* Button Styles */
+.btn-sm {
+  padding: 5px 10px;
+  border-radius: 4px;
   display: inline-block;
-  color: #6c757d;
-  text-decoration: underline;
-  padding-left: 10px;
-  transition: color 0.2s ease;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.edit-button {
+  background-color: #909d6e;
+  color: black;
+  text-decoration: none;
+}
+
+.edit-button:hover {
+  background-color: #93aa84;
+  font-weight: bold;
+}
+
+.delete-button {
+  background-color: #95826a;
+}
+
+.delete-button:hover {
+  background-color: #a79c87;
+  font-weight: bold;
 }
