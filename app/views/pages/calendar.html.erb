@@ -1,1 +1,38 @@
-<h1>Calendar</h1>
+<%= stylesheet_link_tag 'calendar', media: 'all' %>
+
+<div class="container my-4">
+
+ <!-- Calendar Wrapper -->
+ <div class="calendar">
+   <%= month_calendar events: @events do |date, events| %>
+     <div class="border p-2 text-center">
+       <!-- Display Date -->
+       <strong class="d-block"><%= date.day %></strong>
+
+
+       <!-- Check if there are any meetings for the date -->
+         <!-- Display Meetings -->
+         <% events.each do |event| %>
+           <div class="event">
+             <%= link_to event.title, event_path(event), class: "event-title" %><br>
+             <small class="event-time">
+               <%= event.start_time.strftime("%I:%M %p") %> 
+             </small>
+           </div>
+       <% end %>
+
+       <!-- Display Activities for this date -->
+        <% activities_on_date = @activities.select { |activity| activity.date.to_date == date } %>
+        <% activities_on_date.each do |activity| %>
+          <div class="activity">
+            <%= link_to activity.title, activity_path(activity), class: "activity-title" %><br>
+            <small class="activity-time">
+              <%= activity.start_time.strftime("%I:%M %p") %>
+            </small>
+          </div>
+        <% end %>
+
+     </div>
+   <% end %>
+ </div>
+</div>

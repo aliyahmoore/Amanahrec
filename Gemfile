@@ -60,6 +60,8 @@ gem "devise", "~> 4.9"
 
 gem "htmlbeautifier", "~> 1.4"
 
+gem "simple_calendar", "~> 3.1"
+
 gem "stripe", "~> 13.3"
 
 gem "dotenv-rails", groups: [ :development, :test ]

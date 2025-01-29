@@ -1,6 +1,7 @@
 class Activity < ApplicationRecord
     has_many_attached :images
-
+    has_many :payments, as: :paymentable
+    
     validates :title, presence: true
     validates :description, presence: true
     validates :date, presence: true
@@ -9,5 +10,9 @@ class Activity < ApplicationRecord
     validates :cost, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
     validates :duration, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
 
-    has_many :payments, as: :paymentable
+    
+
+    def start_time
+        date
+    end
 end
