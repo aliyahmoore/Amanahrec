@@ -16,16 +16,20 @@
     <h2>Cost</h2>
     <p><strong>Cost:</strong> <%= number_to_currency(@event.cost, precision: 2) %></p>
     <% if @event.images.attached? %>
-      <div class="event-images">
-        <% @event.images.each do |image| %>
-          <div class="event-image">
-            <%= image_tag image, alt: "Event Image", class: "img-fluid" %> <!-- Display each image -->
-          </div>
-        <% end %>
-      </div>
-    <% else %>
-      <p>No images uploaded for this event.</p>
-    <% end %>
+    <div class="event-images">
+      <% @event.images.each do |image| %>
+        <div class="event-image">
+          <%= image_tag image, alt: "Event Image", class: "img-fluid" %> <!-- Display each image -->
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>No images uploaded for this event.</p>
+  <% end %>
+<div class="text-center">
+  <%= button_to 'Register Now', event_payments_path(@event, paymentable_type: 'Event', paymentable_id: @event.id), method: :post, class: 'event-payments btn btn-primary', data: { turbo: false } %>
+</div>
+  
   </div>
 </div>
 <div class="event-actions">

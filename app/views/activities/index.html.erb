@@ -2,7 +2,7 @@
   <h1 class="page-title text-center">Activities</h1>
 
   <div class="d-flex justify-content-center mb-3">
-    <%= link_to 'New Activity', new_activity_path, class: 'btn btn-primary' %>
+    <%= link_to 'New Activity', new_activity_path, class: 'activity-index btn btn-primary' %>
   </div>
 
   <div class="row d-flex justify-content-center g-3">
@@ -30,6 +30,8 @@
             <div class="mt-auto d-flex justify-content-between">
               <%= link_to 'Edit', edit_activity_path(activity), class: 'btn btn-warning btn-sm' %>
               <%= link_to 'Delete', activity_path(activity), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+            <%= button_to 'Register Now', activity_payments_path(activity, paymentable_type: 'Activity', paymentable_id: activity.id), method: :post, class: 'activity-payments btn btn-primary', data: { turbo: false } %>
+            
             </div>
           </div>
         </div>
