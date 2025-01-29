@@ -1,17 +1,13 @@
 <%= stylesheet_link_tag 'media_mentions', media: 'all' %>
 
-<h1 class="heading text-center my-5" style="color: #403f2b;">Amanah Rec Latest News...</h1>
-
-<div class="text-center mt-4">
-  <%= link_to 'Create New Post', new_media_mention_path, class: 'btn btn-sm create-post-button text-decoration-none' %>
-</div>
+<h1 class="heading text-center my-5" style="color: #403f2b;">Latest News</h1>
 
 <div class="container mt-5">
   <div class="row row-cols-1 row-cols-md-3 g-2">
     <% if @media_mentions.present? %>
       <% @media_mentions.each do |media_mention| %>
         <div class="col">
-          <div class="card custom-card">
+          <div class="card custom-card equal-height-card"> 
             <div class="card-body">
               <h5 class="card-title"><%= media_mention.name %></h5>
               <p class="card-text"><strong>News Organization:</strong> <%= media_mention.organization_name %></p>
@@ -29,12 +25,14 @@
               <% else %>
                 <p class="text-muted">No preview available.</p>
               <% end %>
-
-              <a href="<%= media_mention.link %>" target="_blank" class="btn btn-primary mt-3">View Full Article</a>
+              <a href="<%= media_mention.link %>" target="_blank" class="btn btn-primary mt-3" style="background-color: #FFA500; border-color: #FFA500; color: white;">View Full Article</a>
 
               <div class="mt-3 d-flex justify-content-between">
-                <%= link_to 'Edit Post', edit_media_mention_path(media_mention), class: 'btn btn-sm edit-button' %>
-                <%= button_to 'Delete', media_mention_path(media_mention), method: :delete, class: 'btn btn-sm delete-button' %>
+                <% if current_user.role.id == 1 %>
+                  <%= link_to 'Create New Post', new_media_mention_path, class: 'btn btn-sm create-post-button' %>
+                  <%= link_to 'Edit Post', edit_media_mention_path(media_mention), class: 'btn btn-sm edit-button' %>
+                  <%= button_to 'Delete', media_mention_path(media_mention), method: :delete, class: 'btn btn-sm delete-button' %>
+                <%end%>
               </div>
             </div>
           </div>
@@ -45,4 +43,3 @@
     <% end %>
   </div>
 </div>
-g
