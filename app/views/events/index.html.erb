@@ -1,29 +1,37 @@
-<div class="event-index-container">
-  <h1>Upcoming Events</h1>
-  <!-- Check if there are events to display -->
-  <% if @events.any? %>
-    <div class="event-listing">
-      <% @events.each do |event| %>
-        <div class="event-card">
-          <h3><%= event.title %></h3>
+<div class="events-index-container">
+  <h1 class="page-title text-center">Upcoming Events</h1>
+  <div class="d-flex justify-content-center mb-3">
+    <%= link_to 'New Event', new_event_path, class: 'btn btn-primary' %>
+  </div>
+
+  <div class="row d-flex justify-content-center g-3">
+    <% @events.each do |event| %>
+      <div class="col-md-6 col-lg-4 d-flex">
+        <div class="card flex-fill event-card">
           <% if event.images.attached? %>
-            <div class="event-image">
-              <%= image_tag event.images.first, class: "event-image" %>
-            </div>
+            <%= image_tag event.images.first, class: 'card-img-top event-image', alt: event.title %>
           <% end %>
-          <!-- Combine date and time -->
-          <p><strong>Date and Time:</strong> <%= event.start_date.strftime("%B %d, %Y at %I:%M %p") %></p>
-          <p><strong>Location:</strong> <%= event.location %></p>
-          <p><strong>Cost:</strong> <%= number_to_currency(event.cost, precision: 2) %></p>
-          <!-- Link to View Event Details -->
-          <%= link_to 'View Event', event_path(event), class: "btn-view" %>
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">
+              <%= link_to event.title, event_path(event), class: 'text-decoration-none text-primary' %>
+            </h5>
+            <p class="card-text text-muted">
+              <i class="fa-regular fa-calendar me-2"></i> <%= event.start_date.strftime("%B %d, %Y %I:%M %p") %>
+            </p>
+            <p class="card-text">
+              <i class="fa-solid fa-location-dot me-2"></i> <%= event.location %>
+            </p>
+            <p class="card-text">
+              <i class="fa-sharp-duotone fa-solid fa-money-bill"></i> 
+              <%= event.cost.present? && event.cost > 0 ? number_to_currency(event.cost) : "Free" %>
+            </p>
+            <div class="mt-auto d-flex justify-content-between">
+              <%= link_to 'Edit', edit_event_path(event), class: 'btn btn-warning btn-sm' %>
+              <%= button_to 'Delete', event_path(event), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+            </div>
+          </div>
         </div>
-      <% end %>
-    </div>
-  <% else %>
-    <p>No upcoming events at the moment.</p>
-  <% end %>
-  <!-- Back Button -->
-  <%= link_to 'Back to Home', root_path, class: "btn-back" %>
-  <%= link_to 'New Event', new_event_path, class: "btn-back" %>
+      </div>
+    <% end %>
+  </div>
 </div>
