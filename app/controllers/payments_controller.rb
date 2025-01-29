@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController
-  before_action :set_paymentable, only: [ :create, :success ]
+  before_action :set_paymentable, only: [:create, :success]
 
   def create
     # Ensure the user is logged in before registering
@@ -10,7 +10,11 @@ class PaymentsController < ApplicationController
 
     # Check if the user has already paid for the event/activity or has an active membership
     if user_has_paid_for_paymentable?
-      redirect_to @paymentable, alert: "You have already registered or are already subscribed."
+      if @paymentable.is_a?(Membership)
+        redirect_to root_url, alert: "You are already subscribed."
+      else
+        redirect_to @paymentable, alert: "You have already registered."
+      end
       return
     end
 
@@ -30,15 +34,10 @@ class PaymentsController < ApplicationController
     end
 
     # Find the paymentable (Event, Activity, or Membership)
-    case params[:paymentable_type]
-    when "Activity"
-      @paymentable = Activity.find_by(id: params[:paymentable_id])
-    when "Event"
-      @paymentable = Event.find_by(id: params[:paymentable_id])
-    when "Membership"
-      @paymentable = Membership.find_or_create_by!(user: current_user)
-    else
-      return redirect_to root_url, alert: "Invalid paymentable type."
+    @paymentable = find_paymentable(params[:paymentable_type], params[:paymentable_id])
+
+    unless @paymentable
+      return redirect_to root_url, alert: "Invalid paymentable type or ID."
     end
 
     process_payment_success(session_id)
@@ -46,23 +45,28 @@ class PaymentsController < ApplicationController
 
   private
 
-  # Set either an event or activity for payment
+  # Set either an event, activity, or membership for payment
   def set_paymentable
-    if params[:activity_id]
-      @paymentable = Activity.find_by(id: params[:activity_id])
-    elsif params[:event_id]
-      @paymentable = Event.find_by(id: params[:event_id])
-    elsif params[:payable_type] == "Membership"
-      @paymentable = Membership.find_or_create_by(user: current_user)
-    elsif params[:payable_id] && params[:payable_type]
-      @paymentable = params[:payable_type].constantize.find_by(id: params[:payable_id])
-    end
-  
+    @paymentable = find_paymentable(params[:paymentable_type], params[:paymentable_id])
+
     unless @paymentable
       redirect_to root_url, alert: "Unable to find the requested paymentable item."
     end
   end
-  
+
+  # Find the paymentable object
+  def find_paymentable(paymentable_type, paymentable_id)
+    case paymentable_type
+    when "Activity"
+      Activity.find_by(id: paymentable_id)
+    when "Event"
+      Event.find_by(id: paymentable_id)
+    when "Membership"
+      Membership.find_by(user: current_user) || Membership.create!(user: current_user, status: "pending")
+    else
+      nil
+    end
+  end
 
   # Initialize the Stripe Checkout session
   def create_stripe_session
@@ -86,20 +90,23 @@ class PaymentsController < ApplicationController
         }
       ]
     else
-      {
-        price_data: {
-          currency: "usd",
-          product_data: {
-            name: @paymentable.title,
-            description: @paymentable.description
+      [
+        {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: @paymentable.title,
+              description: @paymentable.description
+            },
+            unit_amount: (@paymentable.cost * 100).to_i
           },
-          unit_amount: (@paymentable.cost * 100).to_i
-        },
-        quantity: 1
-      }
+          quantity: 1
+        }
+      ]
     end
+
     Stripe::Checkout::Session.create(
-      payment_method_types: [ "card" ],
+      payment_method_types: ["card"],
       customer: customer.id,
       line_items: line_items,
       mode: mode,
@@ -129,12 +136,18 @@ class PaymentsController < ApplicationController
           recurring_type: @paymentable.is_a?(Membership) ? "monthly" : nil
         )
 
-          # Update membership status and end_date if it's a membership
-          if @paymentable.is_a?(Membership)
-            @paymentable.update!(status: "active", start_date: Time.now, end_date: Time.now + 1.month)
-          end
+        # Update membership status and end_date if it's a membership
+        if @paymentable.is_a?(Membership)
+          @paymentable.update!(status: "active", start_date: Time.now, end_date: Time.now + 1.month)
+        end
 
-        redirect_to @paymentable, notice: "Payment successful! Thank you for registering."
+
+        # Customize the redirect based on the paymentable type
+        if @paymentable.is_a?(Membership)
+          redirect_to root_url, notice: "Payment successful! Thank you for subscribing."
+        else
+          redirect_to @paymentable, notice: "Payment successful! Thank you for registering."
+        end
       else
         redirect_to @paymentable, alert: "Payment was not completed."
       end
@@ -161,13 +174,12 @@ class PaymentsController < ApplicationController
   # Check if the current user has already paid for the event/activity
   def user_has_paid_for_paymentable?
     if @paymentable.is_a?(Membership)
-      @paymentable.active? # Assuming you have a method or status field to check active memberships
+      @paymentable.active? # Check active memberships
     else
-    Payment.exists?(user_id: current_user.id,
-                    paymentable_type: @paymentable.class.name,
-                    paymentable_id: @paymentable.id,
-                    status: "succeeded")
+      Payment.exists?(user_id: current_user.id,
+                      paymentable_type: @paymentable.class.name,
+                      paymentable_id: @paymentable.id,
+                      status: "succeeded")
     end
   end
 end
-
