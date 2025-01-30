@@ -3,6 +3,6 @@ class Membership < ApplicationRecord
   has_many :payments, as: :payable
 
   def active?
-    status == "active"
+    status == "active" && end_date > Time.now
   end
 end
