@@ -43,8 +43,7 @@
   <label class="form-label">Membership Status</label>
   <div>
     <% if current_user.membership&.active? %>
-      <button class="btn btn-outline-success d-inline">Active</button>
-      <button class="btn btn-outline-danger d-inline">Cancel Membership</button>
+      <button class="btn btn-outline-success d-inline" disabled>Active</button>
     <% else %>
       <button class="btn btn-outline-secondary d-inline" disabled>Inactive</button>
       <span>Click "Become a Member!" below to join.</span>
