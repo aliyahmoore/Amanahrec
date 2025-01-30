@@ -10,4 +10,5 @@ class Activity < ApplicationRecord
     validates :duration, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
 
     has_many :payments, as: :paymentable
+    has_many :registrations, as: :registrable
 end

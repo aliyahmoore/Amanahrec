@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_and_belongs_to_many :events
+  has_many :events, through: registration
   has_many :testimonials, dependent: :destroy
   belongs_to :role
 
@@ -13,6 +13,7 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, :email, :phone_number, :gender, :ethnicity, presence: true
 
+  has_many :registrations
   has_many :payments
   has_one :membership
 
