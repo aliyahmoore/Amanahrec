@@ -9,9 +9,9 @@
         <div class="col">
           <div class="card custom-card equal-height-card"> 
             <div class="card-body">
-              <h5 class="card-title" style="color: #57573f;">
+              <strong><h2 class="card-title" style="color: #57573f;">
                 <%= media_mention.name %>
-              </h5>
+              </h2></strong>
               <p class="card-text close-spaced" style="color: #57573f;">
                 News Organization: <%= media_mention.organization_name %>
               </p>
@@ -23,8 +23,8 @@
                 <iframe 
                   src="<%= media_mention.link %>" 
                   title="<%= media_mention.name %> Article Snippet" 
-                  width="100%" 
-                  height="200" 
+                  width="90%" 
+                  height="350" 
                   frameborder="0" 
                   style="border: 1px solid #ccc; border-radius: 8px;">
                 </iframe>
@@ -34,7 +34,7 @@
 
               <a href="<%= media_mention.link %>" target="_blank" 
                 class="btn btn-primary mt-3" 
-                style="background-color: #FFA500; border-color: #FFA500; color: white;">
+                style="background-color: #82825E; border-color: #82825E; color: white;">
                 View Full Article
               </a>
 
