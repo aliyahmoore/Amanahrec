@@ -51,6 +51,10 @@ class Activity < ApplicationRecord
       recurrence_days.split(",").map(&:strip) if recurrence_days.present?
     end
 
+    def start_time
+        date
+    end
+
     private
 
     def set_default_recurrence_days
