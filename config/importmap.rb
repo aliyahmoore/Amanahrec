@@ -8,3 +8,5 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 pin "testimonial_slider", to: "testimonial_slider.js"
 pin "testimonial_slider", to: "testimonial_slider.js"
 pin "non_member_alert", to: "non_member_alert.js"
+pin "navbar_dropdown", to: "navbar_dropdown.js"
+

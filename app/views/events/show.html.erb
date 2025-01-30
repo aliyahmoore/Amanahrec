@@ -1,5 +1,6 @@
 <!-- Event Show Page -->
 <div class="event-show-container">
+
   
   <!-- Event Title -->
   <h1><%= @event.title %></h1>
@@ -8,9 +9,9 @@
   <div class="event-details">
     <h2>Description</h2>
     <p><%= @event.description %></p>
-
     <h2>Event Information</h2>
     <p><strong>Location:</strong> <%= @event.location %></p>
+
     <p><strong>Date and Time:</strong> <%= @event.start_date.strftime("%B %d, %Y at %I:%M %p") %></p>
     <p><strong>End Date:</strong> <%= @event.end_date.strftime("%B %d, %Y at %I:%M %p") %></p>
     <p class="time-info">
@@ -27,6 +28,7 @@
         </p>
       <% end %>
     <% end %>
+
 
     <h2>Childcare & Sponsors</h2>
     <p><strong>Childcare Available:</strong> <%= @event.childcare ? 'Yes' : 'No' %></p>
@@ -50,6 +52,7 @@
 
   </div>
 
+
   <!-- Register Event Button (Only Show When General Registration is Open or for Members During Early Access) -->
   <% if (@event.early_access_for_members? && current_user&.member?) || @event.general_registration_open? %>
     <div class="event-actions">
@@ -66,5 +69,6 @@
       <%= link_to 'Edit Event', edit_event_path(@event), class: "btn btn-primary" %>
     <% end %>
   </div>
+
 
 </div>
