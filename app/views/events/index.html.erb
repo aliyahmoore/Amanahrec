@@ -74,6 +74,14 @@
             </div>
             </div>
           </div>
+          <% end %>
+          <!-- Combine date and time -->
+          <p><strong>Date and Time:</strong> <%= event.start_date.strftime("%B %d, %Y at %I:%M %p") %></p>
+          <p><strong>Location:</strong> <%= event.location %></p>
+          <p><strong>Cost:</strong> <%= number_to_currency(event.cost, precision: 2) %></p>
+          <!-- Link to View Event Details -->
+          <%= link_to 'View Event', event_path(event), class: "btn-view" %>
+          <%= button_to 'Register Now', event_payments_path(event, paymentable_type: 'Event', paymentable_id: event.id), method: :post, class: 'event-payments btn btn-primary', data: { turbo: false } %>
         </div>
       <% end %>
     </div>
