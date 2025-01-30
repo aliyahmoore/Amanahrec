@@ -134,6 +134,12 @@ class PaymentsController < ApplicationController
           recurring_type: @paymentable.is_a?(Membership) ? "monthly" : nil
         )
 
+        Registration.create(
+          user_id: current_user.id,
+          registrable: @paymentable,
+          status: "confirmed"
+        )
+        
         # Update membership status and end_date if it's a membership
         if @paymentable.is_a?(Membership)
           @paymentable.update!(status: "active", start_date: Time.now, end_date: Time.now + 1.month)

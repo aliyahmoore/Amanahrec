@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :events, through: registration
+  has_many :events
   has_many :testimonials, dependent: :destroy
   belongs_to :role
 
