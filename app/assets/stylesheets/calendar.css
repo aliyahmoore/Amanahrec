@@ -32,12 +32,11 @@
   }
   
   .calendar {
-    background-color: #E9E2D8; 
+    background-color: #DACCB1; 
     padding: 10px; 
-    border-radius: 10px; 
+    border-radius: 30px; 
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
   }
-
   
 .event:hover {
     transform: scale(1.05); 
