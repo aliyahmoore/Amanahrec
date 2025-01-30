@@ -12,7 +12,7 @@ class Activity < ApplicationRecord
     validates :early_access_days, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
     validates :general_registration_start, presence: true, if: -> { early_access_for_members? }
 
-    # Calculate the early registration start date
+  # Calculate the early registration start date
   def early_registration_start
     return nil unless general_registration_start.present? && early_access_days.present?
     general_registration_start - early_access_days.days
