@@ -53,9 +53,13 @@
       <% if current_user.membership&.active? %>
         <!-- Active Subscription -->
         <li>
+        <li class="dropdown-item">
+  <span class="btn btn-outline-success btn-sm" style="pointer-events: none; opacity: 0.65; cursor: default;">
+    Active <i class="fa-solid fa-crown"></i>
+  </span>
+</li>
           <%= button_to 'Cancel Subscription', cancel_subscription_payments_path, 
-            method: :post, class: "dropdown-item btn btn-danger btn-block",  data: { turbo: false } %>
-        </li>
+            method: :post, class: "custom-danger-btn", data: { turbo: false } %>
       <% else %>
         <!-- Inactive Subscription -->
         <li class="dropdown-item">
