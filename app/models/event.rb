@@ -25,8 +25,10 @@ class Event < ApplicationRecord
   end
 
   # Check if general registration is open
+  
   def general_registration_open?
-    general_registration_start.present? && Time.current >= general_registration_start
+    return false if general_registration_start.nil?
+    Time.current >= general_registration_start
   end
 
   # Determine if a user can register

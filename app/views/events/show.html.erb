@@ -42,12 +42,16 @@
     <% else %>
       <p>No images uploaded for this event.</p>
     <% end %>
-<div class="text-center">
-  <%= button_to 'Register Now', event_payments_path(@event, paymentable_type: 'Event', paymentable_id: @event.id), method: :post, class: 'event-payments btn btn-primary', data: { turbo: false } %>
-</div>
+    
   
   </div>
-
+  <!-- Register event Button (Only Show When General Registration is Open) -->
+  <% if (@event.early_access_for_members? && current_user&.member?) || @event.general_registration_open? %>
+     <div class="event-actions">
+      <%= button_to 'Register Now', event_payments_path(@event, paymentable_type: 'event', paymentable_id: @event.id), method: :post, class: 'event-payments btn btn-primary', data: { turbo: false } %>
+     </div>
+   <% end %>
+   
   <!-- Event Actions -->
   <div class="event-actions">
     <%= link_to 'Back to Events', events_path, class: "btn btn-secondary" %>
