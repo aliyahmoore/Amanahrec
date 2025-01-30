@@ -1,7 +1,9 @@
+<!-- Event Show Page -->
 <div class="event-show-container">
+  
   <!-- Event Title -->
   <h1><%= @event.title %></h1>
-  
+
   <!-- Event Details Section -->
   <div class="event-details">
     <h2>Description</h2>
@@ -9,22 +11,22 @@
 
     <h2>Event Information</h2>
     <p><strong>Location:</strong> <%= @event.location %></p>
-    
     <p><strong>Date and Time:</strong> <%= @event.start_date.strftime("%B %d, %Y at %I:%M %p") %></p>
     <p><strong>End Date:</strong> <%= @event.end_date.strftime("%B %d, %Y at %I:%M %p") %></p>
-    <p class="time-info"><strong>RSVP Deadline:</strong> <%= @event.rsvp_deadline.strftime("%B %d, %Y at %I:%M %p") %></p>
+    <p class="time-info">
+      <strong>RSVP Deadline:</strong> <%= @event.rsvp_deadline.strftime("%B %d, %Y at %I:%M %p") %>
+    </p>
 
-    <!-- Early Access Info -->
-<% if @event.early_access_for_members && @event.early_access_days %>
-  <% days_remaining = (@event.general_registration_start.to_date - Date.current).to_i %>
-  <% if days_remaining > 0 %>
-    <p><strong>Early Access For Members Ends In:</strong> <strong><%= days_remaining %> Days </strong></p>
-  <% else %>
-   
-  <% end %>
-<% end %>
-
-    
+    <!-- Early Access Information -->
+    <% if @event.early_access_for_members && @event.early_access_days %>
+      <% days_remaining = (@event.general_registration_start.to_date - Date.current).to_i %>
+      <% if days_remaining > 0 %>
+        <p>
+          <strong>Early Access For Members Ends In:</strong> 
+          <strong><%= days_remaining %> Days</strong>
+        </p>
+      <% end %>
+    <% end %>
 
     <h2>Childcare & Sponsors</h2>
     <p><strong>Childcare Available:</strong> <%= @event.childcare ? 'Yes' : 'No' %></p>
@@ -33,25 +35,36 @@
     <h2>Cost</h2>
     <p><strong>Cost:</strong> <%= number_to_currency(@event.cost, precision: 2) %></p>
 
+    <!-- Event Images -->
     <% if @event.images.attached? %>
       <div class="event-images">
         <% @event.images.each do |image| %>
           <div class="event-image">
-            <%= image_tag image, alt: "Event Image", class: "img-fluid" %> <!-- Display each image -->
+            <%= image_tag image, alt: "Event Image", class: "img-fluid" %>
           </div>
         <% end %>
       </div>
     <% else %>
       <p>No images uploaded for this event.</p>
     <% end %>
+
   </div>
+
+  <!-- Register Event Button (Only Show When General Registration is Open or for Members During Early Access) -->
+  <% if (@event.early_access_for_members? && current_user&.member?) || @event.general_registration_open? %>
+    <div class="event-actions">
+      <%= button_to 'Register Now', "#", class: 'event-payments btn btn-primary', data: { turbo: false } %>
+    </div>
+  <% end %>
 
   <!-- Event Actions -->
   <div class="event-actions">
     <%= link_to 'Back to Events', events_path, class: "btn btn-secondary" %>
-     <% if current_user&.role_id == 1 %>
-    <%= button_to 'Delete Event', event_path(@event), method: :delete, data: { confirm: 'Are you sure you want to delete this event?' }, class: "btn btn-danger" %>
-    <%= link_to 'Edit Event', edit_event_path(@event), class: "btn btn-primary" %>
+    <% if current_user&.role_id == 1 %>
+      <%= button_to 'Delete Event', event_path(@event), method: :delete, 
+                     data: { confirm: 'Are you sure you want to delete this event?' }, class: "btn btn-danger" %>
+      <%= link_to 'Edit Event', edit_event_path(@event), class: "btn btn-primary" %>
     <% end %>
   </div>
+
 </div>
