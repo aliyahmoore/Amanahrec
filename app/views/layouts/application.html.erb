@@ -28,14 +28,6 @@
       <%= render 'layouts/navbar' %> 
       <%= yield %> 
       <%= yield :javascript %>
-      <% if user_signed_in? %>
-  <%= button_to "Become a Member!", 
-                payments_path(paymentable_type: "Membership", paymentable_id: current_user.id), 
-                method: :post, 
-                class: "btn btn-outline-primary" %>
-<% else %>
-  <%= link_to "Become a Member!", new_user_session_path, class: "btn btn-outline-primary" %>
-<% end %>
       <%= render 'layouts/footer' %>
     </body>
   </html>
