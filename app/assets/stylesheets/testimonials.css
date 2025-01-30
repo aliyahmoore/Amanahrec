@@ -1,3 +1,109 @@
+
+/* Testimonials Home Section Styles */
+.testimonials-section {
+  background: linear-gradient(112deg, #f7f6f4 50%, #3f3f26);
+  padding: 2rem 3rem;
+  max-width: 550px;
+  margin: auto;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-slider {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  width: 400px;
+}
+
+.testimonial-slide {
+  display: none;
+  transition: transform 0.5s ease-in-out;
+  padding: 7rem 5rem;
+  border-radius: 2px;
+  width: 300%;
+}
+
+.testimonial-slide.active {
+  display: block;
+}
+
+.carousel-caption {
+  padding: 2rem;
+  font-size: 1.2rem;
+  font-style: italic;
+  font-weight: bold;
+  line-height: 2rem;
+  text-align: center;
+  color: rgba(78, 77, 77, 0.856);
+}
+
+.testimonial-navigation {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+}
+
+.testimonial-navigation .prev,
+.testimonial-navigation .next {
+  background-color: #b3a68b;
+  color: #fff;
+  border: none;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 20%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.testimonial-navigation .prev:hover,
+.testimonial-navigation .next:hover {
+  background-color: #c2b7a0;
+}
+
+.testimonial-navigation .prev {
+  margin-left: 1rem;
+}
+
+.testimonial-navigation .next {
+  margin-right: 1rem;
+}
+
+.testimonial-text {
+  font-size: 1.1rem;
+  line-height: 1.8rem;
+  color: #57573F;
+}
+
+.testimonial-author {
+  font-style: normal;
+  margin-top: 1rem;
+  color: #57573F;
+}
+
+@media(max-width: 767px) {
+  .carousel-caption {
+    padding: 1rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .testimonial-navigation .prev,
+  .testimonial-navigation .next {
+    font-size: 1.5rem;
+  }
+}
+
+
+
 /* Testimonials Section Styles */
 .testimonial-container h1 {
     font-size: 2.5rem;
