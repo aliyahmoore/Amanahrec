@@ -54,7 +54,7 @@
               <!-- Alert for non-members -->
               <% if event.early_access_period? && !current_user&.member? %>
                 <p class="alert-member-only">This event is currently available to members only.</p>
-                <a href="#" class="btn btn-primary btn-sm">Sign Up for Membership</a>
+            
               <% end %>
               
             
