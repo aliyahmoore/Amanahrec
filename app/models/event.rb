@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
     has_many_attached :images
     has_and_belongs_to_many :users
-  
+
     validates :title, presence: true
     validates :description, presence: true
     validates :start_date, presence: true
@@ -11,8 +11,8 @@ class Event < ApplicationRecord
     validates :cost, numericality: { greater_than_or_equal_to: 0 }
     validates :early_access_days, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
     validates :general_registration_start, presence: true, if: -> { early_access_for_members? }
-  
-    # Calculate the early registration start date
+
+  # Calculate the early registration start date
   def early_registration_start
     return nil unless general_registration_start.present? && early_access_days.present?
     general_registration_start - early_access_days.days
@@ -36,4 +36,3 @@ class Event < ApplicationRecord
     early_access_period? || general_registration_open?
   end
 end
-  

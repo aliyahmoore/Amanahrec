@@ -7,11 +7,11 @@ class EventsController < ApplicationController
         @events = Event.all
     end
 
-    
+
     def show
       @can_register = @event.can_register?(current_user)
     end
-    
+
 
     # GET /events/new
     def new
@@ -66,7 +66,7 @@ class EventsController < ApplicationController
     def event_params
       params.require(:event).permit(
         :title, :description, :start_date, :end_date, :location,
-        :rsvp_deadline, :childcare,:early_access_for_members,:early_access_days,:general_registration_start,:sponsors, :cost, images: []
+        :rsvp_deadline, :childcare, :early_access_for_members, :early_access_days, :general_registration_start, :sponsors, :cost, images: []
       )
     end
 end
