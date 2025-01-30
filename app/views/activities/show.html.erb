@@ -33,11 +33,16 @@
     <p><strong>Cost:</strong> <%= number_to_currency(@activity.cost, unit: "$", precision: 2) %></p>
     <p><strong>Duration:</strong> <%= @activity.duration %> hours</p>
   </div>
-  <!-- Register Activity Button -->
-  <div class="activity-actions">
-    <%= button_to 'Register Now', "#", class: 'btn btn-primary', data: { turbo: false } %>
-  </div>  
+  
 
+  
+  <!-- Register Activity Button (Only Show When General Registration is Open) -->
+ <% if (@activity.early_access_for_members? && current_user&.member?) || @activity.general_registration_open? %>
+    <div class="activity-actions">
+      <%= button_to 'Register Now', "#", class: 'btn btn-primary', data: { turbo: false } %>
+    </div>
+  <% end %>
+  
   <!-- Action Buttons (Edit, Delete, Back) -->
   <div class="activity-actions">
     <% if current_user&.role_id == 1 %>
