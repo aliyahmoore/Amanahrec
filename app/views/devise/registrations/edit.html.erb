@@ -39,16 +39,16 @@
         <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control bg-light" %>
       </div>
      <!-- Membership Status -->
-      <div class="col-md-6">
-        Membership Status:
-        <div>
-          <% if current_user.membership&.active? %>
-            <p class="badge bg-success fs-5 mt-2">Active</p>
-          <% else %>
-            <p class="badge bg-secondary fs-5 mt-2">Inactive</p>
-          <% end %>
-        </div>
-      </div>
+<div class="col-md-6">
+  <label class="form-label">Membership Status</label>
+  <div>
+    <% if current_user.membership&.active? %>
+      <button class="btn btn-outline-success">Active</button>
+    <% else %>
+      <button class="btn btn-outline-secondary" disabled>Inactive</button>
+    <% end %>
+  </div>
+</div>
     </div>
 
     <!-- Password and Confirmation -->
