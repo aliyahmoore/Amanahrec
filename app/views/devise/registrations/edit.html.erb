@@ -45,7 +45,8 @@
     <% if current_user.membership&.active? %>
       <button class="btn btn-outline-success">Active</button>
     <% else %>
-      <button class="btn btn-outline-secondary" disabled>Inactive</button>
+      <button class="btn btn-outline-secondary d-inline" disabled>Inactive</button>
+      <span>Click "Become a Member!" below to join.</span>
     <% end %>
   </div>
 </div>
