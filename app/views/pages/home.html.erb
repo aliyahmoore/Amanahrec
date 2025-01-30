@@ -1,79 +1,88 @@
-<div class="background-image-section" style="background-image: url('https://voyageminnesota.com/wp-content/uploads/2024/08/c-1722429567615-nasrieen_habib_51c96d6b-bcb9-4f97-a312-38cdd0cd4f29_original.jpg'); background-size: object-fit; background-position: center; height: 900px; padding: 50px 0; position: relative;">
-  <div class="container">
-    <div class="row">
-      <!-- Activities Card -->
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">Activities</h5>
-            <p class="card-text">Explore engaging activities designed to connect with nature and promote sustainability.</p>
-            <a href="<%= activities_path %>" class="btn btn-primary btn-sm">View Activities</a>
-          </div>
-        </div>
-      </div>
-      <!-- Events Card -->
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">Events</h5>
-            <p class="card-text">Join us in our upcoming events focused on environmental sustainability and stewardship.</p>
-            <a href="<%= events_path %>" class="btn btn-primary btn-sm">View Events</a>
-          </div>
-        </div>
-      </div>
-      <!-- Latest News Card -->
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">Latest News</h5>
-            <p class="card-text">Stay updated with the latest news and initiatives related to our mission.</p>
-            <a href="<%= media_mentions_path %>" class="btn btn-primary btn-sm">Read More</a>
-          </div>
-        </div>
+<% content_for :title, "Amanahrec Home" %>
+<% content_for :javascript do %>
+  <script type="module">
+    import "testimonial_slider";
+  </script>
+<% end %>
+
+<div style="background-image: url('/Homepage_bg.jpg'); background-size: cover; background-position: center; height: 100vh;">
+  <h1>Welcome to the Amanahrec Homepage!</h1>
+
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <!-- Hero Image -->
+    <div class="hero-image">
+      <!-- insert hero image -->
+      <!-- insert Logo on top of the hero image -->
+      <div class="hero-logo">
       </div>
     </div>
   </div>
-</div>
-<div class="mt-2"></div>
-<!-- Testimonials Section -->
-<div class="testimonials-section">
-  <div class="container py-5">
-    <h2 class="text-center">What People Are Saying:</h2>
-    <div id="testimonialCarousel" class="carousel carousel-dark slide col-md-6 mx-auto" data-bs-ride="carousel">
-      <!-- Carousel Indicators -->
-      <div class="carousel-indicators">
-        <% @testimonials.each_with_index do |testimonial, index| %>
-          <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="<%= index %>" class="<%= index == 0 ? 'active' : '' %>" aria-label="Slide <%= index + 1 %>"></button>
-        <% end %>
-      </div>
-      <!-- Carousel Items -->
-      <div class="carousel-inner">
-        <% @testimonials.each_with_index do |testimonial, index| %>
-          <div class="carousel-item <%= index == 0 ? 'active' : '' %>" data-bs-interval="<%= index == 0 ? '10000' : '2000' %>">
-            <div class="d-block w-100 text-center p-5 testimonial-content">
-              <p class="lead"><em><%= testimonial.text %></em></p>
-              <h6><%= testimonial.user.first_name %> <%= testimonial.user.last_name %></h6>
-            </div>
+
+  <div class="card-section">
+    <!-- Card 1: Activities -->
+    <div class="card">
+      <!-- place activities image tag -->
+      <h3>Activities</h3>
+      <p>Find fun adventures and ways to get involved!</p>
+    </div>
+
+    <!-- Card 2: Events -->
+    <div class="card">
+      <!-- place events image tag -->
+      <h3>Events</h3>
+      <p>Check out upcoming gatherings and happenings.</p>
+    </div>
+
+    <!-- Card 3: Latest News -->
+    <div class="card">
+      <!-- place latest news image tag -->
+      <h3>Latest News</h3>
+      <p>Stay up-to-date with current announcements.</p>
+    </div>
+  </div>
+
+  <div class="upcoming-events">
+    <h2>Upcoming Events</h2>
+    <ul>
+      <li><strong>Saturday Hike</strong> – Saturday, January 1, 2025</li>
+      <li><strong>Snow Tubing</strong> – Sunday, January 8, 2025</li>
+      <li><strong>Kayaking</strong> – Friday, January 12, 2025</li>
+    </ul>
+  </div>
+
+  <!-- Testimonials Section -->
+  <div class="testimonials-section">
+    <h4 class="text-center" style="color: #767656;">
+      <strong>What Our Members Say</strong>
+    </h4><br>
+
+    <!-- Testimonial Slider -->
+    <div class="testimonial-slider">
+      <% @testimonials.each_with_index do |testimonial, index| %>
+        <div class="testimonial-slide <%= 'active' if index == 0 %>">
+          <div class="carousel-caption text-center">
+            <p class="testimonial-text"><%= testimonial.text %></p>
+            <p class="testimonial-author">- <%= testimonial.user.first_name %> <%= testimonial.user.last_name %></p>
           </div>
-        <% end %>
-      </div>
-      <!-- Carousel Controls -->
-      <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-    <!-- Buttons -->
-    <div class="text-center mt-4">
-      <% if user_signed_in? && current_user.role.id == 1 %>
-        <%= link_to 'View Testimonials', testimonials_path, class: 'btn btn-secondary' %>
-      <% else %>
-        <%= link_to 'Submit a Testimonial', new_testimonial_path, class: 'btn btn-secondary' %>
+        </div>
       <% end %>
+    </div><br>
+
+    <!-- Navigation Arrows -->
+    <div class="testimonial-navigation">
+      <button class="prev">&#10094;</button>
+      <button class="next">&#10095;</button>
     </div>
+
+    <!-- Button for submitting or viewing testimonials -->
+    <% if user_signed_in? %>
+      <% if current_user.role.id == 1 %>
+        <%= link_to 'View Our Testimonials', testimonials_path, class: 'btn btn-secondary', style: "background-color: #8E8C79; border-color: #8E8C79;" %>
+      <% else %>
+        <%= link_to 'Submit a Testimonial', new_testimonial_path, class: 'btn btn-secondary', style: "background-color: #767656; border-color: #8E8C79;" %>
+      <% end %>
+    <% end %>
+
   </div>
 </div>
