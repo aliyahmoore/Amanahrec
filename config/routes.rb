@@ -38,6 +38,11 @@ Rails.application.routes.draw do
   # Memberships
   resources :payments, only: [ :create ]
 
+  resources :payments, only: [:create, :success] do
+    collection do
+      post :cancel_subscription  
+    end
+  end
   get "/payments/success", to: "payments#success"
   get "/payments/cancel", to: "payments#cancel"
 end

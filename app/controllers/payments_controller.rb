@@ -1,5 +1,6 @@
 class PaymentsController < ApplicationController
   before_action :set_paymentable, only: [:create, :success]
+  protect_from_forgery with: :exception
 
   def create
     # Ensure the user is logged in before registering
@@ -40,11 +41,33 @@ class PaymentsController < ApplicationController
     process_payment_success(session_id)
   end
 
+  def cancel_subscription
+    begin
+      # Cancel the Stripe subscription
+      stripe_subscription = Stripe::Subscription.retrieve(current_user.membership.stripe_subscription_id)
+      stripe_subscription.cancel
+  
+      # Update the membership status to canceled
+      current_user.membership.update(status: 'canceled')
+  
+      # Find the active recurring payment and update its status
+    payment = current_user.payments.find_by(is_recurring: true, status: 'succeeded')
+    if payment
+      payment.update!(status: 'canceled')
+    end
+      # Redirect to a confirmation page or show a success message
+      redirect_to root_url, notice: "Your membership has been successfully canceled."
+    rescue Stripe::StripeError => e
+      # Handle Stripe error (e.g., if subscription not found or cancel fails)
+      redirect_to edit_user_registration_path, alert: "Error: #{e.message}"
+    end
+  end
+  
+
   private
 
   # Set either an event, activity, or membership for payment
   def set_paymentable
-    Rails.logger.debug("Finding paymentable with type: #{params[:paymentable_type]} and ID: #{params[:paymentable_id]}")
     @paymentable = find_paymentable(params[:paymentable_type], params[:paymentable_id])
 
     unless @paymentable
@@ -137,7 +160,17 @@ class PaymentsController < ApplicationController
 
         # Update membership status and end_date if it's a membership
         if @paymentable.is_a?(Membership)
-          @paymentable.update!(status: "active", start_date: Time.now, end_date: Time.now + 1.month)
+
+          # Retrieve Stripe customer and subscription information
+        customer = Stripe::Customer.retrieve(session.customer)
+        subscription = Stripe::Subscription.retrieve(session.subscription)
+          @paymentable.update!(
+            status: "active", 
+          start_date: Time.now, 
+          end_date: Time.now + 1.month,
+          stripe_customer_id: customer.id,
+          stripe_subscription_id: subscription.id
+          )
         end
 
 
