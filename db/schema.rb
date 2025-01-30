@@ -68,6 +68,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_02_233602) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "early_access_for_members"
+    t.integer "early_access_days"
+    t.datetime "general_registration_start"
+    t.string "recurrence_pattern"
+    t.string "recurrence_days"
+    t.time "recurrence_time"
   end
 
   create_table "events", force: :cascade do |t|
@@ -108,6 +114,17 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_02_233602) do
     t.datetime "updated_at", null: false
     t.index ["paymentable_type", "paymentable_id"], name: "index_payments_on_paymentable"
     t.index ["user_id"], name: "index_payments_on_user_id"
+  end
+
+  create_table "registrations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "registrable_type", null: false
+    t.bigint "registrable_id", null: false
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["registrable_type", "registrable_id"], name: "index_registrations_on_registrable"
+    t.index ["user_id"], name: "index_registrations_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
