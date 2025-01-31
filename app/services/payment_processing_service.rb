@@ -1,4 +1,4 @@
-class PaymentSuccessService
+class PaymentProcessingService
     # Constants for payment and membership statuses
     PAYMENT_STATUS_SUCCEEDED = "succeeded".freeze
     PAYMENT_STATUS_FAILED = "failed".freeze
