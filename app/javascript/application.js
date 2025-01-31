@@ -3,6 +3,3 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "testimonials_slider"
 import "navbar_dropdown"
-
-import Rails from "@rails/ujs";
-Rails.start();
