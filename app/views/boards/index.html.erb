@@ -9,5 +9,7 @@
 </div>
 
 <div>
-<%= link_to "New Board Member", new_board_path, class: "btn btn-primary mt-3" %>
+<% if current_user&.role&.name == "admin" %>
+<%= link_to "Add a New Board Member", new_board_path, class: "btn btn-primary mt-3" %>
+<%end%>
 </div>
