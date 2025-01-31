@@ -10,7 +10,11 @@
       <h5 class="card-title"><%= board.name %></h5>
       <p class="card-subtitle text-muted"><%= board.position %></p>
       <p class="card-text"><%= board.description %></p>
-      <%= link_to "Show Profile", board_path(board), class: "btn btn-primary" %>
+       <% if current_user&.role&.name == "admin" %> 
+      <%= link_to "Edit Board Member", edit_board_path(board) %> 
+      <%= link_to "Delete Board Member", @board, method: :delete %>
+      <%end%>
     </div>
   </div>
 </div>
+

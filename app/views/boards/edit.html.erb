@@ -1,12 +1,10 @@
-<% content_for :title, "Editing board" %>
+<% content_for :title, "Editing Board Member" %>
 
 <h1>Editing board</h1>
 
 <%= render "form", board: @board %>
-
 <br>
 
 <div>
-  <%= link_to "Show this board", @board %> |
-  <%= link_to "Back to boards", boards_path %>
+  <%= link_to "Back to Board", boards_path %>
 </div>
