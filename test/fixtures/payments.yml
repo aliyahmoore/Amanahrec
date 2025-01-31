@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stripe_payment_id: MyString
+  amount: 9.99
+  status: MyString
+  event: one
+  user: one
+  is_recurring: false
+  recurring_type: MyString
+  payment_date: 2025-01-23 12:30:26
+
+two:
+  stripe_payment_id: MyString
+  amount: 9.99
+  status: MyString
+  event: two
+  user: two
+  is_recurring: false
+  recurring_type: MyString
+  payment_date: 2025-01-23 12:30:26

@@ -9,6 +9,7 @@ class Event < ApplicationRecord
     validates :location, presence: true
     validates :rsvp_deadline, presence: true
     validates :cost, numericality: { greater_than_or_equal_to: 0 }
+    has_many :payments, as: :paymentable
     validates :early_access_days, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
     validates :general_registration_start, presence: true, if: -> { early_access_for_members? }
 
