@@ -88,12 +88,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_30_143233) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+  
 
   create_table "memberships", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "start_date"
     t.datetime "end_date"
     t.string "status"
+
     t.string "stripe_customer_id"
     t.string "stripe_subscription_id"
     t.datetime "created_at", null: false
