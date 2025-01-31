@@ -26,7 +26,7 @@ class PaymentsController < ApplicationController
       return redirect_to root_url, alert: "Invalid paymentable type or ID."
     end
 
-    if PaymentSuccessService.new(current_user, @paymentable, session_id).process_payment
+    if PaymentProcessingService.new(current_user, @paymentable, session_id).process_payment
       redirect_to paymentable_success_path, notice: "Payment successful! Thank you for #{@paymentable.is_a?(Membership) ? 'subscribing.' : 'registering.'}"
     else
       redirect_to @paymentable, alert: "Payment was not completed. Please try again."
