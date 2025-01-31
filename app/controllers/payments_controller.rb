@@ -1,29 +1,18 @@
 class PaymentsController < ApplicationController
   before_action :set_paymentable, only: [:create, :success]
-  protect_from_forgery with: :exception
 
   def create
-    # Ensure the user is logged in before registering
     return redirect_to new_user_session_path, alert: "You must be signed in to register." unless user_signed_in?
 
-    # Check if the user has already paid for the event/activity or has an active membership
     if user_has_paid_for_paymentable?
-      if @paymentable.is_a?(Membership)
-        redirect_to root_url, alert: "You are already subscribed."
-      else
-        redirect_to @paymentable, alert: "You have already registered."
-      end
+      redirect_to appropriate_path, alert: appropriate_alert_message
       return
     end
 
-    # Create the Stripe Checkout session
-    stripe_session = create_stripe_session
-
-    # Redirect the user to Stripe Checkout
+    stripe_session = PaymentService.new(current_user, @paymentable, root_url).create_stripe_session
     redirect_to stripe_session.url, allow_other_host: true
   end
 
-  # Upon completion of payment
   def success
     session_id = params[:session_id]
 
@@ -31,53 +20,35 @@ class PaymentsController < ApplicationController
       return redirect_to @paymentable, alert: "Session ID is missing."
     end
 
-    # Find the paymentable (Event, Activity, or Membership)
     @paymentable = find_paymentable(params[:paymentable_type], params[:paymentable_id])
 
     unless @paymentable
       return redirect_to root_url, alert: "Invalid paymentable type or ID."
     end
 
-    process_payment_success(session_id)
+    if PaymentSuccessService.new(current_user, @paymentable, session_id).process_success_payment
+      redirect_to appropriate_success_path, notice: "Payment successful! Thank you for #{@paymentable.is_a?(Membership) ? 'subscribing.' : 'registering.'}"
+    else
+      redirect_to @paymentable, alert: "Payment was not completed."
+    end
   end
 
   def cancel_subscription
-    begin
-      # Cancel the Stripe subscription
-      stripe_subscription = Stripe::Subscription.retrieve(current_user.membership.stripe_subscription_id)
-      stripe_subscription.cancel
-  
-      # Update the membership status to canceled
-      current_user.membership.update(status: 'canceled')
-  
-      # Find the active recurring payment and update its status
-    payment = current_user.payments.find_by(is_recurring: true, status: 'succeeded')
-    if payment
-      payment.update!(status: 'canceled')
-    end
-      # Redirect to a confirmation page or show a success message
+    if SubscriptionCancellationService.new(current_user).cancel
       redirect_to root_url, notice: "Your membership has been successfully canceled."
-    rescue Stripe::StripeError => e
-      # Handle Stripe error (e.g., if subscription not found or cancel fails)
-      redirect_to edit_user_registration_path, alert: "Error: #{e.message}"
+    else
+      redirect_to edit_user_registration_path, alert: "Error canceling subscription."
     end
   end
-  
 
   private
 
-  # Set either an event, activity, or membership for payment
   def set_paymentable
     @paymentable = find_paymentable(params[:paymentable_type], params[:paymentable_id])
-
-    unless @paymentable
-      redirect_to root_url, alert: "Unable to find the requested paymentable item."
-    end
+    redirect_to root_url, alert: "Unable to find the requested paymentable item." unless @paymentable
   end
 
-  # Find the paymentable object
   def find_paymentable(paymentable_type, paymentable_id)
-    Rails.logger.debug("Finding paymentable item - type: #{paymentable_type}, ID: #{paymentable_id}")
     case paymentable_type
     when "Activity"
       Activity.find_by(id: paymentable_id)
@@ -90,128 +61,26 @@ class PaymentsController < ApplicationController
     end
   end
 
-  # Initialize the Stripe Checkout session
-  def create_stripe_session
-    customer = Stripe::Customer.create(
-      email: current_user.email,
-      name: "#{current_user.first_name} #{current_user.last_name}"
-    )
-
-    # Set payment mode and pricing based on the paymentable type
-    mode = @paymentable.is_a?(Membership) ? "subscription" : "payment"
-    line_items = if @paymentable.is_a?(Membership)
-      [
-        {
-          price_data: {
-            currency: "usd",
-            product: ENV["STRIPE_MEMBERSHIP_PRODUCT_ID"],
-            recurring: { interval: "month" },
-            unit_amount: 1000 # $10 in cents
-          },
-          quantity: 1
-        }
-      ]
-    else
-      [
-        {
-          price_data: {
-            currency: "usd",
-            product_data: {
-              name: @paymentable.title,
-              description: @paymentable.description
-            },
-            unit_amount: (@paymentable.cost * 100).to_i
-          },
-          quantity: 1
-        }
-      ]
-    end
-
-    Stripe::Checkout::Session.create(
-      payment_method_types: ["card"],
-      customer: customer.id,
-      line_items: line_items,
-      mode: mode,
-      success_url: success_url(paymentable_type: @paymentable.class.name, paymentable_id: @paymentable.id, session_id: "{CHECKOUT_SESSION_ID}"),
-      cancel_url: cancel_url(paymentable_type: @paymentable.class.name, paymentable_id: @paymentable.id),
-      metadata: {
-        user_id: current_user.id,
-        paymentable_id: @paymentable.id,
-        paymentable_type: @paymentable.class.name,
-      }
-    )
-  end
-
-  # Create the payment record after success
-  def process_payment_success(session_id)
-    begin
-      session = Stripe::Checkout::Session.retrieve(session_id)
-
-      if session.payment_status == "paid"
-        Payment.create!(
-          stripe_payment_id: session.id,
-          amount: @paymentable.is_a?(Membership) ? 10.0 : @paymentable.cost, # Membership cost or paymentable cost
-          status: "succeeded",
-          user_id: current_user.id,
-          paymentable: @paymentable,  # Polymorphic association
-          is_recurring: @paymentable.is_a?(Membership)? true : false,
-          recurring_type: @paymentable.is_a?(Membership) ? "monthly" : nil
-        )
-
-        # Update membership status and end_date if it's a membership
-        if @paymentable.is_a?(Membership)
-
-          # Retrieve Stripe customer and subscription information
-        customer = Stripe::Customer.retrieve(session.customer)
-        subscription = Stripe::Subscription.retrieve(session.subscription)
-          @paymentable.update!(
-            status: "active", 
-          start_date: Time.now, 
-          end_date: Time.now + 1.month,
-          stripe_customer_id: customer.id,
-          stripe_subscription_id: subscription.id
-          )
-        end
-
-
-        # Customize the redirect based on the paymentable type
-        if @paymentable.is_a?(Membership)
-          redirect_to root_url, notice: "Payment successful! Thank you for subscribing."
-        else
-          redirect_to @paymentable, notice: "Payment successful! Thank you for registering."
-        end
-      else
-        redirect_to @paymentable, alert: "Payment was not completed."
-      end
-    rescue Stripe::InvalidRequestError => e
-      Rails.logger.error("Error retrieving session: #{e.message}")
-      redirect_to @paymentable, alert: "Error retrieving payment details."
-    end
-  end
-
-  # Generate the success URL
-  def success_url(paymentable_type:, paymentable_id:, session_id:)
-    "#{root_url}payments/success?paymentable_type=#{paymentable_type}&paymentable_id=#{paymentable_id}&session_id=#{session_id}"
-  end
-
-  # Generate the cancel URL
-  def cancel_url(paymentable_type:, paymentable_id:)
-    if paymentable_type == "Event"
-      "#{root_url}events/#{paymentable_id}"
-    else
-      "#{root_url}activities/#{paymentable_id}"
-    end
-  end
-
-  # Check if the current user has already paid for the event/activity
   def user_has_paid_for_paymentable?
     if @paymentable.is_a?(Membership)
-      @paymentable.active? # Check active memberships
+      @paymentable.active?
     else
       Payment.exists?(user_id: current_user.id,
                       paymentable_type: @paymentable.class.name,
                       paymentable_id: @paymentable.id,
                       status: "succeeded")
     end
+  end
+
+  def appropriate_path
+    @paymentable.is_a?(Membership) ? root_url : @paymentable
+  end
+
+  def appropriate_alert_message
+    @paymentable.is_a?(Membership) ? "You are already subscribed." : "You have already registered."
+  end
+
+  def appropriate_success_path
+    @paymentable.is_a?(Membership) ? root_url : @paymentable
   end
 end
