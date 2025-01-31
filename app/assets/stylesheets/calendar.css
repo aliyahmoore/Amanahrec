@@ -58,3 +58,20 @@
     text-align: center;
   }
   
+  .calendar-today-container {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .today-link {
+    text-decoration: none;
+    color: #5C5C5C;
+    font-weight: bold;
+    display: inline-block;
+    transition: color 0.3s ease;
+  }
+  
+  .today-link:hover {
+    color: #333; 
+  }
+  
