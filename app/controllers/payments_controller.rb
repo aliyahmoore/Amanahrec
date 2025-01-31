@@ -5,7 +5,7 @@ class PaymentsController < ApplicationController
     return redirect_to new_user_session_path, alert: "You must be signed in to register." unless user_signed_in?
 
     if user_has_paid_for_paymentable?
-      redirect_to appropriate_path, alert: appropriate_alert_message
+      redirect_to paymentable_path, alert: paymentable_alert_message
       return
     end
 
@@ -27,7 +27,7 @@ class PaymentsController < ApplicationController
     end
 
     if PaymentSuccessService.new(current_user, @paymentable, session_id).process_success_payment
-      redirect_to appropriate_success_path, notice: "Payment successful! Thank you for #{@paymentable.is_a?(Membership) ? 'subscribing.' : 'registering.'}"
+      redirect_to paymentable_success_path, notice: "Payment successful! Thank you for #{@paymentable.is_a?(Membership) ? 'subscribing.' : 'registering.'}"
     else
       redirect_to @paymentable, alert: "Payment was not completed."
     end
@@ -72,15 +72,15 @@ class PaymentsController < ApplicationController
     end
   end
 
-  def appropriate_path
+  def paymentable_path
     @paymentable.is_a?(Membership) ? root_url : @paymentable
   end
 
-  def appropriate_alert_message
+  def paymentable_alert_message
     @paymentable.is_a?(Membership) ? "You are already subscribed." : "You have already registered."
   end
 
-  def appropriate_success_path
+  def paymentable_success_path
     @paymentable.is_a?(Membership) ? root_url : @paymentable
   end
 end
