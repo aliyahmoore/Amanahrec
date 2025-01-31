@@ -63,10 +63,11 @@
 } 
 
 .create-post-button {
-  background-color: #f1c40f;
-  border-color: #f1c40f;
-  color: rgb(26, 26, 26);
+  background-color: #f1c40f !important;
+  border-color: #f1c40f !important;
+  color: rgb(26, 26, 26) !important;
 }
+
 
 .create-post-button:hover {
   background-color: #e4d25e;
