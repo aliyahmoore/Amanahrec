@@ -1,17 +1,16 @@
-<div id="<%= dom_id board %>">
-  <p>
-    <strong>Name:</strong>
-    <%= board.name %>
-  </p>
+<div class="col">
+  <div class="card h-100">
+    <% if board.image.attached? %>
+      <%= image_tag board.image.variant(resize_to_limit: [300, 200]), class: "card-img-top", alt: board.name %>
+    <% else %>
+      <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Default Image">
+    <% end %>
 
-  <p>
-    <strong>Position:</strong>
-    <%= board.position %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= board.description %>
-  </p>
-
+    <div class="card-body">
+      <h5 class="card-title"><%= board.name %></h5>
+      <p class="card-subtitle text-muted"><%= board.position %></p>
+      <p class="card-text"><%= board.description %></p>
+      <%= link_to "Show Profile", board_path(board), class: "btn btn-primary" %>
+    </div>
+  </div>
 </div>
