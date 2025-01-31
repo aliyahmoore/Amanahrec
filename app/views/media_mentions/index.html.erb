@@ -41,7 +41,7 @@
               <% if current_user&.role&.name == 'admin' %>
                 <div class="mt-3 d-flex justify-content-between">
                   <%= link_to "New Media Mention", new_media_mention_path, class: "btn btn-primary" %>
-                  <%= link_to 'Edit Post', edit_media_mention_path(media_mention), class: 'btn btn-sm edit-button' %>
+                  <%= link_to 'Edit', edit_media_mention_path(media_mention), class: 'btn btn-sm edit-button' %>
                   <%= button_to 'Delete', media_mention_path(media_mention), method: :delete, class: 'btn btn-sm delete-button' %>
                 </div>
               <% end %>
