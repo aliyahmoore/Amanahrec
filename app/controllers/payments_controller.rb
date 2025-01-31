@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController
-  before_action :set_paymentable, only: [:create, :success]
+  before_action :set_paymentable, only: [ :create, :success ]
 
   def create
     # Ensure the user is logged in before registering
@@ -104,7 +104,7 @@ class PaymentsController < ApplicationController
     end
 
     Stripe::Checkout::Session.create(
-      payment_method_types: ["card"],
+      payment_method_types: [ "card" ],
       customer: customer.id,
       line_items: line_items,
       mode: mode,
@@ -113,7 +113,7 @@ class PaymentsController < ApplicationController
       metadata: {
         user_id: current_user.id,
         paymentable_id: @paymentable.id,
-        paymentable_type: @paymentable.class.name,
+        paymentable_type: @paymentable.class.name
       }
     )
   end
@@ -139,7 +139,7 @@ class PaymentsController < ApplicationController
           registrable: @paymentable,
           status: "successful"
         )
-        
+
         # Update membership status and end_date if it's a membership
         if @paymentable.is_a?(Membership)
           @paymentable.update!(status: "active", start_date: Time.now, end_date: Time.now + 1.month)

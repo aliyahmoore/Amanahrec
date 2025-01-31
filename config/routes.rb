@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   # Define root path
   root "pages#home"
 
-  resources :testimonials, only: [:index, :new, :create, :edit, :update, :destroy] do
+  resources :testimonials, only: [ :index, :new, :create, :edit, :update, :destroy ] do
     member do
       patch :approve
       patch :unapprove
@@ -25,22 +25,22 @@ Rails.application.routes.draw do
 
   # Activities routes (payment and registration nested under activities)
   resources :activities do
-    resources :registrations, only: [:create]  # Ensure registrations are nested under activities
-    resources :payments, only: [:create]       # Ensure payments are nested under activities
+    resources :registrations, only: [ :create ]  # Ensure registrations are nested under activities
+    resources :payments, only: [ :create ]       # Ensure payments are nested under activities
   end
 
   # Events routes (already configured for events)
   resources :events do
-    resources :registrations, only: [:create]  # Ensure registrations are nested under events
-    resources :payments, only: [:create]       # Ensure payments are nested under events
+    resources :registrations, only: [ :create ]  # Ensure registrations are nested under events
+    resources :payments, only: [ :create ]       # Ensure payments are nested under events
   end
-  
-  get 'my_registrations', to: 'registrations#my_registrations'
+
+  get "my_registrations", to: "registrations#my_registrations"
 
   # Payment success and cancel URLs (if needed globally)
   get "/payments/success", to: "payments#success"
   get "/payments/cancel", to: "payments#cancel"
 
   # Membership payment routes (assuming it's separate from events/activities)
-  resources :payments, only: [:create]
+  resources :payments, only: [ :create ]
 end

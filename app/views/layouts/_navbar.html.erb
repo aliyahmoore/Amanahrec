@@ -14,8 +14,18 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <!-- Navigation Links -->
+      <!-- Main Navigation Links -->
       <ul class="navbar-nav lead d-flex align-items-center mx-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            About
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+            <li><%= link_to "About Us", pages_about_path, class: "dropdown-item" %></li>
+            <li><%= link_to "Our Partners", pages_partners_path, class: "dropdown-item" %></li>
+            <li><%= link_to "Meet Our Board", pages_board_path, class: "dropdown-item" %></li>
+          </ul>
+        </li>
         <li class="nav-item"><%= link_to "Activities", activities_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "Events", events_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "Calendar", pages_calendar_path, class: "nav-link" %></li>
@@ -23,7 +33,7 @@
         <li class="nav-item"><%= link_to "Donate", "https://kindful.com/", class: "nav-link", id: "donate" %></li>
       </ul>
       
-      <!-- User Links -->
+      <!-- User Links (Only shown if signed in) -->
       <ul class="navbar-nav lead d-flex align-items-center ms-auto">
         <% if user_signed_in? %>
           <li class="nav-item"><%= link_to "My Registrations", my_registrations_path, class: "nav-link" %></li> <!-- Add this line -->
