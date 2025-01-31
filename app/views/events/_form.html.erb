@@ -69,11 +69,28 @@
       </div>
     </div>
 
-    <!-- Childcare Available, Checkbox, and Cost on the Same Line -->
-    <div class="form-group row">
-       <!-- Event Sponsors -->
-    <div class="col-md-4">
-      <%= form.label :sponsors, "Sponsor(s)" %>
+    <div class="form-group">
+  <%= form.label :general_registration_start, "General Registration Start Date" %>
+  <%= form.datetime_local_field :general_registration_start, class: "form-control", required: true, placeholder: "Select the date when general registration starts" %>
+  </div>
+  <!-- Early Access Info -->
+    <div class="form-group">
+    <%= form.label :early_access_for_members, "Enable Early Access for Members" %>
+    <%= form.check_box :early_access_for_members, class: "form-check-input" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :early_access_days, "Number of Days for Member Early Access" %>
+    <%= form.number_field :early_access_days, class: "form-control", min: 0, placeholder: "Enter number of days for early access" %>
+  </div>
+    <!-- Childcare Available -->
+    <div class="form-group">
+      <%= form.label :childcare, "Childcare Available?" %>
+      <%= form.check_box :childcare, class: "form-check-input" %>
+    </div>
+    <!-- Event Sponsors -->
+    <div class="form-group">
+      <%= form.label :sponsors, "Event Sponsors" %>
       <%= form.text_field :sponsors, class: "form-control", placeholder: "Enter event sponsors" %>
     </div>
       

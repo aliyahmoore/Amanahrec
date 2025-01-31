@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema[7.2].define(version: 2025_01_30_013724) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +59,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_30_013724) do
     t.boolean "early_access_for_members"
     t.integer "early_access_days"
     t.datetime "general_registration_start"
+    t.string "recurrence_pattern"
+    t.string "recurrence_days"
+    t.time "recurrence_time"
+
   end
 
   create_table "activities_users", id: false, force: :cascade do |t|
