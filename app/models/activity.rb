@@ -78,6 +78,8 @@ class Activity < ApplicationRecord
 
     end
 
+    attribute :is_recurring, :boolean
+
     def start_time
         start_date
     end

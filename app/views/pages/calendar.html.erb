@@ -9,8 +9,7 @@
         <strong class="d-block"><%= date.day %></strong>
       </div>
 
-      <!-- Check if there are any meetings for the date -->
-      <!-- Display Meetings -->
+      <!-- Display Events (Only if they exist on this specific date) -->
       <% events.each do |event| %>
         <div class="event">
           <%= link_to event.title, event_path(event), class: "event-title" %><br>
