@@ -3,7 +3,6 @@ class MediaMentionsController < ApplicationController
 
   def index
     @media_mentions = MediaMention.all
-    @media_mention = MediaMention.new
   end
 
   def show

@@ -38,9 +38,9 @@
                 View Full Article
               </a>
 
-              <% if current_user&.role&.id == 1 %>
+              <% if current_user&.role&.name == 'admin' %>
                 <div class="mt-3 d-flex justify-content-between">
-                  <%= link_to 'Create New Post', new_media_mention_path, class: 'btn btn-sm create-post-button' %>
+                  <%= link_to "New Media Mention", new_media_mention_path, class: "btn btn-primary" %>
                   <%= link_to 'Edit Post', edit_media_mention_path(media_mention), class: 'btn btn-sm edit-button' %>
                   <%= button_to 'Delete', media_mention_path(media_mention), method: :delete, class: 'btn btn-sm delete-button' %>
                 </div>
