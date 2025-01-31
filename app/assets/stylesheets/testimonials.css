@@ -231,7 +231,7 @@
   
   .btn.custom-btn-success {
     background-color: #57573F;
-    color: #E9E2D8;
+    color: #eeece9;
     border: none;
     padding: 0.5rem 1.5rem;
     border-radius: 5px;
@@ -240,7 +240,7 @@
   }
   
   .btn.custom-btn-success:hover {
-    background-color: #41412D;
+    background-color: #676755;
   }
   
   .btn.custom-btn-secondary {
@@ -326,3 +326,35 @@
     opacity: 1;
   }
   
+  /* Index Testimonial Style */
+
+  .testimonial-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+    gap: 20px; /* Space between cards */
+    padding: 0 2rem;
+  }
+  
+  .testimonial-card {
+    width: 100%;
+    margin: 0 auto;
+    background-color: #c7c4b2; 
+  }
+  
+  .testimonial-card .card-text {
+    font-size: 1.50rem; 
+  }
+
+  
+/* Flex container to align buttons horizontally */
+.testimonial-card .mt-2 {
+  display: flex;
+  gap: 10px; /* Adjust the space between buttons */
+}
+
+/* Optional: Adjust padding for button size */
+.testimonial-card .btn.custom-btn-primary,
+.testimonial-card .btn.custom-btn-danger {
+  padding: 8px 15px; /* Adjust padding for both buttons */
+  color: white;
+}
