@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController
-  before_action :set_paymentable, only: [:create, :success]
+  before_action :set_paymentable, only: [ :create, :success ]
 
   def create
     return redirect_to new_user_session_path, alert: "You must be signed in to register." unless user_signed_in?
