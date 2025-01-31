@@ -1,32 +1,75 @@
 class PaymentSuccessService
+    # Constants for payment and membership statuses
+    PAYMENT_STATUS_SUCCEEDED = "succeeded".freeze
+    PAYMENT_STATUS_FAILED = "failed".freeze
+    PAYMENT_STATUS_PENDING = "pending".freeze
+  
+    MEMBERSHIP_STATUS_ACTIVE = "active".freeze
+    MEMBERSHIP_STATUS_PENDING = "pending".freeze
+  
     def initialize(user, paymentable, session_id)
       @user = user
       @paymentable = paymentable
       @session_id = session_id
     end
   
-    def process_success_payment
-      session = Stripe::Checkout::Session.retrieve(@session_id)
+    # Process the payment based on the payment status
+    def process_payment
+      session = retrieve_stripe_session
   
-      if session.payment_status == "paid"
-        create_payment_record(session)
-        update_membership_status(session) if @paymentable.is_a?(Membership)
-        true
+      case session.payment_status
+      when "paid"
+        handle_successful_payment(session)
+      when "unpaid", "failed"
+        handle_failed_payment(session)
+      when "pending"
+        handle_pending_payment(session)
       else
+        Rails.logger.error("Unknown payment status: #{session.payment_status}")
         false
       end
-    rescue Stripe::InvalidRequestError => e
-      Rails.logger.error("Error retrieving session: #{e.message}")
+    rescue Stripe::StripeError => e
+      Rails.logger.error("Stripe error: #{e.message}")
+      false
+    rescue StandardError => e
+      Rails.logger.error("Unexpected error: #{e.message}")
       false
     end
   
     private
   
-    def create_payment_record(session)
+    # Retrieve the Stripe session
+    def retrieve_stripe_session
+      Stripe::Checkout::Session.retrieve(@session_id)
+    end
+  
+    # Handle a successful payment
+    def handle_successful_payment(session)
+      create_payment_record(session, PAYMENT_STATUS_SUCCEEDED)
+      update_membership_status(session) if @paymentable.is_a?(Membership)
+      true
+    end
+  
+    # Handle a failed payment
+    def handle_failed_payment(session)
+      create_payment_record(session, PAYMENT_STATUS_FAILED)
+      Rails.logger.warn("Payment failed for user #{@user.id} on #{@paymentable.class.name} #{@paymentable.id}")
+      false
+    end
+  
+    # Handle a pending payment
+    def handle_pending_payment(session)
+      create_payment_record(session, PAYMENT_STATUS_PENDING)
+      Rails.logger.info("Payment pending for user #{@user.id} on #{@paymentable.class.name} #{@paymentable.id}")
+      false
+    end
+  
+    # Create a payment record with the given status
+    def create_payment_record(session, status)
       Payment.create!(
         stripe_payment_id: session.id,
         amount: @paymentable.is_a?(Membership) ? 10.0 : @paymentable.cost,
-        status: "succeeded",
+        status: status,
         user_id: @user.id,
         paymentable: @paymentable,
         is_recurring: @paymentable.is_a?(Membership),
@@ -34,11 +77,13 @@ class PaymentSuccessService
       )
     end
   
+    # Update the membership status for successful payments
     def update_membership_status(session)
       customer = Stripe::Customer.retrieve(session.customer)
       subscription = Stripe::Subscription.retrieve(session.subscription)
+  
       @paymentable.update!(
-        status: "active",
+        status: MEMBERSHIP_STATUS_ACTIVE,
         start_date: Time.now,
         end_date: Time.now + 1.month,
         stripe_customer_id: customer.id,

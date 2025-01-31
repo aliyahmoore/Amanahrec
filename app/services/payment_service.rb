@@ -5,12 +5,14 @@ class PaymentService
       @root_url = root_url
     end
   
+    # Create the stripe session with customer info
     def create_stripe_session
       customer = Stripe::Customer.create(
         email: @user.email,
         name: "#{@user.first_name} #{@user.last_name}"
       )
   
+      # Membership payment is a subscription
       mode = @paymentable.is_a?(Membership) ? "subscription" : "payment"
       line_items = if @paymentable.is_a?(Membership)
         [
@@ -24,6 +26,7 @@ class PaymentService
             quantity: 1
           }
         ]
+        # Events and activities are regular payments
       else
         [
           {
@@ -40,6 +43,7 @@ class PaymentService
         ]
       end
   
+      # Stripe third party for payment checkout
       Stripe::Checkout::Session.create(
         payment_method_types: ["card"],
         customer: customer.id,
