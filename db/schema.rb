@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_29_182311) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_31_041505) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -78,8 +78,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_29_182311) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "early_access_for_members", default: false, null: false
-    t.integer "early_access_days"
-    t.datetime "general_registration_start"
     t.integer "early_access_days"
     t.datetime "general_registration_start"
   end
