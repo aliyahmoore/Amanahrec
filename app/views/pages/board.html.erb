@@ -1,18 +1,32 @@
 <% content_for :title, "Meet Our Board" %>
 <h1>Meet Our Board</h1>
+
 <div class="board-container">
-  <div class="board-members">
-    <div class="board-member board-member-1">
-      <img src="<%= asset_path('nasrieen.jpg') %>" alt="Board Member 1" class="board-member-image">
+  <div class="board-card" style="background-image: url('<%= asset_path('nasrieen.jpg') %>');">
+    <div class="board-member-info">
+      <h2>Nasrieen Habib</h2>
+      <p>Founder & CEO</p>
     </div>
-    <div class="board-member board-member-2">
-      <img src="<%= asset_path('amal.jpg') %>" alt="Board Member 2" class="board-member-image">
+  </div>
+
+  <div class="board-card" style="background-image: url('<%= asset_path('makiya.jpg') %>');">
+    <div class="board-member-info">
+      <h2>Makiya Amin</h2>
+      <p>Volunteer Coordinator</p>
     </div>
-    <div class="board-member board-member-3">
-      <img src="<%= asset_path('rose.jpg') %>" alt="Board Member 3" class="board-member-image">
+  </div>
+
+  <div class="board-card" style="background-image: url('<%= asset_path('amal.jpg') %>');">
+    <div class="board-member-info">
+      <h2>Amal Mohamed</h2>
+      <p>Project Manager</p>
     </div>
-    <div class="board-member board-member-4">
-      <img src="<%= asset_path('makiya.jpg') %>" alt="Board Member 4" class="board-member-image">
+  </div>
+
+  <div class="board-card" style="background-image: url('<%= asset_path('rose.jpg') %>');">
+    <div class="board-member-info">
+      <h2>Rose Youngmark</h2>
+      <p>Development Director</p>
     </div>
   </div>
 </div>

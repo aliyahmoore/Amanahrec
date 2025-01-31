@@ -14,10 +14,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_31_180455) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  # Custom types defined in this database.
-  # Note that some types may not work with other database engines. Be careful if changing database.
-  create_enum "registration_status", ["pending", "successful", "failed"]
-
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -86,9 +82,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_31_180455) do
     t.decimal "cost", precision: 8, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "early_access_for_members", default: false, null: false
-    t.integer "early_access_days"
-    t.datetime "general_registration_start"
   end
 
   create_table "media_mentions", force: :cascade do |t|
@@ -139,9 +132,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_31_180455) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "memberships", "users"
+  add_foreign_key "payments", "events"
   add_foreign_key "payments", "users"
-  add_foreign_key "registrations", "users"
   add_foreign_key "testimonials", "users"
   add_foreign_key "users", "roles"
 end
