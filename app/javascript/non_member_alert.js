@@ -1,4 +1,4 @@
-<
+
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll("[data-countdown-date]").forEach((countdownElement) => {
       const targetDate = new Date(countdownElement.dataset.countdownDate).getTime();
