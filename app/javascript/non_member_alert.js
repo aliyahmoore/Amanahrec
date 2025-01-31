@@ -11,7 +11,9 @@ document.addEventListener("DOMContentLoaded", function () {
           clearInterval(interval);
         } else {
           const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-          countdownElement.innerHTML = `<strong>${days} days left until general registration.</strong>`;
+          const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); 
+          countdownElement.innerHTML = `<strong>${days} days and ${hours} hours left until general registration.</strong>`;
+          
         }
       }
   
