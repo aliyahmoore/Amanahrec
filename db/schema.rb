@@ -80,7 +80,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_29_182311) do
     t.boolean "early_access_for_members", default: false, null: false
     t.integer "early_access_days"
     t.datetime "general_registration_start"
-    t.boolean "early_access_for_members", default: false, null: false
     t.integer "early_access_days"
     t.datetime "general_registration_start"
   end
