@@ -43,9 +43,9 @@
   <label class="form-label">Membership Status</label>
   <div>
     <% if current_user.membership&.active? %>
-      <button class="btn btn-outline-success" disabled>Active <i class="fa-solid fa-crown"></i></button>
+      <button class="btn btn-outline-success" disabled>Active <i class="fas fa-gem"></i></button>
     <% else %>
-      <button class="btn btn-outline-secondary d-inline" disabled>Inactive</button>
+      <button class="btn btn-outline-secondary d-inline" disabled>Inactive <i class="fa-regular fa-gem"></i></button>
       <span>Click "Become a Member!" below to join.</span>
     <% end %>
   </div>
