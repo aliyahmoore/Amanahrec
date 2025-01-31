@@ -5,36 +5,42 @@ Rails.application.routes.draw do
   get "pages/calendar"
   get "pages/partners"
   get "pages/board"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  # Health check route
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Render dynamic PWA files from app/views/pwa/*
+  # PWA files routes
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # Defines the root path route ("/")
-  # root "posts#index"
+
+  # Define root path
   root "pages#home"
-  resources :testimonials, only: [ :index, :new, :create, :edit, :update, :destroy ] do
+
+  resources :testimonials, only: [:index, :new, :create, :edit, :update, :destroy] do
     member do
       patch :approve
       patch :unapprove
     end
   end
 
+  # Activities routes (payment and registration nested under activities)
   resources :activities do
-    resources :payments, only: [ :create ]
+    resources :registrations, only: [:create]  # Ensure registrations are nested under activities
+    resources :payments, only: [:create]       # Ensure payments are nested under activities
   end
 
+  # Events routes (already configured for events)
   resources :events do
-    resources :payments, only: [ :create ]
+    resources :registrations, only: [:create]  # Ensure registrations are nested under events
+    resources :payments, only: [:create]       # Ensure payments are nested under events
   end
+  
+  get 'my_registrations', to: 'registrations#my_registrations'
 
- # Memberships
-  resources :payments, only: [:create] 
-
+  # Payment success and cancel URLs (if needed globally)
   get "/payments/success", to: "payments#success"
   get "/payments/cancel", to: "payments#cancel"
+
+  # Membership payment routes (assuming it's separate from events/activities)
+  resources :payments, only: [:create]
 end

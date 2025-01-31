@@ -137,7 +137,7 @@ class PaymentsController < ApplicationController
         Registration.create(
           user_id: current_user.id,
           registrable: @paymentable,
-          status: "confirmed"
+          status: "successful"
         )
         
         # Update membership status and end_date if it's a membership
