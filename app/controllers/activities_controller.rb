@@ -8,7 +8,7 @@ class ActivitiesController < ApplicationController
 
 
     def show
-        @activity
+        @can_register = @activity.can_register?(current_user)
     end
 
 
@@ -30,7 +30,7 @@ class ActivitiesController < ApplicationController
 
 
     def edit
-        @activity
+      @activity
     end
 
 
@@ -56,20 +56,8 @@ class ActivitiesController < ApplicationController
 
       def activity_params
         params.require(:activity).permit(
-          :title,
-          :description,
-          :date,
-          :location,
-          :capacity,
-          :cost,
-          :duration,
-          :what_to_bring,
-          :rules,
-          :notes,
-          :recurrence_pattern,
-          :recurrence_time,
-          images: [],
-          recurrence_days: []
+          :title, :description, :date, :location,
+          :capacity, :what_to_bring, :rules, :notes, :cost, :duration, :early_access_for_members, :early_access_days, :general_registration_start, images: []
         )
       end
 end

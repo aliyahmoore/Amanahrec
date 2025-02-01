@@ -14,46 +14,32 @@ class Activity < ApplicationRecord
     validates :capacity, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
     validates :cost, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
     validates :duration, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
-    validates :recurrence_pattern, presence: true, if: :recurring?
-    validates :recurrence_days, presence: true, if: :recurring?
+    validates :cost, numericality: { greater_than_or_equal_to: 0 }
+    validates :early_access_days, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
+    validates :general_registration_start, presence: true
 
-    # Check if the activity is recurring
-    def recurring?
-      recurrence_pattern.present? && recurrence_days.present? && recurrence_time.present?
-    end
+  # Calculate the early registration start date
+  def early_registration_start
+    return nil unless general_registration_start.present? && early_access_days.present?
+    general_registration_start - early_access_days.days
+  end
 
-    # Process recurrence days and convert them to a comma-separated string
-    def process_recurrence_days
-      self.recurrence_days = recurrence_days.join(",") if recurrence_days.is_a?(Array)
-    end
+  # Check if the activity is currently in the early access period
+  def early_access_period?
+    return false unless early_access_for_members && early_registration_start.present?
+    Time.current.between?(early_registration_start, general_registration_start)
+  end
 
-    # Get the next occurrence based on the recurrence pattern and days
-    def next_occurrence
-      return unless recurring?
+  # Check if general registration is open
+  def general_registration_open?
+    return false if general_registration_start.nil?
+    Time.current >= general_registration_start
+  end
 
-      current_time = Time.current
-      recurrence_time = current_time.change(hour: self.recurrence_time.hour, min: self.recurrence_time.min, sec: 0)
-
-      if recurrence_pattern == "daily"
-        return recurrence_time if current_time < recurrence_time
-        recurrence_time + 1.day
-      end
-
-      if recurrence_pattern == "weekly"
-        days_of_week = recurrence_days_array
-        next_occurrence = find_next_weekday_occurrence(days_of_week, current_time, recurrence_time)
-        next_occurrence
-      end
-    end
-
-    # Convert recurrence_days string to an array for easier manipulation
-    def recurrence_days_array
-      recurrence_days.split(",").map(&:strip) if recurrence_days.present?
-    end
-
-    private
-
-    def set_default_recurrence_days
-      self.recurrence_days ||= ""
-    end
+  # Determine if a user can register
+  def can_register?(user)
+    return false unless user
+    return general_registration_open? unless user.member?
+    early_access_period? || general_registration_open?
+  end
 end
