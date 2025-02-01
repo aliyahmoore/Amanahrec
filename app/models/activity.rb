@@ -1,6 +1,12 @@
 class Activity < ApplicationRecord
     has_many_attached :images
 
+    # Default value for recurrence_days if nil
+    after_initialize :set_default_recurrence_days, if: :new_record?
+
+    # Callback to save recurrence_days as a string
+    before_save :process_recurrence_days, if: :recurring?
+
     validates :title, presence: true
     validates :description, presence: true
     validates :date, presence: true
