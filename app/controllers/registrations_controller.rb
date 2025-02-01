@@ -7,12 +7,10 @@ class RegistrationsController < ApplicationController
 
   # Create registration for activity/event
   def create
-    logger.debug "Params: #{params.inspect}"
     registrable = find_registrable(params[:registrationable_type], params[:registrationable_id])
 
     if registrable.nil?
       redirect_to root_path, alert: "Invalid registration."
-      logger.debug "Error: registrable is nil. Params: #{params[:registrationable_type]}, #{params[:registrationable_id]}"
       return
     end
 
@@ -21,9 +19,17 @@ class RegistrationsController < ApplicationController
       redirect_to registrable, alert: "You are already registered."
       return
     end
+    # Check for capacity
+    if registrable.registrations.count >= registrable.capacity
+      redirect_to registrable, alert: "Registration is full. Sorry, the capacity has been reached."
+      return
+    end
+    
 
     # Create a new registration
     registration = registrable.registrations.create!(user: current_user, status: "pending")
+
+    registration.update(status: "successful")
 
     # Redirect based on the cost of the registrable item (activity/event)
     if registrable.cost.present? && registrable.cost > 0
