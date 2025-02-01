@@ -11,5 +11,4 @@ class Activity < ApplicationRecord
           errors.add(:end_date, "can't be earlier than the start date")
         end
       end
-
 end
