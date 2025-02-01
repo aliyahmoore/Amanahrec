@@ -14,6 +14,13 @@
     <% end %>
   </div>
 
+  <!-- Early Access Info -->
+  <% if @activity.early_access_for_members && @activity.early_access_days %>
+    <% days_remaining = (@activity.general_registration_start.to_date - Date.current).to_i %>
+    <% if days_remaining > 0 %>
+      <p><strong>Early Access For Members Ends In:</strong> <strong><%= days_remaining %> Days </strong></p>
+      <% end %> 
+    <% end %> 
   <!-- Activity Details -->
   <div class="activity-details">
     <p><strong>Description:</strong> <%= @activity.description %></p>
@@ -26,11 +33,22 @@
     <p><strong>Cost:</strong> <%= number_to_currency(@activity.cost, unit: "$", precision: 2) %></p>
     <p><strong>Duration:</strong> <%= @activity.duration %> hours</p>
   </div>
+  
 
+  
+  <!-- Register Activity Button (Only Show When General Registration is Open) -->
+ <% if (@activity.early_access_for_members? && current_user&.member?) || @activity.general_registration_open? %>
+    <div class="activity-actions">
+      <%= button_to 'Register Now', "#", class: 'btn btn-primary', data: { turbo: false } %>
+    </div>
+  <% end %>
+  
   <!-- Action Buttons (Edit, Delete, Back) -->
   <div class="activity-actions">
+    <% if current_user&.role_id == 1 %>
     <%= link_to 'Edit', edit_activity_path(@activity), class: "edit-button" %>
     <%= button_to 'Delete', @activity, method: :delete, data: { confirm: 'Are you sure you want to delete this activity?' }, class: "delete-button" %>
+    <%end%>
     <%= link_to 'Back to Activities', activities_path, class: "back-button" %>
   </div>
 </div>

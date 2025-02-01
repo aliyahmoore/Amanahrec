@@ -1,8 +1,15 @@
+<% content_for :javascript do %>
+  <script type="module">
+    import "non_member_alert";
+  </script>
+<% end %>
 <div class="container-fluid">
   <h1 class="page-title text-center">Activities</h1>
 
   <div class="d-flex justify-content-center mb-3">
+    <% if current_user&.role_id == 1 %>
     <%= link_to 'New Activity', new_activity_path, class: 'btn btn-primary' %>
+    <%end%>
   </div>
 
   <div class="row d-flex justify-content-center g-3">
@@ -27,9 +34,28 @@
               <%= activity.cost.present? && activity.cost > 0 ? number_to_currency(activity.cost) : "Free" %>
 
             </p>
+           
+            <!-- Countdown Timer -->
+            <% if activity.early_access_for_members && activity.general_registration_start %>
+            <% if Time.current < activity.general_registration_start %>
+              <!-- Display countdown if general registration hasn't started -->
+              <p><strong>Member Registrations Only, General Registration Opens In:</strong></p>
+              <p id="countdown-<%= activity.id %>" 
+                 class="countdown" 
+                 data-countdown-date="<%= activity.general_registration_start %>"></p>
+            <% else %>
+              <!-- Display text if general registration time is met -->
+              <p><strong>General registration is now open!</strong></p>
+            <% end %>
+          <% else %>
+            <!-- If early access is null or false -->
+            <p><strong>General registration is now open!</strong></p>
+          <% end %>
             <div class="mt-auto d-flex justify-content-between">
+              <% if current_user&.role_id == 1 %>
               <%= link_to 'Edit', edit_activity_path(activity), class: 'btn btn-warning btn-sm' %>
               <%= link_to 'Delete', activity_path(activity), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+              <% end %>
             </div>
           </div>
         </div>
