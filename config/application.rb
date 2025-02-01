@@ -22,9 +22,9 @@ module Amanahrec
     # in config/environments, which are processed later.
     #
     config.time_zone = "Central Time (US & Canada)"
-    
+
     # Ensures local timestamps
-    config.active_record.default_timezone = :local 
+    config.active_record.default_timezone = :local
 
     # config.eager_load_paths << Rails.root.join("extras")
   end
