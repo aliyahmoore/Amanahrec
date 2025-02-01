@@ -1,14 +1,5 @@
 
 /* Testimonials Home Section Styles */
-.testimonials-section {
-  background: linear-gradient(112deg, #f7f6f4 50%, #3f3f26);
-  padding: 2rem 3rem;
-  max-width: 550px;
-  margin: auto;
-  position: relative;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
 
 .testimonial-slider {
   position: relative;
@@ -21,9 +12,9 @@
 .testimonial-slide {
   display: none;
   transition: transform 0.5s ease-in-out;
-  padding: 7rem 5rem;
+  padding: 40rem 5rem;
   border-radius: 2px;
-  width: 300%;
+  width: 600%;
 }
 
 .testimonial-slide.active {
