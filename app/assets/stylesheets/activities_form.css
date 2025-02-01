@@ -30,20 +30,11 @@
   color: #403F2B;
 }
 
-/* Recurrence Days Checkboxes */
-.activity-form .checkbox-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px; /* Adds space between each checkbox */
-}
 
-.activity-form .checkbox-container input[type="checkbox"] {
-  margin-right: 10px;
-}
-
-.activity-form .checkbox-container label {
-  margin-bottom: 0;
+/* Form Group Label Styling */
+.activity-form .form-group label {
   font-size: 1rem;
+  font-weight: bold;
 }
 
 /* Submit Button */
@@ -74,4 +65,35 @@
   margin-bottom: 15px;
   border: 1px solid #57573F;
   border-radius: 5px;
+}
+
+/* Additional Styles for Recurrence Section */
+.activity-form .field {
+  margin-bottom: 15px;
+}
+
+.activity-form .required {
+  color: red;
+}
+
+/* Spacing adjustments for overall form */
+.activity-form .form-group {
+  margin-bottom: 15px;
+}
+
+.activity-form .actions {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.activity-form .form-group input,
+.activity-form .form-group select,
+.activity-form .form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #57573F;
+  font-size: 1rem;
+  background-color: #fff;
+  color: #403F2B;
 }

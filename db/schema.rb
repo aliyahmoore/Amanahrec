@@ -62,6 +62,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_30_143233) do
     t.string "recurrence_pattern"
     t.string "recurrence_days"
     t.time "recurrence_time"
+    t.boolean "early_access_for_members"
+    t.integer "early_access_days"
+    t.datetime "general_registration_start"
   end
 
   create_table "events", force: :cascade do |t|

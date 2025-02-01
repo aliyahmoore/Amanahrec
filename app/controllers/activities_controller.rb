@@ -8,7 +8,7 @@ class ActivitiesController < ApplicationController
 
 
     def show
-        @activity
+        @can_register = @activity.can_register?(current_user)
     end
 
 
@@ -30,7 +30,7 @@ class ActivitiesController < ApplicationController
 
 
     def edit
-        @activity
+      @activity
     end
 
 
@@ -69,6 +69,7 @@ class ActivitiesController < ApplicationController
           :recurrence_pattern,
           :recurrence_time,
           :images,
+          :general_registration_start,
           recurrence_days: []
         )
       end
