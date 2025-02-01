@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :boards
   devise_for :users
   get "pages/home"
   get "pages/about"

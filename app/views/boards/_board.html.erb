@@ -1,0 +1,20 @@
+<div class="col">
+  <div class="card h-100">
+    <% if board.image.attached? %>
+      <%= image_tag board.image.variant(resize_to_limit: [300, 200]), class: "card-img-top", alt: board.name %>
+    <% else %>
+      <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Default Image">
+    <% end %>
+
+    <div class="card-body">
+      <h5 class="card-title"><%= board.name %></h5>
+      <p class="card-subtitle text-muted"><%= board.position %></p>
+      <p class="card-text"><%= board.description %></p>
+       <% if current_user&.role&.name == "admin" %> 
+      <%= link_to "Edit Board Member", edit_board_path(board) %> 
+      <%= link_to "Delete Board Member", @board, method: :delete %>
+      <%end%>
+    </div>
+  </div>
+</div>
+
