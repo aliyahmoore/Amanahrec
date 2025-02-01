@@ -17,8 +17,8 @@
   <!-- Activity Details -->
   <div class="activity-details">
     <p><strong>Description:</strong> <%= @activity.description %></p>
-    <p><strong>Date:</strong> <%= @activity.start_date %></p>
-    <p><strong>Date:</strong> <%= @activity.end_date %></p>
+    <p><strong>Date:</strong>  <%= @activity.start_date.strftime("%B %d, %Y") %> 
+  <%= @activity.start_date.strftime("%I:%M %p") %> - <%= @activity.end_date.strftime("%I:%M %p") %>
     <p><strong>Location:</strong> <%= @activity.location %></p>
     <p><strong>Capacity:</strong> <%= @activity.capacity %></p>
     <p><strong>What to Bring:</strong> <%= @activity.what_to_bring %></p>
