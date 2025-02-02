@@ -12,7 +12,6 @@ class Activity < ApplicationRecord
     validates :cost, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
     validates :recurrence_pattern, inclusion: { in: %w[daily weekly], message: "%{value} is not a valid recurrence pattern" }, if: :recurring?
     validates :recurrence_days, presence: true, if: :recurring?
-    validates :early_access_for_members, inclusion: { in: [true, false] }
     validates :general_registration_start, presence: true
     validates :early_access_days, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
   
