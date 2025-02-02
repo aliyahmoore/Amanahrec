@@ -43,7 +43,7 @@
             <!-- Countdown Timer or Status -->
             <p><strong><%= activity.registration_status %></strong></p>
 
-            <% if activity.registration_status == "Member Registrations Only, General Registration Opens In:" %>
+            <% if activity.registration_status == "Member Registrations Open, General Registration Opens In:" %>
               <p id="countdown-<%= activity.id %>" 
                 class="countdown" 
                 data-countdown-date="<%= activity.general_registration_start %>"></p>

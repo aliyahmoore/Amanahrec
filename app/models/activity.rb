@@ -64,7 +64,7 @@ class Activity < ApplicationRecord
       
       def registration_status
         return "Closed" if Time.current > end_date
-        return "Member Registrations Only, General Registration Opens In:" if early_access_for_members && Time.current < general_registration_start
+        return "Member Registrations Open, General Registration Opens In:" if early_access_for_members && Time.current < general_registration_start
         "General registration is now open!"
       end
   
