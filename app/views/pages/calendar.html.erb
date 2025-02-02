@@ -1,5 +1,4 @@
 <% content_for :title, "Calendar" %>
-<h1>Calendar</h1>
 <div class="container my-4">
 
   <!-- Calendar Wrapper -->
@@ -22,7 +21,7 @@
       <% end %>
 
       <!-- Display Activities for this date -->
-      <% activities_on_date = @activities.select { |activity| activity.date.to_date == date } %>
+      <% activities_on_date = @activities.select { |activity| activity.start_date.to_date == date } %>
       <% activities_on_date.each do |activity| %>
         <div class="activity">
           <%= link_to activity.title, activity_path(activity), class: "activity-title" %><br>

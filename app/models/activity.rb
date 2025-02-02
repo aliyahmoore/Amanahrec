@@ -76,7 +76,9 @@ class Activity < ApplicationRecord
       return general_registration_open? unless user.member?
       early_access_period? || general_registration_open?
 
+    end
+
     def start_time
-        date
+        start_date
     end
 end
