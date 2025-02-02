@@ -77,7 +77,7 @@
   </button>
 </div>
 <div class="text-center">
-    <% if current_user.role.id == 1 %>
+    <% if user_signed_in? && current_user.role.id == 1 %>
       <%= link_to 'View Testimonials', testimonials_path, class: 'btn btn-secondary' %>
     <% else %>
       <%= link_to 'Submit a Testimonial', new_testimonial_path, class: 'btn btn-secondary' %>
