@@ -58,11 +58,11 @@ class ActivitiesController < ApplicationController
         params.require(:activity).permit(
           :title,
           :description,
-          :date,
+          :start_date,
+          :end_date,
           :location,
           :capacity,
           :cost,
-          :duration,
           :what_to_bring,
           :rules,
           :notes,
@@ -70,6 +70,7 @@ class ActivitiesController < ApplicationController
           :recurrence_time,
           :images,
           :general_registration_start,
+          :early_access_for_members, :early_access_days,
           recurrence_days: []
         )
       end

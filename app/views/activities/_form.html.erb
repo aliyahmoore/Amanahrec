@@ -24,8 +24,13 @@
     </div>
 
     <div class="field">
-      <%= form.label :date %><span class="required">*</span>
-      <%= form.datetime_local_field :date, class: "input-field" %>
+      <%= form.label :start_date %><span class="required">*</span>
+      <%= form.datetime_local_field :start_date, class: "input-field" %>
+    </div>
+
+        <div class="field">
+      <%= form.label :end_date %><span class="required">*</span>
+      <%= form.datetime_local_field :end_date, class: "input-field" %>
     </div>
   </div>
 
@@ -123,12 +128,6 @@
       min: "0", 
       placeholder: "Enter the event cost (0 for free)" %>
   </div>
-
-  <div class="field">
-    <%= form.label :duration, "Duration (in hours)" %><span class="required">*</span>
-    <%= form.number_field :duration, class: "input-field" %>
-  </div>
-
   <!-- Image Upload Section -->
   <div class="form-section">
     <h3>Upload Images</h3>

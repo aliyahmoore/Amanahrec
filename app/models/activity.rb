@@ -7,24 +7,23 @@ class Activity < ApplicationRecord
     # Callback to save recurrence_days as a string
     before_save :process_recurrence_days, if: :recurring?
 
-    validates :title, presence: true
-    validates :description, presence: true
-    validates :date, presence: true
-    validates :location, presence: true
+    validates :title, :description, :start_date, :end_date, :location, presence: true
     validates :capacity, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
     validates :cost, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
-    validates :duration, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
-    validates :recurrence_pattern, presence: true, if: :recurring?
+    validates :recurrence_pattern, inclusion: { in: %w[daily weekly], message: "%{value} is not a valid recurrence pattern" }, if: :recurring?
     validates :recurrence_days, presence: true, if: :recurring?
+    validates :early_access_for_members, inclusion: { in: [true, false] }
+
+    validates :general_registration_start, presence: true
 
     # Check if the activity is recurring
     def recurring?
       recurrence_pattern.present? && recurrence_days.present? && recurrence_time.present?
     end
 
-    # Process recurrence days and convert them to a comma-separated string
+    # Process recurrence days and convself.recurrence_days = recurrence_days.is_a?(Array) ? recurrence_days.join(",") : recurrence_daysert them to a comma-separated string
     def process_recurrence_days
-      self.recurrence_days = recurrence_days.join(",") if recurrence_days.is_a?(Array)
+        self.recurrence_days = recurrence_days.is_a?(Array) ? recurrence_days.join(",") : recurrence_days
     end
 
     # Get the next occurrence based on the recurrence pattern and days
@@ -46,15 +45,19 @@ class Activity < ApplicationRecord
       end
     end
 
-    # Convert recurrence_days string to an array for easier manipulation
+
     def recurrence_days_array
-      recurrence_days.split(",").map(&:strip) if recurrence_days.present?
-    end
+  if recurrence_days.is_a?(String)
+    recurrence_days.split(",").map(&:strip)
+  else
+    Array(recurrence_days)
+  end
+end
 
     def set_default_recurrence_days
-      self.recurrence_days ||= ""
+      self.recurrence_days ||= []
     end
-    validates :cost, numericality: { greater_than_or_equal_to: 0 }
+
     validates :early_access_days, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
     validates :general_registration_start, presence: true
 

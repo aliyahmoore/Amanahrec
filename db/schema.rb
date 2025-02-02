@@ -10,13 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_30_143233) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_31_180455) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  # Custom types defined in this database.
-  # Note that some types may not work with other database engines. Be careful if changing database.
-  create_enum "registration_status", ["pending", "successful", "failed"]
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -49,14 +45,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_30_143233) do
   create_table "activities", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.datetime "date"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.string "location"
     t.integer "capacity"
     t.text "what_to_bring"
     t.text "rules"
     t.text "notes"
     t.decimal "cost", precision: 8, scale: 2
-    t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "recurrence_pattern"
@@ -65,6 +61,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_30_143233) do
     t.boolean "early_access_for_members"
     t.integer "early_access_days"
     t.datetime "general_registration_start"
+  end
+
+  create_table "boards", force: :cascade do |t|
+    t.string "name"
+    t.string "position"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "events", force: :cascade do |t|
@@ -84,23 +88,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_30_143233) do
     t.datetime "general_registration_start"
   end
 
-  create_table "events_users", id: false, force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "event_id", null: false
-    t.index ["event_id", "user_id"], name: "index_events_users_on_event_id_and_user_id"
-    t.index ["user_id", "event_id"], name: "index_events_users_on_user_id_and_event_id"
-  end
-
-  create_table "media", force: :cascade do |t|
-    t.string "name"
-    t.string "link"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.date "published_date"
-    t.string "organization_name"
-  end
-
   create_table "media_mentions", force: :cascade do |t|
     t.string "name", null: false
     t.string "link", null: false
@@ -115,6 +102,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_30_143233) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.string "status"
+    t.string "stripe_customer_id"
+    t.string "stripe_subscription_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_memberships_on_user_id"
@@ -139,7 +128,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_30_143233) do
     t.bigint "user_id", null: false
     t.string "registrable_type", null: false
     t.bigint "registrable_id", null: false
-    t.enum "status", default: "pending", null: false, enum_type: "registration_status"
+    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["registrable_type", "registrable_id"], name: "index_registrations_on_registrable"
