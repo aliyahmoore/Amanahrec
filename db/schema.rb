@@ -87,53 +87,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_31_180455) do
     t.datetime "general_registration_start"
   end
 
-  create_table "media_mentions", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "link", null: false
-    t.date "published_date", null: false
-    t.string "organization_name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "memberships", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.datetime "start_date"
-    t.datetime "end_date"
-    t.string "status"
-    t.string "stripe_customer_id"
-    t.string "stripe_subscription_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_memberships_on_user_id"
-  end
-
-  create_table "payments", force: :cascade do |t|
-    t.string "stripe_payment_id"
-    t.decimal "amount"
-    t.string "status"
-    t.bigint "user_id", null: false
-    t.boolean "is_recurring"
-    t.string "recurring_type"
-    t.string "paymentable_type", null: false
-    t.bigint "paymentable_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["paymentable_type", "paymentable_id"], name: "index_payments_on_paymentable"
-    t.index ["user_id"], name: "index_payments_on_user_id"
-  end
-
-  create_table "registrations", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "registrable_type", null: false
-    t.bigint "registrable_id", null: false
-    t.string "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["registrable_type", "registrable_id"], name: "index_registrations_on_registrable"
-    t.index ["user_id"], name: "index_registrations_on_user_id"
-  end
-
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
