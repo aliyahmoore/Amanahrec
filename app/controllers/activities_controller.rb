@@ -68,7 +68,7 @@ class ActivitiesController < ApplicationController
           :notes,
           :recurrence_pattern,
           :recurrence_time,
-          :images,
+          :image,
           :general_registration_start,
           :early_access_for_members, :early_access_days,
           recurrence_days: []

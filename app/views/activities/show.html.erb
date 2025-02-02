@@ -3,14 +3,12 @@
 
   <!-- Activity Image Section -->
   <div class="activity-images">
-    <% if @activity.images.attached? %>
-      <% @activity.images.each do |image| %>
+    <% if @activity.image.attached? %>
         <div class="activity-image">
-          <%= image_tag image, class: "activity-image-preview" %>
+          <%= image_tag @activity.image, class: "activity-image-preview" %>
         </div>
-      <% end %>
     <% else %>
-      <p>No images uploaded for this activity.</p>
+      <p>No image uploaded for this activity.</p>
     <% end %>
   </div>
 

@@ -1,5 +1,5 @@
 class Activity < ApplicationRecord
-    has_many_attached :images
+    has_one_attached :image
 
     # Default value for recurrence_days if nil
     after_initialize :set_default_recurrence_days, if: :new_record?

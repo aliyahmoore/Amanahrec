@@ -16,8 +16,8 @@
     <% @activities.each do |activity| %>
       <div class="col-md-6 col-lg-4 d-flex">
         <div class="card flex-fill activity-card">
-          <% if activity.images.attached? %>
-            <%= image_tag activity.images.first, class: 'card-img-top activity-image', alt: activity.title %>
+          <% if activity.image.attached? %>
+            <%= image_tag activity.image, class: 'card-img-top activity-image', alt: activity.title %>
           <% end %>
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">
