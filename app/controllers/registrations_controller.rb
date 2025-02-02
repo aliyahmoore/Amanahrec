@@ -1,47 +1,40 @@
 class RegistrationsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_registrable, only: [:create]
 
-  def my_registrations
-    @registrations = current_user.registrations.includes(:registrable)
+  def create
+    # Ensure @registrable is not nil
+    if @registrable.nil?
+      redirect_to root_path, alert: "The event or activity you're trying to register for could not be found."
+      return
+    end
+
+    # Pass both user and registrable to the register_user method
+    registration = Registration.register_user(current_user, @registrable)
+
+    if registration.persisted?
+      redirect_to registration.requires_payment? ? new_payment_path(paymentable: @registrable) : my_registrations_path,
+                  notice: "Registration successful!"
+    else
+      redirect_to @registrable, alert: registration.errors.full_messages.to_sentence
+    end
   end
 
-  # Create registration for activity/event
-  def create
-    registrable = find_registrable(params[:registrationable_type], params[:registrationable_id])
-
-    if registrable.nil?
-      redirect_to root_path, alert: "Invalid registration."
-      return
-    end
-
-    # Check if the user is already registered
-    if registrable.registrations.exists?(user: current_user)
-      redirect_to registrable, alert: "You are already registered."
-      return
-    end
-    # Check for capacity
-    if registrable.registrations.count >= registrable.capacity
-      redirect_to registrable, alert: "Registration is full. Sorry, the capacity has been reached."
-      return
-    end
-    
-
-    # Create a new registration
-    registration = registrable.registrations.create!(user: current_user, status: "pending")
-
-    registration.update(status: "successful")
-
-    # Redirect based on the cost of the registrable item (activity/event)
-    if registrable.cost.present? && registrable.cost > 0
-      redirect_to new_payment_path(paymentable_type: registrable.class.name, paymentable_id: registrable.id)
-    else
-      redirect_to my_registrations_path, notice: "Registration successful!"
-    end
-  rescue => e
-    redirect_to registrable, alert: "An error occurred while registering: #{e.message}"
+  def my_registrations
+    @registrations = current_user.registrations.preload(:registrable).order(:created_at)
   end
 
   private
+
+  def set_registrable
+    Rails.logger.debug "registrable_type: #{params[:registrable_type]}, registrable_id: #{params[:registrable_id]}"
+    # Ensure params are passed correctly, and find the registrable
+    @registrable = find_registrable(params[:registrable_type], params[:registrable_id])
+
+    if @registrable.nil?
+      redirect_to root_path, alert: "The event or activity you're trying to register for could not be found."
+    end
+  end
 
   def find_registrable(type, id)
     case type

@@ -31,16 +31,6 @@
 <div class="event-actions">
   <%= button_to 'Delete Event', event_path(@event), method: :delete, data: { confirm: 'Are you sure you want to delete this event?' }, class: "btn btn-danger" %>
   <%= link_to 'Edit Event', edit_event_path(@event), class: "btn btn-primary" %>
-  <% if @event.cost > 0 %>
-  <!-- Paid Event: Use button_to for payment creation -->
-  <%= button_to 'Register and Pay', 
-                event_payments_path(@event, paymentable_type: 'Event', paymentable_id: @event.id), 
-                method: :post, class: 'event-payments btn btn-primary', data: { turbo: false } %>
-<% else %>
-  <!-- Free Event: Use button_to for registration -->
-  <%= button_to 'Register', 
-                event_registrations_path(@event, registrationable_type: 'Event', registrationable_id: @event.id), 
-                method: :post, class: 'event-payments btn btn-success', data: { turbo: false } %>
-<% end %>
+  <%= render "shared/register_button", registrable: @event %>
 
 </div>

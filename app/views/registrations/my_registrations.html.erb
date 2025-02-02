@@ -3,33 +3,41 @@
 <!-- Grouping Events -->
 <h3>Registered Events</h3>
 <div class="registrations-section events">
-  <% @registrations.each do |registration| %>
-    <% if registration.registrable_type == "Event" && registration.registrable.present? %>
-      <div class="registration-card">
-        <strong><%= registration.registrable.title %></strong><br>
-        <%= registration.registrable.start_date.strftime("%B %d, %Y") %><br>
-        <%= registration.registrable.location %><br>
-        <p>Status: <%= registration.status.capitalize %></p>
-        <%= link_to 'View Event', event_path(registration.registrable), class: 'btn btn-info' %>
-      </div>
-      <hr>
+  <% if @registrations.any? { |registration| registration.registrable_type == "Event" } %>
+    <% @registrations.each do |registration| %>
+      <% if registration.registrable_type == "Event" && registration.registrable.present? %>
+        <div class="registration-card">
+          <strong><%= registration.registrable.title %></strong><br>
+          <%= registration.registrable.start_date.strftime("%B %d, %Y") %><br>
+          <%= registration.registrable.location %><br>
+          <p>Status: <%= registration.status.capitalize %></p>
+          <%= link_to 'View Event', event_path(registration.registrable), class: 'btn btn-info' %>
+        </div>
+        <hr>
+      <% end %>
     <% end %>
+  <% else %>
+    <p>No registered events.</p>
   <% end %>
 </div>
 
 <!-- Grouping Activities -->
 <h3>Registered Activities</h3>
 <div class="registrations-section activities">
-  <% @registrations.each do |registration| %>
-    <% if registration.registrable_type == "Activity" && registration.registrable.present? %>
-      <div class="registration-card">
-        <strong><%= registration.registrable.title %></strong><br>
-        <%= registration.registrable.date.strftime("%B %d, %Y") %><br>
-        <%= registration.registrable.location %><br>
-        <p>Status: <%= registration.status.capitalize %></p>
-        <%= link_to 'View Activity', activity_path(registration.registrable), class: 'btn btn-info' %>
-      </div>
-      <hr>
+  <% if @registrations.any? { |registration| registration.registrable_type == "Activity" } %>
+    <% @registrations.each do |registration| %>
+      <% if registration.registrable_type == "Activity" && registration.registrable.present? %>
+        <div class="registration-card">
+          <strong><%= registration.registrable.title %></strong><br>
+          <%= registration.registrable.date.strftime("%B %d, %Y") %><br>
+          <%= registration.registrable.location %><br>
+          <p>Status: <%= registration.status.capitalize %></p>
+          <%= link_to 'View Activity', activity_path(registration.registrable), class: 'btn btn-info' %>
+        </div>
+        <hr>
+      <% end %>
     <% end %>
+  <% else %>
+    <p>No registered activities.</p>
   <% end %>
 </div>
