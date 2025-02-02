@@ -7,7 +7,7 @@ class Registration < ApplicationRecord
 
   def self.register_user(user, registrable)
     # Check if registrable is nil
-    return OpenStruct.new(persisted?: false, errors: ["Registrable object cannot be found."]) if registrable.nil?
+    return OpenStruct.new(persisted?: false, errors: [ "Registrable object cannot be found." ]) if registrable.nil?
 
     # Check if the user is already registered for the given registrable (activity/event)
     if exists?(user: user, registrable: registrable)

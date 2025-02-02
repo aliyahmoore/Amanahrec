@@ -1,6 +1,6 @@
 class RegistrationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_registrable, only: [:create]
+  before_action :set_registrable, only: [ :create ]
 
   def create
     # Ensure @registrable is not nil
