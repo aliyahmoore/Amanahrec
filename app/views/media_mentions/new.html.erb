@@ -1,11 +1,14 @@
-<% content_for :title, "New media mention" %>
-
-<h1>New media mention</h1>
-
-<%= render "form", media_mention: @media_mention %>
-
-<br>
-
 <div>
-  <%= link_to "Back to media mentions", media_mentions_path %>
+   <h2>Create New Media Mention</h2>
+
+
+   <div>
+       <p><strong><%= @media_mention.name %></strong></p>
+       <p><strong><%= @media_mention.link %></strong></p>
+       <p><strong><%= @media_mention.published_date %></strong></p>
+       <p><strong><%= @media_mention.organization_name %></strong></p>
+   </div>
+
+
+   <%= render 'form', media_mention: @media_mention %>
 </div>

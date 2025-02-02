@@ -1,12 +1,2 @@
-<% content_for :title, "Editing media mention" %>
-
-<h1>Editing media mention</h1>
-
-<%= render "form", media_mention: @media_mention %>
-
-<br>
-
-<div>
-  <%= link_to "Show this media mention", @media_mention %> |
-  <%= link_to "Back to media mentions", media_mentions_path %>
-</div>
+<h1>Edit Media Mention</h1>
+<%= render 'form', media_mention: @media_mention %>
