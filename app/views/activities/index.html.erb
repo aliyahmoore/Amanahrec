@@ -16,15 +16,18 @@
     <% @activities.each do |activity| %>
       <div class="col-md-6 col-lg-4 d-flex">
         <div class="card flex-fill activity-card">
-          <% if activity.images.attached? %>
-            <%= image_tag activity.images.first, class: 'card-img-top activity-image', alt: activity.title %>
+          <% if activity.image.attached? %>
+            <%= image_tag activity.image, class: 'card-img-top activity-image', alt: activity.title %>
           <% end %>
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">
               <%= link_to activity.title, activity_path(activity), class: 'text-decoration-none text-primary' %>
             </h5>
             <p class="card-text text-muted">
-              <i class="fa-regular fa-calendar me-2"></i> <%= activity.date.strftime("%B %d, %Y %I:%M %p") %>
+              <i class="fa-regular fa-calendar me-2"></i> 
+  <%= activity.start_date.strftime("%B %d, %Y") %> 
+  <%= activity.start_date.strftime("%I:%M %p") %> - <%= activity.end_date.strftime("%I:%M %p") %>
+</p>
             </p>
             <p class="card-text">
               <i class="fa-solid fa-location-dot me-2"></i> <%= activity.location %>

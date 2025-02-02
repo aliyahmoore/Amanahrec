@@ -3,14 +3,12 @@
 
   <!-- Activity Image Section -->
   <div class="activity-images">
-    <% if @activity.images.attached? %>
-      <% @activity.images.each do |image| %>
+    <% if @activity.image.attached? %>
         <div class="activity-image">
-          <%= image_tag image, class: "activity-image-preview" %>
+          <%= image_tag @activity.image, class: "activity-image-preview" %>
         </div>
-      <% end %>
     <% else %>
-      <p>No images uploaded for this activity.</p>
+      <p>No image uploaded for this activity.</p>
     <% end %>
   </div>
 
@@ -24,14 +22,25 @@
   <!-- Activity Details -->
   <div class="activity-details">
     <p><strong>Description:</strong> <%= @activity.description %></p>
-    <p><strong>Date:</strong> <%= @activity.date %></p>
+     <p><strong>Date:</strong>  <%= @activity.start_date.strftime("%B %d, %Y") %> 
+  <%= @activity.start_date.strftime("%I:%M %p") %> - <%= @activity.end_date.strftime("%I:%M %p") %>
     <p><strong>Location:</strong> <%= @activity.location %></p>
     <p><strong>Capacity:</strong> <%= @activity.capacity %></p>
     <p><strong>What to Bring:</strong> <%= @activity.what_to_bring %></p>
     <p><strong>Rules:</strong> <%= @activity.rules %></p>
     <p><strong>Notes:</strong> <%= @activity.notes %></p>
     <p><strong>Cost:</strong> <%= number_to_currency(@activity.cost, unit: "$", precision: 2) %></p>
-    <p><strong>Duration:</strong> <%= @activity.duration %> hours</p>
+    
+    <% if @activity.recurrence_pattern.present? %>
+      <p><strong>Recurring:</strong> <%= @activity.recurrence_pattern.capitalize %></p>
+
+      <% if @activity.recurrence_pattern == "weekly" && @activity.recurrence_days.present? %>
+        <p><strong>Days:</strong>
+          <% days = @activity.recurrence_days.split(',').map(&:capitalize) %>
+          <%= days.join(', ') %>
+        </p>
+      <% end %>
+    <% end %>
   </div>
   
 
