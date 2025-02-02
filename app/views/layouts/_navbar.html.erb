@@ -36,21 +36,40 @@
       </ul>
       <!-- User Links -->
       <ul class="navbar-nav lead d-flex align-items-center ms-auto">
-        <% if user_signed_in? %>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-expanded="false">
-              <i class="fa-solid fa-user"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <li class="dropdown-header">
-                Hi, <%= current_user.first_name %>!
-              </li>
-              <li>
-                <%= link_to "Edit Profile", edit_user_registration_path, class: "dropdown-item" %>
-              </li>
-              <li>
-                <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-              </li>
+       <% if user_signed_in? %>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-expanded="false">
+      <i class="fa-solid fa-user"></i>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+      <li class="dropdown-header">
+        Hi, <%= current_user.first_name %>!
+      </li>
+      <li>
+        <%= link_to "Edit Profile", edit_user_registration_path, class: "dropdown-item" %>
+      </li>
+      <li>
+        <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+      </li>
+
+      <% if current_user.membership&.active? %>
+        <!-- Active Subscription -->
+        <li>
+        <li class="dropdown-item">
+  <span class="btn btn-outline-success btn-sm" style="pointer-events: none; opacity: 0.65; cursor: default;">
+    Active <i class="fas fa-gem"></i>
+  </span>
+</li>
+          <%= button_to 'Cancel Subscription', cancel_subscription_payments_path, 
+            method: :post, class: "custom-danger-btn", data: { turbo: false } %>
+      <% else %>
+        <!-- Inactive Subscription -->
+        <li class="dropdown-item">
+          <button class="btn btn-outline-secondary d-inline" disabled>Inactive <i class="fa-regular fa-gem"></i></button>
+        </li>
+      <% end %>
+    </ul>
+  </li>
             </ul>
           </li>
         <% else %>
