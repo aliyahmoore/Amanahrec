@@ -2,8 +2,8 @@
   <!-- Calendar Wrapper -->
   <div class="calendar">
     <%= month_calendar events: @events do |date, events| %>
-      <!-- Display Date -->
       <div class="border p-2 text-center">
+        <!-- Display Date -->
         <strong class="d-block"><%= date.day %></strong>
       </div>
 
@@ -21,14 +21,9 @@
         </div>
       <% end %>
 
-      <!-- Display Activities (Including Recurring) -->
-      <% activities_on_date = @activities.select do |activity| 
-        # It checks if an activity happens on this day
-        activity.start_time.to_date == start_time || 
-        # it checks if today is the day of the week the activity repeats on
-        (activity.recurring? && activity.recurrence_days.include?(date.strftime("%A"))) 
-      end %>
-
+      <!-- Display Activities -->
+      
+      <% activities_on_date = @activities.select { |activity| activity.start_date.to_date == date } %>
       <% if activities_on_date.any? %>
         <div class="activity-container text-center">
           <% activities_on_date.each do |activity| %>
