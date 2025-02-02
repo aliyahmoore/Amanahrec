@@ -1,77 +1,70 @@
 .event {
-    background-color: #E9E2D8; 
-    padding: 8px;
-    border-radius: 5px;
-    margin-top: 5px;
-  }
-  
-  .activity {
-    background-color: #9cb691; 
-    padding: 8px;
-    border-radius: 5px;
-    margin-top: 5px;
-  }
-  
-  .event-title {
-    color: #363636; 
-    text-decoration: none;
-    font-size: 1.2rem; 
-    font-weight: bold; 
-  }
-  
-  .activity-title {
-    color: #363636; 
-    text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: bold; 
-  }
-  
-  .event-time, .activity-time {
-    color: #5c5c5c; 
-    font-size: 0.9rem;
-  }
-  
-  .calendar {
-    background-color: #DACCB1; 
-    padding: 10px; 
-    border-radius: 30px; 
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-.event:hover {
-    transform: scale(1.05); 
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3); 
+  background-color: #E9E2D8; 
+  padding: 8px;
+  border-radius: 5px;
+  margin-top: 5px;
 }
 
-.activity:hover {
-    transform: scale(1.05);
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+.activity {
+  background-color: #9cb691; 
+  padding: 8px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.event-container, .activity-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centers child elements */
+  gap: 10px; /* Adds spacing between boxes */
+}
+
+.event, .activity {
+  width: 180px; /* Fixed width */
+}
+
+
+.event-title, .activity-title {
+  color: #363636; 
+  text-decoration: none;
+  font-size: 1.2rem; 
+  font-weight: bold; 
+}
+
+.event-time, .activity-time {
+  color: #5c5c5c; 
+  font-size: 0.9rem;
+}
+
+.calendar {
+  background-color: #DACCB1; 
+  padding: 10px; 
+  border-radius: 30px; 
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.event:hover, .activity:hover {
+  transform: scale(1.05); 
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3); 
 }
 
 .today-link {
-    position: relative;
-    top: -10px; 
-    color: #5C5C5C;
-    text-decoration: none;
-    font-weight: bold;
-    display: block;
-    text-align: center;
-  }
-  
-  .calendar-today-container {
-    text-align: center;
-    margin-top: 10px;
-  }
-  
-  .today-link {
-    text-decoration: none;
-    color: #5C5C5C;
-    font-weight: bold;
-    display: inline-block;
-    transition: color 0.3s ease;
-  }
-  
-  .today-link:hover {
-    color: #333; 
-  }
-  
+  position: relative;
+  top: -10px; 
+  color: #5C5C5C;
+  text-decoration: none;
+  font-weight: bold;
+  display: block;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.today-link:hover {
+  color: #333; 
+}
+
+.calendar-today-container {
+  text-align: center;
+  margin-top: 10px;
+}
+

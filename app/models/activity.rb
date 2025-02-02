@@ -75,7 +75,6 @@ class Activity < ApplicationRecord
       return false unless user
       return general_registration_open? unless user.member?
       early_access_period? || general_registration_open?
-
     end
 
     attribute :is_recurring, :boolean

@@ -1,35 +1,46 @@
-<% content_for :title, "Calendar" %>
 <div class="container my-4">
-
   <!-- Calendar Wrapper -->
   <div class="calendar">
-    <%= month_calendar(events: @events) do |date, events| %>
-      <div>
-        <!-- Display Date -->
+    <%= month_calendar events: @events do |date, events| %>
+      <!-- Display Date -->
+      <div class="border p-2 text-center">
         <strong class="d-block"><%= date.day %></strong>
       </div>
 
-      <!-- Display Events (Only if they exist on this specific date) -->
-      <% events.each do |event| %>
-        <div class="event">
-          <%= link_to event.title, event_path(event), class: "event-title" %><br>
-          <small class="event-time">
-            <%= event.start_time.strftime("%I:%M %p") %>
-          </small>
+      <!-- Display Events -->
+      <% if events.any? %>
+        <div class="event-container text-center">
+          <% events.each do |event| %>
+            <div class="event">
+              <%= link_to event.title, event_path(event), class: "event-title" %><br>
+              <small class="event-time">
+                <%= event.start_time.strftime("%I:%M %p") %>
+              </small>
+            </div>
+          <% end %>
         </div>
       <% end %>
 
-      <!-- Display Activities for this date -->
-      <% activities_on_date = @activities.select { |activity| activity.start_date.to_date == date } %>
-      <% activities_on_date.each do |activity| %>
-        <div class="activity">
-          <%= link_to activity.title, activity_path(activity), class: "activity-title" %><br>
-          <small class="activity-time">
-            <%= activity.start_time.strftime("%I:%M %p") %>
-          </small>
+      <!-- Display Activities (Including Recurring) -->
+      <% activities_on_date = @activities.select do |activity| 
+        # It checks if an activity happens on this day
+        activity.start_time.to_date == start_time || 
+        # it checks if today is the day of the week the activity repeats on
+        (activity.recurring? && activity.recurrence_days.include?(date.strftime("%A"))) 
+      end %>
+
+      <% if activities_on_date.any? %>
+        <div class="activity-container text-center">
+          <% activities_on_date.each do |activity| %>
+            <div class="activity">
+              <%= link_to activity.title, activity_path(activity), class: "activity-title" %><br>
+              <small class="activity-time">
+                <%= activity.start_time.strftime("%I:%M %p") %>
+              </small>
+            </div>
+          <% end %>
         </div>
       <% end %>
-
     <% end %>
   </div>
 </div>
