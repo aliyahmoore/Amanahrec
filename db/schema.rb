@@ -55,12 +55,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_31_180455) do
     t.decimal "cost", precision: 8, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "recurrence_pattern"
-    t.string "recurrence_days"
-    t.time "recurrence_time"
     t.boolean "early_access_for_members"
     t.integer "early_access_days"
     t.datetime "general_registration_start"
+    t.string "recurrence_pattern"
+    t.string "recurrence_days"
   end
 
   create_table "boards", force: :cascade do |t|

@@ -77,11 +77,6 @@
     </div>
   </div>
 
-    <div class="field">
-      <%= form.label :recurrence_time, "Recurrence Time" %>
-      <%= form.time_select :recurrence_time, { default: Time.current.change(hour: 6, min: 0), minute_step: 15, class: "input-field" } %>
-    </div>
-  </div>
 
   <div class="field">
     <%= form.label :location %><span class="required">*</span>

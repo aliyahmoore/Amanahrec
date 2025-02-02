@@ -40,10 +40,6 @@
           <%= days.join(', ') %>
         </p>
       <% end %>
-
-      <% if @activity.recurrence_time.present? %>
-        <p><strong>Recurring Time:</strong> <%= @activity.recurrence_time.strftime('%I:%M %p') %></p>
-      <% end %>
     <% end %>
   </div>
   
