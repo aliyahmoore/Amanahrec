@@ -2,6 +2,7 @@
   <!-- Calendar Wrapper -->
   <div class="calendar">
     <%= month_calendar events: @events do |date, events| %>
+    <div class="date-wrapper">
       <div class="border p-2 text-center">
         <!-- Display Date -->
         <strong class="d-block"><%= date.day %></strong>
@@ -39,3 +40,4 @@
     <% end %>
   </div>
 </div>
+
