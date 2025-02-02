@@ -14,6 +14,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_31_180455) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  # Custom types defined in this database.
+  # Note that some types may not work with other database engines. Be careful if changing database.
+  create_enum "registration_status", ["pending", "successful", "failed"]
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -55,11 +59,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_31_180455) do
     t.decimal "cost", precision: 8, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "recurrence_pattern"
+    t.string "recurrence_days"
     t.boolean "early_access_for_members"
     t.integer "early_access_days"
     t.datetime "general_registration_start"
-    t.string "recurrence_pattern"
-    t.string "recurrence_days"
   end
 
   create_table "boards", force: :cascade do |t|
@@ -85,6 +89,68 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_31_180455) do
     t.boolean "early_access_for_members", default: false, null: false
     t.integer "early_access_days"
     t.datetime "general_registration_start"
+  end
+
+  create_table "events_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
+    t.index ["event_id", "user_id"], name: "index_events_users_on_event_id_and_user_id"
+    t.index ["user_id", "event_id"], name: "index_events_users_on_user_id_and_event_id"
+  end
+
+  create_table "media", force: :cascade do |t|
+    t.string "name"
+    t.string "link"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "published_date"
+    t.string "organization_name"
+  end
+
+  create_table "media_mentions", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "link", null: false
+    t.date "published_date", null: false
+    t.string "organization_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.string "stripe_payment_id"
+    t.decimal "amount"
+    t.string "status"
+    t.bigint "user_id", null: false
+    t.boolean "is_recurring"
+    t.string "recurring_type"
+    t.string "paymentable_type", null: false
+    t.bigint "paymentable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["paymentable_type", "paymentable_id"], name: "index_payments_on_paymentable"
+    t.index ["user_id"], name: "index_payments_on_user_id"
+  end
+
+  create_table "registrations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "registrable_type", null: false
+    t.bigint "registrable_id", null: false
+    t.enum "status", default: "pending", null: false, enum_type: "registration_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["registrable_type", "registrable_id"], name: "index_registrations_on_registrable"
+    t.index ["user_id"], name: "index_registrations_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
