@@ -1,43 +1,60 @@
+<%= stylesheet_link_tag 'calendar', media: 'all' %>
+
 <div class="container my-4">
   <!-- Calendar Wrapper -->
   <div class="calendar">
     <%= month_calendar events: @events do |date, events| %>
-      <div class="date-wrapper">
-        <div class="border p-2 text-center">
-          <!-- Display Date -->
-          <strong><%= date.day %></strong>
-        </div>
-
-        <!-- Display Events -->
-        <% if events.any? %>
-          <div class="event-container text-center">
-            <% events.each do |event| %>
-              <div class="event">
-                <%= link_to event.title, event_path(event), class: "event-title" %><br>
-                <small class="event-time">
-                  <%= event.start_time.strftime("%I:%M %p") %>
-                </small>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-
-        <!-- Display Activity -->
-        <% activity = @activities.select { |activity| activity.start_date.to_date == date } %>
-        <% if activity.any? %>
-          <div class="activity-container text-center">
-            <% activity.each do |act| %>
-              <div class="activity">
-                <%= link_to act.title, activity_path(act), class: "activity-title" %><br>
-                <small class="activity-time">
-                  <%= act.start_time.strftime("%I:%M %p") %>
-                </small>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-
+      
+      <!-- Display Date -->
+      <div class="border p-2 text-center">
+        <strong class="d-block"><%= date.day %></strong>
       </div>
+
+      <!-- Display Events -->
+      <% if events.any? %>
+        <div class="event-container text-center">
+          <% events.each do |event| %>
+            <div class="event">
+              <%= link_to event.title, event_path(event), class: "event-title" %><br>
+              <small class="event-time">
+                <%= event.start_time.strftime("%I:%M %p") %>
+              </small>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <!-- Display Activities -->
+      <% activities_on_date = @activities.select { |activity| activity.start_date.to_date == date } %>
+      <% if activities_on_date.any? %>
+        <div class="activity-container text-center">
+          <% activities_on_date.each do |activity| %>
+            <div class="activity">
+              <%= link_to activity.title, activity_path(activity), class: "activity-title" %><br>
+              <small class="activity-time">
+                <%= activity.start_time.strftime("%I:%M %p") %>
+              </small>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <!-- Display Recurring Activities -->
+      <% if @recurring_activities.present? %>
+        <% @recurring_activities.each do |activity| %>
+          <!-- Check if the current activity's start time matches the current date -->
+          <% if activity[:start_time] == date %>
+            <!-- If it matches, display the activity -->
+            <div class="activity">
+              <%= link_to activity[:title], activity_path(activity[:title]), class: "activity-title" %><br>
+              <small class="activity-time">
+                <%= activity[:start_time].strftime("%I:%M %p") %>
+              </small>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+
     <% end %>
   </div>
 </div>
