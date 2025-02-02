@@ -50,10 +50,23 @@ class Activity < ApplicationRecord
     end
   
     def can_register?(user)
-      return false unless user
-      return general_registration_open? unless user.member?
-      early_access_period? || general_registration_open?
-    end
+        return false unless user
+        return false if Time.current > end_date # Registration closes after event ends
+      
+        if user.member?
+          return true if early_access_period? || general_registration_open?
+        else
+          return general_registration_open?
+        end
+      
+        false
+      end
+      
+      def registration_status
+        return "Closed" if Time.current > end_date
+        return "Member Registrations Only, General Registration Opens In:" if early_access_for_members && Time.current < general_registration_start
+        "General registration is now open!"
+      end
   
     # Private Methods
   
@@ -78,7 +91,8 @@ class Activity < ApplicationRecord
     end
   
     def general_registration_start_before_start_date
-      return unless general_registration_start && start_date && general_registration_start > start_date
+      return if general_registration_start.nil? || start_date.blank?
+      return if general_registration_start <= start_date
       errors.add(:general_registration_start, "date can't be later than the start date")
     end
   end

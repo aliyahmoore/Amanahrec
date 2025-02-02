@@ -40,22 +40,14 @@
 
             </p>
            
-            <!-- Countdown Timer -->
-            <% if activity.early_access_for_members && activity.general_registration_start %>
-            <% if Time.current < activity.general_registration_start %>
-              <!-- Display countdown if general registration hasn't started -->
-              <p><strong>Member Registrations Only, General Registration Opens In:</strong></p>
+            <!-- Countdown Timer or Status -->
+            <p><strong><%= activity.registration_status %></strong></p>
+
+            <% if activity.registration_status == "Member Registrations Only, General Registration Opens In:" %>
               <p id="countdown-<%= activity.id %>" 
-                 class="countdown" 
-                 data-countdown-date="<%= activity.general_registration_start %>"></p>
-            <% else %>
-              <!-- Display text if general registration time is met -->
-              <p><strong>General registration is now open!</strong></p>
+                class="countdown" 
+                data-countdown-date="<%= activity.general_registration_start %>"></p>
             <% end %>
-          <% else %>
-            <!-- If early access is null or false -->
-            <p><strong>General registration is now open!</strong></p>
-          <% end %>
             <div class="mt-auto d-flex justify-content-between">
               <% if current_user&.role_id == 1 %>
               <%= link_to 'Edit', edit_activity_path(activity), class: 'btn btn-warning btn-sm' %>
