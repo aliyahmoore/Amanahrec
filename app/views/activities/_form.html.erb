@@ -1,7 +1,13 @@
+<% content_for :javascript do %>
+  <script type="module">
+    import "recurring_activities";
+  </script>
+<% end %>
+
 <%= form_with(model: @activity, local: true, html: { class: 'activity-form', data: { turbo: false } }) do |form| %>
   <!-- Error Messages -->
   <% if @activity.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="alert alert-danger">
       <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
       <ul>
         <% @activity.errors.full_messages.each do |message| %>
@@ -12,115 +18,118 @@
   <% end %>
 
   <!-- Activity Details Section -->
-  <div class="form-section">
+  <div class="form-section mb-4">
     <h3>Activity Details</h3>
-    <div class="field">
-      <%= form.label :title %><span class="required">*</span>
-      <%= form.text_field :title, class: "input-field" %>
-    </div>
-
-    <div class="field">
-      <%= form.label :description %><span class="required">*</span>
-      <%= form.text_area :description, class: "input-field" %>
-    </div>
-
     <div class="row">
-    <!-- Start Date and End Date on one line -->
-    <div class="col-md-6">
-      <%= form.label :start_date, "Start Date", class: "form-label" %>
-      <%= form.datetime_local_field :start_date, class: "form-control" %>
+      <div class="col-md-6">
+        <%= form.label :title, class: "form-label" %><span class="required">*</span>
+        <%= form.text_field :title, class: "form-control" %>
+      </div>
+      <div class="col-md-6">
+        <%= form.label :location, class: "form-label" %><span class="required">*</span>
+        <%= form.text_field :location, class: "form-control" %>
+      </div>
     </div>
-    <div class="col-md-6">
-      <%= form.label :end_date, "End Date", class: "form-label" %>
-      <%= form.datetime_local_field :end_date, class: "form-control" %>
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <%= form.label :start_date, "Start Date", class: "form-label" %>
+        <%= form.datetime_local_field :start_date, class: "form-control" %>
+      </div>
+      <div class="col-md-6">
+        <%= form.label :end_date, "End Date", class: "form-label" %>
+        <%= form.datetime_local_field :end_date, class: "form-control" %>
+      </div>
     </div>
-
-    <div class="field">
-      <%= form.label :location %><span class="required">*</span>
-      <%= form.text_field :location, class: "input-field" %>
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <%= form.label :description, class: "form-label" %><span class="required">*</span>
+        <%= form.text_area :description, class: "form-control", rows: 3 %>
+      </div>
     </div>
-
-    <div class="field">
-      <%= form.label :rules %><span class="required">*</span>
-      <%= form.text_area :rules, class: "input-field" %>
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <%= form.label :rules, class: "form-label" %><span class="required">*</span>
+        <%= form.text_area :rules, class: "form-control", rows: 3 %>
+      </div>
     </div>
-
-    <div class="field">
-      <%= form.label :notes %><span class="required">*</span>
-      <%= form.text_area :notes, class: "input-field" %>
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <%= form.label :notes, class: "form-label" %><span class="required">*</span>
+        <%= form.text_area :notes, class: "form-control", rows: 3 %>
+      </div>
     </div>
   </div>
 
   <!-- Recurrence Section -->
-  <div class="form-section">
+  <div class="form-section mb-4">
     <h3>Recurrence</h3>
-    <div class="field">
-      <%= form.label :recurrence_pattern, "Recurring Event?" %><span class="required">*</span>
-      <%= form.select :recurrence_pattern, options_for_select([['None', nil], ['Daily', 'daily'], ['Weekly', 'weekly']], @activity.recurrence_pattern || 'none'), {}, class: "input-field", id: "activity_recurrence_pattern" %>
-    </div>
-
-    <!-- Recurrence Days Checkboxes -->
-    <div class="field" id="recurrence_days_field" style="<%= 'display:none' if @activity.recurrence_pattern != 'weekly' %>">
-      <%= form.label :recurrence_days, "Recurrence Days (Select days)" %>
-      <div class="checkbox-container">
-        <% %w[monday tuesday wednesday thursday friday saturday sunday].each do |day| %>
-          <div class="checkbox-item">
-            <%= check_box_tag "activity[recurrence_days][]", day, @activity.recurrence_days.to_s.include?(day) %>
-            <%= form.label "recurrence_days_#{day}", day.capitalize %>
-          </div>
-        <% end %>
+    <div class="row">
+      <div class="col-md-6">
+        <%= form.label :recurrence_pattern, "Recurring Event?", class: "form-label" %><span class="required">*</span>
+        <%= form.select :recurrence_pattern, options_for_select([['None', nil], ['Daily', 'daily'], ['Weekly', 'weekly']], @activity.recurrence_pattern || 'none'), {}, class: "form-select", id: "activity_recurrence_pattern" %>
+      </div>
+      <div class="col-md-6" id="recurrence_days_field" style="<%= 'display:none' if @activity.recurrence_pattern != 'weekly' %>">
+        <%= form.label :recurrence_days, "Recurrence Days (Select days)", class: "form-label" %>
+        <div class="checkbox-container">
+          <% %w[monday tuesday wednesday thursday friday saturday sunday].each do |day| %>
+            <div class="form-check form-check-inline">
+              <%= check_box_tag "activity[recurrence_days][]", day, @activity.recurrence_days.to_s.include?(day), class: "form-check-input" %>
+              <%= form.label "recurrence_days_#{day}", day.capitalize, class: "form-check-label" %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Registration Section -->
-  <div class="form-section">
-
-
+  <div class="form-section mb-4">
     <h3>Registration</h3>
-
     <div class="row">
-    <div class="col-md-6">
-      <%= form.label :general_registration_start, "General Registration Start Date" %><span class="required">*</span>
-      <%= form.datetime_local_field :general_registration_start, class: "input-field", required: true, placeholder: "Select the date when general registration starts" %>
+      <div class="col-md-6">
+        <%= form.label :general_registration_start, "General Registration Start Date", class: "form-label" %><span class="required">*</span>
+        <%= form.datetime_local_field :general_registration_start, class: "form-control", required: true %>
+      </div>
+      <div class="col-md-6">
+        <%= form.label :capacity, class: "form-label" %><span class="required">*</span>
+        <%= form.number_field :capacity, class: "form-control" %>
+      </div>
     </div>
-
-   <div class="col-md-6">
-      <%= form.label :capacity %><span class="required">*</span>
-      <%= form.number_field :capacity, class: "input-field" %>
-    </div>
-    </div>
-
- <div class="row">
-    <div class="col-md-6">
-      <%= form.label :early_access_for_members, "Enable Early Access for Members", class: "form-check-label" %>
-      <%= form.check_box :early_access_for_members, {}, "true", "false" %>
-    </div>
-
-     <div class="col-md-6">
-      <%= form.label :early_access_days, "Number of Days for Member Early Access" %>
-      <%= form.number_field :early_access_days, class: "input-field", min: 0, placeholder: "Enter number of days for early access" %>
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <div class="form-check">
+          <%= form.check_box :early_access_for_members, class: "form-check-input" %>
+          <%= form.label :early_access_for_members, "Enable Early Access for Members", class: "form-check-label" %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <%= form.label :early_access_days, "Number of Days for Member Early Access", class: "form-label" %>
+        <%= form.number_field :early_access_days, class: "form-control", min: 0 %>
+      </div>
     </div>
   </div>
 
   <!-- Cost Section -->
-  <div class="form-section">
-    <h3>Cost</h3>
-    <div class="field">
-      <%= form.label :cost, "Cost" %><span class="required">*</span>
-      <%= form.number_field :cost, value: @activity.cost.nil? ? 0 : @activity.cost, class: "input-field", step: "0.01", min: "0", placeholder: "Enter the event cost (0 for free)" %>
+<div class="form-section mb-4">
+  <div class="row">
+    <!-- Cost Section -->
+    <div class="col-md-6">
+      <h3>Cost($)</h3>
+      <%= form.number_field :cost, value: @activity.cost.nil? ? 0 : @activity.cost, class: "form-control", step: "0.01", min: "0" %>
+    </div>
+
+    <!-- Upload Image Section -->
+    <div class="col-md-6">
+      <h3>Upload an Image</h3>
+      <%= form.file_field :image, class: "form-control" %>
     </div>
   </div>
+</div>
+
+
 
   <!-- Submit Button -->
   <div class="actions">
-    <%= form.submit "Save Activity", class: "submit-button" %>
+    <%= form.submit "Save Activity", class: "btn btn-primary" %>
   </div>
-<% end %>
-
-<!-- JavaScript for Recurrence Logic -->
-<% content_for :javascript do %>
-  <script type="module">
-    import "recurring_activities";
-  </script>
 <% end %>
