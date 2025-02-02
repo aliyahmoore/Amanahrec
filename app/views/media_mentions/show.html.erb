@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @media_mention %>
+
+<div>
+  <%= link_to "Edit this media mention", edit_media_mention_path(@media_mention) %> |
+  <%= link_to "Back to media mentions", media_mentions_path %>
+
+  <%= button_to "Destroy this media mention", @media_mention, method: :delete %>
+</div>

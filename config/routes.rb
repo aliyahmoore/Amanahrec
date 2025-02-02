@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :media_mentions
   resources :boards
   devise_for :users
   get "pages/home"
