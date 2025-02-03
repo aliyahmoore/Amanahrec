@@ -3,25 +3,24 @@
 one:
   title: MyString
   description: MyText
-  time: 2025-01-16 17:14:38
-  date: 2025-01-16
+  start_date: 2025-01-16 17:14:38
+  end_date: 2025-01-16
   location: MyString
   capacity: 1
   what_to_bring: MyText
   rules: MyText
   notes: MyText
   cost: 9.99
-  duration: 1
+
 
 two:
   title: MyString
   description: MyText
-  time: 2025-01-16 17:14:38
-  date: 2025-01-16
+  start_date: 2025-01-16 17:14:38
+  end_date: 2025-01-16
   location: MyString
   capacity: 1
   what_to_bring: MyText
   rules: MyText
   notes: MyText
   cost: 9.99
-  duration: 1

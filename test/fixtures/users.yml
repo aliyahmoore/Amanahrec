@@ -4,8 +4,26 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+one:
+  first_name: John
+  last_name: Doe
+  email: john@example.com
+  phone_number: "123-456-7890"
+  member: false
+  gender: Male
+  age_range: "25-34"
+  ethnicity: "Hispanic"
+  encrypted_password: "$2a$12$KIX/5D9iXIvKw7E3D4b0veVz/0qyp9LV/NzXZ2KQ6oyhR3tJ3qHFS"
+  role_id: 2
+
+two:
+  first_name: Jane
+  last_name: Smith
+  email: jane@example.com
+  phone_number: "987-654-3210"
+  member: true
+  gender: Female
+  age_range: "35-44"
+  ethnicity: "Asian"
+  encrypted_password: "$2a$12$KIX/5D9iXIvKw7E3D4b0veVz/0qyp9LV/NzXZ2KQ6oyhR3tJ3qHFS"
+  role_id: 2
