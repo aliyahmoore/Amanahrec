@@ -28,8 +28,9 @@ class PaymentProcessingService
         Rails.logger.error("Unknown payment status: #{session.payment_status}")
         false
       end
-    rescue Stripe::StripeError => e
-      Rails.logger.error("Stripe error: #{e.message}")
+    rescue Stripe::StripeError, StandardError => e
+      Rails.logger.error("[PaymentProcessingService] Error: #{e.class} - #{e.message}")
+      Rails.logger.error(e.backtrace.join("\n"))
       false
     rescue StandardError => e
       Rails.logger.error("Unexpected error: #{e.message}")
