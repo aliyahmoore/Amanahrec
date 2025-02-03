@@ -27,7 +27,8 @@ class PaymentsController < ApplicationController
     end
 
     if PaymentProcessingService.new(current_user, @paymentable, session_id).process_payment
-      message = @paymentable.is_a?(Membership) ? "Thank you for subscribing." : "Registration successful." redirect_to paymentable_success_path, notice: message 
+      message = @paymentable.is_a?(Membership) ? "Thank you for subscribing." : "Registration successful." 
+      redirect_to paymentable_success_path, notice: message 
     else
       redirect_to @paymentable, alert: "Payment was not completed. Please try again."
     end
@@ -46,6 +47,7 @@ class PaymentsController < ApplicationController
   def user_has_paid_for_paymentable?
     if @paymentable.is_a?(Membership)
       @paymentable.active?
+    end
   end
 
   def paymentable_path

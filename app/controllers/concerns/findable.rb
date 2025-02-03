@@ -13,8 +13,14 @@ module Findable
     end
   
     def find_paymentable(type, id)
-      type.constantize.find_by(id: id) if %w[Activity Event Membership].include?(type)
-    rescue NameError
-      nil
-    end
+        if type == "Membership"
+          Membership.find_by(user: current_user) || Membership.create!(user: current_user, status: "pending")
+        elsif %w[Activity Event].include?(type)
+          type.constantize.find_by(id: id)
+        else
+          nil
+        end
+      rescue NameError
+        nil
+      end
   end

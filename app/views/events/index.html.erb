@@ -1,21 +1,16 @@
-<% content_for :title, "Events" %>
-<!-- Event Index -->
 <% content_for :javascript do %>
   <script type="module">
     import "non_member_alert";
   </script>
 <% end %>
-
 <div class="container-fluid">
   <h1 class="page-title text-center">Upcoming Events</h1>
-
   <!-- Admin Only: Button to Add New Events -->
   <% if current_user&.role_id == 1 %>
     <div class="d-flex justify-content-center mb-3">
       <%= link_to 'New Event', new_event_path, class: 'btn btn-primary' %>
     </div>
   <% end %>
-
   <% if @events.any? %>
     <div class="row d-flex justify-content-center g-3">
       <% @events.each do |event| %>
@@ -26,27 +21,22 @@
             <% if event.images.attached? %>
               <%= image_tag event.images.first, class: 'card-img-top event-image', alt: event.title %>
             <% end %>
-
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">
                 <%= link_to event.title, event_path(event), class: 'text-decoration-none text-primary' %>
               </h5>
-
               <p class="card-text text-muted">
                 <i class="fa-regular fa-calendar me-2"></i>
                 <%= event.start_date.strftime("%B %d, %Y %I:%M %p") %>
               </p>
-
               <p class="card-text">
                 <i class="fa-solid fa-location-dot me-2"></i>
                 <%= event.location %>
               </p>
-
               <p class="card-text">
                 <i class="fa-sharp-duotone fa-solid fa-money-bill"></i>
                 <%= event.cost.present? && event.cost > 0 ? number_to_currency(event.cost) : "Free" %>
               </p>
-
               <!-- Registration Countdown / Status -->
               <% if event.early_access_for_members && event.general_registration_start %>
                 <% if Time.current < event.general_registration_start %>
@@ -61,7 +51,6 @@
               <% else %>
                 <p><strong>General registration is now open!</strong></p>
               <% end %>
-
               <!-- Alert for Non-Members -->
               <% if event.early_access_period? && !current_user&.member? %>
                 <p class="alert-member-only">This event is currently available to members only.</p>
@@ -74,22 +63,13 @@
             </div>
             </div>
           </div>
-          <% end %>
-          <!-- Combine date and time -->
-          <p><strong>Date and Time:</strong> <%= event.start_date.strftime("%B %d, %Y at %I:%M %p") %></p>
-          <p><strong>Location:</strong> <%= event.location %></p>
-          <p><strong>Cost:</strong> <%= number_to_currency(event.cost, precision: 2) %></p>
-          <!-- Link to View Event Details -->
-          <%= link_to 'View Event', event_path(event), class: "btn-view" %>
-          <%= button_to 'Register Now', event_payments_path(event, paymentable_type: 'Event', paymentable_id: event.id), method: :post, class: 'event-payments btn btn-primary', data: { turbo: false } %>
         </div>
       <% end %>
     </div>
   <% else %>
     <p>No upcoming events at the moment.</p>
   <% end %>
-  <!-- Back Button -->
   <%= link_to 'Back to Home', root_path, class: "btn-back" %>
   <%= link_to 'New Event', new_event_path, class: "btn-back" %>
- 
+
 </div>
