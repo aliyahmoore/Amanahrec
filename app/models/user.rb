@@ -18,7 +18,7 @@ class User < ApplicationRecord
   def has_paid_for?(paymentable)
     payments.exists?(paymentable: paymentable, status: "succeeded")
   end
-  
+
   has_one :membership
 
   def paid?

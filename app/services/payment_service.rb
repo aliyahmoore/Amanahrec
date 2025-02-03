@@ -14,33 +14,17 @@ class PaymentService
 
       # Membership payment is a subscription
       mode = @paymentable.is_a?(Membership) ? "subscription" : "payment"
-      line_items = if @paymentable.is_a?(Membership)
-        [
-          {
-            price_data: {
-              currency: "usd",
-              product: ENV["STRIPE_MEMBERSHIP_PRODUCT_ID"],
-              recurring: { interval: "month" },
-              unit_amount: 1000 # $10 in cents
-            },
-            quantity: 1
-          }
-        ]
-        # Events and activities are regular payments
-      else
-        [
-          {
-            price_data: {
-              currency: "usd",
-              product_data: {
-                name: @paymentable.title,
-                description: @paymentable.description
-              },
-              unit_amount: (@paymentable.cost * 100).to_i
-            },
-            quantity: 1
-          }
-        ]
+      def line_items
+        [ {
+          price_data: {
+            currency: "usd",
+            unit_amount: payment_amount,
+            product: product_id, # This will return the product ID for Membership or nil for others
+            recurring: recurring_data, # Will be nil unless it's a Membership
+            product_data: payment_product_data # For non-Membership types
+          },
+          quantity: 1
+        } ]
       end
 
       # Stripe third party for payment checkout
@@ -70,4 +54,27 @@ class PaymentService
         "#{@root_url}activities/#{@paymentable.id}"
       end
     end
+
+    private
+
+# Payment amount
+def payment_amount
+  @paymentable.is_a?(Membership) ? 1000 : (@paymentable.cost * 100).to_i
+end
+
+# Product ID for Membership or nil for others
+def product_id
+  @paymentable.is_a?(Membership) ? ENV["STRIPE_MEMBERSHIP_PRODUCT_ID"] : nil
+end
+
+# Recurring data for Membership or nil for others
+def recurring_data
+  @paymentable.is_a?(Membership) ? { interval: "month" } : nil
+end
+
+# Product data for non-Membership types (event, activity)
+def payment_product_data
+  return nil if @paymentable.is_a?(Membership) # Membership is handled by product_id
+  { name: @paymentable.title, description: @paymentable.description }
+end
 end
