@@ -68,12 +68,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_02_233602) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "early_access_for_members"
-    t.integer "early_access_days"
-    t.datetime "general_registration_start"
-    t.string "recurrence_pattern"
-    t.string "recurrence_days"
-    t.time "recurrence_time"
   end
 
   create_table "events", force: :cascade do |t|
@@ -100,6 +94,19 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_02_233602) do
     t.string "organization_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "status"
+    t.string "stripe_customer_id"
+    t.string "stripe_subscription_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
 
   create_table "payments", force: :cascade do |t|
     t.string "stripe_payment_id"
@@ -142,12 +149,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_02_233602) do
     t.index ["user_id"], name: "index_testimonials_on_user_id"
   end
 
-  create_table "roles", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "first_name", limit: 255, null: false
     t.string "last_name", limit: 255, null: false
@@ -172,9 +173,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_02_233602) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "memberships", "users"
-  add_foreign_key "payments", "activities"
-  add_foreign_key "payments", "events"
   add_foreign_key "payments", "users"
+  add_foreign_key "registrations", "users"
   add_foreign_key "testimonials", "users"
   add_foreign_key "users", "roles"
 end

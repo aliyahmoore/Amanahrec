@@ -1,21 +1,21 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  stripe_payment_id: MyString
-  amount: 9.99
-  status: MyString
-  event: one
-  user: one
+one_time_payment:
+  stripe_payment_id: "pi_1F..."
+  amount: 100.00
+  status: "succeeded"
+  user_id: 1
   is_recurring: false
-  recurring_type: MyString
-  payment_date: 2025-01-23 12:30:26
+  recurring_type: null
+  paymentable_type: "Event"
+  paymentable_id: 1
 
-two:
-  stripe_payment_id: MyString
-  amount: 9.99
-  status: MyString
-  event: two
-  user: two
-  is_recurring: false
-  recurring_type: MyString
-  payment_date: 2025-01-23 12:30:26
+recurring_payment:
+  stripe_payment_id: "pi_2G..."
+  amount: 10.00
+  status: "succeeded"
+  user_id: 2
+  is_recurring: true
+  recurring_type: "monthly"
+  paymentable_type: "Membership"
+  paymentable_id: 1

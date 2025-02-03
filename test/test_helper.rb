@@ -8,8 +8,12 @@ module ActiveSupport
     parallelize(workers: :number_of_processors)
 
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-    fixtures :all
-
+    fixtures :roles, :users, :memberships, :events, :activities, :media_mentions, :boards
     # Add more helper methods to be used by all tests here...
+
+    setup do
+      puts "Users in database: #{User.pluck(:id)}"
+      puts "Memberships in database: #{Membership.pluck(:user_id)}"
+    end
   end
 end

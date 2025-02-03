@@ -43,7 +43,7 @@ class PaymentsController < ApplicationController
     end
   end
 
-  private  
+  private
 
   def paymentable_path
     @paymentable.is_a?(Membership) ? root_url : polymorphic_path(@paymentable)

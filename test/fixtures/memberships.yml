@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user_id: one
+  user_id: 1
   start_date: 2025-01-28 11:00:39
   end_date: 2025-01-28 11:00:39
   status: MyString
 
 two:
-  user_id: two
+  user_id: 2
   start_date: 2025-01-28 11:00:39
   end_date: 2025-01-28 11:00:39
   status: MyString
