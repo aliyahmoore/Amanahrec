@@ -6,8 +6,7 @@ class PaymentsController < ApplicationController
     return redirect_to new_user_session_path, alert: "You must be signed in to register." unless user_signed_in?
 
     if user_has_paid_for_paymentable?
-      redirect_to paymentable_path, alert: paymentable_alert_message
-      return
+      return redirect_to paymentable_path, alert: paymentable_alert_message if current_user.has_paid_for?(@paymentable)
     end
 
     stripe_session = PaymentService.new(current_user, @paymentable, root_url).create_stripe_session
@@ -47,12 +46,6 @@ class PaymentsController < ApplicationController
   def user_has_paid_for_paymentable?
     if @paymentable.is_a?(Membership)
       @paymentable.active?
-    else
-      Payment.exists?(user_id: current_user.id,
-                      paymentable_type: @paymentable.class.name,
-                      paymentable_id: @paymentable.id,
-                      status: "succeeded")
-    end
   end
 
   def paymentable_path
