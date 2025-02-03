@@ -1,4 +1,4 @@
-<%= stylesheet_link_tag 'media_mentions', media: 'all' %>
+
 
 
 <h1>Latest News</h1>
@@ -18,7 +18,7 @@
    <% if @media_mentions.present? %>
      <% @media_mentions.each do |media_mention| %>
        <div>
-         <div class="card custom-card mb-3">
+         <div class="card custom-card mb-3" style="background-color: #DACCB1;">
            <div class="card-header media-header" style="background-color: #E9E2D8; height: 120px; display: flex; align-items: center; justify-content: center;">
              <strong>
                <h2 style="color: #403F2B; margin: 0; font-size: 25px; text-align: center;">
