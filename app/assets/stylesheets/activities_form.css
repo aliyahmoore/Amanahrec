@@ -4,7 +4,13 @@
   padding: 30px;
 }
 /* Adjustments for File Input */
-.activity-form .form-control {
+.activity-form .form-control, .form-select {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #57573F;
+}
+
+.activity-form .form-select {
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #57573F;
