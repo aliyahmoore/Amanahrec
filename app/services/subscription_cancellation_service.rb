@@ -6,7 +6,7 @@ class SubscriptionCancellationService
   # Cancel subscription
   def cancel
     # Retrieve Stripe subscription
-    stripe_subscription = Stripe::Subscription.retrieve(@user.membership.stripe_subscription_id)
+    stripe_subscription = Stripe::Subscription.retrieve(@user.membership&.stripe_subscription_id)
     stripe_subscription&.cancel
 
     # Update membership status

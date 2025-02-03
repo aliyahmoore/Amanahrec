@@ -7,7 +7,7 @@ class Membership < ApplicationRecord
     status == "active" && end_date > Time.now
   end
 
-  def update_membership_status!(customer, subscription)
+  def activate!(customer, subscription)
     update!(
       status: MEMBERSHIP_STATUS_ACTIVE,
       start_date: Time.now,

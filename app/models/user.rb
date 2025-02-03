@@ -20,8 +20,4 @@ class User < ApplicationRecord
   end
 
   has_one :membership
-
-  def paid?
-    payments.where(status: "succeeded").exists?
-  end
 end

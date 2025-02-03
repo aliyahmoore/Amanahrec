@@ -83,6 +83,6 @@ class PaymentProcessingService
       customer = Stripe::Customer.retrieve(session.customer)
       subscription = Stripe::Subscription.retrieve(session.subscription)
 
-      @paymentable.update_membership_status!(customer, subscription)
+      @paymentable.activate!(customer, subscription) if @paymentable.is_a?(Membership)
     end
 end

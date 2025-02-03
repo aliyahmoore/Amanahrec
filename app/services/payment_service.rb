@@ -57,24 +57,24 @@ class PaymentService
 
     private
 
-# Payment amount
-def payment_amount
-  @paymentable.is_a?(Membership) ? 1000 : (@paymentable.cost * 100).to_i
-end
+    # Payment amount
+    def payment_amount
+      @paymentable.is_a?(Membership) ? 1000 : (@paymentable.cost * 100).to_i
+    end
 
-# Product ID for Membership or nil for others
-def product_id
-  @paymentable.is_a?(Membership) ? ENV["STRIPE_MEMBERSHIP_PRODUCT_ID"] : nil
-end
+    # Product ID for Membership or nil for others
+    def product_id
+      @paymentable.is_a?(Membership) ? ENV["STRIPE_MEMBERSHIP_PRODUCT_ID"] : nil
+    end
 
-# Recurring data for Membership or nil for others
-def recurring_data
-  @paymentable.is_a?(Membership) ? { interval: "month" } : nil
-end
+    # Recurring data for Membership or nil for others
+    def recurring_data
+      @paymentable.is_a?(Membership) ? { interval: "month" } : nil
+    end
 
-# Product data for non-Membership types (event, activity)
-def payment_product_data
-  return nil if @paymentable.is_a?(Membership) # Membership is handled by product_id
-  { name: @paymentable.title, description: @paymentable.description }
-end
+    # Product data for non-Membership types (event, activity)
+    def payment_product_data
+      return nil if @paymentable.is_a?(Membership) # Membership is handled by product_id
+      { name: @paymentable.title, description: @paymentable.description }
+    end
 end
