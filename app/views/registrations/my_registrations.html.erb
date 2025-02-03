@@ -1,0 +1,15 @@
+<h1>My Registrations</h1>
+
+<!-- Grouped Registrations (Events and Activities) -->
+<% @grouped_registrations.each do |type, registrations| %>
+  <h3>Registered <%= type.pluralize %></h3>
+  <div class="registrations-section <%= type.downcase %>">
+    <% if registrations.any? %>
+      <% registrations.each do |registration| %>
+        <%= render partial: 'registration', locals: { registration: registration } %>
+      <% end %>
+    <% else %>
+      <p>No registered <%= type.downcase.pluralize %>.</p>
+    <% end %>
+  </div>
+<% end %>

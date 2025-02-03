@@ -10,6 +10,9 @@ class Activity < ApplicationRecord
     validates :title, :description, :start_date, :end_date, :location, presence: true
     validates :capacity, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
     validates :cost, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
+
+    has_many :payments, as: :paymentable
+    has_many :registrations, as: :registrable
     validates :recurrence_pattern, inclusion: { in: %w[daily weekly], message: "%{value} is not a valid recurrence pattern" }, if: :recurring?
     validates :recurrence_days, presence: true, if: :recurring?
     validates :general_registration_start, presence: true
@@ -76,6 +79,4 @@ class Activity < ApplicationRecord
       return general_registration_open? unless user.member?
       early_access_period? || general_registration_open?
     end
-    
-    has_many :payments, as: :paymentable
 end

@@ -1,8 +1,11 @@
 <% content_for :title, @event.title %>
 <!-- Event Show Page -->
 <div class="event-show-container">
+
+  
   <!-- Event Title -->
   <h1><%= @event.title %></h1>
+
   <!-- Event Details Section -->
   <div class="event-details">
     <h2>Description</h2>
@@ -51,9 +54,9 @@
 
   <!-- Register Event Button (Only Show When General Registration is Open or for Members During Early Access) -->
   <% if (@event.early_access_for_members? && current_user&.member?) || @event.general_registration_open? %>
-    <div class="text-center">
-  <%= button_to 'Register Now', event_payments_path(@event, paymentable_type: 'Event', paymentable_id: @event.id), method: :post, class: 'event-payments btn btn-primary', data: { turbo: false } %>
-</div>
+    <div class="event-actions">
+      <%= render "shared/register_button", registrable: @event %>
+    </div>
   <% end %>
 
   <!-- Event Actions -->
