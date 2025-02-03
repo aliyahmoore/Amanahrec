@@ -18,8 +18,8 @@
 /* Donate Button */
 #donate {
   font-size: 1.25rem; /* Match .lead font size */
-  color: var(--main-color) !important;
-  background-color: var(--accent-color); /* Light background for button */
+  color: #daccb1 !important;
+  background-color: #57573f !important; 
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
 }
