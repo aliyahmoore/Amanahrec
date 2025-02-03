@@ -45,44 +45,45 @@
 </div>
 
 <!-- Testimonials Section -->
+<!-- Testimonials Section -->
 <div>
-<div id="testimonialCarousel" class="carousel carousel-dark slide col-md-6 mx-auto" data-bs-ride="carousel">
-  <!-- Carousel Indicators -->
-  <div class="carousel-indicators">
-    <% @testimonials.each_with_index do |testimonial, index| %>
-      <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="<%= index %>" class="<%= index == 0 ? 'active' : '' %>" aria-label="Slide <%= index + 1 %>"></button>
-    <% end %>
-  </div>
-
-  <!-- Carousel Items -->
-  <div class="carousel-inner">
-    <% @testimonials.each_with_index do |testimonial, index| %>
-      <div class="carousel-item <%= index == 0 ? 'active' : '' %>" data-bs-interval="<%= index == 0 ? '10000' : '2000' %>">
-        <div class="d-block w-100 text-center p-5">
-          <p class="lead"><em><%= testimonial.text %></em></p>
-          <h6><%= testimonial.user.first_name %> <%= testimonial.user.last_name %></h3>
-        </div>
-      </div>
-    <% end %>
-  </div>
-
-  <!-- Carousel Controls -->
-  <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-<div class="text-center">
-    <% if user_signed_in? && current_user.role.id == 1 %>
-      <%= link_to 'View Testimonials', testimonials_path, class: 'btn btn-secondary' %>
-    <% else %>
-      <%= link_to 'Submit a Testimonial', new_testimonial_path, class: 'btn btn-secondary' %>
-    <% end %>
+  <div id="testimonialCarousel" class="carousel carousel-dark slide col-md-6 mx-auto" data-bs-ride="carousel">
+    <!-- Carousel Indicators -->
+    <div class="carousel-indicators">
+      <% @testimonials.each_with_index do |testimonial, index| %>
+        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="<%= index %>" class="<%= index == 0 ? 'active' : '' %>" aria-label="Slide <%= index + 1 %>"></button>
+      <% end %>
     </div>
+
+    <!-- Carousel Items -->
+    <div class="carousel-inner">
+      <% @testimonials.each_with_index do |testimonial, index| %>
+        <div class="carousel-item <%= index == 0 ? 'active' : '' %>" data-bs-interval="<%= index == 0 ? '10000' : '2000' %>">
+          <div class="d-block w-100 text-center p-5 testimonial-content">
+            <p class="lead"><em><%= testimonial.text %></em></p>
+            <h6><%= testimonial.user.first_name %> <%= testimonial.user.last_name %></h6>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Carousel Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <div class="text-center">
+    <% if user_signed_in? && current_user.role.id == 1 %>
+      <%= link_to 'View Testimonials', testimonials_path, class: 'btn btn-secondary mb-3' %>
+    <% else %>
+      <%= link_to 'Submit a Testimonial', new_testimonial_path, class: 'btn btn-secondary mb-3' %>
+    <% end %>
+  </div>
 </div>
 
 
