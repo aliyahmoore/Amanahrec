@@ -2,14 +2,6 @@
 .activity-form {
   background-color: #E9E2D8;
   padding: 30px;
-  border-radius: 8px;
-  max-width: 700px;
-  margin: 0 auto;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.activity-form .form-section {
-  margin-bottom: 20px;
 }
 
 .activity-form h3 {

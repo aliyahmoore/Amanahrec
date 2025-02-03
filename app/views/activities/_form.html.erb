@@ -21,39 +21,41 @@
   <div class="form-section mb-4">
     <h3>Activity Details</h3>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-3">
         <%= form.label :title, class: "form-label" %><span class="required">*</span>
         <%= form.text_field :title, class: "form-control" %>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-3">
         <%= form.label :location, class: "form-label" %><span class="required">*</span>
         <%= form.text_field :location, class: "form-control" %>
       </div>
-    </div>
-    <div class="row mt-3">
-      <div class="col-md-6">
+
+            <div class="col-md-2">
         <%= form.label :start_date, "Start Date", class: "form-label" %>
         <%= form.datetime_local_field :start_date, class: "form-control" %>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-2">
         <%= form.label :end_date, "End Date", class: "form-label" %>
         <%= form.datetime_local_field :end_date, class: "form-control" %>
       </div>
+
+       <div class="col-md-1">
+      <%= form.label :cost, "Cost ($)", class: "form-label" %>
+      <%= form.number_field :cost, value: @activity.cost.nil? ? 0 : @activity.cost, class: "form-control", step: "0.01", min: "0" %>
     </div>
+    </div>
+
     <div class="row mt-3">
-      <div class="col-md-12">
+      <div class="col-md-4">
         <%= form.label :description, class: "form-label" %><span class="required">*</span>
         <%= form.text_area :description, class: "form-control", rows: 3 %>
       </div>
-    </div>
-    <div class="row mt-3">
-      <div class="col-md-12">
+      <div class="col-md-4">
         <%= form.label :rules, class: "form-label" %><span class="required">*</span>
         <%= form.text_area :rules, class: "form-control", rows: 3 %>
       </div>
-    </div>
-    <div class="row mt-3">
-      <div class="col-md-12">
+
+       <div class="col-md-4">
         <%= form.label :notes, class: "form-label" %><span class="required">*</span>
         <%= form.text_area :notes, class: "form-control", rows: 3 %>
       </div>
@@ -86,47 +88,34 @@
   <div class="form-section mb-4">
     <h3>Registration</h3>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-3">
         <%= form.label :general_registration_start, "General Registration Start Date", class: "form-label" %><span class="required">*</span>
         <%= form.datetime_local_field :general_registration_start, class: "form-control", required: true %>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-3">
         <%= form.label :capacity, class: "form-label" %><span class="required">*</span>
         <%= form.number_field :capacity, class: "form-control" %>
       </div>
-    </div>
-    <div class="row mt-3">
-      <div class="col-md-6">
+
+      <div class="col-md-2">
         <div class="form-check">
           <%= form.check_box :early_access_for_members, class: "form-check-input" %>
           <%= form.label :early_access_for_members, "Enable Early Access for Members", class: "form-check-label" %>
         </div>
       </div>
-      <div class="col-md-6">
+       <div class="col-md-3">
         <%= form.label :early_access_days, "Number of Days for Member Early Access", class: "form-label" %>
         <%= form.number_field :early_access_days, class: "form-control", min: 0 %>
       </div>
     </div>
+     
+    </div>
   </div>
 
-  <!-- Cost Section -->
-<div class="form-section mb-4">
-  <div class="row">
-    <!-- Cost Section -->
-    <div class="col-md-6">
-      <h3>Cost($)</h3>
-      <%= form.number_field :cost, value: @activity.cost.nil? ? 0 : @activity.cost, class: "form-control", step: "0.01", min: "0" %>
-    </div>
-
-    <!-- Upload Image Section -->
-    <div class="col-md-6">
+<div class="col-md-3">
       <h3>Upload an Image</h3>
       <%= form.file_field :image, class: "form-control" %>
     </div>
-  </div>
-</div>
-
-
 
   <!-- Submit Button -->
   <div class="actions">
