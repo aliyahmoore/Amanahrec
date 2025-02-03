@@ -67,7 +67,7 @@
   <div class="form-section mb-4">
     <h3>Registration</h3>
     <div class="row">
-      <div class="col-md-2">
+      <div class="col-md-3">
         <%= form.label :general_registration_start, "General Registration Start Date", class: "form-label" %><span class="required">*</span>
         <%= form.datetime_local_field :general_registration_start, class: "form-control", required: true %>
       </div>
@@ -81,7 +81,7 @@
           <%= form.label :early_access_for_members, "Member Early Access", class: "form-check-label m-0" %>
         </div>
       </div>
-      <div class="col-md-1">
+      <div class="col-md-3">
         <%= form.label :early_access_days, "Early Access Duration (days)", class: "form-label" %>
         <%= form.number_field :early_access_days, class: "form-control", min: 0 %>
       </div>

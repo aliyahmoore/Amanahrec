@@ -27,8 +27,10 @@
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       <% end %>
-      <%= render 'layouts/navbar' %> <!-- Moved navbar here, below flash -->
+      <%= render 'layouts/navbar' %> 
+     <div class="container">
       <%= yield %> <!-- Main content area -->
+      </div>
       <%= yield :javascript %>
       <%= render 'layouts/footer' %>
     </body>
