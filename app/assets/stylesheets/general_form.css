@@ -1,0 +1,20 @@
+/* Common Form Styles */
+.activity-form, .event-form {
+  padding: 30px;
+}
+
+.activity-form .form-control, 
+.activity-form .form-select, 
+.event-form .form-control, 
+.event-form .form-select {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #676762;
+}
+
+/* Form Sections */
+.form-section {
+  margin-bottom: 30px;
+  padding: 15px;
+  border-radius: 5px;
+}

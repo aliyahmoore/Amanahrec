@@ -3,8 +3,8 @@
 one:
   title: MyString
   description: MyText
-  event_datetime: 2025-01-22 07:53:12
-  end_datetime: 2025-01-22 07:53:12
+  start_date: 2025-01-22 07:53:12
+  end_date: 2025-01-22 07:53:12
   location: MyString
   rsvp_deadline: 2025-01-22
   childcare: false
@@ -14,8 +14,8 @@ one:
 two:
   title: MyString
   description: MyText
-  event_datetime: 2025-01-22 07:53:12
-  end_datetime: 2025-01-22 07:53:12
+  start_date: 2025-01-22 07:53:12
+  end_date: 2025-01-22 07:53:12
   location: MyString
   rsvp_deadline: 2025-01-22
   childcare: false
