@@ -1,38 +1,66 @@
+<% content_for :title, @activity.title %>
 <div class="activity-show">
   <h1 class="activity-title"><%= @activity.title %></h1>
 
   <!-- Activity Image Section -->
   <div class="activity-images">
-    <% if @activity.images.attached? %>
-      <% @activity.images.each do |image| %>
+    <% if @activity.image.attached? %>
         <div class="activity-image">
-          <%= image_tag image, class: "activity-image-preview" %>
+          <%= image_tag @activity.image, class: "activity-image-preview" %>
         </div>
-      <% end %>
     <% else %>
-      <p>No images uploaded for this activity.</p>
+      <p>No image uploaded for this activity.</p>
     <% end %>
   </div>
 
+  <!-- Early Access Info -->
+  <% if @activity.early_access_for_members && @activity.early_access_days %>
+    <% days_remaining = (@activity.general_registration_start.to_date - Date.current).to_i %>
+    <% if days_remaining > 0 %>
+      <p><strong>Early Access For Members Ends In:</strong> <strong><%= days_remaining %> Days </strong></p>
+      <% end %> 
+    <% end %> 
   <!-- Activity Details -->
   <div class="activity-details">
     <p><strong>Description:</strong> <%= @activity.description %></p>
-    <p><strong>Date:</strong> <%= @activity.date %></p>
+     <p><strong>Date:</strong>  <%= @activity.start_date.strftime("%B %d, %Y") %> 
+  <%= @activity.start_date.strftime("%I:%M %p") %> - <%= @activity.end_date.strftime("%I:%M %p") %>
     <p><strong>Location:</strong> <%= @activity.location %></p>
     <p><strong>Capacity:</strong> <%= @activity.capacity %></p>
     <p><strong>What to Bring:</strong> <%= @activity.what_to_bring %></p>
     <p><strong>Rules:</strong> <%= @activity.rules %></p>
     <p><strong>Notes:</strong> <%= @activity.notes %></p>
     <p><strong>Cost:</strong> <%= number_to_currency(@activity.cost, unit: "$", precision: 2) %></p>
-    <p><strong>Duration:</strong> <%= @activity.duration %> hours</p>
-  </div>
+    
+    <% if @activity.recurrence_pattern.present? %>
+      <p><strong>Recurring:</strong> <%= @activity.recurrence_pattern.capitalize %></p>
 
+      <% if @activity.recurrence_pattern == "weekly" && @activity.recurrence_days.present? %>
+        <p><strong>Days:</strong>
+          <% days = @activity.recurrence_days.split(',').map(&:capitalize) %>
+          <%= days.join(', ') %>
+        </p>
+      <% end %>
+    <% end %>
+  </div>
+  
+
+  
+  <!-- Register Activity Button (Only Show When General Registration is Open) -->
+ <% if (@activity.early_access_for_members? && current_user&.member?) || @activity.general_registration_open? %>
+    <div class="activity-actions">
+      <%= render "shared/register_button", registrable: @activity %>
+    </div>
+  <% end %>
+  
   <!-- Action Buttons (Edit, Delete, Back) -->
   <div class="activity-actions">
+    <% if current_user&.role_id == 1 %>
     <%= link_to 'Edit', edit_activity_path(@activity), class: "edit-button" %>
     <%= button_to 'Delete', @activity, method: :delete, data: { confirm: 'Are you sure you want to delete this activity?' }, class: "delete-button" %>
+    <%end%>
     <%= link_to 'Back to Activities', activities_path, class: "back-button" %>
-    <%= render "shared/register_button", registrable: @activity %>
+    
 
 
   </div>

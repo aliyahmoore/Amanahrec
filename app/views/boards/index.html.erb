@@ -1,0 +1,15 @@
+<% content_for :title, "Boards" %>
+
+<h1>Our Board Members</h1>
+
+<div class="row row-cols-1 row-cols-lg-2 g-4">
+  <% @boards.each do |board| %>
+    <%= render board %>
+  <% end %>
+</div>
+
+<div>
+<% if current_user&.role&.name == "admin" %>
+<%= link_to "Add a New Board Member", new_board_path, class: "btn btn-primary mt-3" %>
+<%end%>
+</div>
