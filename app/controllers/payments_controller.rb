@@ -1,6 +1,7 @@
 class PaymentsController < ApplicationController
   before_action :set_paymentable, only: [ :create, :success ]
 
+  include Findable
   def create
     return redirect_to new_user_session_path, alert: "You must be signed in to register." unless user_signed_in?
 
@@ -42,24 +43,6 @@ class PaymentsController < ApplicationController
   end
 
   private
-
-  def set_paymentable
-    @paymentable = find_paymentable(params[:paymentable_type], params[:paymentable_id])
-    redirect_to root_url, alert: "Unable to find the requested paymentable item." unless @paymentable
-  end
-
-  def find_paymentable(paymentable_type, paymentable_id)
-    case paymentable_type
-    when "Activity"
-      Activity.find_by(id: paymentable_id)
-    when "Event"
-      Event.find_by(id: paymentable_id)
-    when "Membership"
-      Membership.find_by(user: current_user) || Membership.create!(user: current_user, status: "pending")
-    else
-      nil
-    end
-  end
 
   def user_has_paid_for_paymentable?
     if @paymentable.is_a?(Membership)
