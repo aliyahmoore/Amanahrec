@@ -67,7 +67,7 @@
     <h3>Recurrence</h3>
     <div class="row">
       <div class="col-md-6">
-        <%= form.label :recurrence_pattern, "Recurring Event?", class: "form-label" %><span class="required">*</span>
+        <%= form.label :recurrence_pattern, "Recurring Event?", class: "form-label" %>
         <%= form.select :recurrence_pattern, options_for_select([['None', nil], ['Daily', 'daily'], ['Weekly', 'weekly']], @activity.recurrence_pattern || 'none'), {}, class: "form-select", id: "activity_recurrence_pattern" %>
       </div>
       <div class="col-md-6" id="recurrence_days_field" style="<%= 'display:none' if @activity.recurrence_pattern != 'weekly' %>">
@@ -97,14 +97,14 @@
         <%= form.number_field :capacity, class: "form-control" %>
       </div>
 
-      <div class="col-md-2">
-        <div class="form-check">
-          <%= form.check_box :early_access_for_members, class: "form-check-input" %>
-          <%= form.label :early_access_for_members, "Enable Early Access for Members", class: "form-check-label" %>
-        </div>
-      </div>
+     <div class="col-md-2 d-flex align-items-center">
+  <div class="form-check m-0">
+    <%= form.check_box :early_access_for_members, class: "form-check-input me-2" %>
+    <%= form.label :early_access_for_members, "Member Early Access", class: "form-check-label m-0" %>
+  </div>
+</div>
        <div class="col-md-3">
-        <%= form.label :early_access_days, "Number of Days for Member Early Access", class: "form-label" %>
+        <%= form.label :early_access_days, "Early Access Duration (days)", class: "form-label" %>
         <%= form.number_field :early_access_days, class: "form-control", min: 0 %>
       </div>
     </div>
@@ -118,7 +118,7 @@
     </div>
 
   <!-- Submit Button -->
-  <div class="actions">
+  <div class="text-center">
     <%= form.submit "Save Activity", class: "btn btn-primary" %>
   </div>
 <% end %>

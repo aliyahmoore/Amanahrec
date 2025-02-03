@@ -3,89 +3,9 @@
   background-color: #E9E2D8;
   padding: 30px;
 }
-
-.activity-form h3 {
-  font-size: 1.5rem;
-  color: #403F2B;
-  margin-bottom: 10px;
-}
-
-/* Form fields (input, textarea, select) */
-.activity-form .input-field {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #57573F;
-  border-radius: 5px;
-  font-size: 1rem;
-  background-color: #fff;
-  color: #403F2B;
-}
-
-
-/* Form Group Label Styling */
-.activity-form .form-group label {
-  font-size: 1rem;
-  font-weight: bold;
-}
-
-/* Submit Button */
-.activity-form .submit-button {
-  background-color: #57573F;
-  color: white;
-  padding: 12px 20px;
-  border-radius: 5px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.activity-form .submit-button:hover {
-  background-color: #403F2B;
-}
-
-/* Error Message */
-.activity-form .error {
-  color: red;
-  font-size: 0.9rem;
-}
-
 /* Adjustments for File Input */
 .activity-form .form-control {
-  width: 100%;
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #57573F;
-  border-radius: 5px;
-}
-
-/* Additional Styles for Recurrence Section */
-.activity-form .field {
-  margin-bottom: 15px;
-}
-
-.activity-form .required {
-  color: red;
-}
-
-/* Spacing adjustments for overall form */
-.activity-form .form-group {
-  margin-bottom: 15px;
-}
-
-.activity-form .actions {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.activity-form .form-group input,
-.activity-form .form-group select,
-.activity-form .form-group textarea {
-  width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #57573F;
-  font-size: 1rem;
-  background-color: #fff;
-  color: #403F2B;
 }
