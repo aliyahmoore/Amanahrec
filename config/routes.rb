@@ -17,7 +17,6 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   resources :media_mentions
-  get "/about", to: "pages#about"
   # Defines the root path route ("/")
   # root "posts#index"
   root "pages#home"
@@ -27,5 +26,18 @@ Rails.application.routes.draw do
       patch :unapprove
     end
   end
-  resources :events, :activities
+
+  resources :activities, :events do
+    resources :payments, only: [ :create ]
+  end
+
+  # Membership payments (handled at the top level)
+  resources :payments, only: [ :create ] do
+    collection do
+      post :cancel_subscription
+    end
+  end
+
+  get "/payments/success", to: "payments#success"
+  get "/payments/cancel", to: "payments#cancel"
 end

@@ -58,6 +58,8 @@
               <%= link_to 'Edit', edit_activity_path(activity), class: 'btn btn-warning btn-sm' %>
               <%= link_to 'Delete', activity_path(activity), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
               <% end %>
+            <%= button_to 'Register Now', activity_payments_path(activity, paymentable_type: 'Activity', paymentable_id: activity.id), method: :post, class: 'activity-payments btn btn-primary', data: { turbo: false } %>
+            
             </div>
           </div>
         </div>

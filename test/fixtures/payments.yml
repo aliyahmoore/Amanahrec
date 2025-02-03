@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one_time_payment:
+  stripe_payment_id: "pi_1F..."
+  amount: 100.00
+  status: "succeeded"
+  user_id: 1
+  is_recurring: false
+  recurring_type: null
+  paymentable_type: "Event"
+  paymentable_id: 1
+
+recurring_payment:
+  stripe_payment_id: "pi_2G..."
+  amount: 10.00
+  status: "succeeded"
+  user_id: 2
+  is_recurring: true
+  recurring_type: "monthly"
+  paymentable_type: "Membership"
+  paymentable_id: 1
