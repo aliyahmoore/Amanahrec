@@ -1,5 +1,5 @@
 <% content_for :title, @activity.title %>
-<div class="container activity-show-container">
+<div class="container activity-show">
   <h1 class="activity-title mt-3 display-3"><%= @activity.title %></h1>
 
   <!-- Activity Image Section -->
@@ -45,6 +45,16 @@
     <!-- Right Column (Activity Details, Register, Edit, Delete Buttons) -->
     <div class="col-md-4">
       <div class="activity-details text-start p-3 shadow-sm rounded bg-light">
+        
+         <!-- Member Early Access Badge -->
+    <% if @activity.early_access_for_members? %>
+      <div class="text-center mb-2">
+        <span class="badge bg-warning text-dark">
+          <i class="fas fa-gem"></i> Member Early Access
+        </span>
+      </div>
+    <% end %>
+        
         <!-- Date and Location -->
         <p><i class="fas fa-calendar-alt"></i> <strong>:</strong> <%= @activity.start_date.strftime("%B %d, %Y") %> 
           <%= @activity.start_date.strftime("%I:%M %p") %> - <%= @activity.end_date.strftime("%I:%M %p") %>
