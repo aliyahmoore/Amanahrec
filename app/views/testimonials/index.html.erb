@@ -1,26 +1,55 @@
-<div class="testimonial-container container my-5">
-  <h1 class="text-center mb-4">Testimonials</h1>
-  <% @testimonials.each do |testimonial| %>
-    <div class="card testimonial-card mb-4">
-      <div class="card-body">
-        <p class="card-text"><%= testimonial.text %></p>
-        <small>By: <%= testimonial.user.first_name %> <%= testimonial.user.last_name %></small>
-        <% if current_user&.role&.name == 'admin' %>
-          <div class="d-flex justify-content-between align-items-center">
-            <% if testimonial.approved? %>
-              <span class="badge bg-success custom-badge">Approved</span>
-              <%= button_to "Unapprove", unapprove_testimonial_path(testimonial), method: :patch, class: "btn custom-btn-warning btn-sm", data: { confirm: "Are you sure you want to unapprove this testimonial?" } %>
-            <% else %>
-              <span class="badge bg-warning custom-badge">Pending Approval</span>
-              <%= button_to "Approve", approve_testimonial_path(testimonial), method: :patch, class: "btn custom-btn-success btn-sm" %>
-            <% end %>
+<%= stylesheet_link_tag "testimonial_index", "data-turbo-track": "reload" %>
+
+<h1 class="text-center mb-4">Testimonials</h1>
+
+<div class="container">
+  <!-- Filter Buttons -->
+  <div class="text-center mb-5">
+    <%= link_to "Show All", testimonials_path, class: "btn btn-secondary" %>
+    <%= link_to "Approved", testimonials_path(status: "approved"), class: "btn btn-success" %>
+    <%= link_to "Pending Approval", testimonials_path(status: "pending"), class: "btn btn-warning" %>
+  </div>
+
+  <div class="row">
+    <% @testimonials.each do |testimonial| %>
+      <div class="col-md-6 col-lg-4 mb-4 testimonial-card-container">
+        <div class="card testimonial-card" style="width: 26rem; max-width: 100%;">
+          <!-- Card Header -->
+          <div class="card-header <%= testimonial.approved? ? 'bg-success text-white' : 'bg-warning text-dark' %>">
+            <%= testimonial.approved? ? 'Approved' : 'Pending Approval' %>
           </div>
 
-          <div class="mt-2">
-            <%= link_to "Edit", edit_testimonial_path(testimonial), class: "btn custom-btn-primary btn-sm me-2" %>
-            <%= button_to "Delete", testimonial_path(testimonial), method: :delete, class: "btn custom-btn-danger btn-sm", data: { confirm: "Are you sure you want to delete this testimonial permanently?" } %>
+          <!-- Card Body -->
+          <div class="card-body">
+            <p class="card-text" style="font-size: 1.2rem; font-weight: bold; color: #403F2B; text-align: center; line-height: 1.4; margin-top: 20px;">
+              <%= testimonial.text %>
+            </p>
+            <small class="text-muted d-block text-center" style="margin-top: 15px; display: block;">
+              By: <%= testimonial.user.first_name %> <%= testimonial.user.last_name %>
+            </small>
           </div>
-        <% end %>
+
+          <% if current_user&.role&.name == 'admin' %>
+            <!-- Card Footer -->
+            <div class="card-footer">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <% if testimonial.approved? %>
+                    <%= button_to "Unapprove", unapprove_testimonial_path(testimonial), method: :patch, class: "btn btn-warning btn-sm", data: { confirm: "Are you sure?" } %>
+                  <% else %>
+                    <%= button_to "Approve", approve_testimonial_path(testimonial), method: :patch, class: "btn btn-success btn-sm" %>
+                  <% end %>
+                </div>
+
+                <%= link_to "Edit", edit_testimonial_path(testimonial), class: "btn btn-primary btn-sm" %>
+
+                <div>
+                  <%= button_to "Delete", testimonial_path(testimonial), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Are you sure?" } %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   <% end %>
