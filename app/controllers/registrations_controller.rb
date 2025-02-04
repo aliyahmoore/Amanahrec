@@ -1,6 +1,6 @@
 class RegistrationsController < ApplicationController
   before_action :set_registrable, only: [ :create ]
-
+  ALLOWED_REGISTRABLE_TYPES = [ "Activity", "Event" ]
 
 
   def create
@@ -32,10 +32,17 @@ class RegistrationsController < ApplicationController
 
   # Sets the registrable (Event or Activity) based on the provided params
   def set_registrable
-    @registrable = params[:registrable_type].constantize.find_by!(id: params[:registrable_id])
+    valid_types = [ "Activity", "Event" ]  # Whitelist allowed types
+    # Check if the registrable type is in the allowed list
+    if valid_types.include?(params[:registrable_type])
+      # Safe constantize: Find the class and retrieve the record
+      @registrable = params[:registrable_type].constantize.find_by!(id: params[:registrable_id])
+    end
   rescue ActiveRecord::RecordNotFound
+    # Handle case where the record is not found
     redirect_to root_path, alert: t("errors.registration.not_found")
   end
+
 
   # Finds the registrable object (Event or Activity) by its type and ID
   def find_registrable(type, id)
