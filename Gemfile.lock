@@ -284,6 +284,8 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    simple_calendar (3.1.0)
+      rails (>= 6.1)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -340,9 +342,8 @@ DEPENDENCIES
   capybara
   debug
   devise (~> 4.9)
-  htmlbeautifier (~> 1.4)
-  image_processing (~> 1.2)
   dotenv-rails
+  htmlbeautifier (~> 1.4)
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
@@ -351,6 +352,7 @@ DEPENDENCIES
   rails (~> 7.2.2)
   rubocop-rails-omakase
   selenium-webdriver
+  simple_calendar (~> 3.1)
   sprockets-rails
   stimulus-rails
   stripe (~> 13.3)

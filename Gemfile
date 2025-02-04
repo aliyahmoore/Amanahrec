@@ -63,3 +63,5 @@ gem "htmlbeautifier", "~> 1.4"
 gem "stripe", "~> 13.3"
 
 gem "dotenv-rails", groups: [ :development, :test ]
+
+gem "simple_calendar", "~> 3.1"

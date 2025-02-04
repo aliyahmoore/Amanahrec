@@ -78,4 +78,8 @@ class Activity < ApplicationRecord
     end
 
     has_many :payments, as: :paymentable
+
+    def start_time
+      start_date
+    end
 end
