@@ -4,7 +4,7 @@ module Findable
     included do
       before_action :set_paymentable, only: [ :create, :success ]
     end
-
+  
     private
 
     def set_paymentable
@@ -20,7 +20,7 @@ module Findable
         else
           nil
         end
-      rescue NameError
-        nil
+      rescue ActiveRecord::RecordNotFound
+        redirect_to root_url, alert: t("errors.payment.invalid_paymentable")
       end
 end
