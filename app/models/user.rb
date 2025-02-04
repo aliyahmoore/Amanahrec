@@ -12,4 +12,12 @@ class User < ApplicationRecord
 
 
   validates :first_name, :last_name, :email, :phone_number, :gender, :ethnicity, presence: true
+
+  has_many :payments
+
+  def has_paid_for?(paymentable)
+    payments.exists?(paymentable: paymentable, status: "succeeded")
+  end
+
+  has_one :membership
 end

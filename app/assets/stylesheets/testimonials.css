@@ -12,3 +12,31 @@
   font-weight: bold;
   margin-top: 10px;
 }
+
+/* Set a fixed height for the carousel items */
+.carousel-item {
+  height: 200px; /* Adjust this value as needed */
+  overflow-y: auto; /* Make the content scrollable if it overflows */
+}
+
+/* Ensure the content within the carousel item is properly aligned */
+.testimonial-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Optional: Truncate text with an ellipsis if it overflows */
+.testimonial-content p {
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* Number of lines to show */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-secondary{
+  background-color: #e9e2d8;
+}

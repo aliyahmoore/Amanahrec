@@ -15,3 +15,14 @@
  */
 
  
+body {
+    background-color: #e9e2d8!important;
+    color: #403f2b !important;
+}
+
+.btn-primary {
+    background-color: #403f2b !important; /* Dark Brown */
+    color: #E9E2D8 !important; /* Light Beige */
+    border: none !important;
+    padding: 10px 15px !important;
+  }

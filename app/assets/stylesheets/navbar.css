@@ -1,7 +1,7 @@
-/* Navigation Bar */
 .navbar {
-  --main-color: #403f2b;
-  --accent-color: #DACCB1;
+  --main-color: #403f2b; /* Dark color for logo and text */
+  --accent-color: #daccb1; /* Light color for contrast */
+  background-color: var(--accent-color) !important; /* Lighter background for navbar */
 }
 
 .navbar .nav-item .nav-link {
@@ -18,8 +18,8 @@
 /* Donate Button */
 #donate {
   font-size: 1.25rem; /* Match .lead font size */
-  color: var(--main-color) !important;
-  background-color: var(--accent-color);
+  color: #daccb1 !important;
+  background-color: #57573f !important; 
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
 }
@@ -50,6 +50,20 @@
 /* Hover & Active Effects */
 .dropdown-item:hover,
 .dropdown-item.active {
-  background-color: var(--accent-color) !important;
-  color: var(--main-color) !important;
+  background-color: var(--main-color) !important;
+  color: var(--accent-color) !important; /* Light text on hover */
+}
+
+
+.custom-danger-btn {
+  background-color: red;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  margin-top: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  text-align: center;
 }
