@@ -8,4 +8,5 @@
   <%= button_to "Register", 
                 polymorphic_path([registrable, :registrations], registrable_type: registrable.class.name, registrable_id: registrable.id), 
                 method: :post, class: "btn btn-success", data: { turbo: false } %>
+                
 <% end %>

@@ -1,24 +1,27 @@
 class RegistrationsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_registrable, only: [ :create ]
+  before_action :set_registrable, only: [:create]
+
+  
 
   def create
-    # Ensure @registrable is not nil
-    if @registrable.nil?
-      redirect_to root_path, alert: "The event or activity you're trying to register for could not be found."
-      return
-    end
-
-    # Pass both user and registrable to the register_user method
+    # Register the user using the Registration model's class method
     registration = Registration.register_user(current_user, @registrable)
 
     if registration.persisted?
-      redirect_to registration.requires_payment? ? new_payment_path(paymentable: @registrable) : my_registrations_path,
-                  notice: "Registration successful!"
+      # Check if the registrable requires payment
+      if registration.requires_payment?
+        # Redirect to the payment page if payment is required
+        redirect_to new_payment_path(paymentable: @registrable), notice: "Please proceed with payment."
+      else
+        # If no payment is required, redirect to the registrations page
+        redirect_to my_registrations_path, notice: "Registration successful!"
+      end
     else
+      # If registration failed, show errors
       redirect_to @registrable, alert: registration.errors.full_messages.to_sentence
     end
   end
+
 
   def my_registrations
     @registrations = current_user.registrations.preload(:registrable).order(:created_at)
@@ -27,16 +30,17 @@ class RegistrationsController < ApplicationController
 
   private
 
+  # Sets the registrable (Event or Activity) based on the provided params
   def set_registrable
-    Rails.logger.debug "registrable_type: #{params[:registrable_type]}, registrable_id: #{params[:registrable_id]}"
-    # Ensure params are passed correctly, and find the registrable
     @registrable = find_registrable(params[:registrable_type], params[:registrable_id])
 
+    # If the registrable is not found, redirect to the root path
     if @registrable.nil?
       redirect_to root_path, alert: "The event or activity you're trying to register for could not be found."
     end
   end
 
+  # Finds the registrable object (Event or Activity) by its type and ID
   def find_registrable(type, id)
     case type
     when "Activity"

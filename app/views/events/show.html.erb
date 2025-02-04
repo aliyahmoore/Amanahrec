@@ -36,7 +36,7 @@
     <p><strong>Sponsors:</strong> <%= @event.sponsors.presence || 'No sponsors listed' %></p>
 
     <h2>Cost</h2>
-    <p><strong>Cost:</strong><%= @event.cost.to_i == 0 ? 'Free' : number_to_currency(@activity.cost, unit: "$", precision: 2) %></p>
+    <p><strong>Cost:</strong><%= @event.cost.to_i == 0 ? 'Free' : number_to_currency(@event.cost, unit: "$", precision: 2) %></p>
     <% if @event.images.attached? %>
     <div class="event-images">
       <% @event.images.each do |image| %>
@@ -48,9 +48,6 @@
   <% else %>
     <p>No images uploaded for this event.</p>
   <% end %>
-<div class="text-center">
-  <%= button_to 'Register Now', event_payments_path(@event, paymentable_type: 'Event', paymentable_id: @event.id), method: :post, class: 'event-payments btn btn-primary', data: { turbo: false } %>
-</div>
   
   </div>
 
@@ -58,10 +55,10 @@
   <!-- Register Event Button (Only Show When General Registration is Open or for Members During Early Access) -->
   <% if (@event.early_access_for_members? && current_user&.member?) || @event.general_registration_open? %>
     <div class="event-actions">
-      <%= button_to 'Register Now', "#", class: 'event-payments btn btn-primary', data: { turbo: false } %>
+      <%= render "shared/register_button", registrable: @event %>
     </div>
   <% end %>
-
+  
   <!-- Event Actions -->
   <div class="event-actions">
     <%= link_to 'Back to Events', events_path, class: "btn btn-secondary" %>
@@ -70,6 +67,5 @@
                      data: { confirm: 'Are you sure you want to delete this event?' }, class: "btn btn-danger" %>
       <%= link_to 'Edit Event', edit_event_path(@event), class: "btn btn-primary" %>
     <% end %>
-    <%= render "shared/register_button", registrable: @event %>
   </div>
 </div>

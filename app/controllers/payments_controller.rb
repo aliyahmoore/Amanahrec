@@ -17,29 +17,33 @@ class PaymentsController < ApplicationController
   def success
     session_id = params[:session_id]
 
+    # If session ID is missing, redirect with an error
     if session_id.blank?
       return redirect_to @paymentable, alert: "Session ID is missing."
     end
 
+    # Ensure that the paymentable exists
     @paymentable = find_paymentable(params[:paymentable_type], params[:paymentable_id])
 
     unless @paymentable
       return redirect_to root_url, alert: "Invalid paymentable type or ID."
     end
 
+    # Process the payment
     if PaymentProcessingService.new(current_user, @paymentable, session_id).process_payment
-      message = @paymentable.is_a?(Membership) ? "Thank you for subscribing." : "Registration successful."
-      redirect_to paymentable_success_path, notice: message
-    else
-      redirect_to @paymentable, alert: "Payment was not completed. Please try again."
-    end
-  end
+      # After successful payment, try to register the user for the event/activity
+      registration_service = RegistrationService.new(current_user, @paymentable)
 
-  def cancel_subscription
-    if SubscriptionCancellationService.new(current_user).cancel
-      redirect_to root_url, notice: "Your membership has been successfully canceled."
+      if registration_service.register_user
+        message = @paymentable.is_a?(Membership) ? "Thank you for subscribing." : "Registration successful."
+        redirect_to paymentable_success_path, notice: message
+      else
+        # If registration fails, show the error message
+        redirect_to @paymentable, alert: "Registration could not be completed. Please try again."
+      end
     else
-      redirect_to edit_user_registration_path, alert: "Error canceling subscription."
+      # If payment fails, show the payment failure message
+      redirect_to @paymentable, alert: "Payment was not completed. Please try again."
     end
   end
 

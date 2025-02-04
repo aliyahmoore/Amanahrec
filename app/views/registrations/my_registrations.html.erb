@@ -1,15 +1,21 @@
 <h1>My Registrations</h1>
 
-<!-- Grouped Registrations (Events and Activities) -->
-<% @grouped_registrations.each do |type, registrations| %>
-  <h3>Registered <%= type.pluralize %></h3>
-  <div class="registrations-section <%= type.downcase %>">
-    <% if registrations.any? %>
-      <% registrations.each do |registration| %>
-        <%= render partial: 'registration', locals: { registration: registration } %>
-      <% end %>
-    <% else %>
-      <p>No registered <%= type.downcase.pluralize %>.</p>
-    <% end %>
-  </div>
+<!-- Display Activities -->
+<% if @grouped_registrations["Activity"].present? %>
+  <h3>Activities</h3>
+  <% @grouped_registrations["Activity"].each do |registration| %>
+    <%= render 'registration', registration: registration %>
+  <% end %>
+<% else %>
+  <p>You have no registered activities.</p>
+<% end %>
+
+<!-- Display Events -->
+<% if @grouped_registrations["Event"].present? %>
+  <h3>Events</h3>
+  <% @grouped_registrations["Event"].each do |registration| %>
+    <%= render 'registration', registration: registration %>
+  <% end %>
+<% else %>
+  <p>You have no registered events.</p>
 <% end %>

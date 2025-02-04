@@ -10,8 +10,6 @@ class Activity < ApplicationRecord
     validates :title, :description, :start_date, :end_date, :location, presence: true
     validates :capacity, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
     validates :cost, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
-    validates :duration, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
-
     has_many :payments, as: :paymentable
     has_many :registrations, as: :registrable
     validates :recurrence_pattern, inclusion: { in: %w[daily weekly], message: "%{value} is not a valid recurrence pattern" }, if: :recurring?
