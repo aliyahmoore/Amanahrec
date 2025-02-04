@@ -1,0 +1,92 @@
+/* Container for each date */
+.date-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 120px; /* Adjust the width to fit your design */
+  margin: 5px; /* Space between dates */
+  text-align: center; /* Centers content inside each date wrapper */
+}
+
+/* Border around each date */
+.date-box {
+  border: 2px solid #000; /* Black border around each date */
+  padding: 10px;
+  background-color: #fff; /* Optional: Background color for the date box */
+  border-radius: 5px; /* Optional: Rounded corners for the date box */
+}
+
+/* Event and activity styling */
+.event {
+  background-color: #E9E2D8;
+  padding: 8px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.activity {
+  background-color: #9cb691;
+  padding: 8px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+/* Containers for events and activities */
+.event-container, .activity-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centers child elements */
+  gap: 10px; /* Adds spacing between event/activity boxes */
+}
+
+.event, .activity {
+  width: 180px; /* Fixed width for event/activity boxes */
+}
+
+/* Styling for event and activity titles */
+.event-title, .activity-title {
+  color: #363636;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.event-time, .activity-time {
+  color: #5c5c5c;
+  font-size: 0.9rem;
+}
+
+/* Calendar container styling */
+.calendar {
+  background-color: #DACCB1;
+  padding: 10px;
+  border-radius: 30px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover effects for event/activity boxes */
+.event:hover, .activity:hover {
+  transform: scale(1.05);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Today link styling */
+.today-link {
+  position: relative;
+  top: -10px;
+  color: #5C5C5C;
+  text-decoration: none;
+  font-weight: bold;
+  display: block;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.today-link:hover {
+  color: #333;
+}
+
+/* Styling for the today calendar container */
+.calendar-today-container {
+  text-align: center;
+  margin-top: 10px;
+}
