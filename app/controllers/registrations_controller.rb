@@ -32,12 +32,9 @@ class RegistrationsController < ApplicationController
 
   # Sets the registrable (Event or Activity) based on the provided params
   def set_registrable
-    @registrable = find_registrable(params[:registrable_type], params[:registrable_id])
-
-    # If the registrable is not found, redirect to the root path
-    if @registrable.nil?
-      redirect_to root_path, alert: "The event or activity you're trying to register for could not be found."
-    end
+    @registrable = params[:registrable_type].constantize.find_by!(id: params[:registrable_id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path, alert: t("errors.registration.not_found")
   end
 
   # Finds the registrable object (Event or Activity) by its type and ID

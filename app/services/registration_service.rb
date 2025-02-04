@@ -1,37 +1,28 @@
 class RegistrationService
-    def initialize(user, registrable)
-      @user = user
-      @registrable = registrable
-    end
+  def initialize(user, registrable)
+    @user = user
+    @registrable = registrable
+  end
 
-    # Main method to register the user for the event or activity
-    def register_user
-      # Check if the event/activity has reached capacity
-      return false if capacity_reached?
+  def register_user
+    raise RegistrationError, t("errors.registration.already_registered") if already_registered?
+    raise RegistrationError, t("errors.registration.capacity_full") if capacity_reached?
 
-      # Check if the user is already registered for this event/activity
-      return false if already_registered?
+    registration = Registration.create!(user: @user, registrable: @registrable, status: :successful)
+    registration
+  rescue ActiveRecord::RecordInvalid => e
+    false
+  end
 
-      # If all checks pass, create the registration
-      registration = Registration.create(
-        user_id: @user.id,
-        registrable: @registrable,
-        status: :successful  # Assuming the payment is successful
-      )
+  private
 
-      # Return true if registration was successful
-      registration.persisted?
-    end
+  def already_registered?
+    Registration.exists?(user: @user, registrable: @registrable)
+  end
 
-    private
-
-    # Check if the registrable has reached capacity
-    def capacity_reached?
-      @registrable.is_a?(Activity) && @registrable.registrations.count >= @registrable.capacity
-    end
-
-    # Check if the user is already registered for the event/activity
-    def already_registered?
-      Registration.exists?(user: @user, registrable: @registrable)
-    end
+  def capacity_reached?
+    @registrable.is_a?(Activity) && @registrable.registrations.count >= @registrable.capacity
+  end
 end
+
+class RegistrationError < StandardError; end
