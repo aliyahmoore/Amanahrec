@@ -2,6 +2,5 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "testimonials_slider"
-import "navbar_dropdown"
 import "recurring_activities"
 import "non_member_alert"
