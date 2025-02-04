@@ -26,3 +26,16 @@ body {
     border: none !important;
     padding: 10px 15px !important;
   }
+
+
+  .event-image-preview ,
+  .activity-image-preview {
+    width: 100%; /* or a fixed width like 300px */
+    width: auto; /* Set a max width */
+    height: 300px !important; /* Ensures the aspect ratio is maintained */
+    display: block;
+    margin: 0 auto; /* Centers the image */
+    border-radius: 8px; /* Optional: Rounds the corners */
+    object-fit: cover; /* Ensures consistent sizing without distortion */
+  }
+  
