@@ -26,7 +26,6 @@
             <%= activity.start_date.strftime("%B %d, %Y") %>
             <%= activity.start_date.strftime("%I:%M %p") %> - <%= activity.end_date.strftime("%I:%M %p") %>
           </p>
-        </p>
         <p class="card-text">
           <i class="fa-solid fa-location-dot me-2"></i> <%= activity.location %>
         </p>
@@ -34,6 +33,8 @@
           <i class="fa-sharp-duotone fa-solid fa-money-bill"></i>
           <%= activity.cost.present? && activity.cost > 0 ? number_to_currency(activity.cost) : "Free" %>
         </p>
+<!-- Member Early Access Badge -->
+        <%= render 'shared/early_access_badge', item: activity %>
         <!-- Countdown Timer -->
         <%= render 'shared/countdown', item: activity%>
         <div class="mt-auto d-flex justify-content-between">

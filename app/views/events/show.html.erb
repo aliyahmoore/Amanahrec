@@ -29,13 +29,7 @@
   <div class="col-md-4">
     <div class="event-details text-start p-3 shadow-sm rounded bg-light">
       <!-- Member Early Access Badge -->
-      <% if @event.early_access_for_members? %>
-        <div class="text-center mb-2">
-          <span class="badge bg-warning text-dark">
-            <i class="fas fa-gem"></i> Member Early Access
-          </span>
-        </div>
-      <% end %>
+<%= render 'shared/early_access_badge', item: @event %>
       <!-- Date and Location -->
       <p><i class="fas fa-calendar-alt"></i> <strong>:</strong> <%= @event.start_date.strftime("%B %d, %Y") %>
         <%= @event.start_date.strftime("%I:%M %p") %> - <%= @event.end_date.strftime("%I:%M %p") %>

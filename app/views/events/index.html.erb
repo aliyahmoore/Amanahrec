@@ -25,7 +25,6 @@
             <%= event.start_date.strftime("%B %d, %Y") %>
             <%= event.start_date.strftime("%I:%M %p") %> - <%= event.end_date.strftime("%I:%M %p") %>
           </p>
-        </p>
         <p class="card-text">
           <i class="fa-solid fa-location-dot me-2"></i> <%= event.location %>
         </p>
@@ -33,6 +32,8 @@
           <i class="fa-sharp-duotone fa-solid fa-money-bill"></i>
           <%= event.cost.present? && event.cost > 0 ? number_to_currency(event.cost) : "Free" %>
         </p>
+                <!-- Member Early Access Badge -->
+<%= render 'shared/early_access_badge', item: event %>
         <!-- Countdown Timer -->
         <%= render 'shared/countdown', item: event %>
         <div class="mt-auto d-flex justify-content-between">
