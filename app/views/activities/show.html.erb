@@ -45,7 +45,7 @@
     </div>
     <!-- Action Buttons -->
     <div class="activity-actions text-center mt-3">
-      <% if (@activity.early_access_for_members? && current_user&.member?) || @activity.general_registration_open? %>
+      <% if (@activity.early_access_for_members? && current_user&.membership_active?) || @activity.general_registration_open? %>
         <%= button_to 'Register Now', activity_payments_path(@activity, paymentable_type: 'Activity', paymentable_id: @activity.id), method: :post, class: 'activity-payments btn btn-primary mb-3', data: { turbo: false } %>
       <% end %>
       <% if current_user&.role_id == 1 %>
