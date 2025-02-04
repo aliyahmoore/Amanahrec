@@ -1,6 +1,6 @@
 <% content_for :title, @activity.title %>
 
-  <h1 class="activity-title mt-3 display-3"><%= @activity.title %></h1>
+  <h1 class="activity-title mt-3 text-center display-3"><%= @activity.title %></h1>
 
   <!-- Activity Image Section -->
   <div class="activity-images">
@@ -27,17 +27,6 @@
 
         <% if @activity.rules.present? %>
           <p><i class="fas fa-exclamation-triangle"></i> <strong>Rules:</strong> <%= @activity.rules %></p>
-        <% end %>
-
-        <% if @activity.recurrence_pattern.present? %>
-          <p><i class="fas fa-sync-alt"></i> <strong>Recurring:</strong> <%= @activity.recurrence_pattern.capitalize %></p>
-
-          <% if @activity.recurrence_pattern == "weekly" && @activity.recurrence_days.present? %>
-            <p><i class="fas fa-calendar-week"></i> <strong>Days:</strong> 
-              <% days = @activity.recurrence_days.split(',').map(&:capitalize) %>
-              <%= days.join(', ') %>
-            </p>
-          <% end %>
         <% end %>
       </div>
     </div>
@@ -66,7 +55,7 @@
       <!-- Action Buttons -->
       <div class="activity-actions text-center mt-3">
         <% if (@activity.early_access_for_members? && current_user&.member?) || @activity.general_registration_open? %>
-          <%= button_to 'Register Now', activity_payments_path(@activity, paymentable_type: 'Activity', paymentable_id: @activity.id), method: :post, class: 'activity-payments btn btn-primary', data: { turbo: false } %>
+          <%= button_to 'Register Now', activity_payments_path(@activity, paymentable_type: 'Activity', paymentable_id: @activity.id), method: :post, class: 'activity-payments btn btn-primary mb-3', data: { turbo: false } %>
         <% end %>
 
         <% if current_user&.role_id == 1 %>
