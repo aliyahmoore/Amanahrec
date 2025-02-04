@@ -53,3 +53,37 @@ html, body {
     background-color: #ffffff !important;
   }
   
+
+  /* Custom button styling for 'View Full Article' */
+.btn-custom {
+    background-color: #57573F !important; /* Muted Green */
+    border-color: #57573F !important;
+    color: #E9E2D8 !important;
+    padding: 10px 15px;
+    text-align: center;
+    width: fit-content;
+  }
+  
+  .btn-custom:hover {
+    background-color: #403F2B !important; /* Dark Brown */
+    border-color: #403F2B !important;
+    color: #DACCB1 !important;
+  }
+  
+  /* Ensure consistent card styling */
+  .custom-card {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .card-footer {
+    background-color: #DACCB1 !important; 
+    border-top: none;
+  }
+  .news-text {
+    color: #daccb1; /* Dark brown */
+    font-size: 16px; /* Adjust size if needed */
+  }
+
+  
+  
