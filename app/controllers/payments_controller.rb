@@ -34,7 +34,6 @@ class PaymentsController < ApplicationController
     else
       redirect_to @paymentable, alert: t("errors.payment.failed")
     end
-
   end
 
   def cancel_subscription
@@ -62,7 +61,7 @@ end
   def process_payment(session_id)
     PaymentProcessingService.new(current_user, @paymentable, session_id).process_payment
   end
-  
+
   def register_user
     if RegistrationService.new(current_user, @paymentable).register_user
       message = @paymentable.is_a?(Membership) ? t("notices.payment.subscribed") : t("notices.registration.success")
