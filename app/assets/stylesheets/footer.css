@@ -3,6 +3,7 @@ footer.footer-custom {
   color: #E9E2D8;
   text-align: center;
   padding: 1rem;
+  margin-top: auto;
 }
 
 .footer-custom a[href^="mailto:"] {
@@ -15,4 +16,17 @@ footer.footer-custom {
 
 .footer-custom i {
   color: #E9E2D8;
+}
+
+
+.become-member {
+  color: #E9E2D8 !important;
+  border-color:  #E9E2D8 !important;
+  background-color: transparent !important;
+}
+
+.become-member:hover {
+  background-color: transparent !important;
+  border-color: #daccb1 !important;
+  color: #daccb1 !important;
 }

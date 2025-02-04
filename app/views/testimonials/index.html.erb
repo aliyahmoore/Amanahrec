@@ -1,12 +1,10 @@
 <div class="testimonial-container container my-5">
   <h1 class="text-center mb-4">Testimonials</h1>
-
   <% @testimonials.each do |testimonial| %>
     <div class="card testimonial-card mb-4">
       <div class="card-body">
         <p class="card-text"><%= testimonial.text %></p>
         <small>By: <%= testimonial.user.first_name %> <%= testimonial.user.last_name %></small>
-
         <% if current_user&.role&.name == 'admin' %>
           <hr>
           <div class="d-flex justify-content-between align-items-center">
