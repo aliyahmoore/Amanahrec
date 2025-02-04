@@ -85,5 +85,4 @@ class PaymentProcessingService
 
       @paymentable.activate!(customer, subscription) if @paymentable.is_a?(Membership)
     end
-    
 end

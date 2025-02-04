@@ -1,7 +1,7 @@
 class RegistrationsController < ApplicationController
-  before_action :set_registrable, only: [:create]
+  before_action :set_registrable, only: [ :create ]
 
-  
+
 
   def create
     # Register the user using the Registration model's class method

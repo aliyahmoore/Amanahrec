@@ -53,7 +53,7 @@ Rails.application.routes.draw do
     resources :payments, only: [ :create ]       # Ensure payments are nested under events
   end
 
-get '/my_registrations', to: 'registrations#my_registrations', as: 'my_registrations'
+get "/my_registrations", to: "registrations#my_registrations", as: "my_registrations"
 
 
   # Payment success and cancel URLs (if needed globally)

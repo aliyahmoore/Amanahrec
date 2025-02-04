@@ -1,7 +1,7 @@
 class Registration < ApplicationRecord
   belongs_to :user
   belongs_to :registrable, polymorphic: true
-  
+
   enum status: { pending: "pending", successful: "successful", failed: "failed" }
 
   validate :check_capacity, on: :create
@@ -10,7 +10,7 @@ class Registration < ApplicationRecord
   # Registers the user for an event/activity (registrable) and returns the registration object
   def self.register_user(user, registrable)
     # If registrable is nil, return an error message
-    return OpenStruct.new(persisted?: false, errors: ["Registrable object cannot be found."]) if registrable.nil?
+    return OpenStruct.new(persisted?: false, errors: [ "Registrable object cannot be found." ]) if registrable.nil?
 
     # Check if the user is already registered for the event/activity
     if exists?(user: user, registrable: registrable)
