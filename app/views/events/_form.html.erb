@@ -49,17 +49,17 @@
         <%= form.text_field :sponsors, class: "form-control" %>
       </div>
       <div class="col-md-2">
-  <%= form.label :cost, "Cost ($)", class: "form-label" %>
-  <%= form.number_field :cost, value: sprintf('%.2f', @event.cost || 0), class: "form-control", step: "0.01", min: "0" %>
-</div>
+        <%= form.label :cost, "Cost ($)", class: "form-label" %>
+        <%= form.number_field :cost, value: sprintf('%.2f', @event.cost || 0), class: "form-control", step: "0.01", min: "0" %>
+      </div>
       <div class="col-md-3 d-flex align-items-center">
-  <div class="form-check m-0">
-    <%= form.label :childcare, class: "form-check-label m-0" do %>
-      <i class="fa-solid fa-child-reaching"></i> Childcare Available?
-    <% end %>
-    <%= form.check_box :childcare, class: "form-check-input me-2" %> 
-  </div>
-</div>
+        <div class="form-check m-0">
+          <%= form.label :childcare, class: "form-check-label m-0" do %>
+            <i class="fa-solid fa-child-reaching"></i> Childcare Available?
+          <% end %>
+          <%= form.check_box :childcare, class: "form-check-input me-2" %>
+        </div>
+      </div>
     </div>
   </div>
   <!-- Registration Section -->
@@ -95,7 +95,6 @@
       </div>
     </div>
   </div>
-  
   <!-- Submit Button -->
   <div class="text-center">
     <%= form.submit "Save Event", class: "btn btn-primary" %>

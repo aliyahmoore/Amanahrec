@@ -34,18 +34,7 @@
           <%= event.cost.present? && event.cost > 0 ? number_to_currency(event.cost) : "Free" %>
         </p>
         <!-- Countdown Timer -->
-        <% if event.early_access_for_members && event.general_registration_start %>
-          <% if Time.current < event.general_registration_start %>
-            <p class="registration-info">Member Registrations Only, General Registration Opens In:</p>
-            <p id="countdown-<%= event.id %>" 
-       class="countdown" 
-       data-countdown-date="<%= event.general_registration_start %>"></p>
-          <% else %>
-            <p class="registration-info">General registration is now open!</p>
-          <% end %>
-        <% else %>
-          <p class="registration-info">General registration is now open!</p>
-        <% end %>
+        <%= render 'shared/countdown', item: event %>
         <div class="mt-auto d-flex justify-content-between">
           <% if current_user&.role_id == 1 %>
             <%= link_to 'Edit', edit_event_path(event), class: 'btn btn-warning btn-sm' %>
