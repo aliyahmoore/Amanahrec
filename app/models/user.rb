@@ -1,7 +1,9 @@
 class User < ApplicationRecord
-  has_and_belongs_to_many :events
   has_many :testimonials, dependent: :destroy
   belongs_to :role
+  has_many :registrations
+  has_many :activities, through: :registrations
+  has_many :events, through: :registrations
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

@@ -6,13 +6,11 @@ Rails.application.routes.draw do
   get "pages/calendar"
   get "pages/partners"
   get "pages/board"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  # Health check route
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Render dynamic PWA files from app/views/pwa/*
+  # PWA files routes
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
@@ -20,6 +18,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   root "pages#home"
+
   resources :testimonials, only: [ :index, :new, :create, :edit, :update, :destroy ] do
     member do
       patch :approve
@@ -27,17 +26,27 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :activities, :events do
-    resources :payments, only: [ :create ]
+  # Activities and Events routes
+  resources :activities do
+    resources :registrations, only: [ :create ]  # Ensure registrations are nested under activities
+    resources :payments, only: [ :new, :create ]  # Ensure payments are nested under activities
   end
 
-  # Membership payments (handled at the top level)
+  resources :events do
+    resources :registrations, only: [ :create ]  # Ensure registrations are nested under events
+    resources :payments, only: [ :new, :create ]  # Ensure payments are nested under events
+  end
+
+  # Payment success and cancel URLs (if needed globally)
+  get "/payments/success", to: "payments#success"
+  get "/payments/cancel", to: "payments#cancel"
+
+  # Membership payment routes (assuming it's separate from events/activities)
   resources :payments, only: [ :create ] do
     collection do
       post :cancel_subscription
     end
   end
 
-  get "/payments/success", to: "payments#success"
-  get "/payments/cancel", to: "payments#cancel"
+  get "/my_registrations", to: "registrations#my_registrations", as: "my_registrations"
 end
