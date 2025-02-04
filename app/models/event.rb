@@ -10,9 +10,9 @@ class Event < ApplicationRecord
     validates :location, presence: true
     validates :rsvp_deadline, presence: true
     validates :cost, numericality: { greater_than_or_equal_to: 0 }
-    
 
-  # Calculate the early registration start date
+
+    # Calculate the early registration start date
 
     has_many :payments, as: :paymentable
 

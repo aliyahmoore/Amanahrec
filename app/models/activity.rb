@@ -51,7 +51,7 @@ class Activity < ApplicationRecord
     def set_default_recurrence_days
       self.recurrence_days ||= []
     end
-   
+
 
     has_many :payments, as: :paymentable
 

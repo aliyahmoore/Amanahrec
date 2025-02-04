@@ -19,7 +19,7 @@ class User < ApplicationRecord
     payments.exists?(paymentable: paymentable, status: "succeeded")
   end
 
-  
+
 
 
   def membership_active?
