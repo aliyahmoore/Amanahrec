@@ -22,7 +22,7 @@ class RegistrationsController < ApplicationController
 
   def my_registrations
     @registrations = current_user.registrations.preload(:registrable).order(:created_at)
-    @grouped_registrations = @registrations.group_by { |registration| registration.registrable_type }
+    @grouped_registrations = current_user.registrations.preload(:registrable).group_by(&:registrable_type)
   end
 
   private

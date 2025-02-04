@@ -2,7 +2,7 @@
   <strong><%= registration.registrable&.title %></strong><br>
   
   <% if registration.registrable.is_a?(Activity) %>
-    <%= registration.registrable&.date&.strftime("%B %d, %Y") %><br>
+    <%= registration.registrable&.start_date&.strftime("%B %d, %Y") %><br>
   <% elsif registration.registrable.is_a?(Event) %>
     <%= registration.registrable&.start_date&.strftime("%B %d, %Y") %><br>
   <% end %>

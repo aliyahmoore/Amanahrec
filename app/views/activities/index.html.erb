@@ -17,7 +17,7 @@
               <%= link_to activity.title, activity_path(activity), class: 'text-decoration-none text-primary' %>
             </h5>
             <p class="card-text text-muted">
-              <i class="fa-regular fa-calendar me-2"></i> <%= activity.date.strftime("%B %d, %Y %I:%M %p") %>
+              <i class="fa-regular fa-calendar me-2"></i> <%= activity.start_date.strftime("%B %d, %Y %I:%M %p") %>
             </p>
             <p class="card-text">
               <i class="fa-solid fa-location-dot me-2"></i> <%= activity.location %>

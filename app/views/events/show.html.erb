@@ -14,7 +14,7 @@
     <p><strong>Childcare Available:</strong> <%= @event.childcare ? 'Yes' : 'No' %></p>
     <p><strong>Sponsors:</strong> <%= @event.sponsors %></p>
     <h2>Cost</h2>
-    <p><strong>Cost:</strong> <%= number_to_currency(@event.cost, precision: 2) %></p>
+    <p><strong>Cost:</strong><%= @event.cost.to_i == 0 ? 'Free' : number_to_currency(@activity.cost, unit: "$", precision: 2) %></p>
     <% if @event.images.attached? %>
       <div class="event-images">
         <% @event.images.each do |image| %>
