@@ -6,10 +6,6 @@ class BoardsController < ApplicationController
     @boards = Board.all
   end
 
-  # GET /boards/1 or /boards/1.json
-  def show
-  end
-
   # GET /boards/new
   def new
     @board = Board.new
@@ -25,7 +21,7 @@ class BoardsController < ApplicationController
 
     respond_to do |format|
       if @board.save
-        format.html { redirect_to @board, notice: "Board was successfully created." }
+        format.html { redirect_to boards_path, notice: "Board was successfully created." }
         format.json { render :show, status: :created, location: @board }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +34,7 @@ class BoardsController < ApplicationController
   def update
     respond_to do |format|
       if @board.update(board_params)
-        format.html { redirect_to @board, notice: "Board was successfully updated." }
+        format.html { redirect_to boards_path, notice: "#{@board.name} was successfully updated." }
         format.json { render :show, status: :ok, location: @board }
       else
         format.html { render :edit, status: :unprocessable_entity }
