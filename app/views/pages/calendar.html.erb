@@ -10,9 +10,9 @@
         <strong class="d-block"><%= date.day %></strong>
       </div>
 
-      <!-- Display Events -->
+      <!-- Events Section -->
       <% if events.any? %>
-        <div class="event-container text-center">
+        <div class="event-container">
           <% events.each do |event| %>
             <div class="event">
               <%= link_to event.title, event_path(event), class: "event-title" %><br>
@@ -24,10 +24,10 @@
         </div>
       <% end %>
 
-      <!-- Display Activities -->
+      <!-- Activities Section -->
       <% activities_on_date = @activities.select { |activity| activity.start_date.to_date == date } %>
       <% if activities_on_date.any? %>
-        <div class="activity-container text-center">
+        <div class="activity-container">
           <% activities_on_date.each do |activity| %>
             <div class="activity">
               <%= link_to activity.title, activity_path(activity), class: "activity-title" %><br>
