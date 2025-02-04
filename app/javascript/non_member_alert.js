@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
           const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
           const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); 
-          countdownElement.innerHTML = `<strong>${days} days and ${hours} hours left until general registration.</strong>`;
+          countdownElement.innerHTML = `<strong>${days} days and ${hours} hours`;
           
         }
       }

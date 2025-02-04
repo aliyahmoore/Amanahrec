@@ -26,35 +26,25 @@
             <%= activity.start_date.strftime("%B %d, %Y") %>
             <%= activity.start_date.strftime("%I:%M %p") %> - <%= activity.end_date.strftime("%I:%M %p") %>
           </p>
-        </p>
-        <p class="card-text">
-          <i class="fa-solid fa-location-dot me-2"></i> <%= activity.location %>
-        </p>
-        <p class="card-text">
-          <i class="fa-sharp-duotone fa-solid fa-money-bill"></i>
-          <%= activity.cost.present? && activity.cost > 0 ? number_to_currency(activity.cost) : "Free" %>
-        </p>
-        <!-- Countdown Timer -->
-        <% if activity.early_access_for_members && activity.general_registration_start %>
-          <% if Time.current < activity.general_registration_start %>
-            <p class="registration-info">Member Registrations Only, General Registration Opens In:</p>
-            <p id="countdown-<%= activity.id %>" 
-       class="countdown" 
-       data-countdown-date="<%= activity.general_registration_start %>"></p>
-          <% else %>
-            <p class="registration-info">General registration is now open!</p>
-          <% end %>
-        <% else %>
-          <p class="registration-info">General registration is now open!</p>
-        <% end %>
-        <div class="mt-auto d-flex justify-content-between">
-          <% if current_user&.role_id == 1 %>
-            <%= link_to 'Edit', edit_activity_path(activity), class: 'btn btn-warning btn-sm' %>
-            <%= link_to 'Delete', activity_path(activity), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
-          <% end %>
+          <p class="card-text">
+            <i class="fa-solid fa-location-dot me-2"></i> <%= activity.location %>
+          </p>
+          <p class="card-text">
+            <i class="fa-sharp-duotone fa-solid fa-money-bill"></i>
+            <%= activity.cost.present? && activity.cost > 0 ? number_to_currency(activity.cost) : "Free" %>
+          </p>
+          <!-- Member Early Access Badge -->
+          <%= render 'shared/early_access_badge', item: activity %>
+          <!-- Countdown Timer -->
+          <%= render 'shared/countdown', item: activity%>
+          <div class="mt-auto d-flex justify-content-between">
+            <% if current_user&.role_id == 1 %>
+              <%= link_to 'Edit', edit_activity_path(activity), class: 'btn btn-warning btn-sm' %>
+              <%= link_to 'Delete', activity_path(activity), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
 </div>
