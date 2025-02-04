@@ -1,6 +1,7 @@
+<h2 class="text-center mt-3 mb-4">Sign In</h2>
+
 <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "w-25 mx-auto form-container", style: "border: 2px solid #808080; padding: 15px; border-radius: 5px;" }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-  <h2 class="text-center mb-4">Sign in</h2>
   <!-- Email -->
   <div class="mb-3">
     <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email address*", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
@@ -20,7 +21,7 @@
   <% end %>
   <!-- Submit Button -->
   <div class="mb-3 text-center">
-    <%= f.submit "Sign in", class: "btn btn-secondary text-white px-4" %>
+    <%= f.submit "Sign In", class: "btn btn-secondary text-white px-4" %>
   </div>
   <!-- Centered Links (Inside the border) -->
   <div class="text-center">

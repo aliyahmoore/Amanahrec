@@ -14,15 +14,76 @@
  *= require_self
  */
 
- 
-body {
-    background-color: #e9e2d8!important;
-    color: #403f2b !important;
-}
 
-.btn-primary {
+/* Ensure full height layout */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #e9e2d8 !important;
+    color: #403f2b !important;
+  }
+  
+  /* Main content should expand to push the footer down */
+  .main-content {
+    flex: 1;
+  }
+  
+  /* Primary button styling */
+  .btn-primary {
     background-color: #403f2b !important; /* Dark Brown */
-    color: #E9E2D8 !important; /* Light Beige */
+    color: #e9e2d8 !important; /* Light Beige */
     border: none !important;
     padding: 10px 15px !important;
   }
+  
+  /* Event and Activity image styling */
+  .event-image-preview,
+  .activity-image-preview {
+    height: 300px !important;
+    display: block;
+    margin: 0 auto; /* Centers the image */
+    border-radius: 8px; /* Rounded corners */
+    object-fit: cover; /* Ensures consistent sizing without distortion */
+  }
+  
+  /* Devise login page background */
+  .devise-login-page {
+    background-color: #ffffff !important;
+  }
+  
+
+  /* Custom button styling for 'View Full Article' */
+.btn-custom {
+    background-color: #57573F !important; /* Muted Green */
+    border-color: #57573F !important;
+    color: #E9E2D8 !important;
+    padding: 10px 15px;
+    text-align: center;
+    width: fit-content;
+  }
+  
+  .btn-custom:hover {
+    background-color: #403F2B !important; /* Dark Brown */
+    border-color: #403F2B !important;
+    color: #DACCB1 !important;
+  }
+  
+  /* Ensure consistent card styling */
+  .custom-card {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .card-footer {
+    background-color: #DACCB1 !important; 
+    border-top: none;
+  }
+  .news-text {
+    color: #daccb1; /* Dark brown */
+    font-size: 16px; /* Adjust size if needed */
+  }
+
+  
+  

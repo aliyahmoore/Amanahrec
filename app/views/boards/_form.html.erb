@@ -1,36 +1,37 @@
-<%= form_with(model: board) do |form| %>
-  <% if board.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(board.errors.count, "error") %> prohibited this board from being saved:</h2>
-
-      <ul>
-        <% board.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+<div class="container d-flex justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <%= form_with(model: board, class: "needs-validation", novalidate: true) do |form| %>
+      <% if board.errors.any? %>
+        <div class="alert alert-danger">
+          <h4><%= pluralize(board.errors.count, "error") %> prohibited this board from being saved:</h4>
+          <ul>
+            <% board.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="row">
+        <div class="mb-3 col-md-6">
+          <%= form.label :name, class: "form-label" %>
+          <%= form.text_field :name, class: "form-control", required: true %>
+        </div>
+        <div class="mb-3 col-md-6">
+          <%= form.label :position, class: "form-label" %>
+          <%= form.text_field :position, class: "form-control", required: true %>
+        </div>
+      </div>
+      <div class="mb-3">
+        <%= form.label :description, class: "form-label" %>
+        <%= form.text_area :description, class: "form-control", rows: 4 %>
+      </div>
+      <div class="mb-3">
+        <%= form.label :image, class: "form-label" %>
+        <%= form.file_field :image, class: "form-control" %>
+      </div>
+      <div class="mt-3 text-center">
+        <%= form.submit "Save Board", class: "btn btn-primary" %>
+      </div>
+    <% end %>
   </div>
-
-  <div>
-    <%= form.label :position, style: "display: block" %>
-    <%= form.text_field :position %>
-  </div>
-
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
-  </div>
-  
-  <div>
-  <%= form.label :image %>
-  <%= form.file_field :image %>
-    </div>
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
