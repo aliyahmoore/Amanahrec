@@ -3,14 +3,20 @@ class TestimonialsController < ApplicationController
     before_action :set_testimonial, only: [ :edit, :update, :destroy, :approve ]
     before_action :authorize_admin!, only: [ :approve, :unapprove, :edit, :destroy ]
 
-    # Display approved testimonials to everyone and unapproved to admin
     def index
-        if current_user&.role&.name == "admin"
-            @testimonials = Testimonial.order(created_at: :desc)
+      if current_user&.role&.name == "admin"
+        if params[:status] == "approved"
+          @testimonials = Testimonial.where(approved: true).order(created_at: :desc)
+        elsif params[:status] == "pending"
+          @testimonials = Testimonial.where(approved: false).order(created_at: :desc)
         else
-            @testimonials = Testimonial.where(approved: true).order(created_at: :desc)
+          @testimonials = Testimonial.order(created_at: :desc) # Show all for admin
         end
+      else
+        redirect_to root_path, alert: "You are not authorized to view this page."
+      end
     end
+
 
     # Form for creating a new testimonial
     def new
