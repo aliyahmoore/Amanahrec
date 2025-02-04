@@ -16,8 +16,6 @@ Rails.application.routes.draw do
 
   resources :media_mentions
   # Defines the root path route ("/")
-  # root "posts#index"
-  # Define root path
   root "pages#home"
 
   resources :testimonials, only: [ :index, :new, :create, :edit, :update, :destroy ] do
@@ -27,38 +25,27 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :activities, :events do
-    resources :payments, only: [ :create ]
-  end
-
-  # Membership payments (handled at the top level)
-  resources :payments, only: [ :create ] do
-    collection do
-      post :cancel_subscription
-    end
-  end
-
-  get "/payments/success", to: "payments#success"
-  get "/payments/cancel", to: "payments#cancel"
-
-  # Activities routes (payment and registration nested under activities)
+  # Activities and Events routes
   resources :activities do
     resources :registrations, only: [ :create ]  # Ensure registrations are nested under activities
-    resources :payments, only: [ :create ]       # Ensure payments are nested under activities
+    resources :payments, only: [ :new, :create ]  # Ensure payments are nested under activities
   end
 
-  # Events routes (already configured for events)
   resources :events do
     resources :registrations, only: [ :create ]  # Ensure registrations are nested under events
-    resources :payments, only: [ :create ]       # Ensure payments are nested under events
+    resources :payments, only: [ :new, :create ]  # Ensure payments are nested under events
   end
-
-get "/my_registrations", to: "registrations#my_registrations", as: "my_registrations"
-
 
   # Payment success and cancel URLs (if needed globally)
   get "/payments/success", to: "payments#success"
   get "/payments/cancel", to: "payments#cancel"
 
   # Membership payment routes (assuming it's separate from events/activities)
+  resources :payments, only: [ :create ] do
+    collection do
+      post :cancel_subscription
+    end
+  end
+
+  get "/my_registrations", to: "registrations#my_registrations", as: "my_registrations"
 end
