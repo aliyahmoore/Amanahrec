@@ -28,13 +28,13 @@ Rails.application.routes.draw do
 
   # Activities and Events routes
   resources :activities do
-    resources :registrations, only: [:create]  # Ensure registrations are nested under activities
-    resources :payments, only: [:new, :create]  # Ensure payments are nested under activities
+    resources :registrations, only: [ :create ]  # Ensure registrations are nested under activities
+    resources :payments, only: [ :new, :create ]  # Ensure payments are nested under activities
   end
 
   resources :events do
-    resources :registrations, only: [:create]  # Ensure registrations are nested under events
-    resources :payments, only: [:new, :create]  # Ensure payments are nested under events
+    resources :registrations, only: [ :create ]  # Ensure registrations are nested under events
+    resources :payments, only: [ :new, :create ]  # Ensure payments are nested under events
   end
 
   # Payment success and cancel URLs (if needed globally)
@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   get "/payments/cancel", to: "payments#cancel"
 
   # Membership payment routes (assuming it's separate from events/activities)
-  resources :payments, only: [:create] do
+  resources :payments, only: [ :create ] do
     collection do
       post :cancel_subscription
     end
