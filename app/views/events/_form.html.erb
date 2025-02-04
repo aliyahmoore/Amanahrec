@@ -48,16 +48,18 @@
         <%= form.label :sponsors, "Event Sponsor(s)", class: "form-label" %>
         <%= form.text_field :sponsors, class: "form-control" %>
       </div>
-      <div class="col-md-1">
-        <%= form.label :cost, "Cost ($)", class: "form-label" %>
-        <%= form.number_field :cost, value: @event.cost.nil? ? 0 : @event.cost, class: "form-control", step: "0.01", min: "0" %>
-      </div>
-      <div class="col-md-1 d-flex align-items-center">
-        <div class="form-check m-0">
-          <%= form.label :childcare, "Childcare Available?", class: "form-check-label m-0" %>
-          <%= form.check_box :childcare, class: "form-check-input me-2" %>
-        </div>
-      </div>
+      <div class="col-md-2">
+  <%= form.label :cost, "Cost ($)", class: "form-label" %>
+  <%= form.number_field :cost, value: sprintf('%.2f', @event.cost || 0), class: "form-control", step: "0.01", min: "0" %>
+</div>
+      <div class="col-md-3 d-flex align-items-center">
+  <div class="form-check m-0">
+    <%= form.label :childcare, class: "form-check-label m-0" do %>
+      <i class="fa-solid fa-child-reaching"></i> Childcare Available?
+    <% end %>
+    <%= form.check_box :childcare, class: "form-check-input me-2" %> 
+  </div>
+</div>
     </div>
   </div>
   <!-- Registration Section -->
@@ -85,12 +87,15 @@
     </div>
   </div>
   <!-- Image Upload Section -->
-  <div class="row mb-4">
-    <div class="col-md-6">
-      <h3>Upload an Image</h3>
-      <%= form.file_field :image, class: "form-control" %>
+  <div class="form-section">
+    <h3>Upload an Image</h3>
+    <div class="row">
+      <div class="col-md-3">
+        <%= form.file_field :image, class: "form-control" %>
+      </div>
     </div>
   </div>
+  
   <!-- Submit Button -->
   <div class="text-center">
     <%= form.submit "Save Event", class: "btn btn-primary" %>

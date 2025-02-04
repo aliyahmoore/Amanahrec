@@ -51,4 +51,13 @@ class Activity < ApplicationRecord
   def set_default_recurrence_days
     self.recurrence_days ||= []
   end
+
+  def registration_status
+    return "Closed" if Time.current > end_date
+    return "Member Registrations Open, General Registration Opens In:" if early_access_for_members && Time.current < general_registration_start
+    "General registration is now open!"
+  end
+
+  private
+  
 end
