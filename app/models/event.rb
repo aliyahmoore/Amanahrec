@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
     has_many_attached :images
     has_and_belongs_to_many :users
+    has_many :payments, as: :paymentable
 
     validates :title, presence: true
     validates :description, presence: true
@@ -32,9 +33,8 @@ class Event < ApplicationRecord
   # Determine if a user can register
   def can_register?(user)
     return false unless user
-    return general_registration_open? unless user.member?
+    return general_registration_open? unless user.membership_active?
     early_access_period? || general_registration_open?
   end
 
-    has_many :payments, as: :paymentable
 end

@@ -1,5 +1,6 @@
 class Activity < ApplicationRecord
     has_one_attached :image
+    has_many :payments, as: :paymentable
 
     # Default value for recurrence_days if nil
     after_initialize :set_default_recurrence_days, if: :new_record?
@@ -73,9 +74,7 @@ class Activity < ApplicationRecord
     # Determine if a user can register
     def can_register?(user)
       return false unless user
-      return general_registration_open? unless user.member?
+      return general_registration_open? unless user.membership_active?
       early_access_period? || general_registration_open?
     end
-
-    has_many :payments, as: :paymentable
 end
