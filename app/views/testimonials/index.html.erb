@@ -12,45 +12,41 @@
 
   <div class="row">
     <% @testimonials.each do |testimonial| %>
-      <div class="col-md-6 col-lg-4 mb-4 testimonial-card-container">
-        <div class="card testimonial-card" style="width: 26rem; max-width: 100%;">
+      <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
+        <div class="card testimonial-card d-flex flex-column h-100" style="width: 26rem; max-width: 100%;">
           <!-- Card Header -->
           <div class="card-header <%= testimonial.approved? ? 'bg-success text-white' : 'bg-warning text-dark' %>">
             <%= testimonial.approved? ? 'Approved' : 'Pending Approval' %>
           </div>
 
           <!-- Card Body -->
-          <div class="card-body">
-            <p class="card-text" style="font-size: 1.2rem; font-weight: bold; color: #403F2B; text-align: center; line-height: 1.4; margin-top: 20px;">
+          <div class="card-body flex-grow-1">
+            <p class="card-text text-center font-weight-bold text-dark" style="font-size: 1.2rem; line-height: 1.4; margin-top: 20px;">
               <%= testimonial.text %>
             </p>
-            <small class="text-muted d-block text-center" style="margin-top: 15px; display: block;">
+            <small class="text-muted d-block text-center mt-3">
               By: <%= testimonial.user.first_name %> <%= testimonial.user.last_name %>
             </small>
           </div>
 
           <% if current_user&.role&.name == 'admin' %>
             <!-- Card Footer -->
-            <div class="card-footer">
-              <div class="d-flex justify-content-between">
-                <div>
-                  <% if testimonial.approved? %>
-                    <%= button_to "Unapprove", unapprove_testimonial_path(testimonial), method: :patch, class: "btn btn-warning btn-sm", data: { confirm: "Are you sure?" } %>
-                  <% else %>
-                    <%= button_to "Approve", approve_testimonial_path(testimonial), method: :patch, class: "btn btn-success btn-sm" %>
-                  <% end %>
-                </div>
+            <div class="card-footer mt-auto">
+              <div class="d-flex justify-content-center gap-2">
+                <% if testimonial.approved? %>
+                  <%= button_to "Unapprove", unapprove_testimonial_path(testimonial), method: :patch, class: "btn btn-warning btn-sm", data: { confirm: "Are you sure?" } %>
+                <% else %>
+                  <%= button_to "Approve", approve_testimonial_path(testimonial), method: :patch, class: "btn btn-success btn-sm" %>
+                <% end %>
 
                 <%= link_to "Edit", edit_testimonial_path(testimonial), class: "btn btn-primary btn-sm" %>
 
-                <div>
-                  <%= button_to "Delete", testimonial_path(testimonial), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Are you sure?" } %>
-                </div>
+                <%= button_to "Delete", testimonial_path(testimonial), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Are you sure?" } %>
               </div>
             </div>
           <% end %>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
