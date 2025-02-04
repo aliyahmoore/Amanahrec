@@ -2,17 +2,21 @@
   <% if Time.current < item.general_registration_start %>
     <p class="registration-info text-center">
       Member Registrations Now Open </br> General Registration Opens In: 
-      <span id="countdown-<%= item.id %>" 
+    <span id="countdown-<%= item.id %>" 
             class="countdown" 
             data-countdown-date="<%= item.general_registration_start %>"></span>
-    </p>
-  <% else %>
-    <p class="registration-info text-center">
-      <button type="button" class="btn btn-outline-success">General Registration Open!</button>
-    </p>
-  <% end %>
+  </p>
 <% else %>
   <p class="registration-info text-center">
-    <button type="button" class="btn btn-outline-success">General Registration Open!</button>
+    <span class="btn btn-outline-success" style="pointer-events: none;">
+      General Registration Open!
+    </span>
+  </p>
+<% end %>
+<% else %>
+  <p class="registration-info text-center">
+     <span class="btn btn-outline-success" style="pointer-events: none;">
+      General Registration Open!
+    </span>
   </p>
 <% end %>
