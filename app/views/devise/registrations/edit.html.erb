@@ -1,4 +1,4 @@
-<h2 class="text-center mb-4">Edit Profile</h2>
+<h2 class="text-center mt-3">Edit Profile</h2>
 <div class="d-flex justify-content-center">
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "w-50 form-container", style: "border: 2px solid #808080; padding: 20px; border-radius: 5px;" }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
@@ -97,5 +97,6 @@
 </div>
 <!-- Account Deletion -->
 <div class="mt-3 text-center">
-  <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger btn-md" %>
+  <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger mb-3" %>
 </div>
+<div class="mb-3"></div>

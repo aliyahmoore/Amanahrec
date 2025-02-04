@@ -14,28 +14,42 @@
  *= require_self
  */
 
- 
-body {
-    background-color: #e9e2d8!important;
-    color: #403f2b !important;
-}
 
-.btn-primary {
+/* Ensure full height layout */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #e9e2d8 !important;
+    color: #403f2b !important;
+  }
+  
+  /* Main content should expand to push the footer down */
+  .main-content {
+    flex: 1;
+  }
+  
+  /* Primary button styling */
+  .btn-primary {
     background-color: #403f2b !important; /* Dark Brown */
-    color: #E9E2D8 !important; /* Light Beige */
+    color: #e9e2d8 !important; /* Light Beige */
     border: none !important;
     padding: 10px 15px !important;
   }
-
-
-  .event-image-preview ,
+  
+  /* Event and Activity image styling */
+  .event-image-preview,
   .activity-image-preview {
-    width: 100%; /* or a fixed width like 300px */
-    width: auto; /* Set a max width */
-    height: 300px !important; /* Ensures the aspect ratio is maintained */
+    height: 300px !important;
     display: block;
     margin: 0 auto; /* Centers the image */
-    border-radius: 8px; /* Optional: Rounds the corners */
+    border-radius: 8px; /* Rounded corners */
     object-fit: cover; /* Ensures consistent sizing without distortion */
+  }
+  
+  /* Devise login page background */
+  .devise-login-page {
+    background-color: #ffffff !important;
   }
   

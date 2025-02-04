@@ -1,7 +1,7 @@
+<h2 class="text-center mt-3 mb-4">Sign Up</h2>
 <div class="d-flex justify-content-center">
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "w-50 form-container", style: "border: 2px solid #808080; padding: 20px; border-radius: 5px;" }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
-    <h2 class="text-center mb-4">Sign up</h2>
     <!-- First and Last Name on the Same Line -->
     <div class="row mb-3">
       <div class="col-md-6">
