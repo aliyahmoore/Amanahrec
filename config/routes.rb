@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :boards
   devise_for :users
   get "pages/home"
   get "pages/about"
@@ -13,6 +14,9 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
+  resources :media_mentions
+  # Defines the root path route ("/")
+  # root "posts#index"
   # Define root path
   root "pages#home"
 
@@ -22,6 +26,20 @@ Rails.application.routes.draw do
       patch :unapprove
     end
   end
+
+  resources :activities, :events do
+    resources :payments, only: [ :create ]
+  end
+
+  # Membership payments (handled at the top level)
+  resources :payments, only: [ :create ] do
+    collection do
+      post :cancel_subscription
+    end
+  end
+
+  get "/payments/success", to: "payments#success"
+  get "/payments/cancel", to: "payments#cancel"
 
   # Activities routes (payment and registration nested under activities)
   resources :activities do
@@ -42,5 +60,4 @@ Rails.application.routes.draw do
   get "/payments/cancel", to: "payments#cancel"
 
   # Membership payment routes (assuming it's separate from events/activities)
-  resources :payments, only: [ :create ]
 end

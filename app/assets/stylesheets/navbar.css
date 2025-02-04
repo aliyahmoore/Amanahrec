@@ -1,73 +1,69 @@
- /* Navigation bar */
- .navbar .nav-item .nav-link {
-    color: #403f2b !important; 
-  }
-  .navbar-brand {
-  font-family: phosphate; 
-  font-size: 6rem !important; 
-  color: #403f2b !important;
-  }
-  
-  .navbar .nav-item {
-    margin-right: 1rem; /* Add space between links */
-  }
-  
-  /* Donate button */
-  #donate {
-    font-size: 1.25rem; /* Match .lead font size */
-    color:#403f2b!important; 
-    background-color: #DACCB1;
-    padding: 0.5rem 1rem; 
-    border-radius: 0.25rem; 
-  }
-  
-  /* Change the color of the hamburger lines to match the color of the navbar */
-  .navbar-toggler-icon {
-    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"%3E%3Cpath stroke="%23DACCB1" stroke-width="2" d="M4 7h22M4 15h22M4 23h22" stroke-linecap="round" stroke-linejoin="round"/%3E%3C/svg%3E') !important;
-  }
-  
-  .navbar-toggler {
-    border-color: #DACCB1 !important;  
-  }
+.navbar {
+  --main-color: #403f2b; /* Dark color for logo and text */
+  --accent-color: #daccb1; /* Light color for contrast */
+  background-color: var(--accent-color) !important; /* Lighter background for navbar */
+}
 
-  .dropdown-menu {
-    display: none;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-  }
-  
-  .dropdown:hover .dropdown-menu {
-    display: block;
-    opacity: 1;
-  }
-  
+.navbar .nav-item .nav-link {
+  color: var(--main-color) !important;
+  margin-right: 1rem; /* Add space between links */
+}
 
+.navbar-brand {
+  font-family: Phosphate;
+  font-size: 6rem !important;
+  color: var(--main-color) !important;
+}
 
-  /* Dropdown Menu Background and Border */
-.dropdown-menu {
-  background-color: #f8f9fa; /* Light background color */
-  border: 1px solid #e0e0e0; /* Light border for definition */
-  border-radius: 0.25rem; /* Slightly rounded corners */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+/* Donate Button */
+#donate {
+  font-size: 1.25rem; /* Match .lead font size */
+  color: #daccb1 !important;
+  background-color: #57573f !important; 
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+}
+
+/* Navbar Toggler */
+.navbar-toggler {
+  border-color: var(--main-color) !important;
+}
+
+.navbar-toggler-icon {
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"%3E%3Cpath stroke="%23403F2B" stroke-width="2" d="M4 7h22M4 15h22M4 23h22" stroke-linecap="round" stroke-linejoin="round"/%3E%3C/svg%3E') !important;
+}
+
+/* Dropdown Menu */
+.navbar .dropdown-menu {
+  right: 0;
+  left: auto;
 }
 
 /* Dropdown Menu Items */
 .dropdown-item {
-  color: #403f2b; /* Neutral text color */
-  font-size: 1rem; /* Adjust font size */
-  padding: 0.5rem 1rem; /* Add padding for better spacing */
-  transition: background-color 0.2s ease, color 0.2s ease; /* Smooth transition on hover */
+  color: var(--main-color) !important;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Hover Effect for Dropdown Items */
-.dropdown-item:hover {
-  background-color: #dacdb1; /* Slight color change on hover */
-  color: #000;
-}
-
-
+/* Hover & Active Effects */
+.dropdown-item:hover,
 .dropdown-item.active {
-  background-color: #daccb1; 
-  color: #000; 
-  font-weight: bold; 
+  background-color: var(--main-color) !important;
+  color: var(--accent-color) !important; /* Light text on hover */
+}
+
+
+.custom-danger-btn {
+  background-color: red;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  margin-top: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  text-align: center;
 }

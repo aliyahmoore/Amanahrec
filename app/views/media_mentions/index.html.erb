@@ -1,0 +1,59 @@
+<h1>Latest News</h1>
+
+<% if current_user&.role&.name == 'admin' %>
+  <div class="col-12 text-center mt-4">
+    <%= link_to "New Media Mention", new_media_mention_path, class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<div class="container mt-5">
+  <div class="row row-cols-1 row-cols-md-3 g-2">
+    <% if @media_mentions.present? %>
+      <% @media_mentions.each do |media_mention| %>
+        <div>
+          <div class="card custom-card mb-3" style="background-color: #DACCB1;">
+            <div class="card-header media-header" style="background-color: #E9E2D8; height: 120px; display: flex; align-items: center; justify-content: center;">
+              <strong>
+                <h2 style="color: #403F2B; margin: 0; font-size: 25px; text-align: center;">
+                  <%= media_mention.name %>
+                </h2>
+              </strong>
+            </div>
+            <div class="card-body" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <strong>
+                <p class="card-text">
+                  News Organization: <%= media_mention.organization_name %>
+                </p>
+              </strong>
+              <strong>
+                <p class="card-text">
+                  Published Date: <%= media_mention.published_date.strftime("%B %d, %Y") %>
+                </p>
+              </strong>
+            </div>
+            <div class="card-footer">
+              <% if media_mention.link.present? %>
+                <a href="<%= media_mention.link %>" target="_blank"
+                   class="btn btn-primary mt-3"
+                   style="background-color: #82825E; border-color: #82825E; color: white;">
+                   View Full Article
+                </a>
+              <% else %>
+                <p class="text-muted">No link available</p>
+              <% end %>
+
+              <% if current_user&.role&.name == 'admin' %>
+                <div class="mt-3 d-flex justify-content-between">
+                  <%= link_to 'Edit', edit_media_mention_path(media_mention), class: 'btn btn-sm btn-outline-secondary rounded-0' %>
+                  <%= button_to 'Delete', media_mention_path(media_mention), method: :delete, class: 'btn btn-sm btn-outline-danger rounded-0' %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="text-center text-muted fs-5">No Updates Available At This Time.</p>
+    <% end %>
+  </div>
+</div>
