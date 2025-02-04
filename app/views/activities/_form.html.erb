@@ -10,7 +10,6 @@
       </ul>
     </div>
   <% end %>
-
   <!-- Activity Details Section -->
   <div class="form-section mb-4">
     <h3>Activity Details</h3>
@@ -36,7 +35,6 @@
         <%= form.number_field :cost, value: @activity.cost.nil? ? 0 : @activity.cost, class: "form-control", step: "0.01", min: "0" %>
       </div>
     </div>
-
     <div class="row mt-3">
       <div class="col-md-4">
         <%= form.label :description, class: "form-label" %><span class="required">*</span>
@@ -52,7 +50,6 @@
       </div>
     </div>
   </div>
-
   <!-- Recurrence Section -->
   <div class="form-section mb-4">
     <h3>Recurrence</h3>
@@ -74,7 +71,6 @@
       </div>
     </div>
   </div>
-
   <!-- Registration Section -->
   <div class="form-section mb-4">
     <h3>Registration</h3>
@@ -99,7 +95,6 @@
       </div>
     </div>
   </div>
-
   <!-- Image Upload Section -->
   <div class="row mb-4">
     <div class="col-md-3">
@@ -107,10 +102,8 @@
       <%= form.file_field :image, class: "form-control" %>
     </div>
   </div>
-
   <!-- Submit Button -->
   <div class="text-center">
     <%= form.submit "Save Activity", class: "btn btn-primary" %>
   </div>
-
 <% end %>

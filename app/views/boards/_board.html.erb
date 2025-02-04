@@ -5,18 +5,16 @@
     <% else %>
       <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Default Image">
     <% end %>
-
     <div class="card-body">
       <h5 class="card-title"><%= board.name %></h5>
       <p class="card-subtitle text-muted"><%= board.position %></p>
       <p class="card-text"><%= board.description %></p>
-    <% if current_user&.role&.name == "admin" %> 
-  <div class="d-flex gap-2">
-    <%= link_to "Edit", edit_board_path(board), class: "btn btn-warning" %>
-    <%= button_to "Delete", board_path(board), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure you want to delete this board member?" } %>
-  </div>
-<% end %>
+      <% if current_user&.role&.name == "admin" %>
+        <div class="d-flex gap-2">
+          <%= link_to "Edit", edit_board_path(board), class: "btn btn-warning" %>
+          <%= button_to "Delete", board_path(board), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure you want to delete this board member?" } %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
-

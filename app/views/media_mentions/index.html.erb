@@ -1,11 +1,9 @@
 <h1>Latest News</h1>
-
 <% if current_user&.role&.name == 'admin' %>
   <div class="col-12 text-center mt-4">
     <%= link_to "New Media Mention", new_media_mention_path, class: "btn btn-primary" %>
   </div>
 <% end %>
-
 <div class="container mt-5">
   <div class="row row-cols-1 row-cols-md-3 g-2">
     <% if @media_mentions.present? %>
@@ -36,12 +34,11 @@
                 <a href="<%= media_mention.link %>" target="_blank"
                    class="btn btn-primary mt-3"
                    style="background-color: #82825E; border-color: #82825E; color: white;">
-                   View Full Article
+                  View Full Article
                 </a>
               <% else %>
                 <p class="text-muted">No link available</p>
               <% end %>
-
               <% if current_user&.role&.name == 'admin' %>
                 <div class="mt-3 d-flex justify-content-between">
                   <%= link_to 'Edit', edit_media_mention_path(media_mention), class: 'btn btn-sm btn-outline-secondary rounded-0' %>
