@@ -3,7 +3,6 @@ class TestimonialsController < ApplicationController
     before_action :set_testimonial, only: [ :edit, :update, :destroy, :approve ]
     before_action :authorize_admin!, only: [ :approve, :unapprove, :edit, :destroy ]
 
-    # Display approved testimonials to everyone and unapproved to admin
     def index
       if current_user&.role&.name == "admin"
         if params[:status] == "approved"
@@ -17,7 +16,6 @@ class TestimonialsController < ApplicationController
         redirect_to root_path, alert: "You are not authorized to view this page."
       end
     end
-
 
 
     # Form for creating a new testimonial
