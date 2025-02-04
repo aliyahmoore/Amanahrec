@@ -21,9 +21,7 @@
             <%= link_to event.title, event_path(event), class: 'text-decoration-none text-primary' %>
           </h5>
           <p class="card-text text-muted">
-            <i class="fa-regular fa-calendar me-2"></i>
-            <%= event.start_date.strftime("%B %d, %Y") %>
-            <%= event.start_date.strftime("%I:%M %p") %> - <%= event.end_date.strftime("%I:%M %p") %>
+            <i class="fa-regular fa-calendar me-2"></i><%= event.start_date.strftime("%B %d, %Y") %> -  <%= event.end_date.strftime("%B %d, %Y") %> 
           </p>
           <p class="card-text">
             <i class="fa-solid fa-location-dot me-2"></i> <%= event.location %>
