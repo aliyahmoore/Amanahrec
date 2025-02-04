@@ -1,51 +1,54 @@
-Rails.application.routes.draw do
-  resources :boards
-  devise_for :users
-  get "pages/home"
-  get "pages/about"
-  get "pages/calendar"
-  get "pages/partners"
-  get "pages/board"
+class Registration < ApplicationRecord
+  belongs_to :user
+  belongs_to :registrable, polymorphic: true
 
-  # Health check route
-  get "up" => "rails/health#show", as: :rails_health_check
+  enum :status, { pending: "pending", successful: "successful", failed: "failed" }
 
-  # PWA files routes
-  get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-  get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
-  resources :media_mentions
-  # Defines the root path route ("/")
-  root "pages#home"
+  validate :check_capacity, on: :create
+  validate :check_existing_registration, on: :create
 
-  resources :testimonials, only: [ :index, :new, :create, :edit, :update, :destroy ] do
-    member do
-      patch :approve
-      patch :unapprove
+  # Registers the user for an event/activity (registrable) and returns the registration object
+  def self.register_user(user, registrable)
+    # If registrable is nil, return an error message
+    return OpenStruct.new(persisted?: false, errors: [ "Registrable object cannot be found." ]) if registrable.nil?
+
+    # Check if the user is already registered for the event/activity
+    if exists?(user: user, registrable: registrable)
+      registration = Registration.new
+      registration.errors.add(:base, "You are already registered.")
+      return registration
+    end
+
+    # Check capacity for the event/activity
+    if registrable.is_a?(Activity) && registrable.registrations.count >= registrable.capacity
+      registration = Registration.new
+      registration.errors.add(:base, "Registration is full. Sorry, the capacity has been reached.")
+      return registration
+    end
+
+    # Create the registration and set its status to 'successful'
+    create(user: user, registrable: registrable, status: :successful)
+  end
+
+  # Returns true if the registrable requires payment (i.e., it has a cost)
+  def requires_payment?
+    registrable&.cost.present? && registrable.cost.positive?
+  end
+
+  private
+
+  # Ensures the event/activity doesn't exceed its capacity
+  def check_capacity
+    if registrable.is_a?(Activity) && registrable.registrations.count >= registrable.capacity
+      errors.add(:base, "Registration is full. Sorry, the capacity has been reached.")
     end
   end
 
-  # Activities and Events routes
-  resources :activities do
-    resources :registrations, only: [ :create ]  # Ensure registrations are nested under activities
-    resources :payments, only: [ :new, :create ]  # Ensure payments are nested under activities
-  end
-
-  resources :events do
-    resources :registrations, only: [ :create ]  # Ensure registrations are nested under events
-    resources :payments, only: [ :new, :create ]  # Ensure payments are nested under events
-  end
-
-  # Payment success and cancel URLs (if needed globally)
-  get "/payments/success", to: "payments#success"
-  get "/payments/cancel", to: "payments#cancel"
-
-  # Membership payment routes (assuming it's separate from events/activities)
-  resources :payments, only: [ :create ] do
-    collection do
-      post :cancel_subscription
+  # Ensures the user is not already registered for the event/activity
+  def check_existing_registration
+    if self.class.exists?(user: user, registrable: registrable)
+      errors.add(:base, "You are already registered for this event or activity.")
     end
   end
-
-  get "/my_registrations", to: "registrations#my_registrations", as: "my_registrations"
 end
