@@ -14,7 +14,7 @@ class Activity < ApplicationRecord
   validates :cost, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
   validates :recurrence_pattern, inclusion: { in: %w[daily weekly], message: "%{value} is not a valid recurrence pattern" }, if: :recurring?
   validates :recurrence_days, presence: true, if: :recurring?
-  
+
   # Check if the activity is recurring
   def recurring?
     recurrence_pattern.present? && recurrence_days.present?
@@ -59,5 +59,4 @@ class Activity < ApplicationRecord
   end
 
   private
-  
 end

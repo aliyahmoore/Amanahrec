@@ -24,6 +24,4 @@ class User < ApplicationRecord
   def membership_active?
     membership&.active?
   end
-
-
 end
