@@ -4,47 +4,41 @@
     import "non_member_alert";
   </script>
 <% end %>
-
-
-  <h1 class="page-title text-center mt-3">Upcoming Activities</h1>
-
-  <div class="d-flex justify-content-center mb-3">
-    <% if current_user&.role_id == 1 %>
+<h1 class="page-title text-center mt-3">Upcoming Activities</h1>
+<div class="d-flex justify-content-center mb-3">
+  <% if current_user&.role_id == 1 %>
     <%= link_to 'New Activity', new_activity_path, class: 'btn btn-primary' %>
-    <%end%>
-  </div>
-
-  <div class="row d-flex justify-content-center g-3">
-    <% @activities.each do |activity| %>
-      <div class="col-md-6 col-lg-4 d-flex">
-        <div class="card flex-fill activity-card mb-4">
-          <% if activity.image.attached? %>
-            <%= image_tag activity.image, class: 'card-img-top activity-image', alt: activity.title %>
-          <% end %>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">
-              <%= link_to activity.title, activity_path(activity), class: 'text-decoration-none text-primary' %>
-            </h5>
-            <p class="card-text text-muted">
-              <i class="fa-regular fa-calendar me-2"></i> 
-  <%= activity.start_date.strftime("%B %d, %Y") %> 
-  <%= activity.start_date.strftime("%I:%M %p") %> - <%= activity.end_date.strftime("%I:%M %p") %>
-</p>
-            </p>
-            <p class="card-text">
-              <i class="fa-solid fa-location-dot me-2"></i> <%= activity.location %>
-            </p>
-            <p class="card-text">
-              <i class="fa-sharp-duotone fa-solid fa-money-bill"></i> 
-              <%= activity.cost.present? && activity.cost > 0 ? number_to_currency(activity.cost) : "Free" %>
-
-            </p>
-           
-            <!-- Countdown Timer -->
-            <% if activity.early_access_for_members && activity.general_registration_start %>
-  <% if Time.current < activity.general_registration_start %>
-    <p class="registration-info">Member Registrations Only, General Registration Opens In:</p>
-    <p id="countdown-<%= activity.id %>" 
+  <%end%>
+</div>
+<div class="row d-flex justify-content-center g-3">
+  <% @activities.each do |activity| %>
+    <div class="col-md-6 col-lg-4 d-flex">
+      <div class="card flex-fill activity-card mb-4">
+        <% if activity.image.attached? %>
+          <%= image_tag activity.image, class: 'card-img-top activity-image-preview', alt: activity.title %>
+        <% end %>
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">
+            <%= link_to activity.title, activity_path(activity), class: 'text-decoration-none text-primary' %>
+          </h5>
+          <p class="card-text text-muted">
+            <i class="fa-regular fa-calendar me-2"></i>
+            <%= activity.start_date.strftime("%B %d, %Y") %>
+            <%= activity.start_date.strftime("%I:%M %p") %> - <%= activity.end_date.strftime("%I:%M %p") %>
+          </p>
+        </p>
+        <p class="card-text">
+          <i class="fa-solid fa-location-dot me-2"></i> <%= activity.location %>
+        </p>
+        <p class="card-text">
+          <i class="fa-sharp-duotone fa-solid fa-money-bill"></i>
+          <%= activity.cost.present? && activity.cost > 0 ? number_to_currency(activity.cost) : "Free" %>
+        </p>
+        <!-- Countdown Timer -->
+        <% if activity.early_access_for_members && activity.general_registration_start %>
+          <% if Time.current < activity.general_registration_start %>
+            <p class="registration-info">Member Registrations Only, General Registration Opens In:</p>
+            <p id="countdown-<%= activity.id %>" 
        class="countdown" 
        data-countdown-date="<%= activity.general_registration_start %>"></p>
   <% else %>

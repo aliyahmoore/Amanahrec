@@ -50,8 +50,8 @@
 /* Hover & Active Effects */
 .dropdown-item:hover,
 .dropdown-item.active {
-  background-color: var(--main-color) !important;
-  color: var(--accent-color) !important; /* Light text on hover */
+  background-color: var(--accent-color) !important;
+  color: var(--main-color) !important; /* Light text on hover */
 }
 
 

@@ -1,8 +1,4 @@
-<body class="d-flex flex-column min-vh-100">
-  <main class="flex-grow-1">
-    <!-- Page Content -->
-  </main>
-  <footer class="footer-custom">
+<footer class="footer-custom">
     <!-- Footer Content -->
     <p>© 2025 Amanahrec Project</p>
     <p><i class="fa-solid fa-envelope"></i> <a href="mailto:hikinghijabie@gmail.com" class="text-body">hikinghijabie@gmail.com</a></p>
@@ -25,16 +21,13 @@
       </li>
     </ul>
     <div>
-    <% if user_signed_in? %>
-
-   
-  <%= button_to "Become a Member!", 
+      <% if user_signed_in? %>
+        <%= button_to "Become a Member!", 
                 payments_path(paymentable_type: "Membership", paymentable_id: current_user.id), 
                 method: :post, 
-                class: "btn btn-outline-primary" %>
-<% else %>
-  <%= link_to "Become a Member!", new_user_session_path, class: "btn btn-outline-primary" %>
-<% end %>
+                class: "btn become-member" %>
+      <% else %>
+        <%= link_to "Become a Member!", new_user_session_path, class: "btn become-member" %>
+      <% end %>
     </div>
   </footer>
-</body>
