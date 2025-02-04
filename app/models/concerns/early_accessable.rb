@@ -1,4 +1,4 @@
-module Registrable
+module EarlyAccessable
     extend ActiveSupport::Concern
 
     included do

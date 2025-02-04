@@ -1,5 +1,5 @@
 class Activity < ApplicationRecord
-  include Registrable
+  include EarlyAccessable
   has_one_attached :image
   has_many :payments, as: :paymentable
 
