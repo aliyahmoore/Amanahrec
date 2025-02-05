@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll("[data-countdown-date]").forEach((countdownElement) => {
       const targetDate = new Date(countdownElement.dataset.countdownDate).getTime();
@@ -13,8 +12,10 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
           const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
           const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); 
-          countdownElement.innerHTML = `<strong>${days} ${dayText} and ${hours} ${hourText}</strong>`;
           
+          const dayText = days === 1 ? "day" : "days";
+          const hourText = hours === 1 ? "hour" : "hours";
+          countdownElement.innerHTML = `<strong>${days} ${dayText} and ${hours} ${hourText}</strong>`;          
         }
       }
   
@@ -22,5 +23,3 @@ document.addEventListener("DOMContentLoaded", function () {
       const interval = setInterval(updateCountdown, 60000); // Update every minute
     });
   });
-  
-
