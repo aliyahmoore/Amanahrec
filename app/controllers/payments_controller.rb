@@ -37,12 +37,12 @@ class PaymentsController < ApplicationController
   end
 
   def cancel_subscription
-  if SubscriptionCancellationService.new(current_user).cancel
-    redirect_to root_url, notice: "Your membership has been successfully canceled."
-  else
-    redirect_to edit_user_registration_path, alert: "Error canceling subscription."
+    if SubscriptionCancellationService.new(current_user).cancel
+      redirect_to root_url, notice: "Your membership has been successfully canceled."
+    else
+      redirect_to edit_user_registration_path, alert: "Error canceling subscription."
+    end
   end
-end
 
   private
 

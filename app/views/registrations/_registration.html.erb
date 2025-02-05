@@ -1,7 +1,7 @@
 <div class="registration-card">
   <strong><%= registration.registrable&.title %></strong><br>
   
-<%= formatted_start_date(registration.registrable) %><br>
+  <%= formatted_start_date(registration.registrable) %><br>
   
   <%= registration.registrable&.location %><br>
   <p>Status: <%= registration.status.capitalize %></p>

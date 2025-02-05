@@ -4,8 +4,7 @@ class Registration < ApplicationRecord
 
   enum :status, { pending: "pending", successful: "successful", failed: "failed" }
 
-
-  validate :check_capacity, on: :create
+  validates :user_id, :registrable_id, :registrable_type, presence: true
   validate :check_existing_registration, on: :create
 
   # Registers the user for an event/activity (registrable) and returns the registration object
@@ -37,13 +36,6 @@ class Registration < ApplicationRecord
   end
 
   private
-
-  # Ensures the event/activity doesn't exceed its capacity
-  def check_capacity
-    if registrable.is_a?(Activity) && registrable.registrations.count >= registrable.capacity
-      errors.add(:base, "Registration is full. Sorry, the capacity has been reached.")
-    end
-  end
 
   # Ensures the user is not already registered for the event/activity
   def check_existing_registration
