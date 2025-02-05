@@ -1,19 +1,13 @@
 class TestimonialsController < ApplicationController
-    before_action :authenticate_user!, except: [ :index ]
+  load_and_authorize_resource
+    before_action :authenticate_user!, except: [ :index, :edit, :destroy, :update ]
     before_action :set_testimonial, only: [ :edit, :update, :destroy, :approve ]
-    before_action :authorize_admin!, only: [ :approve, :unapprove, :edit, :destroy ]
 
     def index
-      if current_user&.admin?
-        if params[:status] == "approved"
-          @testimonials = Testimonial.where(approved: true).order(created_at: :desc)
-        elsif params[:status] == "pending"
-          @testimonials = Testimonial.where(approved: false).order(created_at: :desc)
-        else
-          @testimonials = Testimonial.order(created_at: :desc) # Show all for admin
-        end
-      else
-        redirect_to root_path, alert: "You are not authorized to view this page."
+      @testimonials = case params[:status]
+      when "approved" then Testimonial.where(approved: true).order(created_at: :desc)
+      when "pending"  then Testimonial.where(approved: false).order(created_at: :desc)
+      else Testimonial.order(created_at: :desc)
       end
     end
 
@@ -72,9 +66,5 @@ class TestimonialsController < ApplicationController
 
     def set_testimonial
       @testimonial = Testimonial.find(params[:id])
-    end
-
-    def authorize_admin!
-        redirect_to root_path, alert: "Not authorized!" unless current_user&.role&.name == "admin"
     end
 end
