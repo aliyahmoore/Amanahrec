@@ -11,7 +11,7 @@
     </div>
   <% end %>
   <!-- Activity Details Section -->
-  <div class="form-section mb-4">
+  <div class="form-section">
     <h3>Activity Details</h3>
     <div class="row">
       <div class="col-md-3">
@@ -51,7 +51,7 @@
     </div>
   </div>
   <!-- Recurrence Section -->
-  <div class="form-section mb-4">
+  <div class="form-section">
     <h3>Recurrence</h3>
     <div class="row">
       <div class="col-md-6">
@@ -72,14 +72,14 @@
     </div>
   </div>
   <!-- Registration Section -->
-  <div class="form-section mb-4">
+  <div class="form-section">
     <h3>Registration</h3>
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-4">
         <%= form.label :general_registration_start, "General Registration Start Date", class: "form-label" %><span class="required">*</span>
         <%= form.datetime_local_field :general_registration_start, class: "form-control", required: true %>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-2">
         <%= form.label :capacity, class: "form-label" %><span class="required">*</span>
         <%= form.number_field :capacity, class: "form-control" %>
       </div>
@@ -96,10 +96,12 @@
     </div>
   </div>
   <!-- Image Upload Section -->
-  <div class="row mb-4">
-    <div class="col-md-3">
-      <h3>Upload an Image</h3>
-      <%= form.file_field :image, class: "form-control" %>
+  <div class="form-section">
+    <h3>Upload an Image</h3>
+    <div class="row">
+      <div class="col-md-3">
+        <%= form.file_field :image, class: "form-control" %>
+      </div>
     </div>
   </div>
   <!-- Submit Button -->

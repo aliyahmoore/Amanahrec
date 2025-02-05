@@ -1,3 +1,4 @@
+<% content_for :title, "Upcoming Events" %>
 <% content_for :javascript do %>
   <script type="module">
     import "non_member_alert";
@@ -17,19 +18,17 @@
           <%= image_tag event.images.first, class: 'card-img-top event-image-preview', alt: event.title %>
         <% end %>
         <div class="card-body d-flex flex-column">
-          <h5 class="card-title">
-            <%= link_to event.title, event_path(event), class: 'text-decoration-none text-primary' %>
-          </h5>
-          <p class="card-text text-muted">
-            <i class="fa-regular fa-calendar me-2"></i>
-            <%= event.start_date.strftime("%B %d, %Y") %>
-            <%= event.start_date.strftime("%I:%M %p") %> - <%= event.end_date.strftime("%I:%M %p") %>
+          <h4 class="card-title text-center">
+            <%= link_to event.title, event_path(event), class: 'text-decoration-none' %>
+          </h4>
+          <p class="card-text">
+            <i class="fas fa-calendar-alt"></i> <strong>:</strong> <%= event.start_date.strftime("%B %d, %Y") %> -  <%= event.end_date.strftime("%B %d, %Y") %>
           </p>
           <p class="card-text">
-            <i class="fa-solid fa-location-dot me-2"></i> <%= event.location %>
+            <i class="fa-solid fa-location-dot"></i> <strong>:</strong> <%= event.location %>
           </p>
           <p class="card-text">
-            <i class="fa-sharp-duotone fa-solid fa-money-bill"></i>
+            <i class="fa-sharp-duotone fa-solid fa-money-bill"></i> <strong>:</strong> 
             <%= event.cost.present? && event.cost > 0 ? number_to_currency(event.cost) : "Free" %>
           </p>
           <!-- Member Early Access Badge -->

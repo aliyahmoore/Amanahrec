@@ -36,7 +36,6 @@ html, body {
     background-color: #403f2b !important; /* Dark Brown */
     color: #e9e2d8 !important; /* Light Beige */
     border: none !important;
-    padding: 10px 15px !important;
   }
   
   /* Event and Activity image styling */
@@ -45,7 +44,6 @@ html, body {
     height: 300px !important;
     display: block;
     margin: 0 auto; /* Centers the image */
-    border-radius: 8px; /* Rounded corners */
     object-fit: cover; /* Ensures consistent sizing without distortion */
   }
   
@@ -82,9 +80,36 @@ html, body {
     border-top: none;
   }
   .news-text {
-    color: #daccb1; /* Dark brown */
+    color: #daccb1 !important; /* Dark brown */
     font-size: 16px; /* Adjust size if needed */
   }
 
+  .about p {
+    margin-bottom: 30px;
+    line-height: 2;
+    text-align: center;
+}
+h4.card-title a {
+    color: #403F2B;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  h4.card-title a:hover {
+    color: #57573F;
+  }
+
+
+  .card-text {
+    color: #403f2b;
+  }
   
+  .card-title {
+    color: #403f2b;
+  }
   
+  .card-body .fa-calendar-alt, 
+  .card-body .fa-location-dot, 
+  .card-body .fa-money-bill {
+    color: #403f2b;
+  }
