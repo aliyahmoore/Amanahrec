@@ -1,0 +1,26 @@
+<% if item.general_registration_start.present? %>
+  <% if Time.current < item.general_registration_start %>
+    <p class="registration-info text-center">
+      <% if item.early_access_for_members %>
+        Member Registrations Now Open </br> General Registration Opens In: 
+    <% else %>
+      General Registration Opens In: 
+    <% end %>
+    <span id="countdown-<%= item.id %>" 
+            class="countdown" 
+            data-countdown-date="<%= item.general_registration_start %>"></span>
+  </p>
+<% else %>
+  <p class="registration-info text-center">
+    <span class="btn btn-outline-success" style="pointer-events: none;">
+      General Registration Open!
+    </span>
+  </p>
+<% end %>
+<% else %>
+  <p class="registration-info text-center">
+    <span class="btn btn-outline-warning" style="pointer-events: none;">
+      Registration Date Not Set
+    </span>
+  </p>
+<% end %>

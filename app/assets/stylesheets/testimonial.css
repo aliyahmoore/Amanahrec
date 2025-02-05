@@ -1,0 +1,19 @@
+.testimonial-card-container {
+    display: flex;
+    justify-content: center;
+}
+
+.testimonial-card {
+    background-color: #c6c3a3;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.testimonial-content {
+    height: 200px; 
+  }

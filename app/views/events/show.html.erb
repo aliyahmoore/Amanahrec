@@ -29,26 +29,20 @@
   <div class="col-md-4">
     <div class="event-details text-start p-3 shadow-sm rounded bg-light">
       <!-- Member Early Access Badge -->
-      <% if @event.early_access_for_members? %>
-        <div class="text-center mb-2">
-          <span class="badge bg-warning text-dark">
-            <i class="fas fa-gem"></i> Member Early Access
-          </span>
-        </div>
-      <% end %>
+      <%= render 'shared/early_access_badge', item: @event %>
       <!-- Date and Location -->
-      <p><i class="fas fa-calendar-alt"></i> <strong>:</strong> <%= @event.start_date.strftime("%B %d, %Y") %>
-        <%= @event.start_date.strftime("%I:%M %p") %> - <%= @event.end_date.strftime("%I:%M %p") %>
+      <p><i class="fas fa-calendar-alt"></i> <strong>:</strong>
+        <%= @event.start_date.strftime("%B %d %Y") %> - <%= @event.end_date.strftime("%B %d %Y") %>
       </p>
       <p><i class="fas fa-map-marker-alt"></i> <strong>:</strong> <%= @event.location %></p>
       <p><i class="fa-solid fa-money-bill"></i> <strong>:</strong> <%= @event.cost.present? && @event.cost > 0 ? number_to_currency(@event.cost) : "Free" %></p>
     </div>
     <!-- Action Buttons -->
     <div class="event-actions text-center mt-3">
-      <% if (@event.early_access_for_members? && current_user&.member?) || @event.general_registration_open? %>
-        <%= button_to 'Register Now', event_payments_path(@event, paymentable_type: 'event', paymentable_id: @event.id), method: :post, class: 'event-payments btn btn-primary mb-3', data: { turbo: false } %>
+      <% if (@event.early_access_for_members? && current_user&.membership_active?) || @event.general_registration_open? %>
+        <%= button_to 'Register Now', event_payments_path(@event, paymentable_type: 'Event', paymentable_id: @event.id), method: :post, class: 'event-payments btn btn-primary mb-3', data: { turbo: false } %>
       <% end %>
-      <% if current_user&.role_id == 1 %>
+      <% if current_user&.admin? %>
         <div class="d-flex justify-content-center gap-2 mt-2">
           <%= link_to 'Edit', edit_event_path(@event), class: "btn btn-warning md-2 mb-3" %>
           <%= button_to 'Delete', @event, method: :delete, data: { confirm: 'Are you sure you want to delete this event?' }, class: "btn btn-danger md-2 mb-3" %>

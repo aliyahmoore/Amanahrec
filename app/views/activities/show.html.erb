@@ -29,13 +29,7 @@
   <div class="col-md-4">
     <div class="activity-details text-start p-3 shadow-sm rounded bg-light">
       <!-- Member Early Access Badge -->
-      <% if @activity.early_access_for_members? %>
-        <div class="text-center mb-2">
-          <span class="badge bg-warning text-dark">
-            <i class="fas fa-gem"></i> Member Early Access
-          </span>
-        </div>
-      <% end %>
+      <%= render 'shared/early_access_badge', item: @activity %>
       <!-- Date and Location -->
       <p><i class="fas fa-calendar-alt"></i> <strong>:</strong> <%= @activity.start_date.strftime("%B %d, %Y") %>
         <%= @activity.start_date.strftime("%I:%M %p") %> - <%= @activity.end_date.strftime("%I:%M %p") %>
@@ -45,10 +39,10 @@
     </div>
     <!-- Action Buttons -->
     <div class="activity-actions text-center mt-3">
-      <% if (@activity.early_access_for_members? && current_user&.member?) || @activity.general_registration_open? %>
+      <% if (@activity.early_access_for_members? && current_user&.membership_active?) || @activity.general_registration_open? %>
         <%= button_to 'Register Now', activity_payments_path(@activity, paymentable_type: 'Activity', paymentable_id: @activity.id), method: :post, class: 'activity-payments btn btn-primary mb-3', data: { turbo: false } %>
       <% end %>
-      <% if current_user&.role_id == 1 %>
+      <% if current_user&.admin? %>
         <div class="d-flex justify-content-center gap-2 mt-2">
           <%= link_to 'Edit', edit_activity_path(@activity), class: "btn btn-warning md-2 mb-3" %>
           <%= button_to 'Delete', @activity, method: :delete, data: { confirm: 'Are you sure you want to delete this activity?' }, class: "btn btn-danger md-2 mb-3" %>

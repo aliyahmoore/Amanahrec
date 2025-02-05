@@ -40,6 +40,7 @@
         <div>
           <% if current_user.membership&.active? %>
             <button class="btn btn-outline-success" disabled>Active <i class="fas fa-gem"></i></button>
+            since : <%= current_user.membership.start_date.strftime("%m/%d/%Y") %>
           <% else %>
             <button class="btn btn-outline-secondary d-inline" disabled>Inactive <i class="fa-regular fa-gem"></i></button>
             <span>Click "Become a Member!" below to join.</span>
