@@ -40,12 +40,6 @@
   <div class="container py-5">
     <h2 class="text-center">What People Are Saying:</h2>
     <div id="testimonialCarousel" class="carousel carousel-dark slide col-md-6 mx-auto" data-bs-ride="carousel">
-      <!-- Carousel Indicators -->
-      <div class="carousel-indicators">
-        <% @testimonials.each_with_index do |testimonial, index| %>
-          <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="<%= index %>" class="<%= index == 0 ? 'active' : '' %>" aria-label="Slide <%= index + 1 %>"></button>
-        <% end %>
-      </div>
       <!-- Carousel Items -->
       <div class="carousel-inner">
         <% @testimonials.each_with_index do |testimonial, index| %>

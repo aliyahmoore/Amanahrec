@@ -7,14 +7,12 @@
         - <%= calendar.end_week %>
       <% end %>
     </span>
-
     <nav>
       <%= link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view %>
       <%= link_to t('simple_calendar.today', default: 'Today'), calendar.url_for_today_view %>
       <%= link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view %>
     </nav>
   </div>
-
   <table class="table table-striped">
     <thead>
       <tr>
@@ -23,7 +21,6 @@
         <% end %>
       </tr>
     </thead>
-
     <tbody>
       <% date_range.each_slice(7) do |week| %>
         <tr>

@@ -10,11 +10,14 @@ class SubscriptionCancellationService
     stripe_subscription&.cancel
 
     # Update membership status
-    @user.membership.update(status: "canceled")
+    @user.membership.update!(
+    status: "canceled",
+    end_date: Time.now
+  )
 
-    # Update payment status
-    payment = @user.payments.find_by(is_recurring: true, status: "succeeded")
-    payment.update!(status: "canceled") if payment
+  if (payment = @user.payments.find_by(is_recurring: true, status: "succeeded"))
+    payment.update!(status: "canceled")
+  end
 
     true
   rescue Stripe::StripeError => e

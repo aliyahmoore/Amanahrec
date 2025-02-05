@@ -1,4 +1,5 @@
 class Activity < ApplicationRecord
+    include EarlyAccessable
     has_one_attached :image
 
     # Default value for recurrence_days if nil
@@ -14,8 +15,7 @@ class Activity < ApplicationRecord
     has_many :registrations, as: :registrable
     validates :recurrence_pattern, inclusion: { in: %w[daily weekly], message: "%{value} is not a valid recurrence pattern" }, if: :recurring?
     validates :recurrence_days, presence: true, if: :recurring?
-    validates :general_registration_start, presence: true
-    validates :early_access_days, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
+
 
     # Check if the activity is recurring
     def recurring?
@@ -54,30 +54,6 @@ class Activity < ApplicationRecord
       self.recurrence_days ||= []
     end
 
-    # Calculate the early registration start date
-    def early_registration_start
-      return nil unless general_registration_start.present? && early_access_days.present?
-      general_registration_start - early_access_days.days
-    end
-
-    # Check if the activity is currently in the early access period
-    def early_access_period?
-      return false unless early_access_for_members && early_registration_start.present?
-      Time.current.between?(early_registration_start, general_registration_start)
-    end
-
-    # Check if general registration is open
-    def general_registration_open?
-      return false if general_registration_start.nil?
-      Time.current >= general_registration_start
-    end
-
-    # Determine if a user can register
-    def can_register?(user)
-      return false unless user
-      return general_registration_open? unless user.member?
-      early_access_period? || general_registration_open?
-    end
 
     has_many :payments, as: :paymentable
 
