@@ -29,7 +29,7 @@
             </small>
           </div>
 
-          <% if current_user&.role&.name == 'admin' %>
+          <% if current_user&.admin? %>
             <!-- Card Footer -->
             <div class="card-footer mt-auto">
               <div class="d-flex justify-content-center gap-2">
