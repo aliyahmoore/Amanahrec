@@ -93,7 +93,7 @@
     <!-- Action Buttons -->
     <div class="activity-actions text-center mt-3">
       <% if (@activity.early_access_for_members? && current_user&.membership_active?) || @activity.general_registration_open? %>
-        <%= render "shared/register_button", registrable: @activity %>
+        <%= render "shared/register_button", registrable: @event %>
       <% end %>
       <% if current_user&.admin? %>
         <div class="d-flex justify-content-center gap-2 mt-2">
