@@ -18,11 +18,11 @@
           <%= image_tag activity.image, class: 'card-img-top activity-image-preview', alt: activity.title %>
         <% end %>
         <div class="card-body d-flex flex-column">
-          <h5 class="card-title">
+          <h5 class="card-title text-center">
             <%= link_to activity.title, activity_path(activity), class: 'text-decoration-none text-primary' %>
           </h5>
           <p class="card-text text-muted">
-            <i class="fa-regular fa-calendar me-2"></i>
+           <i class="fas fa-calendar-alt"></i></i>
             <%= activity.start_date.strftime("%B %d, %Y") %>
             <%= activity.start_date.strftime("%I:%M %p") %> - <%= activity.end_date.strftime("%I:%M %p") %>
           </p>

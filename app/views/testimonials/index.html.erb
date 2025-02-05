@@ -1,5 +1,5 @@
 <%= stylesheet_link_tag "testimonial_index", "data-turbo-track": "reload" %>
-<h1 class="text-center mb-4">Testimonials</h1>
+<h1 class="text-center mt-3">Testimonials</h1>
 <div class="container">
   <!-- Filter Buttons -->
   <div class="text-center mb-5">
@@ -29,12 +29,12 @@
             <div class="card-footer mt-auto">
               <div class="d-flex justify-content-center gap-2">
                 <% if testimonial.approved? %>
-                  <%= button_to "Unapprove", unapprove_testimonial_path(testimonial), method: :patch, class: "btn btn-warning btn-sm", data: { confirm: "Are you sure?" } %>
+                  <%= button_to "Unapprove", unapprove_testimonial_path(testimonial), method: :patch, class: "btn btn-warning", data: { confirm: "Are you sure?" } %>
                 <% else %>
-                  <%= button_to "Approve", approve_testimonial_path(testimonial), method: :patch, class: "btn btn-success btn-sm" %>
+                  <%= button_to "Approve", approve_testimonial_path(testimonial), method: :patch, class: "btn btn-success" %>
                 <% end %>
-                <%= link_to "Edit", edit_testimonial_path(testimonial), class: "btn btn-primary btn-sm" %>
-                <%= button_to "Delete", testimonial_path(testimonial), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Are you sure?" } %>
+                <%= link_to "Edit", edit_testimonial_path(testimonial), class: "btn btn-primary" %>
+                <%= button_to "Delete", testimonial_path(testimonial), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
               </div>
             </div>
           <% end %>

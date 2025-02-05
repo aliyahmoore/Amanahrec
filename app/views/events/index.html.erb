@@ -18,11 +18,11 @@
           <%= image_tag event.images.first, class: 'card-img-top event-image-preview', alt: event.title %>
         <% end %>
         <div class="card-body d-flex flex-column">
-          <h5 class="card-title">
+          <h5 class="card-title text-center">
             <%= link_to event.title, event_path(event), class: 'text-decoration-none text-primary' %>
           </h5>
           <p class="card-text text-muted">
-            <i class="fa-regular fa-calendar me-2"></i><%= event.start_date.strftime("%B %d, %Y") %> -  <%= event.end_date.strftime("%B %d, %Y") %>
+            <i class="fas fa-calendar-alt"></i> <%= event.start_date.strftime("%B %d, %Y") %> -  <%= event.end_date.strftime("%B %d, %Y") %>
           </p>
           <p class="card-text">
             <i class="fa-solid fa-location-dot me-2"></i> <%= event.location %>
