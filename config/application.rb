@@ -23,6 +23,7 @@ module Amanahrec
     #
     config.time_zone = "Central Time (US & Canada)"
 
+   
     # Ensures local timestamps
     config.active_record.default_timezone = :local
 
