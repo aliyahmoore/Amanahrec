@@ -10,6 +10,7 @@
       </ul>
     </div>
   <% end %>
+  
   <!-- Activity Details Section -->
   <div class="form-section">
     <h3>Activity Details</h3>
@@ -50,27 +51,7 @@
       </div>
     </div>
   </div>
-  <!-- Recurrence Section -->
-  <div class="form-section">
-    <h3>Recurrence</h3>
-    <div class="row">
-      <div class="col-md-6">
-        <%= form.label :recurrence_pattern, "Recurring Event?", class: "form-label" %>
-        <%= form.select :recurrence_pattern, options_for_select([['None', nil], ['Daily', 'daily'], ['Weekly', 'weekly']], @activity.recurrence_pattern || 'none'), {}, class: "form-select", id: "activity_recurrence_pattern" %>
-      </div>
-      <div class="col-md-6" id="recurrence_days_field" style="<%= 'display:none' if @activity.recurrence_pattern != 'weekly' %>">
-        <%= form.label :recurrence_days, "Recurrence Days (Select days)", class: "form-label" %>
-        <div class="checkbox-container">
-          <% %w[monday tuesday wednesday thursday friday saturday sunday].each do |day| %>
-            <div class="form-check form-check-inline">
-              <%= check_box_tag "activity[recurrence_days][]", day, @activity.recurrence_days.to_s.include?(day), class: "form-check-input" %>
-              <%= form.label "recurrence_days_#{day}", day.capitalize, class: "form-check-label" %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
+
   <!-- Registration Section -->
   <div class="form-section">
     <h3>Registration</h3>
@@ -95,6 +76,7 @@
       </div>
     </div>
   </div>
+
   <!-- Image Upload Section -->
   <div class="form-section">
     <h3>Upload an Image</h3>
@@ -104,6 +86,7 @@
       </div>
     </div>
   </div>
+
   <!-- Submit Button -->
   <div class="text-center">
     <%= form.submit "Save Activity", class: "btn btn-primary" %>
