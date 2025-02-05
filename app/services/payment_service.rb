@@ -83,8 +83,8 @@ class PaymentService
       end
 
       {
-        name: @paymentable.title,
-        description: "#{@paymentable.description} | Date: #{formatted_date}"
+        name: "#{@paymentable.title} | #{formatted_date}",
+        description: @paymentable.description
       }
     end
 end
