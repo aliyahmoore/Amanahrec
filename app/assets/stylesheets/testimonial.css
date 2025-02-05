@@ -13,3 +13,7 @@
     flex-direction: column;
     justify-content: space-between;
 }
+
+.testimonial-content {
+    height: 200px; 
+  }

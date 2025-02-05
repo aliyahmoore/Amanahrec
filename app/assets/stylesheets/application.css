@@ -80,7 +80,7 @@ html, body {
     border-top: none;
   }
   .news-text {
-    color: #daccb1; /* Dark brown */
+    color: #daccb1 !important; /* Dark brown */
     font-size: 16px; /* Adjust size if needed */
   }
 
