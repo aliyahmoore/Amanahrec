@@ -44,7 +44,6 @@ html, body {
     height: 300px !important;
     display: block;
     margin: 0 auto; /* Centers the image */
-    border-radius: 8px; /* Rounded corners */
     object-fit: cover; /* Ensures consistent sizing without distortion */
   }
   
@@ -90,5 +89,27 @@ html, body {
     line-height: 2;
     text-align: center;
 }
+h4.card-title a {
+    color: #403F2B;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  h4.card-title a:hover {
+    color: #57573F;
+  }
+
+
+  .card-text {
+    color: #403f2b;
+  }
   
+  .card-title {
+    color: #403f2b;
+  }
   
+  .card-body .fa-calendar-alt, 
+  .card-body .fa-location-dot, 
+  .card-body .fa-money-bill {
+    color: #403f2b;
+  }
