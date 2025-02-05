@@ -5,8 +5,8 @@ class RegistrationService
   end
 
   def register_user
-    raise RegistrationError, t("errors.registration.already_registered") if already_registered?
-    raise RegistrationError, t("errors.registration.capacity_full") if capacity_reached?
+    raise RegistrationError, "You are already registered for this event or activity." if already_registered?
+    raise RegistrationError, "Registration is full. Sorry, the capacity has been reached." if capacity_reached?
 
     registration = Registration.create!(user: @user, registrable: @registrable, status: :successful)
     registration
