@@ -10,7 +10,7 @@ class Event < ApplicationRecord
     validates :location, presence: true
     validates :rsvp_deadline, presence: true
     validates :cost, numericality: { greater_than_or_equal_to: 0 }
-
+    validate :rsvp_deadline_must_be_valid
 
     # Calculate the early registration start date
 
@@ -18,5 +18,19 @@ class Event < ApplicationRecord
 
     def start_time
       start_date
+    end
+
+    private
+
+    def rsvp_deadline_must_be_valid
+      return if rsvp_deadline.blank? || start_date.blank? || general_registration_start.blank?
+  
+      if rsvp_deadline >= start_date
+        errors.add(:rsvp_deadline, "must be before the event start date")
+      end
+  
+      if rsvp_deadline < general_registration_start
+        errors.add(:rsvp_deadline, "must be after the general registration start date")
+      end
     end
 end
