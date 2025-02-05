@@ -25,35 +25,25 @@
             <%= event.start_date.strftime("%B %d, %Y") %>
             <%= event.start_date.strftime("%I:%M %p") %> - <%= event.end_date.strftime("%I:%M %p") %>
           </p>
-        </p>
-        <p class="card-text">
-          <i class="fa-solid fa-location-dot me-2"></i> <%= event.location %>
-        </p>
-        <p class="card-text">
-          <i class="fa-sharp-duotone fa-solid fa-money-bill"></i>
-          <%= event.cost.present? && event.cost > 0 ? number_to_currency(event.cost) : "Free" %>
-        </p>
-        <!-- Countdown Timer -->
-        <% if event.early_access_for_members && event.general_registration_start %>
-          <% if Time.current < event.general_registration_start %>
-            <p class="registration-info">Member Registrations Only, General Registration Opens In:</p>
-            <p id="countdown-<%= event.id %>" 
-       class="countdown" 
-       data-countdown-date="<%= event.general_registration_start %>"></p>
-          <% else %>
-            <p class="registration-info">General registration is now open!</p>
-          <% end %>
-        <% else %>
-          <p class="registration-info">General registration is now open!</p>
-        <% end %>
-        <div class="mt-auto d-flex justify-content-between">
-          <% if current_user&.role_id == 1 %>
-            <%= link_to 'Edit', edit_event_path(event), class: 'btn btn-warning btn-sm' %>
-            <%= link_to 'Delete', event_path(event), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
-          <% end %>
+          <p class="card-text">
+            <i class="fa-solid fa-location-dot me-2"></i> <%= event.location %>
+          </p>
+          <p class="card-text">
+            <i class="fa-sharp-duotone fa-solid fa-money-bill"></i>
+            <%= event.cost.present? && event.cost > 0 ? number_to_currency(event.cost) : "Free" %>
+          </p>
+          <!-- Member Early Access Badge -->
+          <%= render 'shared/early_access_badge', item: event %>
+          <!-- Countdown Timer -->
+          <%= render 'shared/countdown', item: event %>
+          <div class="mt-auto d-flex justify-content-between">
+            <% if current_user&.role_id == 1 %>
+              <%= link_to 'Edit', edit_event_path(event), class: 'btn btn-warning btn-sm' %>
+              <%= link_to 'Delete', event_path(event), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
 </div>
