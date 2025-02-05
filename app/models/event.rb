@@ -7,7 +7,8 @@ class Event < ApplicationRecord
 
   validates :title, :description, :start_date, :end_date, :location, :rsvp_deadline, presence: true
   validates :cost, presence: true, numericality: { greater_than_or_equal_to: 0 }
-  validates :capacity, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :capacity, presence: true, numericality: { only_integer: true, greater_than: 0 }
+
 
   # Calculate the early registration start date
 
