@@ -4,7 +4,7 @@ class TestimonialsController < ApplicationController
     before_action :authorize_admin!, only: [ :approve, :unapprove, :edit, :destroy ]
 
     def index
-      if current_user&.role&.name == "admin"
+      if current_user&.admin?
         if params[:status] == "approved"
           @testimonials = Testimonial.where(approved: true).order(created_at: :desc)
         elsif params[:status] == "pending"

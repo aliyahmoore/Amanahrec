@@ -25,4 +25,9 @@ class User < ApplicationRecord
   def membership_active?
     membership&.active?
   end
+
+  # method to check user roles add to
+  def admin?
+    role&.name&.downcase == "admin"
+  end
 end

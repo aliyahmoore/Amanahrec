@@ -6,7 +6,7 @@
 <% end %>
 <h1 class="text-center mt-3">Upcoming Activities</h1>
 <div class="d-flex justify-content-center mb-3">
-  <% if current_user&.role_id == 1 %>
+  <% if current_user&.admin? %>
     <%= link_to 'New Activity', new_activity_path, class: 'btn btn-primary' %>
   <%end%>
 </div>
@@ -38,7 +38,7 @@
           <!-- Countdown Timer -->
           <%= render 'shared/countdown', item: activity%>
           <div class="mt-auto d-flex justify-content-between">
-            <% if current_user&.role_id == 1 %>
+            <% if current_user&.admin? %>
               <%= link_to 'Edit', edit_activity_path(activity), class: 'btn btn-warning btn-sm' %>
               <%= link_to 'Delete', activity_path(activity), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
             <% end %>
