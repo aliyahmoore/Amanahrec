@@ -1,7 +1,5 @@
 <%= stylesheet_link_tag "testimonial_index", "data-turbo-track": "reload" %>
-
 <h1 class="text-center mb-4">Testimonials</h1>
-
 <div class="container">
   <!-- Filter Buttons -->
   <div class="text-center mb-5">
@@ -9,7 +7,6 @@
     <%= link_to "Approved", testimonials_path(status: "approved"), class: "btn btn-success" %>
     <%= link_to "Pending Approval", testimonials_path(status: "pending"), class: "btn btn-warning" %>
   </div>
-
   <div class="row">
     <% @testimonials.each do |testimonial| %>
       <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
@@ -18,7 +15,6 @@
           <div class="card-header <%= testimonial.approved? ? 'bg-success text-white' : 'bg-warning text-dark' %>">
             <%= testimonial.approved? ? 'Approved' : 'Pending Approval' %>
           </div>
-
           <!-- Card Body -->
           <div class="card-body flex-grow-1">
             <p class="card-text text-center font-weight-bold text-dark" style="font-size: 1.2rem; line-height: 1.4; margin-top: 20px;">
@@ -28,7 +24,6 @@
               By: <%= testimonial.user.first_name %> <%= testimonial.user.last_name %>
             </small>
           </div>
-
           <% if current_user&.role&.name == 'admin' %>
             <!-- Card Footer -->
             <div class="card-footer mt-auto">
@@ -38,9 +33,7 @@
                 <% else %>
                   <%= button_to "Approve", approve_testimonial_path(testimonial), method: :patch, class: "btn btn-success btn-sm" %>
                 <% end %>
-
                 <%= link_to "Edit", edit_testimonial_path(testimonial), class: "btn btn-primary btn-sm" %>
-
                 <%= button_to "Delete", testimonial_path(testimonial), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Are you sure?" } %>
               </div>
             </div>
