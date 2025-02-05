@@ -65,3 +65,5 @@ gem "stripe", "~> 13.3"
 gem "dotenv-rails", groups: [ :development, :test ]
 
 gem "simple_calendar", "~> 3.1"
+
+gem "cancancan", "~> 3.6"
