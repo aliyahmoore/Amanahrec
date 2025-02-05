@@ -75,13 +75,13 @@ class PaymentService
     # Product data for non-Membership types (event, activity)
     def payment_product_data
       return nil if @paymentable.is_a?(Membership) # Membership is handled by product_id
-    
+
       formatted_date = if @paymentable.is_a?(Activity)
                         "#{@paymentable.start_date.strftime('%B %d, %Y %I:%M %p')} - #{@paymentable.end_date.strftime('%I:%M %p')}"
-                      else
+      else
                         "#{@paymentable.start_date.strftime('%B %d, %Y')} - #{@paymentable.end_date.strftime('%B %d, %Y')}"
-                      end
-    
+      end
+
       {
         name: @paymentable.title,
         description: "#{@paymentable.description} | Date: #{formatted_date}"
