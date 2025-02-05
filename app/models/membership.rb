@@ -11,7 +11,7 @@ class Membership < ApplicationRecord
     update!(
       status: MEMBERSHIP_STATUS_ACTIVE,
       start_date: Time.now,
-      end_date: nil, 
+      end_date: nil,
       stripe_customer_id: customer.id,
       stripe_subscription_id: subscription.id
     )
