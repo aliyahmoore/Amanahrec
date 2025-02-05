@@ -32,14 +32,14 @@ class Ability
     user ||= User.new
 
     if user.admin?
-      can :manage, [Activity, Board, Event, MediaMention, Testimonial]  # Admin can manage all actions
+      can :manage, [ Activity, Board, Event, MediaMention, Testimonial ]  # Admin can manage all actions
     elsif user.persisted?
       can :create, Testimonial # Signed in users can submit a testimonial
-      can :read, [Activity, Event]  
-      can :index, [Board, MediaMention] 
+      can :read, [ Activity, Event ]
+      can :index, [ Board, MediaMention ]
     else user
-      can :read, [Activity, Event]  # Not signed in users can only read
-      can :index, [Board, MediaMention] # Not signed in users can only see the index
+      can :read, [ Activity, Event ]  # Not signed in users can only read
+      can :index, [ Board, MediaMention ] # Not signed in users can only see the index
     end
   end
 end

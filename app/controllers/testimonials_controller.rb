@@ -3,7 +3,7 @@ class TestimonialsController < ApplicationController
     before_action :authenticate_user!, except: [ :index, :edit, :destroy, :update ]
     before_action :set_testimonial, only: [ :edit, :update, :destroy, :approve ]
 
-    def index 
+    def index
       @testimonials = case params[:status]
       when "approved" then Testimonial.where(approved: true).order(created_at: :desc)
       when "pending"  then Testimonial.where(approved: false).order(created_at: :desc)
