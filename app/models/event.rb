@@ -24,11 +24,11 @@ class Event < ApplicationRecord
 
     def rsvp_deadline_must_be_valid
       return if rsvp_deadline.blank? || start_date.blank? || general_registration_start.blank?
-  
+
       if rsvp_deadline >= start_date
         errors.add(:rsvp_deadline, "must be before the event start date")
       end
-  
+
       if rsvp_deadline < general_registration_start
         errors.add(:rsvp_deadline, "must be after the general registration start date")
       end
