@@ -40,7 +40,7 @@ class ActivitiesController < ApplicationController
         else
           render :edit
         end
-      end
+    end
 
 
       def destroy
@@ -66,11 +66,9 @@ class ActivitiesController < ApplicationController
           :what_to_bring,
           :rules,
           :notes,
-          :recurrence_pattern,
           :image,
           :general_registration_start,
           :early_access_for_members, :early_access_days,
-          recurrence_days: []
         )
       end
 end
