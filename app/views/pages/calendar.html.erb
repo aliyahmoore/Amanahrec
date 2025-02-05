@@ -1,15 +1,12 @@
 <%= stylesheet_link_tag 'calendar', media: 'all' %>
-
 <div class="container my-4">
   <!-- Calendar Wrapper -->
   <div class="calendar">
     <%= month_calendar events: @events do |date, events| %>
-      
       <!-- Display Date -->
       <div class="border p-2 text-center">
         <strong class="d-block"><%= date.day %></strong>
       </div>
-
       <!-- Events Section -->
       <% if events.any? %>
         <div class="event-container">
@@ -23,7 +20,6 @@
           <% end %>
         </div>
       <% end %>
-
       <!-- Activities Section -->
       <% activities_on_date = @activities.select { |activity| activity.start_date.to_date == date } %>
       <% if activities_on_date.any? %>
@@ -38,7 +34,6 @@
           <% end %>
         </div>
       <% end %>
-
     <% end %>
   </div>
 </div>
