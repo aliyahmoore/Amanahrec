@@ -62,7 +62,7 @@
       </div>
       <div class="col-md-2">
         <%= form.label :capacity, class: "form-label" %><span class="required">*</span>
-        <%= form.number_field :capacity, class: "form-control" %>
+        <%= form.number_field :capacity, class: "form-control", min: 1 %>
       </div>
       <div class="col-md-2 d-flex align-items-center">
         <div class="form-check m-0">
