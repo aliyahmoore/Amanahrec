@@ -14,6 +14,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_02_233602) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  # Custom types defined in this database.
+  # Note that some types may not work with other database engines. Be careful if changing database.
+  create_enum "registration_status", ["pending", "successful", "failed"]
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -55,6 +59,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_02_233602) do
     t.decimal "cost", precision: 8, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "recurrence_pattern"
+    t.string "recurrence_days"
     t.boolean "early_access_for_members"
     t.integer "early_access_days"
     t.datetime "general_registration_start"
@@ -131,6 +137,17 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_02_233602) do
     t.datetime "updated_at", null: false
     t.index ["paymentable_type", "paymentable_id"], name: "index_payments_on_paymentable"
     t.index ["user_id"], name: "index_payments_on_user_id"
+  end
+
+  create_table "registrations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "registrable_type", null: false
+    t.bigint "registrable_id", null: false
+    t.enum "status", default: "pending", null: false, enum_type: "registration_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["registrable_type", "registrable_id"], name: "index_registrations_on_registrable"
+    t.index ["user_id"], name: "index_registrations_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
