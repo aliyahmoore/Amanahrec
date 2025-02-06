@@ -6,7 +6,19 @@
       </span>
     </p>
   <% elsif (item.early_access_for_members? && current_user&.membership_active?) || item.general_registration_open? %>
-    <%= button_to 'Register Now', activity_payments_path(item, paymentable_type: item.class.name, paymentable_id: item.id), method: :post, class: 'activity-payments btn btn-primary mb-3', data: { turbo: false } %>
+    <% if registrable.present? %>  <!-- Check if registrable is present -->
+  <% if registrable.cost.to_i > 0 %>
+    <!-- Paid: Redirect to Payments -->
+    <%= button_to "Register and Pay", 
+                  polymorphic_path([registrable, :payments], paymentable_type: registrable.class.name, paymentable_id: registrable.id), 
+                  method: :post, class: "btn btn-primary", data: { turbo: false } %>
+  <% else %>
+    <!-- Free: Direct Registration -->
+    <%= button_to "Register", 
+                  polymorphic_path([registrable, :registrations], registrable_type: registrable.class.name, registrable_id: registrable.id), 
+                  method: :post, class: "btn btn-success", data: { turbo: false } %>
+  <% end %>
+<% end %>
   <% else %>
     <p class="registration-info text-center">
       <span class="btn btn-outline-warning" style="pointer-events: none;">
