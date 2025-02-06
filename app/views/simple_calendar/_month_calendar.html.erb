@@ -1,4 +1,5 @@
 <div class="simple-calendar">
+  <div class="calendar-container" style="display: flex; justify-content: center; text-align: center;">
   <div class="calendar-heading">
     <h1 class="calendar-title">
       <%= link_to calendar.url_for_previous_view, class: 'prev-link', style: 'text-decoration: none;' do %>
@@ -14,6 +15,8 @@
       <% end %>
     </h1>
   </div>
+</div>
+
   <div class="calendar-today-container">
     <%= link_to t('simple_calendar.today', default: 'Today'), calendar.url_for_today_view, class: 'today-link' %>
   </div>
