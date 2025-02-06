@@ -23,6 +23,12 @@
       <% if @activity.rules.present? %>
         <p><i class="fas fa-exclamation-triangle"></i> <strong>Rules:</strong> <%= @activity.rules %></p>
       <% end %>
+       <% if @activity.capacity.present? %>
+        <p><i class="fas fa-users"></i> <strong>Capacity:</strong> <%= @activity.capacity %> participants</p>
+        <% if @activity.registrations.count >= @activity.capacity %>
+          <p class="text-danger"><strong>Registration Full</strong></p>
+        <% end %>
+      <% end %>     
     </div>
   </div>
   <!-- Right Column (Activity Details, Register, Edit, Delete Buttons) -->

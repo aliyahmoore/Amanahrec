@@ -28,6 +28,13 @@
       <% if @event.sponsors.present? %>
         <p><strong>Sponsors:</strong> <%= @event.sponsors %></p>
       <% end %>
+
+       <% if @event.capacity.present? %>
+        <p><i class="fas fa-users"></i> <strong>Capacity:</strong> <%= @event.capacity %> participants</p>
+        <% if @event.registrations.count >= @event.capacity %>
+          <p class="text-danger"><strong>Registration Full</strong></p>
+        <% end %>
+      <% end %>     
     </div>
   </div>
 
