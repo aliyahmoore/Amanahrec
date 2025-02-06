@@ -1,9 +1,7 @@
 class Event < ApplicationRecord
     include EarlyAccessable
-    has_many :payments, as: :paymentable
-    has_many :registrations, as: :registrable
-
     has_many_attached :images
+    has_and_belongs_to_many :users
 
     validates :title, presence: true
     validates :description, presence: true
@@ -15,6 +13,9 @@ class Event < ApplicationRecord
     validate :rsvp_deadline_must_be_valid
 
     # Calculate the early registration start date
+
+    has_many :payments, as: :paymentable
+
     def start_time
       start_date
     end
