@@ -79,8 +79,8 @@ html, body {
     background-color: #DACCB1 !important; 
     border-top: none;
   }
-  .news-text {
-    color: #daccb1 !important; /* Dark brown */
+.news-text {
+    color: #DACCB1 !important; 
     font-size: 16px; /* Adjust size if needed */
   }
 
