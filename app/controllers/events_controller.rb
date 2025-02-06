@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
     load_and_authorize_resource
-    before_action :set_event, only: %i[show edit update destroy]
-
+    before_action :set_landmark, except: [:index, :new, :create]
+    
     # GET /events
     def index
         @events = Event.order(start_date: :desc)
@@ -59,7 +59,7 @@ class EventsController < ApplicationController
 
     # Set event for show, edit, update, and destroy actions
     def set_event
-      @event = Event.find(params[:id])
+      @event = Event.friendly.find(params[:slug])
     end
 
     # Only allow a list of trusted parameters through
