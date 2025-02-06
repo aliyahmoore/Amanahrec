@@ -28,6 +28,4 @@
 #       enabled: "ON"
 
 en:
-  notices:
-    registration:
-      success: "Registration successful!"  # Add this line with your custom message
+  hello: "Hello world"

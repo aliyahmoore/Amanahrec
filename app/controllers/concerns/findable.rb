@@ -20,7 +20,7 @@ module Findable
         else
           nil
         end
-      rescue ActiveRecord::RecordNotFound
-        redirect_to root_url, alert: t("errors.payment.invalid_paymentable")
+      rescue NameError
+        nil
       end
 end
