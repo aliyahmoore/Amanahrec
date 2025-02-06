@@ -15,8 +15,8 @@
               <h2 class="text-center mb-0 w-100"><%= media_mention.name %></h2>
             </div>
             <div class="card-body" style="background-color: #403F2B;">
-              <p class="card-text news-text">News Organization: <%= media_mention.organization_name %></p>
-              <p class="card-text news-text">Published Date: <%= media_mention.published_date.strftime("%B %d, %Y") %></p>
+              <p class="news-text">News Organization: <%= media_mention.organization_name %></p>
+              <p class="news-text">Published Date: <%= media_mention.published_date.strftime("%B %d, %Y") %></p>
             </div>
             <div class="card-footer d-flex flex-column align-items-center">
               <% if media_mention.link.present? %>
