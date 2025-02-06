@@ -4,7 +4,7 @@ class ActivitiesController < ApplicationController
 
 
     def index
-        @activities = Activity.all
+        @activities = Activity.order(start_date: :desc)
     end
 
 
