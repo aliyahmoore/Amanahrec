@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema[7.2].define(version: 2025_02_06_040127) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_06_152612) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -73,6 +72,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_06_040127) do
     t.boolean "early_access_for_members"
     t.integer "early_access_days"
     t.datetime "general_registration_start"
+    t.string "recurrence_pattern"
+    t.string "recurrence_days"
+    t.string "slug"
+    t.index ["slug"], name: "index_activities_on_slug", unique: true
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -111,6 +114,19 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_06_040127) do
     t.integer "early_access_days"
     t.datetime "general_registration_start"
     t.integer "capacity"
+    t.string "slug"
+    t.index ["slug"], name: "index_events_on_slug", unique: true
+  end
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
   create_table "media_mentions", force: :cascade do |t|

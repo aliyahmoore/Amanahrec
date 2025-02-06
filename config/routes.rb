@@ -28,10 +28,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :activities, :events do
-    resources :registrations, only: [ :create ]
-    resources :payments, only: [ :create ]
+  concern :registrable do
+    resources :registrations, only: [:create]
+    resources :payments, only: [:create]
   end
+
+  resources :activities, param: :slug, concerns: :registrable
+  resources :events, param: :slug, concerns: :registrable
 
   # Membership payments (handled at the top level)
   resources :payments, only: [ :create ] do

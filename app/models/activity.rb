@@ -1,5 +1,7 @@
 class Activity < ApplicationRecord
   include EarlyAccessable
+  extend FriendlyId
+  friendly_id :name, use: :slugged
   has_one_attached :image
 
   validates :title, :description, :start_date, :end_date, :location, presence: true

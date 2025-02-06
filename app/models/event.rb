@@ -1,5 +1,7 @@
 class Event < ApplicationRecord
     include EarlyAccessable
+    extend FriendlyId
+    friendly_id :name, use: :slugged
     has_many_attached :images
     has_and_belongs_to_many :users
 

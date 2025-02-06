@@ -69,3 +69,5 @@ gem "simple_calendar", "~> 3.1"
 gem "cancancan", "~> 3.6"
 
 gem "sassc", "~> 2.4"
+
+gem "friendly_id", "~> 5.5"
