@@ -74,11 +74,7 @@
       </div>
       <div class="col-md-1">
         <%= form.label :capacity, class: "form-label" %><span class="required">*</span>
-        <%= form.number_field :capacity, class: "form-control", min: 1 %>
-        <!-- Display a warning if the capacity has been reached -->
-        <% if @event.registrations.count >= @event.capacity %>
-          <div class="text-danger mt-1">Warning: The capacity has been reached for this event.</div>
-        <% end %>
+        <%= form.number_field :capacity, class: "form-control" %>
       </div>
       <div class="col-md-2 d-flex align-items-center">
         <div class="form-check m-0">
