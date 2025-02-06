@@ -1,0 +1,18 @@
+<% if @grouped_registrations["Activity"].present? %>
+  <h3>Activities</h3>
+  <% @grouped_registrations["Activity"].each do |registration| %>
+    <%= render 'registration', registration: registration %>
+  <% end %>
+<% else %>
+  <p>You have no registered activities.</p>
+<% end %>
+
+<!-- Display Events -->
+<% if @grouped_registrations["Event"].present? %>
+  <h3>Events</h3>
+  <% @grouped_registrations["Event"].each do |registration| %>
+    <%= render 'registration', registration: registration %>
+  <% end %>
+<% else %>
+  <p>You have no registered events.</p>
+<% end %>
