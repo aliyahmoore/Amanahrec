@@ -1,6 +1,6 @@
 class PaymentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_paymentable, only: [:create, :success]
+  before_action :set_paymentable, only: [ :create, :success ]
 
   include Findable
 

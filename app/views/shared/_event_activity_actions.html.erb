@@ -7,18 +7,18 @@
     </p>
   <% elsif (registrable.early_access_for_members? && current_user&.membership_active?) || registrable.general_registration_open? %>
     <% if registrable.present? %>  <!-- Check if registrable is present -->
-  <% if registrable.cost.to_i > 0 %>
-    <!-- Paid: Redirect to Payments -->
-    <%= button_to "Register and Pay", 
+      <% if registrable.cost.to_i > 0 %>
+        <!-- Paid: Redirect to Payments -->
+        <%= button_to "Register and Pay", 
                   polymorphic_path([registrable, :payments], paymentable_type: registrable.class.name, paymentable_id: registrable.id), 
                   method: :post, class: "btn btn-primary mb-3", data: { turbo: false } %>
-  <% else %>
-    <!-- Free: Direct Registration -->
-    <%= button_to "Register", 
+      <% else %>
+        <!-- Free: Direct Registration -->
+        <%= button_to "Register", 
                   polymorphic_path([registrable, :registrations], registrable_type: registrable.class.name, registrable_id: registrable.id), 
                   method: :post, class: "btn btn-primary mb-3", data: { turbo: false } %>
-  <% end %>
-<% end %>
+      <% end %>
+    <% end %>
   <% else %>
     <p class="registration-info text-center">
       <span class="btn btn-outline-warning" style="pointer-events: none;">
@@ -26,7 +26,6 @@
       </span>
     </p>
   <% end %>
-
   <% if current_user&.role_id == 1 %> <!-- Admin actions -->
     <div class="d-flex justify-content-center gap-2 mt-2">
       <%= link_to 'Edit', polymorphic_path([:edit, registrable]), class: "btn btn-warning md-2 mb-3" %>

@@ -1,12 +1,12 @@
 class RegistrationsController < ApplicationController
     before_action :set_registrable, only: [ :create ]
     ALLOWED_REGISTRABLE_TYPES = [ "Activity", "Event" ]
-  
-  
+
+
     def create
       # Register the user using the Registration model's class method
       registration = Registration.register_user(current_user, @registrable)
-  
+
       if registration.persisted?
         # Check if the registrable requires payment
         if registration.requires_payment?
@@ -21,15 +21,15 @@ class RegistrationsController < ApplicationController
         redirect_to @registrable, alert: registration.errors.full_messages.to_sentence
       end
     end
-  
-  
+
+
     def my_registrations
       @registrations = current_user.registrations.preload(:registrable).order(:created_at)
       @grouped_registrations = current_user.registrations.preload(:registrable).group_by(&:registrable_type)
     end
-  
+
     private
-  
+
     # Sets the registrable (Event or Activity) based on the provided params
     def set_registrable
       valid_types = [ "Activity", "Event" ]  # Whitelist allowed types
@@ -42,8 +42,8 @@ class RegistrationsController < ApplicationController
       # Handle case where the record is not found
       redirect_to root_path, alert: t("errors.registration.not_found")
     end
-  
-  
+
+
     # Finds the registrable object (Event or Activity) by its type and ID
     def find_registrable(type, id)
       case type
@@ -55,4 +55,4 @@ class RegistrationsController < ApplicationController
         nil
       end
     end
-  end
+end
