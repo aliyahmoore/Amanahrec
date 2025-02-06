@@ -34,14 +34,9 @@
             <%= activity.cost.present? && activity.cost > 0 ? number_to_currency(activity.cost) : "Free" %>
           </p>
           <!-- Member Early Access Badge -->
-          <% if activity.registrations.count >= activity.capacity %>
-            <%= render 'shared/early_access_badge', item: activity %>
-            <div class="btn btn-outline-danger" style="pointer-events: none;">Registration Full</div>
-          <% else %>
-            <%= render 'shared/early_access_badge', item: activity %>
+            <%= render 'shared/early_access_badge', item: activity %>      
             <!-- Countdown Timer -->
             <%= render 'shared/countdown', item: activity %>
-          <% end %>
           <div class="mt-auto d-flex justify-content-between">
             <% if current_user&.admin? %>
               <%= link_to 'Edit', edit_activity_path(activity), class: 'btn btn-warning btn-sm' %>
