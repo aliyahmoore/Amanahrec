@@ -17,12 +17,14 @@
     <div class="event-description ">
       <h2><i class="fas fa-info-circle"></i> Description</h2>
       <p><%= @event.description %></p>
+      <p><i class="fa-solid fa-users"></i> Group size: 1-<%= @event.capacity %></p>
       <% if @event.childcare.present? %>
         <p><i class="fa-solid fa-child-reaching"></i> <strong>Childcare Available</strong></p>
       <% end %>
       <% if @event.sponsors.present? %>
         <p><strong>Sponsors:</strong> <%= @event.sponsors %></p>
       <% end %>
+      <p><strong>RSVP Deadline:</strong> <%= @event.rsvp_deadline.strftime("%B %d, %Y %I:%M %p")%></p>
     </div>
   </div>
   <!-- Right Column (event Details, Register, Edit, Delete Buttons) -->
@@ -32,7 +34,7 @@
       <%= render 'shared/early_access_badge', item: @event %>
       <!-- Date and Location -->
       <p><i class="fas fa-calendar-alt"></i> <strong>:</strong>
-        <%= @event.start_date.strftime("%B %d %Y") %> - <%= @event.end_date.strftime("%B %d %Y") %>
+        <%= @event.start_date.strftime("%B %d %Y") %> - <%= @event.end_date.strftime("%B %d, %Y") %>
       </p>
       <p><i class="fas fa-map-marker-alt"></i> <strong>:</strong> <%= @event.location %></p>
       <p><i class="fa-solid fa-money-bill"></i> <strong>:</strong> <%= @event.cost.present? && @event.cost > 0 ? number_to_currency(@event.cost) : "Free" %></p>
