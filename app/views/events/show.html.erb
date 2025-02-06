@@ -1,5 +1,6 @@
 <% content_for :title, @event.title %>
 <h1 class="event-title mt-3 text-center display-3"><%= @event.title %></h1>
+
 <!-- event Image Section -->
 <div class="event-images">
   <% if @event.images.attached? %>
@@ -10,21 +11,26 @@
     <p>No image uploaded for this event.</p>
   <% end %>
 </div>
+
 <!-- Grid Layout -->
 <div class="row mt-4 .d-flex justify-content-center">
+  
   <!-- Left Column (Description, What to Bring, Rules) -->
   <div class="col-md-4">
-    <div class="event-description ">
+    <div class="event-description">
       <h2><i class="fas fa-info-circle"></i> Description</h2>
       <p><%= @event.description %></p>
+      
       <% if @event.childcare.present? %>
         <p><i class="fa-solid fa-child-reaching"></i> <strong>Childcare Available</strong></p>
       <% end %>
+      
       <% if @event.sponsors.present? %>
         <p><strong>Sponsors:</strong> <%= @event.sponsors %></p>
       <% end %>
     </div>
   </div>
+
   <!-- Right Column (event Details, Register, Edit, Delete Buttons) -->
   <div class="col-md-4">
     <div class="event-details text-start p-3 shadow-sm rounded bg-light">
@@ -37,7 +43,8 @@
       <p><i class="fas fa-map-marker-alt"></i> <strong>:</strong> <%= @event.location %></p>
       <p><i class="fa-solid fa-money-bill"></i> <strong>:</strong> <%= @event.cost.present? && @event.cost > 0 ? number_to_currency(@event.cost) : "Free" %></p>
     </div>
+
     <!-- Action Buttons -->
     <%= render 'shared/event_activity_actions', item: @event %>
   </div>
-</div>
+</div> <!-- Close grid layout row -->

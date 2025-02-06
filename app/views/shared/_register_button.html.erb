@@ -1,0 +1,15 @@
+<% if registrable.present? %>  <!-- Check if registrable is present -->
+  <% if registrable.cost.to_i > 0 %>
+    <!-- Paid: Redirect to Payments -->
+    <%= button_to "Register and Pay", 
+                  polymorphic_path([registrable, :payments], paymentable_type: registrable.class.name, paymentable_id: registrable.id), 
+                  method: :post, class: "btn btn-primary", data: { turbo: false } %>
+  <% else %>
+    <!-- Free: Direct Registration -->
+    <%= button_to "Register", 
+                  polymorphic_path([registrable, :registrations], registrable_type: registrable.class.name, registrable_id: registrable.id), 
+                  method: :post, class: "btn btn-success", data: { turbo: false } %>
+  <% end %>
+<% else %>
+  <p>Registration is unavailable for this event.</p>
+<% end %>
