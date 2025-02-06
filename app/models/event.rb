@@ -12,8 +12,7 @@ class Event < ApplicationRecord
     validates :cost, numericality: { greater_than_or_equal_to: 0 }
     validate :rsvp_deadline_must_be_valid
 
-    # Calculate the early registration start date
-
+    has_many :registrations, as: :registrable
     has_many :payments, as: :paymentable
 
     def start_time
