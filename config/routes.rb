@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "pages/calendar"
   get "pages/partners"
   get "pages/board"
+  get "/my_registrations", to: "registrations#my_registrations", as: "my_registrations"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -28,6 +29,7 @@ Rails.application.routes.draw do
   end
 
   resources :activities, :events do
+    resources :registrations, only: [ :create ] 
     resources :payments, only: [ :create ]
   end
 
