@@ -1,16 +1,26 @@
 class PaymentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_paymentable, only: [ :create, :success ]
+  before_action :set_paymentable, only: [:create, :success]
 
   include Findable
+
   def create
+    # Ensure user is signed in
     return redirect_to new_user_session_path, alert: "You must be signed in to register." unless user_signed_in?
 
+    # Check if the user has already registered or if the activity/event is full
+    registration_service = RegistrationService.new(current_user, @paymentable)
+    
+    if registration_service.capacity_reached?
+      return redirect_to @paymentable, alert: "Registration is full. Sorry, the capacity has been reached."
+    end
+    
     if current_user.has_paid_for?(@paymentable)
       redirect_to @paymentable.is_a?(Membership) ? root_url : paymentable_path, alert: paymentable_alert_message
       return
     end
 
+    # Proceed to create the Stripe session if the capacity check passes
     stripe_session = PaymentService.new(current_user, @paymentable, root_url).create_stripe_session
     redirect_to stripe_session.url, allow_other_host: true
   end
