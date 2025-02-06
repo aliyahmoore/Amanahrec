@@ -1,9 +1,7 @@
 class Event < ApplicationRecord
     include EarlyAccessable
-    has_many :payments, as: :paymentable
-    has_many :registrations, as: :registrable
-
     has_many_attached :images
+    has_and_belongs_to_many :users
 
     validates :title, presence: true
     validates :description, presence: true
@@ -12,11 +10,26 @@ class Event < ApplicationRecord
     validates :location, presence: true
     validates :rsvp_deadline, presence: true
     validates :cost, numericality: { greater_than_or_equal_to: 0 }
-    validates :early_access_days, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
-    validates :general_registration_start, presence: true, if: -> { early_access_for_members? }
+    validate :rsvp_deadline_must_be_valid
 
-    # Calculate the early registration start date
+    has_many :registrations, as: :registrable
+    has_many :payments, as: :paymentable
+
     def start_time
       start_date
+    end
+
+    private
+
+    def rsvp_deadline_must_be_valid
+      return if rsvp_deadline.blank? || start_date.blank? || general_registration_start.blank?
+
+      if rsvp_deadline >= start_date
+        errors.add(:rsvp_deadline, "must be before the event start date")
+      end
+
+      if rsvp_deadline < general_registration_start
+        errors.add(:rsvp_deadline, "must be after the general registration start date")
+      end
     end
 end

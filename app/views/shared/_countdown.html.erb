@@ -1,10 +1,16 @@
 <% if item.general_registration_start.present? %>
-  <% if Time.current < item.general_registration_start %>
+  <% if Time.current > item.end_date %>
+    <p class="registration-info text-center">
+      <span class="btn btn-outline-danger" style="pointer-events: none;">
+        Registration Closed
+      </span>
+    </p>
+  <% elsif Time.current < item.general_registration_start %>
     <p class="registration-info text-center">
       <% if item.early_access_for_members %>
-        Member Registrations Now Open </br> General Registration Opens In: 
+        Member Registrations Now Open </br> General Registration Opens In:
     <% else %>
-      General Registration Opens In: 
+      General Registration Opens In:
     <% end %>
     <span id="countdown-<%= item.id %>" 
             class="countdown" 

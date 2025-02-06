@@ -1,13 +1,13 @@
 class RegistrationService
-  def initialize(user, registrable)
-    @user = user
-    @registrable = registrable
-  end
+    def initialize(user, registrable)
+      @user = user
+      @registrable = registrable
+    end
 
   def register_user
     # Check if the user is already registered
     raise RegistrationError, "You are already registered for this event or activity." if already_registered?
-    
+
     # Check if the capacity is full and prevent registration creation if true
     if capacity_reached?
       raise RegistrationError, "Registration is full. Sorry, the capacity has been reached."
@@ -33,10 +33,9 @@ class RegistrationService
 
   private
 
-  def already_registered?
-    Registration.exists?(user: @user, registrable: @registrable)
-  end
-
+    def already_registered?
+      Registration.exists?(user: @user, registrable: @registrable)
+    end
 end
 
-class RegistrationError < StandardError; end
+  class RegistrationError < StandardError; end

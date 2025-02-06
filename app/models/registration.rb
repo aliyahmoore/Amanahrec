@@ -1,6 +1,7 @@
 class Registration < ApplicationRecord
   belongs_to :user
   belongs_to :registrable, polymorphic: true
+  has_many :registrations
 
   enum :status, { pending: "pending", successful: "successful", failed: "failed" }
 

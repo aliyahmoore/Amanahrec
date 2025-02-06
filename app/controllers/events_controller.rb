@@ -4,8 +4,7 @@ class EventsController < ApplicationController
 
     # GET /events
     def index
-        # everyone can see all events
-        @events = Event.all
+        @events = Event.order(start_date: :desc)
     end
 
 
@@ -66,8 +65,8 @@ class EventsController < ApplicationController
     # Only allow a list of trusted parameters through
     def event_params
       params.require(:event).permit(
-        :title, :description, :start_date, :end_date, :location,
-        :rsvp_deadline, :childcare, :early_access_for_members, :early_access_days, :general_registration_start, :sponsors, :capacity, :cost, images: []
+        :title, :description, :start_date, :end_date, :location, :capacity,
+        :rsvp_deadline, :childcare, :early_access_for_members, :early_access_days, :general_registration_start, :sponsors, :cost, images: []
       )
     end
 end

@@ -101,15 +101,15 @@ h4.card-title a {
 
 
   .card-text {
-    color: #403f2b;
+    color: #403f2b !important;
   }
   
   .card-title {
-    color: #403f2b;
+    color: #403f2b !important;
   }
   
   .card-body .fa-calendar-alt, 
-  .card-body .fa-location-dot, 
+  .card-body .fa-map-marker-alt, 
   .card-body .fa-money-bill {
-    color: #403f2b;
+    color: #403f2b !important;
   }

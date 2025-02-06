@@ -1,17 +1,24 @@
-<div class="registration-card">
-  <strong><%= registration.registrable&.title %></strong><br>
-  
-  <%= formatted_start_date(registration.registrable) %><br>
-  
-  <%= registration.registrable&.location %><br>
-  <p>Status: <%= registration.status.capitalize %></p>
-
-  <% if registration.registrable.present? %>
-    <%= link_to "View #{registration.registrable_type}", 
-                polymorphic_path(registration.registrable), 
-                class: 'btn btn-info' %>
-  <% else %>
-    <p>Registration details are missing or unavailable.</p>
-  <% end %>
+<div class="card registration-card mb-3">
+  <div class="card-body">
+    <h5 class="card-title"><%= registration.registrable&.title %></h5>
+    <p>
+      <i class="fas fa-calendar-alt"></i> <strong>:</strong>
+      <%= formatted_start_date(registration.registrable) %>
+      <%= registration.registrable.start_date.strftime("%I:%M %p") %> - <%= registration.registrable.end_date.strftime("%I:%M %p") %>
+    </p>
+    <p>
+      <i class="fas fa-map-marker-alt"></i> <strong>:</strong> <%= registration.registrable.location %>
+    </p>
+    <p>
+      <i class="fa-solid fa-money-bill"></i> <strong>:</strong>
+      <%= registration.registrable.cost.present? && registration.registrable.cost > 0 ? number_to_currency(registration.registrable.cost) : "Free" %>
+    </p>
+    <% if registration.registrable.present? %>
+      <%= link_to "View #{registration.registrable_type}", 
+                  polymorphic_path(registration.registrable), 
+                  class: 'btn btn-primary' %>
+    <% else %>
+      <p>Registration details are missing or unavailable.</p>
+    <% end %>
+  </div>
 </div>
-<hr>

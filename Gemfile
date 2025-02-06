@@ -67,3 +67,5 @@ gem "dotenv-rails", groups: [ :development, :test ]
 gem "simple_calendar", "~> 3.1"
 
 gem "cancancan", "~> 3.6"
+
+gem "sassc", "~> 2.4"
