@@ -1,7 +1,11 @@
-<% content_for :title, "Add New Board Member" %>
-<h1>New board</h1>
-<%= render "form", board: @board %>
-<br>
-<div>
-  <%= link_to "Back to board", boards_path %>
+<% content_for :title do %>
+  Add New Board Member
+<% end %>
+<div style="text-align: center;">
+  <h1>Add New Board Member</h1>
+  <%= render "form", board: @board %>
+  <br>
+  <div>
+    <%= link_to "Back to Board", boards_path, class: "btn btn-primary" %>
+  </div>
 </div>

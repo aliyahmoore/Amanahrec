@@ -28,7 +28,7 @@
             <i class="fa-solid fa-location-dot"></i> <strong>:</strong> <%= event.location %>
           </p>
           <p class="card-text">
-            <i class="fa-sharp-duotone fa-solid fa-money-bill"></i> <strong>:</strong> 
+            <i class="fa-sharp-duotone fa-solid fa-money-bill"></i> <strong>:</strong>
             <%= event.cost.present? && event.cost > 0 ? number_to_currency(event.cost) : "Free" %>
           </p>
           <!-- Member Early Access Badge -->

@@ -4,8 +4,7 @@ class EventsController < ApplicationController
 
     # GET /events
     def index
-        # everyone can see all events
-        @events = Event.all
+        @events = Event.order(start_date: :desc)
     end
 
 
