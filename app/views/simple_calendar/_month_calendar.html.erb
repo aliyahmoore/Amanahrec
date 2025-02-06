@@ -1,22 +1,21 @@
 <div class="simple-calendar">
   <div class="calendar-container" style="display: flex; justify-content: center; text-align: center;">
-  <div class="calendar-heading">
-    <h1 class="calendar-title">
-      <%= link_to calendar.url_for_previous_view, class: 'prev-link', style: 'text-decoration: none;' do %>
-        <span aria-hidden="true" style="font-size: 40px; padding: 5px; color: #989871;">&laquo;</span>
-        <span class="visually-hidden"><%= t('simple_calendar.previous', default: 'Previous') %></span>
-      <% end %>
-      <time datetime="<%= start_date.strftime('%Y-%m') %>">
-        <%= t('date.month_names')[start_date.month] %> <%= start_date.year %>
-      </time>
-      <%= link_to calendar.url_for_next_view, class: 'next-link', style: 'text-decoration: none;' do %>
-        <span aria-hidden="true" style="font-size: 40px; padding: 5px; color: #989871;">&raquo;</span>
-        <span class="visually-hidden"><%= t('simple_calendar.next', default: 'Next') %></span>
-      <% end %>
-    </h1>
+    <div class="calendar-heading">
+      <h1 class="calendar-title">
+        <%= link_to calendar.url_for_previous_view, class: 'prev-link', style: 'text-decoration: none;' do %>
+          <span aria-hidden="true" style="font-size: 40px; padding: 5px; color: #989871;">&laquo;</span>
+          <span class="visually-hidden"><%= t('simple_calendar.previous', default: 'Previous') %></span>
+        <% end %>
+        <time datetime="<%= start_date.strftime('%Y-%m') %>">
+          <%= t('date.month_names')[start_date.month] %> <%= start_date.year %>
+        </time>
+        <%= link_to calendar.url_for_next_view, class: 'next-link', style: 'text-decoration: none;' do %>
+          <span aria-hidden="true" style="font-size: 40px; padding: 5px; color: #989871;">&raquo;</span>
+          <span class="visually-hidden"><%= t('simple_calendar.next', default: 'Next') %></span>
+        <% end %>
+      </h1>
+    </div>
   </div>
-</div>
-
   <div class="calendar-today-container">
     <%= link_to t('simple_calendar.today', default: 'Today'), calendar.url_for_today_view, class: 'today-link' %>
   </div>

@@ -38,6 +38,6 @@
       <p><i class="fa-solid fa-money-bill"></i> <strong>:</strong> <%= @event.cost.present? && @event.cost > 0 ? number_to_currency(@event.cost) : "Free" %></p>
     </div>
     <!-- Action Buttons -->
-    <%= render 'shared/event_activity_actions', item: @event %>
+    <%= render 'shared/event_activity_actions', registrable: @event %>
   </div>
 </div>

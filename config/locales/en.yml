@@ -28,4 +28,15 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  errors:
+    registration:
+      not_found: "Registration not found."
+      failed: "Registration failed. Please try again."
+    payment:
+      failed: "Payment failed. Please try again."
+
+  notices:
+    payment:
+      subscribed: "You have successfully subscribed!"
+    registration:
+      success: "Registration successful!"
