@@ -28,6 +28,15 @@
 #       enabled: "ON"
 
 en:
+  errors:
+    registration:
+      not_found: "Registration not found."
+      failed: "Registration failed. Please try again."
+    payment:
+      failed: "Payment failed. Please try again."
+
   notices:
-  registration:
-    success: "Registration successful!"  # Add this line with your custom message
+    payment:
+      subscribed: "You have successfully subscribed!"
+    registration:
+      success: "Registration successful!"
