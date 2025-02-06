@@ -16,7 +16,7 @@
     <!-- Free: Direct Registration -->
     <%= button_to "Register", 
                   polymorphic_path([registrable, :registrations], registrable_type: registrable.class.name, registrable_id: registrable.id), 
-                  method: :post, class: "btn btn-success mb-3", data: { turbo: false } %>
+                  method: :post, class: "btn btn-primary mb-3", data: { turbo: false } %>
   <% end %>
 <% end %>
   <% else %>
