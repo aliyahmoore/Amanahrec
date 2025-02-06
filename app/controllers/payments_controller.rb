@@ -5,9 +5,16 @@ class PaymentsController < ApplicationController
   include Findable
 
   def create
+    # Ensure user is signed in
     return redirect_to new_user_session_path, alert: "You must be signed in to register." unless user_signed_in?
 
-    # Skip payment if the user has already paid for the registrable
+    # Check if the user has already registered or if the activity/event is full
+    registration_service = RegistrationService.new(current_user, @paymentable)
+
+    if registration_service.capacity_reached?
+      return redirect_to @paymentable, alert: "Registration is full. Sorry, the capacity has been reached."
+    end
+
     if current_user.has_paid_for?(@paymentable)
       redirect_to paymentable_success_path, alert: paymentable_alert_message
       return

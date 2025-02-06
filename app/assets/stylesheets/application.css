@@ -52,6 +52,10 @@ html, body {
     background-color: #ffffff !important;
   }
   
+  .btn-outline-primary{
+    border-color: #403F2B !important;
+    color: #403F2B !important;
+  }
 
   /* Custom button styling for 'View Full Article' */
 .btn-custom {

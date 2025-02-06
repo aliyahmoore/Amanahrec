@@ -8,7 +8,7 @@
 <div class="d-flex justify-content-center mb-3">
   <% if current_user&.admin? %>
     <%= link_to 'New Activity', new_activity_path, class: 'btn btn-primary' %>
-  <%end%>
+  <% end %>
 </div>
 <div class="row d-flex justify-content-center g-3">
   <% @activities.each do |activity| %>
@@ -22,29 +22,29 @@
             <%= link_to activity.title, activity_path(activity), class: 'text-decoration-none' %>
           </h4>
           <p class="card-text">
-            <i class="fas fa-calendar-alt"></i></i> <strong>:</strong>
-          <%= activity.start_date.strftime("%B %d, %Y") %>
-          <%= activity.start_date.strftime("%I:%M %p") %> - <%= activity.end_date.strftime("%I:%M %p") %>
-        </p>
-        <p class="card-text">
-          <i class="fa-solid fa-location-dot"></i> <strong>:</strong> <%= activity.location %>
-        </p>
-        <p class="card-text">
-          <i class="fa-sharp-duotone fa-solid fa-money-bill"></i> <strong>:</strong>
-          <%= activity.cost.present? && activity.cost > 0 ? number_to_currency(activity.cost) : "Free" %>
-        </p>
-        <!-- Member Early Access Badge -->
-        <%= render 'shared/early_access_badge', item: activity %>
-        <!-- Countdown Timer -->
-        <%= render 'shared/countdown', item: activity%>
-        <div class="mt-auto d-flex justify-content-between">
-          <% if current_user&.admin? %>
-            <%= link_to 'Edit', edit_activity_path(activity), class: 'btn btn-warning btn-sm' %>
-            <%= button_to 'Delete', activity_path(activity), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
-          <% end %>
+            <i class="fas fa-calendar-alt"></i> <strong>:</strong>
+            <%= activity.start_date.strftime("%B %d, %Y") %>
+            <%= activity.start_date.strftime("%I:%M %p") %> - <%= activity.end_date.strftime("%I:%M %p") %>
+          </p>
+          <p class="card-text">
+            <i class="fa-solid fa-location-dot"></i> <strong>:</strong> <%= activity.location %>
+          </p>
+          <p class="card-text">
+            <i class="fa-sharp-duotone fa-solid fa-money-bill"></i> <strong>:</strong>
+            <%= activity.cost.present? && activity.cost > 0 ? number_to_currency(activity.cost) : "Free" %>
+          </p>
+          <!-- Member Early Access Badge -->
+            <%= render 'shared/early_access_badge', item: activity %>      
+            <!-- Countdown Timer -->
+            <%= render 'shared/countdown', item: activity %>
+          <div class="mt-auto d-flex justify-content-between">
+            <% if current_user&.admin? %>
+              <%= link_to 'Edit', edit_activity_path(activity), class: 'btn btn-warning btn-sm' %>
+              <%= button_to 'Delete', activity_path(activity), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
 </div>

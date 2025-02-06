@@ -8,7 +8,7 @@
 <div class="d-flex justify-content-center mb-3">
   <% if current_user&.admin? %>
     <%= link_to 'New Event', new_event_path, class: 'btn btn-primary' %>
-  <%end%>
+  <% end %>
 </div>
 <div class="row d-flex justify-content-center g-3">
   <% @events.each do |event| %>
@@ -31,10 +31,10 @@
             <i class="fa-sharp-duotone fa-solid fa-money-bill"></i> <strong>:</strong>
             <%= event.cost.present? && event.cost > 0 ? number_to_currency(event.cost) : "Free" %>
           </p>
-          <!-- Member Early Access Badge -->
-          <%= render 'shared/early_access_badge', item: event %>
-          <!-- Countdown Timer -->
-          <%= render 'shared/countdown', item: event %>
+            <!-- Member Early Access Badge -->
+            <%= render 'shared/early_access_badge', item: event %>
+            <!-- Countdown Timer -->
+            <%= render 'shared/countdown', item: event %>
           <div class="mt-auto d-flex justify-content-between">
             <% if current_user&.admin? %>
               <%= link_to 'Edit', edit_event_path(event), class: 'btn btn-warning btn-sm' %>
