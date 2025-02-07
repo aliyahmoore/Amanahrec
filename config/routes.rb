@@ -29,8 +29,8 @@ Rails.application.routes.draw do
   end
 
   concern :registrable do
-    resources :registrations, only: [:create]
-    resources :payments, only: [:create]
+    resources :registrations, only: [ :create ]
+    resources :payments, only: [ :create ]
   end
 
   resources :activities, param: :slug, concerns: :registrable

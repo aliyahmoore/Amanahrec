@@ -47,4 +47,3 @@ Event.create!([
     capacity: 10
   }
 ])
-
