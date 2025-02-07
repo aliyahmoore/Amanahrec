@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
     load_and_authorize_resource
-    before_action :set_landmark, except: [:index, :new, :create]
+    before_action :set_event, except: [:index, :new, :create]
     
     # GET /events
     def index

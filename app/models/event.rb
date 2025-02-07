@@ -1,16 +1,15 @@
 class Event < ApplicationRecord
     include EarlyAccessable
     extend FriendlyId
-    friendly_id :name, use: :slugged
+    friendly_id :custom_slug, use: :slugged
+
+    def custom_slug
+      "#{title}-#{start_date.strftime('%Y-%m-%d')}"
+    end
     has_many_attached :images
     has_and_belongs_to_many :users
 
-    validates :title, presence: true
-    validates :description, presence: true
-    validates :start_date, presence: true
-    validates :end_date, presence: true
-    validates :location, presence: true
-    validates :rsvp_deadline, presence: true
+    validates :title, :description, :start_date, :end_date, :capacity, :location, :rsvp_deadline, presence: true
     validates :cost, numericality: { greater_than_or_equal_to: 0 }
     validate :rsvp_deadline_must_be_valid
 
