@@ -1,5 +1,11 @@
 class Activity < ApplicationRecord
   include EarlyAccessable
+  extend FriendlyId
+  friendly_id :custom_slug, use: :slugged
+
+  def custom_slug
+    "#{title}-#{start_date.strftime('%Y-%m-%d')}"
+  end
   has_one_attached :image
 
   validates :title, :description, :start_date, :end_date, :location, presence: true
