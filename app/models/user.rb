@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  has_and_belongs_to_many :events
   has_many :testimonials, dependent: :destroy
   belongs_to :role
   has_one :membership
@@ -15,6 +14,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
 
+         
+      
 
 
   validates :first_name, :last_name, :email, :phone_number, :gender, :ethnicity, presence: true
@@ -34,5 +35,9 @@ class User < ApplicationRecord
   # method to check user roles add to
   def admin?
     role&.name&.downcase == "admin"
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["age_range", "email", "ethnicity", "first_name", "gender", "last_name", "phone_number", "role_id"]
   end
 end
