@@ -7,7 +7,6 @@ class Event < ApplicationRecord
       "#{title}-#{start_date.strftime('%Y-%m-%d')}"
     end
     has_many_attached :images
-    has_and_belongs_to_many :users
 
     validates :title, :description, :start_date, :end_date, :capacity, :location, :rsvp_deadline, presence: true
     validates :cost, numericality: { greater_than_or_equal_to: 0 }
@@ -32,5 +31,13 @@ class Event < ApplicationRecord
       if rsvp_deadline < general_registration_start
         errors.add(:rsvp_deadline, "must be after the general registration start date")
       end
+    end
+
+    def self.ransackable_attributes(auth_object = nil)
+      ["capacity", "childcare", "cost", "early_access_for_members", "end_date", "general_registration_start", "location", "rsvp_deadline","start_date", "title" ]
+    end
+
+    def self.ransackable_associations(auth_object = nil)
+      ["images_attachments", "images_blobs", "payments", "registrations"]
     end
 end
