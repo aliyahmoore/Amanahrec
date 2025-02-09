@@ -1,5 +1,4 @@
 ActiveAdmin.register Registration do
-
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -19,7 +18,9 @@ ActiveAdmin.register Registration do
   index do
     selectable_column
     id_column
-    column :user
+    column "User" do |membership|
+      "#{membership.user.first_name} #{membership.user.last_name}" # Concatenate first and last names
+    end
     column :registrable_type
     column :registrable_id
     column :status
@@ -40,5 +41,4 @@ ActiveAdmin.register Registration do
       row :updated_at
     end
   end
-
 end

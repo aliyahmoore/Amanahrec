@@ -9,11 +9,11 @@ class Registration < ApplicationRecord
   validate :check_existing_registration, on: :create
 
   def self.ransackable_associations(auth_object = nil)
-    ["registrable", "registrations", "user"]
+    [ "registrable", "registrations", "user" ]
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "id", "id_value", "registrable_id", "registrable_type", "status", "updated_at", "user_id"]
+    [ "created_at", "id", "id_value", "registrable_id", "registrable_type", "status", "updated_at", "user_id" ]
   end
 
   # Registers the user for an event/activity (registrable) and returns the registration object

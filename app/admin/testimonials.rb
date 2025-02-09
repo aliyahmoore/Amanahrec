@@ -1,5 +1,4 @@
 ActiveAdmin.register Testimonial do
-
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -14,7 +13,7 @@ ActiveAdmin.register Testimonial do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
+
   # Custom actions for approving and unapproving testimonials
   member_action :approve, method: :put do
     resource.update(approved: true)
@@ -70,5 +69,4 @@ ActiveAdmin.register Testimonial do
     end
     f.actions
   end
-
 end

@@ -1,5 +1,4 @@
 ActiveAdmin.register User do
-
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -14,8 +13,8 @@ ActiveAdmin.register User do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
-  permit_params :first_name, :last_name, :email, :phone_number, :gender, :age_range, 
+
+  permit_params :first_name, :last_name, :email, :phone_number, :gender, :age_range,
   :ethnicity, :role_id, :password, :password_confirmation
 
   controller do
@@ -23,7 +22,7 @@ ActiveAdmin.register User do
       @page_title = "#{resource.first_name} #{resource.last_name}"
     end
   end
-  
+
   # Customizing the index page
   index do
   selectable_column
@@ -37,6 +36,7 @@ ActiveAdmin.register User do
   column :ethnicity
   column :role_id
   column :created_at
+  column :updated_at
   actions
   end
 
@@ -76,18 +76,18 @@ ActiveAdmin.register User do
   f.input :last_name
   f.input :email
   f.input :phone_number
-  f.input :gender, as: :select, collection: [["Male", "Male"], ["Female", "Female"]], 
+  f.input :gender, as: :select, collection: [ [ "Male", "Male" ], [ "Female", "Female" ] ],
             prompt: "Select Gender", input_html: { required: true }
-            f.input :age_range, as: :select, collection: [["18-25", "18-25"], ["26-35", "26-35"], 
-            ["36-45", "36-45"], ["46-55", "46-55"], ["56+", "56+"]], 
+            f.input :age_range, as: :select, collection: [ [ "18-25", "18-25" ], [ "26-35", "26-35" ],
+            [ "36-45", "36-45" ], [ "46-55", "46-55" ], [ "56+", "56+" ] ],
 prompt: "Select Age Range", input_html: { required: true }
-f.input :ethnicity, as: :select, collection: [["White", "White"], ["Black or African American", "Black or African American"], 
-["Asian", "Asian"], ["American Indian or Alaska Native", "American Indian or Alaska Native"], 
-["Native Hawaiian or Other Pacific Islander", "Native Hawaiian or Other Pacific Islander"], 
-["Hispanic or Latino", "Hispanic or Latino"], ["Other", "Other"], 
-["Prefer not to say", "Prefer not to say"]], 
+f.input :ethnicity, as: :select, collection: [ [ "White", "White" ], [ "Black or African American", "Black or African American" ],
+[ "Asian", "Asian" ], [ "American Indian or Alaska Native", "American Indian or Alaska Native" ],
+[ "Native Hawaiian or Other Pacific Islander", "Native Hawaiian or Other Pacific Islander" ],
+[ "Hispanic or Latino", "Hispanic or Latino" ], [ "Other", "Other" ],
+[ "Prefer not to say", "Prefer not to say" ] ],
 prompt: "Select Ethnicity", input_html: { required: true }
-  f.input :role_id, as: :select, collection: Role.all.map { |role| [role.name, role.id] }, include_blank: false
+  f.input :role_id, as: :select, collection: Role.all.map { |role| [ role.name, role.id ] }, include_blank: false
   f.input :password
   f.input :password_confirmation
   end

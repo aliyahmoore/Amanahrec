@@ -1,31 +1,16 @@
 ActiveAdmin.register Activity do
+  permit_params :title, :description, :start_date, :end_date, :location, :capacity,
+                :what_to_bring, :rules, :notes, :cost, :early_access_for_members,
+                :early_access_days, :general_registration_start, :user_id, :image, :created_at, :updated_at
 
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
-  # permit_params :title, :description, :start_date, :end_date, :location, :capacity, :what_to_bring, :rules, :notes, :cost, :early_access_for_members, :early_access_days, :general_registration_start, :recurrence_pattern, :recurrence_days
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:title, :description, :start_date, :end_date, :location, :capacity, :what_to_bring, :rules, :notes, :cost, :early_access_for_members, :early_access_days, :general_registration_start, :recurrence_pattern, :recurrence_days]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
-
+  # Find the slug
   controller do
     def resource
       @activity ||= Activity.friendly.find(params[:id])
     end
   end
 
-  permit_params :title, :description, :start_date, :end_date, :location, :capacity, 
-                :what_to_bring, :rules, :notes, :cost, :early_access_for_members, 
-                :early_access_days, :general_registration_start, :user_id, :image
-
-  # Index Page Customization
+  # Index Page
   index do
     selectable_column
     id_column
@@ -39,6 +24,7 @@ ActiveAdmin.register Activity do
     end
     column :general_registration_start
     column :early_access_for_members
+    column :early_access_days
     column :image do |activity|
       if activity.image.attached?
         image_tag url_for(activity.image), size: "50x50"
@@ -49,6 +35,37 @@ ActiveAdmin.register Activity do
     actions
   end
 
+  # Show
+  show do
+    attributes_table do
+      row :title
+      row :description
+      row :start_date
+      row :end_date
+      row :location
+      row :cost do |activity|
+        number_to_currency(activity.cost, unit: "$", precision: 2) # Formats cost with two decimal places
+      end
+      row :capacity
+      row :general_registration_start
+      row :early_access_for_members
+      row :early_access_days
+      row :what_to_bring
+      row :rules
+      row :notes
+      row :image do |activity|
+        if activity.image.attached?
+          image_tag url_for(activity.image), size: "300x300"
+        else
+          "No Image"
+        end
+      end
+      row :created_at
+      row :updated_at
+    end
+    active_admin_comments
+  end
+
   form do |f|
     f.inputs "Activity Details" do
       f.input :title
@@ -57,7 +74,7 @@ ActiveAdmin.register Activity do
       f.input :end_date, as: :datepicker
       f.input :location
       f.input :capacity
-      f.input  :cost do |activity|
+      f.input :cost do |activity|
         number_to_currency(activity.cost, unit: "$", precision: 2) # Formats cost with two decimal places
       end
       f.input :what_to_bring
@@ -75,7 +92,7 @@ ActiveAdmin.register Activity do
     f.actions
   end
 
-  # Add filters to the index page
+  # Filters
   filter :title
   filter :start_date
   filter :end_date
@@ -83,34 +100,4 @@ ActiveAdmin.register Activity do
   filter :cost
   filter :early_access_for_members
   filter :general_registration_start
-  
-
-  show do
-    attributes_table do
-      row :title
-      row :description
-      row :start_date
-      row :end_date
-      row :location
-      row :capacity
-      row :what_to_bring
-      row :rules
-      row :notes
-      row :cost do |activity|
-        number_to_currency(activity.cost, unit: "$", precision: 2) # Formats cost with two decimal places
-      end
-      row :early_access_for_members
-      row :early_access_days
-      row :general_registration_start
-      row :user
-      row :image do |activity|
-        if activity.image.attached?
-          image_tag url_for(activity.image), size: "300x300"
-        else
-          "No Image"
-        end
-      end
-    end
-    active_admin_comments
-  end
 end

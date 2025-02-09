@@ -14,8 +14,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
 
-         
-      
+
+
 
 
   validates :first_name, :last_name, :email, :phone_number, :gender, :ethnicity, presence: true
@@ -38,6 +38,6 @@ class User < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["age_range", "email", "ethnicity", "first_name", "gender", "last_name", "phone_number", "role_id"]
+    [ "age_range", "email", "ethnicity", "first_name", "gender", "last_name", "phone_number", "role_id" ]
   end
 end

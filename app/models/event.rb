@@ -34,10 +34,10 @@ class Event < ApplicationRecord
     end
 
     def self.ransackable_attributes(auth_object = nil)
-      ["capacity", "childcare", "cost", "early_access_for_members", "end_date", "general_registration_start", "location", "rsvp_deadline","start_date", "title" ]
+      [ "capacity", "childcare", "cost", "early_access_for_members", "end_date", "general_registration_start", "location", "rsvp_deadline", "start_date", "title" ]
     end
 
     def self.ransackable_associations(auth_object = nil)
-      ["images_attachments", "images_blobs", "payments", "registrations"]
+      [ "images_attachments", "images_blobs", "payments", "registrations" ]
     end
 end

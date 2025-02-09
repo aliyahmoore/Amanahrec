@@ -1,26 +1,12 @@
 ActiveAdmin.register Membership do
-
   actions :index, :show
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
-  # permit_params :user_id, :start_date, :end_date, :status, :stripe_customer_id, :stripe_subscription_id
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:user_id, :start_date, :end_date, :status, :stripe_customer_id, :stripe_subscription_id]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
 
-  
   index do
     selectable_column
     id_column
-    column :user
+    column "User" do |membership|
+      "#{membership.user.first_name} #{membership.user.last_name}" # Concatenate first and last names
+    end
     column :start_date
     column :end_date
     column :status
@@ -47,6 +33,4 @@ ActiveAdmin.register Membership do
   filter :status
   filter :start_date
   filter :end_date
-
-  
 end
