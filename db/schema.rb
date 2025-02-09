@@ -10,8 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_06_040127) do
-
 ActiveRecord::Schema[7.2].define(version: 2025_02_06_152612) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,18 +62,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_06_152612) do
     t.index ["slug"], name: "index_activities_on_slug", unique: true
   end
 
-  create_table "admin_users", force: :cascade do |t|
+  create_table "activities_users", id: false, force: :cascade do |t|
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_admin_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+    t.bigint "user_id", null: false
+    t.bigint "activity_id", null: false
+    t.index ["activity_id", "user_id"], name: "index_activities_users_on_activity_id_and_user_id"
+    t.index ["user_id", "activity_id"], name: "index_activities_users_on_user_id_and_activity_id"
   end
 
   create_table "boards", force: :cascade do |t|
@@ -104,6 +97,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_06_152612) do
     t.integer "capacity"
     t.string "slug"
     t.index ["slug"], name: "index_events_on_slug", unique: true
+  end
+
+  create_table "events_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
+    t.index ["event_id", "user_id"], name: "index_events_users_on_event_id_and_user_id"
+    t.index ["user_id", "event_id"], name: "index_events_users_on_user_id_and_event_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
