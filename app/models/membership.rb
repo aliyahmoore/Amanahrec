@@ -16,4 +16,13 @@ class Membership < ApplicationRecord
       stripe_subscription_id: subscription.id
     )
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["end_date", "start_date", "status", "user_id"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["payments", "user"]
+  end
+
 end
