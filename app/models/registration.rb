@@ -8,6 +8,14 @@ class Registration < ApplicationRecord
   validates :user_id, :registrable_id, :registrable_type, presence: true
   validate :check_existing_registration, on: :create
 
+  def self.ransackable_associations(auth_object = nil)
+    ["registrable", "registrations", "user"]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "id", "id_value", "registrable_id", "registrable_type", "status", "updated_at", "user_id"]
+  end
+
   # Registers the user for an event/activity (registrable) and returns the registration object
   def self.register_user(user, registrable)
     # If registrable is nil, return an error message

@@ -136,11 +136,11 @@ GEM
     ffi (1.17.1-x86_64-darwin)
     ffi (1.17.1-x86_64-linux-gnu)
     ffi (1.17.1-x86_64-linux-musl)
-    friendly_id (5.5.1)
-      activerecord (>= 4.0.0)
     formtastic (5.0.0)
       actionpack (>= 6.0.0)
     formtastic_i18n (0.7.0)
+    friendly_id (5.5.1)
+      activerecord (>= 4.0.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     has_scope (0.8.2)
@@ -326,6 +326,14 @@ GEM
       logger
     ruby2_keywords (0.0.5)
     rubyzip (2.4.1)
+    sassc (2.4.0)
+      ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     securerandom (0.4.1)
     selenium-webdriver (4.27.0)
       base64 (~> 0.2)
@@ -404,6 +412,8 @@ DEPENDENCIES
   puma (>= 5.0)
   rails (~> 7.2.2)
   rubocop-rails-omakase
+  sassc (~> 2.4)
+  sassc-rails (~> 2.1)
   selenium-webdriver
   simple_calendar (~> 3.1)
   sprockets-rails
