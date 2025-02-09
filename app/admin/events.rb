@@ -1,7 +1,7 @@
 ActiveAdmin.register Event do
   permit_params :title, :description, :start_date, :end_date, :location, :capacity,
                 :rsvp_deadline, :childcare, :sponsors, :cost, :early_access_for_members,
-                :early_access_days, :general_registration_start, :user_id, :images
+                :early_access_days, :general_registration_start, :user_id, images: []
 
   # Find the slug
   controller do
@@ -42,11 +42,17 @@ ActiveAdmin.register Event do
       row :rsvp_deadline
       row :early_access_for_members
       row :early_access_days
-      row :chidldcare
+      row :childcare
       row :sponsors
-      row :image do |activity|
-        if activity.images.attached?
-          image_tag url_for(activity.image), size: "300x300"
+      row :images do |event|
+        if event.images.attached?
+          div class: "event-images" do
+            event.images.each do |img|
+              span do
+                image_tag url_for(img), size: "200x200", style: "margin: 5px;"
+              end
+            end
+          end
         else
           "No Images"
         end
@@ -55,6 +61,39 @@ ActiveAdmin.register Event do
       row :updated_at
     end
     active_admin_comments
+  end
+
+  form do |f|
+    f.inputs "Activity Details" do
+      f.input :title
+      f.input :description
+      f.input :start_date, as: :datepicker
+      f.input :end_date, as: :datepicker
+      f.input :location
+      f.input :capacity
+      f.input :cost do |activity|
+        number_to_currency(activity.cost, unit: "$", precision: 2) # Formats cost with two decimal places
+      end
+      f.input :childcare
+      f.input :sponsors
+      f.input :general_registration_start, as: :datepicker
+      f.input :rsvp_deadline
+      f.input :early_access_for_members
+      f.input :early_access_days
+    end
+
+    f.inputs "Upload Images" do
+      f.input :images, as: :file, input_html: { multiple: true }
+      if f.object.images.attached?
+        f.object.images.each do |img|
+          div do
+            image_tag url_for(img), size: "100x100", style: "margin: 5px;"
+          end
+        end
+      end
+    end
+
+    f.actions
   end
 
   # Filters for the index page
