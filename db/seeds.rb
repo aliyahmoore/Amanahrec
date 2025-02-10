@@ -161,137 +161,67 @@ Activity.create!([
     general_registration_start: "2023-06-01 09:00"
   }
 ])
+ethnicity_options = [
+  "White",
+  "Black or African American",
+  "Asian",
+  "American Indian or Alaska Native",
+  "Native Hawaiian or Other Pacific Islander",
+  "Hispanic or Latino",
+  "Other",
+  "Prefer not to say"
+]
 
-Event.create!([
-  {
-    title: "Free Camping Prep Night",
-    description: "Dinner: PB&J or Turkey Sandwich and Lemonade\nBreakfast: oatmeal or PB&J and Somalia tea.\nYou're welcome to bring your own dinner, breakfast & snacks. Please bring your own s'mores.\nThree Rivers will provide: tent, sleeping mats, lamp, roasting sticks & cooking stove.\nPlease bring anything you need to be comfortable. I recommend air mattress, pillow, blanket, toiletries, tea, coffee, and snacks. We will play games so bring your favorite camping games.",
-    start_date: "2023-07-30 16:00",
-    end_date: "2023-08-01 08:00",
-    location: "Sumac Knoll Group Campsite, Bloomington, MN 55438",
-    general_registration_start: "2023-07-01",
-    rsvp_deadline: "2023-07-23 16:00",
-    cost: 0,
-    childcare: true,
-    sponsors: "Three Rivers Park District",
-    capacity: 20
-  },
-  {
-    title: "Duluth Fall Trip",
-    description: "Accommodations & Breakfast. Lutsen Adventure Day Pass $60 (group discount for $55 possible). It will be a separate payment, so whoever wants can get single rides at Lutsen online.\nShared beds make it affordable. Sisters will share rooms & brothers will share rooms. If you want your own bed, it's double the price. Families of 5-6 can share a suite with pullout sofa. Only 5 available at $850.\n\nTransportation: Will create group chat for people to coordinate carpooling. Everyone is responsible for finding their own rides & using the group chat to find a ride. Please chip in for gas and parking if carpooling.\n\nThis is a hiking trip. Must be able to hike & walk for 2 hours a day. No exceptions.",
-    start_date: "2023-10-06",
-    end_date: "2023-10-08",
-    location: "Duluth, MN",
-    general_registration_start: "2023-09-01",
-    rsvp_deadline: "2023-09-30",
-    cost: 215,
-    childcare: false,
-    capacity: 15
-  },
-  {
-    title: "Glacier National Park Hiking Hijabie Road Trip 18+",
-    description: "National Parks Road Trip:\n1. Theodore Roosevelt National Park, ND\n2. Glacier National Park, MT\n3. Badlands National Park, SD\n\nTransportation, hotel & glamp camp included. Shared beds to make it affordable. Text to book a spot.\n\nThis is a hiking trip. Must be able to hike and walk for 3-5 hours a day. No exceptions.\n\nAll sales are final & non-refundable. You may sell your spot to someone else, but there will be no refunds.",
-    start_date: "2024-08-31",
-    end_date: "2024-09-05",
-    location: "Theodore Roosevelt National Park, ND\n Glacier National Park, MT\nBadlands National Park, SD",
-    general_registration_start: "2024-08-01",
-    rsvp_deadline: "2024-08-15",
-    cost: 700,
-    childcare: true,
-    capacity: 10
-  }
-])
+# Method to generate formatted phone numbers
+def formatted_phone_number
+  area_code = Faker::Number.number(digits: 3)
+  prefix = Faker::Number.number(digits: 3)
+  line_number = Faker::Number.number(digits: 4)
+  "+1 (#{area_code}) #{prefix}-#{line_number}"
+end
 
+# Create 20 users with first-name-based emails
+20.times do |i|
+  first_name = Faker::Name.first_name.downcase
+  last_name = Faker::Name.last_name.downcase
+  email = "#{first_name}.#{last_name}@gmail.com"
 
-MediaMention.create!([
-  {
-    name: "Hiking Hijabie: Hiking group helps connect Muslim community to the Great Outdoors",
-    organization_name: "Fox9",
-    published_date: "2023-10-18",
-    link: "https://www.fox9.com/news/hiking-group-helps-connect-muslim-community-to-the-great-outdoors"
-  },
-  {
-    name: "Hiking group for Muslim women breaks barriers as hundreds flock to the outdoors",
-    organization_name: "Sahan Journal",
-    published_date: "2024-11-12",
-    link: "https://sahanjournal.com/arts-culture/muslim-hiking-groups-minnesota-women-somali-owned/"
-  },
-  {
-    name: "Hiking Hijabie: How this Minneapolis business owner is making outdoor clothing more inclusive",
-    organization_name: "Kare11",
-    published_date: "2025-01-07",
-    link: "https://www.kare11.com/article/news/local/news-at-noon/hiking-minneapolis-business-owner-making-outdoor-clothing-more-inclusive/89-0b985477-3850-45d8-88a5-d516734d10f1"
-  },
-  {
-    name: "Scarves over headscarves, Muslim women’s outdoors group tackles snow tubing in Minnesota",
-    organization_name: "AP News",
-    published_date: "2025-01-08",
-    link: "https://apnews.com/article/islam-muslim-women-hijabs-outdoor-adventures-minnesota-cold-7c29def2171de0f41f60936c4568e011"
-  },
-  {
-    name: "Empowering Muslim Women in Minnesota with Hiking Hijabie",
-    organization_name: "Mn Upstream",
-    published_date: "2024-03-11",
-    link: "https://mnupstream.org/loving-where-we-live-with-nasireen-habib/"
-  },
-  {
-    name: "Hidden Gems: Meet Nasrieen Habib of Amanah Rec Project",
-    organization_name: "Voyage Minnesota",
-    published_date: "2024-08-21",
-    link: "https://voyageminnesota.com/interview/hidden-gems-meet-nasrieen-habib-of-amanah-rec-project"
-  },
-  {
-    name: "Hiking group for Muslim women breaks barriers as hundreds flock to the outdoors",
-    organization_name: "Star Tribune",
-    published_date: "2024-11-16",
-    link: "https://www.startribune.com/hiking-group-for-muslim-women-breaks-barriers-as-hundreds-flock-to-the-outdoors/601181812"
-  },
-  {
-    name: "Group Breaks Barriers in Minnesota and Beyond",
-    organization_name: "About Islam",
-    published_date: "2024-11-17",
-    link: "https://aboutislam.net/muslim-issues/n-america/muslim-womens-hiking-group-breaks-barriers-in-minnesota-and-beyond/"
-  },
-  {
-    name: "Twin Cities Muslim Women’s Hiking Group Breaks Barriers",
-    organization_name: "Barlaguna",
-    published_date: "2024-11-16",
-    link: "https://www.barlaguna.it/2024/11/17/62173"
-  },
-  {
-    name: "Minneapolis: Group Builds Community, Connection for Muslim Women Outdoors",
-    organization_name: "Iqna",
-    published_date: "2024-11-13",
-    link: "https://iqna.ir/en/news/3490675/minneapolis-group-builds-community-connection-for-muslim-women-outdoors"
-  },
-  {
-    name: "From hijabs to hiking: Muslim women embrace the great outdoors",
-    organization_name: "Africa News",
-    published_date: "2024-10-01",
-    link: "https://www.africanews.com/2025/01/10/from-hijabs-to-hiking-muslim-women-embrace-the-great-outdoors/"
-  },
-  {
-    name: "Un groupe de randonnées de femmes musulmanes brise les barrières au Minnesota et au-delà",
-    organization_name: "Histoire Et Chronique",
-    published_date: "2024-11-17",
-    link: "https://www.histoire-et-chronique.fr/2024/11/17/un-groupe-de-randonnees-de-femmes-musulmanes-brise-les-barrieres-au-minnesota-et-au-dela/"
-  },
-  {
-    name: "Scarves over headscarves, Muslim women’s outdoors group tackles snow tubing in Minnesota",
-    organization_name: "Washington Times",
-    published_date: "2025-01-08",
-    link: "https://www.washingtontimes.com/news/2025/jan/8/scarves-headscarves-muslim-women-outdoors-group-mi/"
-  },
-  {
-    name: "Hiking group for Muslim women breaks barriers as hundreds flock to the outdoors",
-    organization_name: "Wisconsin Muslim Journal",
-    published_date: "2024-11-29",
-    link: "https://wisconsinmuslimjournal.org/https-sahanjournal-com-arts-culture-muslim-hiking-groups-minnesota-women-somali-owned/"
-  },
-  {
-    name: "Hiking Hijabie: How This Minneapolis Business Owner Is Making Outdoor Clothing More Inclusive",
-    organization_name: "Minneapolis Media Town News",
-    published_date: "2024-01-07",
-    link: "https://minneapolimedia.town.news/g/coon-rapids-mn/n/286512/hiking-hijabie-how-minneapolis-business-owner-making-outdoor-clothing"
-  }
-])
+  user = User.create!(
+    first_name: first_name.capitalize,
+    last_name: last_name.capitalize,
+    email: email,
+    phone_number: formatted_phone_number,
+    gender: %w[Male Female].sample,
+    age_range: %w[18-24 25-34 35-44 45-54 55+].sample,
+    ethnicity: ethnicity_options.sample,
+    password: "password123",
+    password_confirmation: "password123",
+    role_id: 2
+  )
+
+  puts "Created User ##{i + 1}: #{user.first_name} #{user.last_name} (#{user.email}) - #{user.phone_number}"
+end
+
+# Create 10 unique testimonials for random users
+testimonials = [
+  "AmanahRec opened my eyes to the beauty of nature and the importance of sustainability!",
+  "Hiking with AmanahRec was a life-changing experience—highly recommended!",
+  "Thanks to Hiking Hijabie, I found a community that shares my passion for nature.",
+  "AmanahRec's events are always well-organized and meaningful.",
+  "I learned so much about environmental stewardship through AmanahRec.",
+  "Hiking Hijabie is the perfect combination of adventure and mindfulness.",
+  "AmanahRec has helped me reconnect with nature in a deeper way.",
+  "Hiking Hijabie is a true inspiration for women who love the outdoors.",
+  "AmanahRec provided a safe and welcoming space for me to explore nature.",
+  "Joining AmanahRec events is the highlight of my month!"
+]
+
+User.order("RANDOM()").limit(10).each_with_index do |user, index|
+  testimonial = Testimonial.create!(
+    text: testimonials[index],
+    approved: [ true, false ].sample,
+    user: user
+  )
+
+  puts "Created Testimonial ##{index + 1} for User #{user.id}: #{testimonial.text}"
+end
