@@ -4,7 +4,7 @@
 <div class="activity-images">
   <% if @activity.image.attached? %>
     <div class="activity-image">
-      <%= image_tag @activity.image, class: "activity-image-preview" %>
+      <%= image_tag @activity.image, class: "centered-image" %>
     </div>
   <% else %>
     <p>No image uploaded for this activity.</p>

@@ -118,4 +118,15 @@ h4.card-title a {
     color: #403f2b !important;
   }
 
+  .activity-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .centered-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
   
