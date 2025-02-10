@@ -1,5 +1,5 @@
 <% content_for :title, @activity.title %>
-<h1 class="activity-title mt-3 text-center display-3"><%= @activity.title %></h1>
+<h3 class="activity-title mt-3 text-center display-3"><%= @activity.title %></h3>
 <!-- Activity Image Section -->
 <div class="activity-images">
   <% if @activity.image.attached? %>
@@ -15,7 +15,7 @@
   <!-- Left Column (Description, What to Bring, Rules) -->
   <div class="col-md-4">
     <div class="activity-description ">
-      <h2><i class="fas fa-info-circle"></i> Description</h2>
+      <h5><i class="fas fa-info-circle"></i> Description</h5>
       <p><%= @activity.description %></p>
       <p><i class="fa-solid fa-users"></i><strong> Registration Limit:</strong> <%= @activity.capacity %></p>
       <% if @activity.what_to_bring.present? %>

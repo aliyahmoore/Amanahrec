@@ -1,21 +1,31 @@
 <% content_for :title, @event.title %>
-<h1 class="event-title mt-3 text-center display-3"><%= @event.title %></h1>
+<h3 class="event-title mt-3 text-center display-3"><%= @event.title %></h3>
 <!-- event Image Section -->
-<div class="event-images">
-  <% if @event.images.attached? %>
-    <div class="event-image">
-      <%= image_tag @event.images.first, class: "event-image-preview" %>
-    </div>
-  <% else %>
-    <p>No image uploaded for this event.</p>
-  <% end %>
+<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <% @event.images.each_with_index do |image, index| %>
+      <div class="carousel-item <%= 'active' if index == 0 %>">
+        <%= image_tag image, class: "d-block w-100", alt: "Event Image #{index + 1}" %>
+      </div>
+    <% end %>
+  </div>
+  
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
 <!-- Grid Layout -->
 <div class="row mt-4 .d-flex justify-content-center">
   <!-- Left Column (Description, What to Bring, Rules) -->
   <div class="col-md-4">
     <div class="event-description ">
-      <h2><i class="fas fa-info-circle"></i> Description</h2>
+      <h5><i class="fas fa-info-circle"></i> Description</h5>
       <p><%= @event.description %></p>
       <p><i class="fa-solid fa-users"></i> <strong>Registration Limit: </strong> <%= @event.capacity %></p> 
       <% if @event.childcare.present? %>
