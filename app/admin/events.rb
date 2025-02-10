@@ -115,8 +115,21 @@ ActiveAdmin.register Event do
     end
 
     f.inputs "Upload Images" do
-      f.input :images, as: :file, input_html: { multiple: true },
-              hint: f.object.images.attached? ? f.object.images.map { |img| image_tag(url_for(img), size: "200x200", style: "margin: 5px;") }.join.html_safe : "No images uploaded"
+      f.input :images, as: :file, input_html: { multiple: true }
+    
+      if f.object.images.attached?
+        f.object.images.each do |img|
+          div do
+            begin
+              image_tag url_for(img), size: "100x100", style: "margin: 5px;"
+            rescue => e
+              para "Image preview failed: #{e.message}"
+            end
+          end
+        end
+      else
+        para "No images uploaded"
+      end
     end
 
     f.actions

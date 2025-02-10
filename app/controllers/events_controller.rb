@@ -1,7 +1,6 @@
 class EventsController < ApplicationController
     load_and_authorize_resource
-    before_action :set_event, except: [ :index, :new, :create ]
-
+    before_action :set_event, only: [ :show, :edit, :update, :destroy ]
     # GET /events
     def index
         @events = Event.order(start_date: :desc)
@@ -33,7 +32,7 @@ class EventsController < ApplicationController
 
     # GET /events/:id/edit
     def edit
-      @event = Event.find(params[:id])
+      @event
     end
 
 

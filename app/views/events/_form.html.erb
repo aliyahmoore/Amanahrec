@@ -91,10 +91,10 @@
 
   <!-- Image Upload Section -->
   <div class="form-section">
-    <h3>Upload an Image</h3>
+    <h3>Upload Images</h3>
     <div class="row">
       <div class="col-md-3">
-        <%= form.file_field :image, class: "form-control" %>
+        <%= form.file_field :images, multiple: true, class: "form-control" %>
       </div>
     </div>
   </div>
