@@ -97,15 +97,15 @@ ActiveAdmin.register Activity do
     f.inputs "Activity Details" do
       f.input :title
       f.input :description
-      f.input :start_date, as: :datepicker
-      f.input :end_date, as: :datepicker
+      f.input :start_date, as: :datepicker, input_html: { value: f.object.start_date&.strftime("%Y-%m-%dT%H:%M") }
+      f.input :end_date, as: :datepicker, input_html: { value: f.object.end_date&.strftime("%Y-%m-%dT%H:%M") }
       f.input :location
       f.input :capacity
       f.input :cost
       f.input :what_to_bring
       f.input :rules
       f.input :notes
-      f.input :general_registration_start, as: :datepicker
+      f.input :general_registration_start, as: :datepicker, input_html: { value: f.object.general_registration_start&.strftime("%Y-%m-%dT%H:%M") }
       f.input :early_access_for_members
       f.input :early_access_days
     end
