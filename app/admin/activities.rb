@@ -1,7 +1,7 @@
 ActiveAdmin.register Activity do
   permit_params :title, :description, :start_date, :end_date, :location, :capacity,
                 :what_to_bring, :rules, :notes, :cost, :early_access_for_members,
-                :early_access_days, :general_registration_start, :user_id, :image, :created_at, :updated_at
+                :early_access_days, :general_registration_start, :user_id, :image
 
   # Find the slug
   controller do
@@ -15,14 +15,20 @@ ActiveAdmin.register Activity do
     selectable_column
     id_column
     column :title
-    column :start_date
-    column :end_date
+    column :start_date do |activity|
+      activity.start_date.strftime("%B %d, %Y %I:%M %p") if activity.start_date
+    end
+    column :end_date do |activity|
+      activity.end_date.strftime("%B %d, %Y %I:%M %p") if activity.end_date
+    end
     column :location
     column :capacity
     column :cost do |activity|
-      number_to_currency(activity.cost, unit: "$", precision: 2) # Formats cost with two decimal places
+      number_to_currency(activity.cost, unit: "$", precision: 2)
     end
-    column :general_registration_start
+    column :general_registration_start do |activity|
+      activity.general_registration_start.strftime("%B %d, %Y %I:%M %p") if activity.general_registration_start
+    end
     column :early_access_for_members
     column :early_access_days
     column :image do |activity|
@@ -35,19 +41,25 @@ ActiveAdmin.register Activity do
     actions
   end
 
-  # Show
+  # Show Page
   show do
     attributes_table do
       row :title
       row :description
-      row :start_date
-      row :end_date
+      row :start_date do |activity|
+        activity.start_date.strftime("%B %d, %Y %I:%M %p") if activity.start_date
+      end
+      row :end_date do |activity|
+        activity.end_date.strftime("%B %d, %Y %I:%M %p") if activity.end_date
+      end
       row :location
       row :cost do |activity|
-        number_to_currency(activity.cost, unit: "$", precision: 2) # Formats cost with two decimal places
+        number_to_currency(activity.cost, unit: "$", precision: 2)
       end
       row :capacity
-      row :general_registration_start
+      row :general_registration_start do |activity|
+        activity.general_registration_start.strftime("%B %d, %Y %I:%M %p") if activity.general_registration_start
+      end
       row :early_access_for_members
       row :early_access_days
       row :what_to_bring
@@ -66,6 +78,7 @@ ActiveAdmin.register Activity do
     active_admin_comments
   end
 
+  # Form
   form do |f|
     f.inputs "Activity Details" do
       f.input :title
@@ -74,9 +87,7 @@ ActiveAdmin.register Activity do
       f.input :end_date, as: :datepicker
       f.input :location
       f.input :capacity
-      f.input :cost do |activity|
-        number_to_currency(activity.cost, unit: "$", precision: 2) # Formats cost with two decimal places
-      end
+      f.input :cost
       f.input :what_to_bring
       f.input :rules
       f.input :notes
