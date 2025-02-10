@@ -66,7 +66,7 @@ testimonials = [
 User.order("RANDOM()").limit(10).each_with_index do |user, index|
   testimonial = Testimonial.create!(
     text: testimonials[index],
-    approved: [true, false].sample,
+    approved: [ true, false ].sample,
     user: user
   )
 

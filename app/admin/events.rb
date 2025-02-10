@@ -12,7 +12,7 @@ ActiveAdmin.register Event do
 
   member_action :duplicate, method: :get do
     event = resource.dup
-  
+
     # Save the duplicated event
     if event.save
       redirect_to edit_admin_event_path(event), notice: "Event successfully duplicated. Please adjust the details."
@@ -47,7 +47,7 @@ ActiveAdmin.register Event do
     column :early_access_days
     actions do |event|
       # Add the duplicate link
-      link_to 'Duplicate', duplicate_admin_event_path(event), method: :get
+      link_to "Duplicate", duplicate_admin_event_path(event), method: :get
     end
   end
 

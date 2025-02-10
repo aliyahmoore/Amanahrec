@@ -12,7 +12,7 @@ ActiveAdmin.register Activity do
 
   member_action :duplicate, method: :get do
     activity = resource.dup
-  
+
     # Save the duplicated activity
     if activity.save
       redirect_to edit_admin_activity_path(activity), notice: "Activity successfully duplicated."
@@ -51,7 +51,7 @@ ActiveAdmin.register Activity do
     end
     actions do |activity|
       # Add the duplicate link
-      link_to 'Duplicate', duplicate_admin_activity_path(activity), method: :get
+      link_to "Duplicate", duplicate_admin_activity_path(activity), method: :get
     end
   end
 
