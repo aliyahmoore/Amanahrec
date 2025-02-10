@@ -28,5 +28,14 @@ module Amanahrec
     config.active_record.default_timezone = :local
 
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Initialize Cloudinary
+    Cloudinary.config do |config|
+      config.cloud_name = ENV['CLOUDINARY_CLOUD_NAME']
+      config.api_key = ENV['CLOUDINARY_API_KEY']
+      config.api_secret = ENV['CLOUDINARY_API_SECRET']
+      config.secure = true
+      config.cdn_subdomain = true
+    end
   end
 end
