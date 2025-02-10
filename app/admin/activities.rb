@@ -10,6 +10,17 @@ ActiveAdmin.register Activity do
     end
   end
 
+  member_action :duplicate, method: :get do
+    activity = resource.dup
+  
+    # Save the duplicated activity
+    if activity.save
+      redirect_to edit_admin_activity_path(activity), notice: "Activity successfully duplicated."
+    else
+      redirect_to admin_activities_path, alert: "Failed to duplicate the activity."
+    end
+  end
+
   # Index Page
   index do
     selectable_column
@@ -38,7 +49,10 @@ ActiveAdmin.register Activity do
         "No Image"
       end
     end
-    actions
+    actions do |activity|
+      # Add the duplicate link
+      link_to 'Duplicate', duplicate_admin_activity_path(activity), method: :get
+    end
   end
 
   # Show Page
