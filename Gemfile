@@ -77,3 +77,6 @@ gem "activeadmin", "~> 3.2"
 gem "sassc-rails", "~> 2.1"
 
 gem "faker", "~> 3.5"
+
+gem "cloudinary"
+gem "activestorage-cloudinary-service"
