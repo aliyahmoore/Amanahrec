@@ -12,9 +12,9 @@
 
 # Create 20 users with first-name-based emails
 20.times do |i|
-  first_name = Faker::Name.first_name
-  last_name = Faker::Name.last_name
-  email = "#{first_name.downcase}.#{last_name.downcase}@gmail.com"
+  first_name = Faker::Name.first_name.downcase
+  last_name = Faker::Name.last_name.downcase
+  email = "#{first_name}.#{last_name}@gmail.com"
 
   user = User.create!(
     first_name: first_name.capitalize,
@@ -24,7 +24,8 @@
     gender: %w[Male Female Non-binary].sample,
     age_range: %w[18-24 25-34 35-44 45-54 55+].sample,
     ethnicity: %w[Asian Black Hispanic White Other].sample,
-    encrypted_password: User.new.send(:password_digest, "password123"),
+    password: "password"
+    password_confirmation:  "password"
     role_id: 2
   )
 
