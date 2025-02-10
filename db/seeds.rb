@@ -22,7 +22,7 @@ Activity.create!([
     notes: "Cashapp$AmanahRec",
     early_access_for_members: true,
     early_access_days: 7,
-    general_registration_start: "2022-12-21 10:00 AM",
+    general_registration_start: "2022-12-21 10:00 AM"
   },
   {
     title: "Pottery Workshop",
@@ -37,7 +37,7 @@ Activity.create!([
     notes: "Limited spots available",
     early_access_for_members: true,
     early_access_days: 7,
-    general_registration_start: "2023-11-08 5:15 PM",
+    general_registration_start: "2023-11-08 5:15 PM"
   },
   {
     title: "Amanah Rec Game Night",
@@ -52,7 +52,7 @@ Activity.create!([
     notes: "Recurring event, check for upcoming dates",
     early_access_for_members: true,
     early_access_days: 7,
-    general_registration_start: "2023-05-07 18:00",
+    general_registration_start: "2023-05-07 18:00"
   },
   {
     title: "Amanah Rec Grand Opening",
@@ -67,7 +67,7 @@ Activity.create!([
     notes: "Come celebrate with us!",
     early_access_for_members: false,
     early_access_days: nil,
-    general_registration_start: "2024-05-01 10:30 AM",
+    general_registration_start: "2024-05-01 10:30 AM"
   },
       {
     title: "Mommie & Me Bouldering",

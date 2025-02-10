@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby '3.2.2'
+ruby "3.2.2"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.2"
@@ -78,6 +78,5 @@ gem "sassc-rails", "~> 2.1"
 
 gem "faker", "~> 3.5"
 
-gem 'cloudinary'
-gem 'activestorage-cloudinary-service'
-
+gem "cloudinary"
+gem "activestorage-cloudinary-service"
