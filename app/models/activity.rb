@@ -4,7 +4,9 @@ class Activity < ApplicationRecord
   friendly_id :custom_slug, use: :slugged
 
   def custom_slug
-    "#{title}-#{start_date.strftime('%Y-%m-%d')}"
+    [
+      [ :name, start_date.strftime("%Y-%m-%d") ] # Combines name and start_date
+    ]
   end
   has_one_attached :image
 
