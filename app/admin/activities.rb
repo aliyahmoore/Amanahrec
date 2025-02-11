@@ -11,18 +11,14 @@ ActiveAdmin.register Activity do
   end
 
   member_action :duplicate, method: :get do
-    activity = resource.dup
+    new_activity = resource.dup
 
     # Set new start_date and end_date (modify as needed)
-    activity.start_date = activity.start_date + 1.day if activity.start_date
-    activity.end_date = activity.end_date + 1.day if activity.end_date
+    new_activity.start_date = new_activity.start_date + 1.day if new_activity.start_date
+    new_activity.end_date = new_activity.end_date + 1.day if new_activity.end_date
 
-    # Save the duplicated activity
-    if activity.save
-      redirect_to edit_admin_activity_path(activity), notice: "Activity successfully duplicated."
-    else
-      redirect_to admin_activities_path, alert: "Failed to duplicate the activity."
-    end
+    # Save the new activity
+    redirect_to new_admin_activity_path(activity: new_activity.attributes)
   end
 
   # Index Page
@@ -105,7 +101,9 @@ ActiveAdmin.register Activity do
       f.input :end_date, as: :datetime_picker
       f.input :location
       f.input :capacity
-      f.input :cost
+      f.input :cost do |activity|
+        number_to_currency(activity.cost, unit: "$", precision: 2)
+      end
       f.input :what_to_bring
       f.input :rules
       f.input :notes
@@ -117,7 +115,6 @@ ActiveAdmin.register Activity do
     f.inputs "Upload Image" do
       f.input :image, as: :file, hint: f.object.image.attached? ? image_tag(url_for(f.object.image), size: "200x200") : "No image uploaded"
     end
-
     f.actions
   end
 

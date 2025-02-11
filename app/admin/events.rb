@@ -1,7 +1,7 @@
 ActiveAdmin.register Event do
   permit_params :title, :description, :start_date, :end_date, :location, :capacity,
                 :rsvp_deadline, :childcare, :sponsors, :cost, :early_access_for_members,
-                :early_access_days, :general_registration_start, :user_id, images: []
+                :early_access_days, :general_registration_start, :user_id ,images: []
 
   # Find the slug
   controller do
@@ -11,18 +11,14 @@ ActiveAdmin.register Event do
   end
 
   member_action :duplicate, method: :get do
-    event = resource.dup
+    new_event = resource.dup
 
     # Set new start_date and end_date (modify as needed)
-    event.start_date = event.start_date + 1.day if event.start_date
-    event.end_date = event.end_date + 1.day if event.end_date
+    new_event.start_date = new_event.start_date + 1.day if new_event.start_date
+    new_event.end_date = new_event.end_date + 1.day if new_event.end_date
 
-    # Save the duplicated event
-    if event.save
-      redirect_to edit_admin_event_path(event), notice: "Event successfully duplicated. Please adjust the details."
-    else
-      redirect_to admin_events_path, alert: "Failed to duplicate the event."
-    end
+    # Save the new event
+    redirect_to new_admin_event_path(event: new_event.attributes)
   end
 
   # Index
@@ -135,8 +131,7 @@ ActiveAdmin.register Event do
         para "No images uploaded"
       end
     end
-
-    f.actions
+    f.actions 
   end
 
   # Filters for the index page
