@@ -13,6 +13,10 @@ ActiveAdmin.register Activity do
   member_action :duplicate, method: :get do
     activity = resource.dup
 
+    # Set new start_date and end_date (modify as needed)
+    activity.start_date = activity.start_date + 1.day if activity.start_date
+    activity.end_date = activity.end_date + 1.day if activity.end_date
+
     # Save the duplicated activity
     if activity.save
       redirect_to edit_admin_activity_path(activity), notice: "Activity successfully duplicated."

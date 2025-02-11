@@ -13,6 +13,10 @@ ActiveAdmin.register Event do
   member_action :duplicate, method: :get do
     event = resource.dup
 
+    # Set new start_date and end_date (modify as needed)
+    event.start_date = event.start_date + 1.day if event.start_date
+    event.end_date = event.end_date + 1.day if event.end_date
+
     # Save the duplicated event
     if event.save
       redirect_to edit_admin_event_path(event), notice: "Event successfully duplicated. Please adjust the details."

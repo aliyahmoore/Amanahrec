@@ -2,10 +2,12 @@ class Event < ApplicationRecord
     include EarlyAccessable
     extend FriendlyId
     friendly_id :custom_slug, use: :slugged
+    before_save :update_slug, if: :date_changed?
+
 
     def custom_slug
       [
-        [ :name, start_date.strftime("%Y-%m-%d") ] # Combines name and start_date
+        [ :title, start_date.strftime("%Y-%m-%d") ] # Combines name and start_date
       ]
     end
     has_many_attached :images
@@ -22,6 +24,16 @@ class Event < ApplicationRecord
     end
 
     private
+
+  # Regenerate the slug after the duplicated event is saved
+  def update_slug
+    self.slug = custom_slug.first.join("-")
+  end
+
+  # Check if the start_date or end_date has changed
+  def date_changed?
+    start_date_changed? || end_date_changed?
+  end
 
     def rsvp_deadline_must_be_valid
       return if rsvp_deadline.blank? || start_date.blank? || general_registration_start.blank?
