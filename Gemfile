@@ -80,3 +80,5 @@ gem "faker", "~> 3.5"
 
 gem "cloudinary"
 gem "activestorage-cloudinary-service"
+
+gem "active_admin_datetimepicker", "~> 1.1"

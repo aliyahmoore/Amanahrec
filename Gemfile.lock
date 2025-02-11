@@ -45,6 +45,8 @@ GEM
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
+    active_admin_datetimepicker (1.1.0)
+      activeadmin (>= 2.14.0, < 4.0)
     activeadmin (3.2.5)
       arbre (~> 1.2, >= 1.2.1)
       csv
@@ -418,6 +420,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  active_admin_datetimepicker (~> 1.1)
   activeadmin (~> 3.2)
   activestorage-cloudinary-service
   bootsnap

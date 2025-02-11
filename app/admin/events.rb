@@ -101,22 +101,22 @@ ActiveAdmin.register Event do
     f.inputs "Event Details" do
       f.input :title
       f.input :description
-      f.input :start_date, as: :datepicker, input_html: { value: f.object.start_date&.strftime("%Y-%m-%d%H:%M") }
-      f.input :end_date, as: :datepicker, input_html: { value: f.object.end_date&.strftime("%Y-%m-%d%H:%M") }
+      f.input :start_date, as: :datetime_picker
+      f.input :end_date, as: :datetime_picker
       f.input :location
       f.input :capacity
       f.input :cost
       f.input :childcare
       f.input :sponsors
-      f.input :general_registration_start, as: :datepicker, input_html: { value: f.object.general_registration_start&.strftime("%Y-%m-%dT%H:%M") }
-      f.input :rsvp_deadline, as: :datepicker, input_html: { value: f.object.rsvp_deadline&.strftime("%Y-%m-%d%H:%M") }
+      f.input :general_registration_start, as: :datetime_picker
+      f.input :rsvp_deadline, as: :datetime_picker
       f.input :early_access_for_members
       f.input :early_access_days
     end
 
     f.inputs "Upload Images" do
       f.input :images, as: :file, input_html: { multiple: true }
-    
+
       if f.object.images.attached?
         f.object.images.each do |img|
           div do
