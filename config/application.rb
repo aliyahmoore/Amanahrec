@@ -22,7 +22,7 @@ module Amanahrec
     # in config/environments, which are processed later.
     #
     config.time_zone = "Central Time (US & Canada)"
-
+    config.beginning_of_week = :sunday
 
     # Ensures local timestamps
     config.active_record.default_timezone = :local
