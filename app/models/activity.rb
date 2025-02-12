@@ -27,5 +27,4 @@ class Activity < ApplicationRecord
   def self.ransackable_attributes(auth_object = nil)
     [ "capacity", "cost", "early_access_for_members", "end_date", "general_registration_start", "location", "start_date", "title" ]
   end
-
 end

@@ -29,7 +29,7 @@ ActiveAdmin.register_page "Dashboard" do
       end
     end
 
-    # Section for Boards and Media Mentions on the Same Row
+# Section for Boards and Media Mentions on the Same Row
 section "Testimonials and Media Mentions" do
   columns do
     column do
@@ -37,7 +37,7 @@ section "Testimonials and Media Mentions" do
         table_for Testimonial.where(approved: false).limit(5) do
           column("Testimonial") { |testimonial| link_to testimonial.text.truncate(50), admin_testimonial_path(testimonial) }
           column("Submitted By") { |testimonial| link_to "#{testimonial.user.first_name} #{testimonial.user.last_name}", admin_user_path(testimonial.user) }
-          column("Submitted Date") { |testimonial| testimonial.created_at.strftime('%B %d, %Y') }
+          column("Submitted Date") { |testimonial| testimonial.created_at.strftime("%B %d, %Y") }
         end
       end
     end
@@ -47,7 +47,7 @@ section "Testimonials and Media Mentions" do
       panel "Recent Media Mentions" do
         table_for MediaMention.order(published_date: :desc).limit(5) do
           column("Title") { |mention| link_to mention.name, admin_media_mention_path(mention) }
-          column("Published Date") { |mention| mention.published_date.strftime('%B %d, %Y') }
+          column("Published Date") { |mention| mention.published_date.strftime("%B %d, %Y") }
         end
       end
     end
@@ -59,25 +59,23 @@ end
     section "Memberships and Payments" do
       columns do
         column do
-          panel "Active Memberships", :class => "membership-section" do
+          panel "Active Memberships", class: "membership-section" do
             div do
-              Membership.where(status: 'active').count
+              Membership.where(status: "active").count
             end
           end
         end
 
         column do
-          panel "Recent Payments", :class => "payments-section" do
+          panel "Recent Payments", class: "payments-section" do
             table_for Payment.order(created_at: :desc).limit(5) do
               column("User") { |payment|  "#{payment.user.first_name} #{payment.user.last_name}" }
               column("Amount") { |payment| payment.amount }
               column("Status") { |payment| payment.status }
-              column("View") { |payment| link_to('View', admin_payment_path(payment)) }
+              column("View") { |payment| link_to("View", admin_payment_path(payment)) }
             end
           end
         end
-
-       
       end
     end
 
@@ -88,12 +86,12 @@ end
           panel "Gender Distribution" do
             gender_counts = User.group(:gender).count.to_a
             total_count = gender_counts.sum { |_, count| count }
-          
+
             table_for gender_counts do
               column("Gender") { |row| row[0] }
               column("Count") { |row| row[1] }
             end
-          
+
             div style: "font-weight: bold; margin-top: 10px;" do
               "Total: #{total_count}"
             end
@@ -102,8 +100,8 @@ end
 
         column do
           panel "Age Range" do
-            age_ranges = ["18-25", "26-35", "36-45", "46-55", "56+"]
-            table_for age_ranges.map { |range| [range, User.where(age_range: range).count] } do
+            age_ranges = [ "18-25", "26-35", "36-45", "46-55", "56+" ]
+            table_for age_ranges.map { |range| [ range, User.where(age_range: range).count ] } do
               column("Age Range") { |row| row[0] }
               column("Count") { |row| row[1] }
             end
@@ -112,9 +110,9 @@ end
 
         column do
           panel "Ethnicity Breakdown" do
-            ethnicities = ["American Indian or Alaska Native", "Asian", "Black or African American", "Hispanic or Latino", 
-                       "Native Hawaiian or Other Pacific Islander", "Other", "Prefer not to say", "White"]
-        table_for ethnicities.map { |eth| [eth, User.where(ethnicity: eth).count] } do
+            ethnicities = [ "American Indian or Alaska Native", "Asian", "Black or African American", "Hispanic or Latino",
+                       "Native Hawaiian or Other Pacific Islander", "Other", "Prefer not to say", "White" ]
+        table_for ethnicities.map { |eth| [ eth, User.where(ethnicity: eth).count ] } do
               column("Ethnicity") { |row| row[0] }
               column("Count") { |row| row[1] }
             end

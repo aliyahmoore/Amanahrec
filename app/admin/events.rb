@@ -1,7 +1,7 @@
 ActiveAdmin.register Event do
   permit_params :title, :description, :start_date, :end_date, :location, :capacity,
                 :rsvp_deadline, :childcare, :sponsors, :cost, :early_access_for_members,
-                :early_access_days, :general_registration_start, :user_id ,images: []
+                :early_access_days, :general_registration_start, :user_id, images: []
 
   # Find the slug
   controller do
@@ -131,7 +131,7 @@ ActiveAdmin.register Event do
         para "No images uploaded"
       end
     end
-    f.actions 
+    f.actions
   end
 
   # Filters for the index page
