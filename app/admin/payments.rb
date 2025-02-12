@@ -22,7 +22,6 @@ ActiveAdmin.register Payment do
     column "User" do |membership|
       "#{membership.user.first_name} #{membership.user.last_name}" # Concatenate first and last names
     end
-    column :stripe_payment_id
     column :amount, sortable: true do |payment|
       number_to_currency(payment.amount)
     end
@@ -30,7 +29,15 @@ ActiveAdmin.register Payment do
     column :is_recurring
     column :recurring_type
     column :paymentable_type
-    column :paymentable_id
+    column "Activity/Event Name" do |payment|
+      if payment.paymentable_type == "Event" && payment.paymentable.present?
+        payment.paymentable.title  # Access the title from Event
+      elsif payment.paymentable_type == "Activity" && payment.paymentable.present?
+        payment.paymentable.title  # Access the title from Activity
+      else
+        "No associated Event or Activity"
+      end
+    end
     column :created_at
     column :updated_at
   end
@@ -46,7 +53,15 @@ ActiveAdmin.register Payment do
       row :is_recurring
       row :recurring_type
       row :paymentable_type
-      row :paymentable_id
+      row  "Activity/Event Name" do |payment|
+        if payment.paymentable_type == "Event" && payment.paymentable.present?
+          payment.paymentable.title  # Access the title from Event
+        elsif payment.paymentable_type == "Activity" && payment.paymentable.present?
+          payment.paymentable.title  # Access the title from Activity
+        else
+          "No associated Event or Activity"
+        end
+      end
       row :created_at
       row :updated_at
     end

@@ -17,3 +17,24 @@
 //   .status_tag { background: #6090DB; }
 
 @import "active_admin_datetimepicker";
+
+section {
+    font-size: 20px;
+}
+body {
+    font-size: 16px; /* Adjust this value to whatever you prefer */
+  }
+  
+
+  
+.table th, .active_admin .table td {
+font-size: 16px; /* For table text */
+}
+
+  
+/* Targeting the Membership Section */
+.panel.membership-section {
+    width: 25%;  /* Reducing the width of the Membership section */ /* Floating the Membership section to the left */
+  }
+  
+
