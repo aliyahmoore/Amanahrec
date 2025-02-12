@@ -8,6 +8,9 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+Role.create!(id: 1, name: "admin") unless Role.exists?(id: 1)
+Role.create!(id: 2, name: "user") unless Role.exists?(id: 2)
+
 Activity.create!([
   {
     title: "Hiking Hijabie Snowshoeing",
