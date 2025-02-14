@@ -1,34 +1,40 @@
-<% content_for :title, "Latest News" %>
 <h1 class="text-center mt-3">Latest News</h1>
+
 <% if current_user&.admin? %>
   <div class="col-12 text-center mt-4">
     <%= link_to "Add New Media", new_media_mention_path, class: "btn btn-primary" %>
   </div>
 <% end %>
+
 <div class="container mt-5">
-  <div class="row row-cols-1 row-cols-md-2 g-4"> <!-- Increased gap to g-4 -->
+  <div class="row row-cols-1 row-cols-md-2 g-4">
     <% if @media_mentions.present? %>
-      <% @media_mentions.each do |media_mention| %>
-        <div class="col"> <!-- Ensures cards are evenly spaced in grid -->
-          <div class="card custom-card mb-3" style="border-color: #daccb1;">
-            <div class="card-header media-header d-flex align-items-center justify-content-center" style="background-color: #daccb1;">
-              <h4 class="text-center mb-0 w-100"><%= media_mention.name %></h4>
-            </div>
-            <div class="card-body" style="background-color: #403F2B;">
-              <p class="news-text text-center">News Organization: <%= media_mention.organization_name %></p>
-              <p class="news-text text-center">Published Date: <%= media_mention.published_date.strftime("%B %d, %Y") %></p>
-            </div>
-            <div class="card-footer d-flex flex-column align-items-center">
-              <% if media_mention.link.present? %>
-                <a href="<%= media_mention.link %>" target="_blank" class="btn btn-custom">View Full Article</a>
-              <% else %>
-                <p class="text-muted">No link available</p>
-              <% end %>
-              <% if current_user&.admin? %>
-                <div class="mt-3 d-flex justify-content-between w-100">
-                  <%= link_to 'Edit', edit_media_mention_path(media_mention), class: 'btn btn-warning' %>
-                  <%= button_to 'Delete', media_mention_path(media_mention), method: :delete, class: "btn btn-danger" %>
-                </div>
+      <% @media_mentions.each do |media_mention| %>  
+        <div class="col">
+          <div class="card mb-3">
+            <% if media_mention.image.present? %>
+              <img class="card-img-top" src="<%= media_mention.image %>">
+            <% end %>
+
+            <div class="card-body">
+              <h5 class="card-title"><%= media_mention.name %></h5>
+              <p class="card-text">
+                <%= media_mention.description.presence || "No description available." %>
+              </p>
+              <p class="card-text">
+                <small class="text-muted">
+                  Published Date: <%= media_mention.published_date.strftime("%B %d, %Y") %>
+                </small>
+              </p>
+              <p class="card-text">
+                <small class="text-muted">
+                  News Organization: <%= media_mention.organization_name %>
+                </small>
+              </p>
+              
+              <% if current_user&.admin? %> 
+                <%= link_to 'Edit', edit_media_mention_path(media_mention), class: 'btn btn-warning' %>
+                <%= button_to 'Delete', media_mention_path(media_mention), method: :delete, class: "btn btn-danger" %>
               <% end %>
             </div>
           </div>

@@ -50,6 +50,6 @@ class MediaMentionsController < ApplicationController
   end
 
   def media_mention_params
-    params.require(:media_mention).permit(:name, :link, :published_date, :organization_name)
+    params.require(:media_mention).permit(:name, :link, :published_date, :organization_name, :description, :image)
   end
 end
