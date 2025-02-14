@@ -130,10 +130,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_06_152612) do
   end
 
   create_table "media_mentions", force: :cascade do |t|
-    t.string "name"
-    t.string "link"
-    t.date "published_date"
-    t.string "organization_name"
+    t.string "name", null: false
+    t.string "link", null: false
+    t.text "description", null: false
+    t.date "published_date", null: false
+    t.string "organization_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

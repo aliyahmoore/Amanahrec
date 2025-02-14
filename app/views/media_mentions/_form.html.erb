@@ -24,6 +24,18 @@
       <% end %>
       <%= f.url_field :link, required: true, class: "form-control" %>
     </div>
+    <div class="mb-3">
+      <%= f.label :description, "Description", class: "form-label text-dark" do %>
+        Description <span class="text-danger">*</span>
+      <% end %>
+      <%= f.text_area :description, required: true, class: "form-control", rows: 4 %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :image, "Upload Image", class: "form-label text-dark" do %>
+        Image <span class="text-danger">*</span>
+      <% end %>
+      <%= f.file_field :image, required: true, class: "form-control" %>
+    </div>
     <div class="text-center mt-3">
       <%= f.submit "Save", class: "btn btn-secondary text-white" %>
     </div>
