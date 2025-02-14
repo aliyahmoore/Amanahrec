@@ -11,8 +11,17 @@
   white-space: nowrap;
 }
 
+/* Font Definition */
+@font-face {
+    font-family: 'phosphateinline';
+   src: url('<%= asset_path("phosphateinline.woff") %>') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 .navbar-brand {
-  font-family: 'Phosphate', sans-serif; /* Fallback font */
+  font-family: 'PhosphateInline', sans-serif; 
   font-size: calc(60px + 1.5vw) !important;
   color: var(--main-color) !important;
 }
@@ -61,13 +70,6 @@
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
 }
-
-/* Font Definition */
-@font-face {
-  font-family: 'Phosphate';
-  src: url('<%= asset_path('fonts/PhosphateInline.ttf') %>') format('truetype');
-}
-
 /* Media Query for Large Screens */
 @media (min-width: 1400px) {
   .container {
