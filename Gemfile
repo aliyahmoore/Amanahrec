@@ -81,3 +81,5 @@ gem "cloudinary"
 gem "activestorage-cloudinary-service"
 
 gem "active_admin_datetimepicker", "~> 1.1"
+
+gem "chronic_duration", "~> 0.10.6"

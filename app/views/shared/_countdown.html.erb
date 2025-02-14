@@ -12,9 +12,8 @@
       <% else %>
         General Registration Opens In:
       <% end %>
-      <span id="countdown-<%= item.id %>" 
-            class="countdown" 
-            data-countdown-date="<%= item.general_registration_start %>"></span>
+       <% time_remaining = item.general_registration_start - Time.current %>
+      <strong><%= ChronicDuration.output(time_remaining, :days => true,:units => 2) %></strong>
     </p>
   <% else %>
     <% if item.registrations.count >= item.capacity %>
