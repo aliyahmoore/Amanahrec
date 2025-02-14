@@ -11,13 +11,14 @@
 
 .navbar-brand {
   font-family: Phosphate;
+  src: url('/assets/PhosphateInline.ttf') format('truetype');
   font-size: calc(60px + 1.5vw) !important;
   color: var(--main-color) !important;
 }
 
 /* Donate Button */
 #donate {
-  font-size: 1.25rem; /* Match .lead font size */
+  font-size: inherit; /* Match .lead font size */
   color: #daccb1 !important;
   background-color: #57573f !important; 
   padding: 0.5rem 1rem;
@@ -45,7 +46,6 @@
 
 /* Dropdown Menu */
 .navbar .dropdown-menu {
-  right: 0;
   left: auto;
 }
 
@@ -63,7 +63,6 @@
   background-color: var(--accent-color) !important;
   color: var(--main-color) !important; /* Light text on hover */
 }
-
 
 .custom-danger-btn {
   background-color: red;
