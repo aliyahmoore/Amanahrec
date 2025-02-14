@@ -65,7 +65,7 @@
 /* Font Definition */
 @font-face {
   font-family: 'Phosphate';
-  src: url('<%= asset_path('PhosphateInline.ttf') %>') format('truetype');
+  src: url('<%= asset_path('fonts/PhosphateInline.ttf') %>') format('truetype');
 }
 
 /* Media Query for Large Screens */
