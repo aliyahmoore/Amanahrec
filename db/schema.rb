@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_14_024141) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_06_152612) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -76,13 +76,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_14_024141) do
     t.index ["slug"], name: "index_activities_on_slug", unique: true
   end
 
-  create_table "activities_users", id: false, force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "activity_id", null: false
-    t.index ["activity_id", "user_id"], name: "index_activities_users_on_activity_id_and_user_id"
-    t.index ["user_id", "activity_id"], name: "index_activities_users_on_user_id_and_activity_id"
-  end
-
   create_table "admin_users", force: :cascade do |t|
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
@@ -125,13 +118,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_14_024141) do
     t.index ["slug"], name: "index_events_on_slug", unique: true
   end
 
-  create_table "events_users", id: false, force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "event_id", null: false
-    t.index ["event_id", "user_id"], name: "index_events_users_on_event_id_and_user_id"
-    t.index ["user_id", "event_id"], name: "index_events_users_on_user_id_and_event_id"
-  end
-
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -144,14 +130,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_14_024141) do
   end
 
   create_table "media_mentions", force: :cascade do |t|
-    t.string "name"
-    t.string "link"
-    t.date "published_date"
-    t.string "organization_name"
+    t.string "name", null: false
+    t.string "link", null: false
+    t.text "description", null: false
+    t.date "published_date", null: false
+    t.string "organization_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "description"
-    t.string "image"
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -159,6 +144,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_14_024141) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.string "status"
+    t.string "stripe_customer_id"
+    t.string "stripe_subscription_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_memberships_on_user_id"
@@ -210,7 +197,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_14_024141) do
     t.string "last_name", limit: 255, null: false
     t.string "email", limit: 255, default: "", null: false
     t.string "phone_number", limit: 20
-    t.boolean "member", default: false, null: false
     t.string "gender", limit: 50
     t.string "age_range", limit: 50
     t.string "ethnicity", limit: 100

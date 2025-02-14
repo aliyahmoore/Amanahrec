@@ -3,6 +3,7 @@ class CreateMediaMentions < ActiveRecord::Migration[7.2]
     create_table :media_mentions do |t|
       t.string :name, null: false
       t.string :link, null: false
+      t.text :description, null: false
       t.date :published_date, null: false
       t.string :organization_name, null: false
 
