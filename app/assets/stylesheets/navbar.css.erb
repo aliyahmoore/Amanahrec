@@ -22,11 +22,14 @@
 
 .navbar-brand {
   font-family: 'phosphateinline', sans-serif; 
-  font-size: calc(60px + 1.5vw) !important;
+  font-size: clamp(1.5rem, 8vw, 6rem)!important;
   color: var(--main-color) !important;
 }
 
 
+.navbar-brand img {
+   height: calc(7vw + 20px); /* 10% of the viewport width */
+}
 
 /* Navbar Toggler */
 .navbar-toggler {

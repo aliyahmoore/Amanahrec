@@ -1,9 +1,4 @@
 <% content_for :title, "Upcoming Activities" %>
-<% content_for :javascript do %>
-  <script type="module">
-    import "non_member_alert";
-  </script>
-<% end %>
 <h1 class="text-center mt-3">Upcoming Activities</h1>
 <div class="d-flex justify-content-center mb-3">
   <% if current_user&.admin? %>
