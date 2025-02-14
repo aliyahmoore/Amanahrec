@@ -46,6 +46,13 @@ html, body {
     margin: 0 auto; /* Centers the image */
     object-fit: cover; /* Ensures consistent sizing without distortion */
   }
+
+  .media-image-preview {
+    height: 500px;
+    display: block;
+    margin: 0 auto; /* Centers the image */
+    object-fit: cover; /* Ensures consistent sizing without distortion */
+  }
   
   /* Devise login page background */
   .devise-login-page {

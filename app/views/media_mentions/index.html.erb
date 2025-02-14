@@ -13,7 +13,7 @@
         <div class="col">
           <div class="card mb-3">
             <% if media_mention.image.attached? %> 
-              <img class="card-img-top" src="<%= media_mention.image.url %>" alt="<%= media_mention.name %>">
+              <img class="card-img-top media-image-preview" src="<%= media_mention.image.url %>" alt="<%= media_mention.name %>">
             <% end %>
 
             <div class="card-body">
