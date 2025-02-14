@@ -1,5 +1,5 @@
 ActiveAdmin.register MediaMention do
-permit_params :name, :description, :link, :published_date, :organization_name
+permit_params :name, :description, :link, :published_date, :organization_name, :image
 
   index do
     selectable_column
@@ -23,9 +23,9 @@ permit_params :name, :description, :link, :published_date, :organization_name
       row :organization_name
       row :published_date
       row :link
-      row :image do |activity|
-        if activity.image.attached?
-          image_tag url_for(activity.image), size: "300x300"
+      row :image do |media_mention|
+        if media_mention.image.attached?
+          image_tag url_for(media_mention.image), size: "300x300"
         else
           "No Image"
         end
