@@ -31,7 +31,7 @@
                   News Organization: <%= media_mention.organization_name %>
            
               </p>
-               <div class="card-footer d-flex flex-column align-items-center">
+               <div class="d-flex flex-column align-items-center">
               <% if media_mention.link.present? %>
   <%= link_to "View Full Article", media_mention.link, target: "_blank", class: "btn btn-primary" %>
 <% else %>

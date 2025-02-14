@@ -63,10 +63,6 @@ html, body {
     overflow: hidden;
   }
   
-  .card-footer {
-    background-color: #DACCB1 !important; 
-    border-top: none;
-  }
 
   .about p {
     margin-bottom: 30px;
