@@ -1,6 +1,5 @@
 class User < ApplicationRecord
   has_many :testimonials, dependent: :destroy
-  belongs_to :role
   has_one :membership
   has_many :payments
 
