@@ -1,5 +1,5 @@
 class TestimonialsController < ApplicationController
-    before_action :authenticate_user!, only: [:new, :create]
+    before_action :authenticate_user!, only: [ :new, :create ]
 
     def index
       @testimonials = case params[:status]

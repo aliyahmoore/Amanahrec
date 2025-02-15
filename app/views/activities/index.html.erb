@@ -3,38 +3,38 @@
 <div class="d-flex justify-content-center mb-3">
 </div>
 <div class="container mt-5">
-<div class="row d-flex justify-content-center g-3">
-  <% @activities.each do |activity| %>
-    <div class="col-md-6 col-lg-4 d-flex">
-      <%= link_to activity_path(activity), class: 'card flex-fill activity-card mb-4 text-decoration-none' do %>
-        <% if activity.image.attached? %>
-          <%= image_tag activity.image, class: 'card-img-top activity-image-preview', alt: activity.title %>
-        <% end %>
-        <div class="card-body d-flex flex-column">
-          <h4 class="card-title text-center">
-            <%= activity.title %>
-          </h4>
-          <p class="card-text">
-            <i class="fas fa-calendar-alt"></i> <strong>:</strong>
-            <%= activity.start_date.strftime("%B %d, %Y") %>
-            <%= activity.start_date.strftime("%I:%M %p") %> - <%= activity.end_date.strftime("%I:%M %p") %>
-          </p>
-          <p class="card-text">
-            <i class="fa-solid fa-location-dot"></i> <strong>:</strong> <%= activity.location %>
-          </p>
-          <p class="card-text">
-            <i class="fa-sharp-duotone fa-solid fa-money-bill"></i> <strong>:</strong>
-            <%= activity.cost.present? && activity.cost > 0 ? number_to_currency(activity.cost) : "Free" %>
-          </p>
-          <!-- Member Early Access Badge -->
-          <%= render 'shared/early_access_badge', item: activity %>      
-          <!-- Countdown Timer -->
-          <%= render 'shared/countdown', item: activity %>
-          <div class="mt-auto d-flex justify-content-between">
+  <div class="row d-flex justify-content-center g-3">
+    <% @activities.each do |activity| %>
+      <div class="col-md-6 col-lg-4 d-flex">
+        <%= link_to activity_path(activity), class: 'card flex-fill activity-card mb-4 text-decoration-none' do %>
+          <% if activity.image.attached? %>
+            <%= image_tag activity.image, class: 'card-img-top activity-image-preview', alt: activity.title %>
+          <% end %>
+          <div class="card-body d-flex flex-column">
+            <h4 class="card-title text-center">
+              <%= activity.title %>
+            </h4>
+            <p class="card-text">
+              <i class="fas fa-calendar-alt"></i> <strong>:</strong>
+              <%= activity.start_date.strftime("%B %d, %Y") %>
+              <%= activity.start_date.strftime("%I:%M %p") %> - <%= activity.end_date.strftime("%I:%M %p") %>
+            </p>
+            <p class="card-text">
+              <i class="fa-solid fa-location-dot"></i> <strong>:</strong> <%= activity.location %>
+            </p>
+            <p class="card-text">
+              <i class="fa-sharp-duotone fa-solid fa-money-bill"></i> <strong>:</strong>
+              <%= activity.cost.present? && activity.cost > 0 ? number_to_currency(activity.cost) : "Free" %>
+            </p>
+            <!-- Member Early Access Badge -->
+            <%= render 'shared/early_access_badge', item: activity %>
+            <!-- Countdown Timer -->
+            <%= render 'shared/countdown', item: activity %>
+            <div class="mt-auto d-flex justify-content-between">
+            </div>
           </div>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
-</div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>

@@ -1,29 +1,29 @@
-<h1 class="text-center mt-3">My Registrations</h1> 
+<h1 class="text-center mt-3">My Registrations</h1>
 <div class="container mt-5">
-<!-- Display Activities -->
-<h3 class="mt-3">Activities</h3>
-<% if @grouped_registrations["Activity"].present? %>
-  <div class="row">
-    <% @grouped_registrations["Activity"].each do |registration| %>
-      <div class="col-md-4">
-        <%= render 'registration', registration: registration %>
-      </div>
-    <% end %>
-  </div>
-<% else %>
-  <p>You have no registered activities.</p>
-<% end %>
-<!-- Display Events -->
-<h3 class="mt-3">Events</h3>
-<% if @grouped_registrations["Event"].present? %>
-  <div class="row">
-    <% @grouped_registrations["Event"].each do |registration| %>
-      <div class="col-md-4">
-        <%= render 'registration', registration: registration %>
-      </div>
-    <% end %>
-  </div>
-<% else %>
-  <p>You have no registered events.</p>
-<% end %>
+  <!-- Display Activities -->
+  <h3 class="mt-3">Activities</h3>
+  <% if @grouped_registrations["Activity"].present? %>
+    <div class="row">
+      <% @grouped_registrations["Activity"].each do |registration| %>
+        <div class="col-md-4">
+          <%= render 'registration', registration: registration %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>You have no registered activities.</p>
+  <% end %>
+  <!-- Display Events -->
+  <h3 class="mt-3">Events</h3>
+  <% if @grouped_registrations["Event"].present? %>
+    <div class="row">
+      <% @grouped_registrations["Event"].each do |registration| %>
+        <div class="col-md-4">
+          <%= render 'registration', registration: registration %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>You have no registered events.</p>
+  <% end %>
 </div>

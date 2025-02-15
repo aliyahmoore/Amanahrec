@@ -9,12 +9,10 @@
       </div>
     <% end %>
   </div>
-  
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
-  
   <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
@@ -27,18 +25,17 @@
     <div class="event-description ">
       <h5><i class="fas fa-info-circle"></i> Description</h5>
       <p><%= @event.description %></p>
-      <p><i class="fa-solid fa-users"></i> <strong>Registration Limit: </strong> <%= @event.capacity %></p> 
+      <p><i class="fa-solid fa-users"></i> <strong>Registration Limit: </strong> <%= @event.capacity %></p>
       <% if @event.childcare.present? %>
         <p><i class="fa-solid fa-child-reaching"></i> <strong>Childcare Available</strong></p>
       <% end %>
       <% if @event.sponsors.present? %>
         <p><strong>Sponsor(s):</strong> <%= @event.sponsors %></p>
-      <% end %>   
+      <% end %>
       <p><strong>RSVP Deadline:</strong> <%= @event.rsvp_deadline.strftime("%B %d, %Y %I:%M %p")%></p>
       <% if @event.capacity.present? && @event.registrations.count >= @event.capacity %>
-   <div class="btn btn-outline-primary" style="pointer-events: none;">SOLD OUT</div>
-<% end %>
-      
+        <div class="btn btn-outline-primary" style="pointer-events: none;">SOLD OUT</div>
+      <% end %>
     </div>
   </div>
   <!-- Right Column (event Details, Register, Edit, Delete Buttons) -->
