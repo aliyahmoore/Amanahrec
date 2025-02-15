@@ -1,5 +1,4 @@
 class TestimonialsController < ApplicationController
-  load_and_authorize_resource
     before_action :authenticate_user!, except: [ :index, :edit, :destroy, :update ]
     before_action :set_testimonial, only: [ :edit, :update, :destroy, :approve ]
 

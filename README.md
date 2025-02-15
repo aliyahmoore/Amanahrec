@@ -16,7 +16,6 @@ The following Ruby gems were used in this project to enhance functionality:
 - **[Stripe](https://github.com/stripe/stripe-ruby)** (`~> 13.3`) – Integration for Stripe payments.
 - **[dotenv-rails](https://github.com/bkeepers/dotenv)** (`~> 2.7`) – Manages environment variables.
 - **[simple_calendar](https://github.com/excid3/simple_calendar)** (`~> 3.1`) – Calendar views for events.
-- **[CanCanCan](https://github.com/CanCanCommunity/cancancan)** (`~> 3.6`) – Authorization for Rails.
 - **[friendly_id](https://github.com/norman/friendly_id)** (`~> 5.5`) – For creating human-friendly URLs.
 - **[ActiveAdmin](https://github.com/activeadmin/activeadmin)** (`~> 3.2`) – Admin interface for Rails.
 - **[faker](https://github.com/faker-ruby/faker)** (`~> 3.5`) – Generates fake data for testing.

@@ -1,6 +1,5 @@
 class MediaMentionsController < ApplicationController
   before_action :set_media_mention, only: [ :show, :edit, :update, :destroy ]
-  load_and_authorize_resource
 
   def index
     @media_mentions = MediaMention.order(published_date: :desc)
