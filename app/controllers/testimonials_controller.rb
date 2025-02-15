@@ -1,6 +1,5 @@
 class TestimonialsController < ApplicationController
-    before_action :authenticate_user!, except: [ :index, :edit, :destroy, :update ]
-    before_action :set_testimonial, only: [ :edit, :update, :destroy, :approve ]
+    before_action :authenticate_user!, only: [:new, :create]
 
     def index
       @testimonials = case params[:status]
@@ -26,44 +25,9 @@ class TestimonialsController < ApplicationController
       end
     end
 
-    # Admin: Approve a testimonial
-    def approve
-      @testimonial.update(approved: true)
-      redirect_to testimonials_path, notice: "Testimonial approved successfully."
-    end
-
-    # Admin: unapprove a testimonial
-    def unapprove
-        @testimonial = Testimonial.find(params[:id])
-        @testimonial.update(approved: false)
-        redirect_to testimonials_path, notice: "Testimonial unapproved successfully."
-      end
-    # Admin or User: Edit a testimonial
-    def edit
-    end
-
-    # Update a testimonial
-    def update
-      if @testimonial.update(testimonial_params)
-        redirect_to testimonials_path, notice: "Testimonial updated successfully."
-      else
-        render :edit
-      end
-    end
-
-    # Admin: Delete a testimonial
-    def destroy
-      @testimonial.destroy
-      redirect_to testimonials_path, notice: "Testimonial deleted successfully."
-    end
-
     private
 
     def testimonial_params
       params.require(:testimonial).permit(:text)
-    end
-
-    def set_testimonial
-      @testimonial = Testimonial.find(params[:id])
     end
 end
