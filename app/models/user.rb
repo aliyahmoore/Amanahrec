@@ -31,11 +31,6 @@ class User < ApplicationRecord
     membership&.active?
   end
 
-  # method to check user roles add to
-  def admin?
-    role&.name&.downcase == "admin"
-  end
-
   def self.ransackable_attributes(auth_object = nil)
     [ "age_range", "email", "ethnicity", "first_name", "gender", "last_name", "phone_number", "role_id" ]
   end
