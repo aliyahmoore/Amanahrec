@@ -61,13 +61,5 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
-    <!-- Buttons -->
-    <div class="text-center mt-4">
-      <% if user_signed_in? && current_user.role.id == 1 %>
-        <%= link_to 'View Testimonials', testimonials_path, class: 'btn btn-primary' %>
-      <% else %>
-        <%= link_to 'Submit a Testimonial', new_testimonial_path, class: 'btn btn-primary' %>
-      <% end %>
-    </div>
   </div>
 </div>
