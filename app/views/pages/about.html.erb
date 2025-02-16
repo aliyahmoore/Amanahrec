@@ -21,9 +21,9 @@
       <div class="founder-box">
         <h2 class="text-center mb-4">About the Founder</h2>
         <div class="about-image  text-center mb-4">
-          <img src="https://i0.wp.com/sahanjournal.com/wp-content/uploads/2024/10/NasireenHabib-7435.jpg?resize=1200%2C800&ssl=1" 
-               alt="Founder Image" 
-               class="img-fluid rounded">
+          <% if @about.image.attached? %>
+            <%= image_tag @about.image, alt: "Founder Image", class: "img-fluid rounded" %>
+          <% end %>
         </div>
         <p class="lead text-center">
           <%= @about.founder %>
