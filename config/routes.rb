@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get "partners/index"
-  get "partners_controllers/index"
   # Devise authentication
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -10,7 +8,6 @@ Rails.application.routes.draw do
   get "pages/home"
   get "pages/about"
   get "pages/calendar"
-  get "pages/partners"
   get "pages/board"
   root "pages#home"
 
@@ -25,6 +22,7 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
+  resources :partners, only: [ :index]
   resources :boards, only: [ :index, :show ]
   resources :media_mentions, only: [ :index, :show ]
 
