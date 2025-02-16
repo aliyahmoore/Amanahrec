@@ -9,5 +9,6 @@ class PagesController < ApplicationController
   end
 
   def about
+    @about = About.first
   end
 end
