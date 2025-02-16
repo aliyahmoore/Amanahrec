@@ -1,2 +1,17 @@
-<h1>Sponsor#index</h1>
-<p>Find me in app/views/sponsor/index.html.erb</p>
+<% content_for :title, "Our Sponsors" %>
+<h1 class="text-center mt-3">Our Sponsors</h1>
+<div class="container mt-5">
+  <div class="row justify-content-center gap-3">
+    <% @sponsors.each do |sponsor| %>
+      <div class="col-auto d-flex justify-content-center">
+        <div class="sponsor-logo">
+          <% if sponsor.logo.attached? %>
+            <%= image_tag sponsor.logo, alt: "Sponsor Logo", class: "img-fluid", style: "height: 100px;" %>
+          <% else %>
+            <p>No Logo Available</p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
