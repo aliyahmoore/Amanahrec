@@ -11,4 +11,13 @@ class PagesController < ApplicationController
   def about
     @about = About.first
   end
+
+  def partners
+    @partners = Partner.all
+  end
+
+  def sponsors
+    @sponsors = Sponsor.all
+  end
+  
 end

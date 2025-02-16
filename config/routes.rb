@@ -5,9 +5,11 @@ Rails.application.routes.draw do
   devise_for :users
 
   # Static pages
-  get "pages/home"
-  get "pages/about"
-  get "pages/calendar"
+  get "home", to: "pages#home"
+  get "about", to: "pages#about"
+  get "calendar", to: "pages#calendar"
+  get "partners", to: "pages#partners"
+  get "sponsors", to: "pages#sponsors"
   root "pages#home"
 
   # User-specific routes
@@ -21,8 +23,6 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
-  resources :partners, only: [ :index ]
-  resources :sponsors, only: [ :index ]
   resources :boards, only: [ :index, :show ]
   resources :media_mentions, only: [ :index, :show ]
 
