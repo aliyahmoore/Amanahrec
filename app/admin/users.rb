@@ -4,18 +4,18 @@ ActiveAdmin.register User do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :first_name, :last_name, :email, :phone_number, :gender, :age_range, :ethnicity, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :role_id
+  # permit_params :first_name, :last_name, :email, :phone_number, :gender, :age_range, :ethnicity, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at
   #
   # or
   #
   # permit_params do
-  #   permitted = [:first_name, :last_name, :email, :phone_number, :gender, :age_range, :ethnicity, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :role_id]
+  #   permitted = [:first_name, :last_name, :email, :phone_number, :gender, :age_range, :ethnicity, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at]
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
 
   permit_params :first_name, :last_name, :email, :phone_number, :gender, :age_range,
-  :ethnicity, :role_id, :password, :password_confirmation
+  :ethnicity, :password, :password_confirmation
 
   controller do
     def show
@@ -34,7 +34,6 @@ ActiveAdmin.register User do
   column :gender
   column :age_range
   column :ethnicity
-  column :role_id
   column :created_at
   column :updated_at
   actions
@@ -47,7 +46,6 @@ ActiveAdmin.register User do
   filter :gender
   filter :age_range
   filter :ethnicity
-  filter :role_id
   filter :created_at
 
   # Show page customization
@@ -61,7 +59,6 @@ ActiveAdmin.register User do
   row :gender
   row :age_range
   row :ethnicity
-  row :role_id
   row :created_at
   row :updated_at
   end
@@ -87,7 +84,6 @@ f.input :ethnicity, as: :select, collection: [ [ "White", "White" ], [ "Black or
 [ "Hispanic or Latino", "Hispanic or Latino" ], [ "Other", "Other" ],
 [ "Prefer not to say", "Prefer not to say" ] ],
 prompt: "Select Ethnicity", input_html: { required: true }
-  f.input :role_id, as: :select, collection: Role.all.map { |role| [ role.name, role.id ] }, include_blank: false
   f.input :password
   f.input :password_confirmation
   end

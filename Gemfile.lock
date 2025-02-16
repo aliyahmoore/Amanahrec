@@ -101,7 +101,6 @@ GEM
     brakeman (7.0.0)
       racc
     builder (3.3.0)
-    cancancan (3.6.1)
     capybara (3.40.0)
       addressable
       matrix
@@ -421,7 +420,6 @@ DEPENDENCIES
   activestorage-cloudinary-service
   bootsnap
   brakeman
-  cancancan (~> 3.6)
   capybara
   chronic_duration (~> 0.10.6)
   cloudinary

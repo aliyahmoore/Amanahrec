@@ -23,20 +23,6 @@
               By: <%= testimonial.user.first_name %> <%= testimonial.user.last_name %>
             </small>
           </div>
-          <% if current_user&.admin? %>
-            <!-- Card Footer -->
-            <div class="card-footer mt-auto">
-              <div class="d-flex justify-content-center gap-2">
-                <% if testimonial.approved? %>
-                  <%= button_to "Unapprove", unapprove_testimonial_path(testimonial), method: :patch, class: "btn btn-warning", data: { confirm: "Are you sure?" } %>
-                <% else %>
-                  <%= button_to "Approve", approve_testimonial_path(testimonial), method: :patch, class: "btn btn-success" %>
-                <% end %>
-                <%= link_to "Edit", edit_testimonial_path(testimonial), class: "btn btn-primary" %>
-                <%= button_to "Delete", testimonial_path(testimonial), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
-              </div>
-            </div>
-          <% end %>
         </div>
       </div>
     <% end %>

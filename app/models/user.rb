@@ -1,6 +1,5 @@
 class User < ApplicationRecord
   has_many :testimonials, dependent: :destroy
-  belongs_to :role
   has_one :membership
   has_many :payments
 
@@ -25,16 +24,8 @@ class User < ApplicationRecord
     payments.exists?(paymentable: paymentable, status: "succeeded")
   end
 
-
-
-
   def membership_active?
     membership&.active?
-  end
-
-  # method to check user roles add to
-  def admin?
-    role&.name&.downcase == "admin"
   end
 
   def self.ransackable_attributes(auth_object = nil)
