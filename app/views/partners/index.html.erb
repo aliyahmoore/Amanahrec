@@ -1,2 +1,12 @@
-<h1>Partners#index</h1>
-<p>Find me in app/views/partners/index.html.erb</p>
+<h1>Our Partners</h1>
+<div class="partner-logos">
+  <% @partners.each do |partner| %>
+    <div class="partner-logo">
+      <% if partner.logo.attached? %>
+        <%= image_tag partner.logo, size: "100x100", alt: "Partner Logo" %>
+      <% else %>
+        <p>No Logo Available</p>
+      <% end %>
+    </div>
+  <% end %>
+</div>
