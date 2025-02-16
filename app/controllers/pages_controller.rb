@@ -10,10 +10,4 @@ class PagesController < ApplicationController
 
   def about
   end
-
-  def partners
-  end
-
-  def board
-  end
 end

@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   get "pages/home"
   get "pages/about"
   get "pages/calendar"
-  get "pages/board"
   root "pages#home"
 
   # User-specific routes
@@ -22,7 +21,7 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
-  resources :partners, only: [ :index]
+  resources :partners, only: [ :index ]
   resources :boards, only: [ :index, :show ]
   resources :media_mentions, only: [ :index, :show ]
 
