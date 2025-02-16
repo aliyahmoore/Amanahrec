@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   resources :partners, only: [ :index ]
+  resources :sponsors, only: [ :index ]
   resources :boards, only: [ :index, :show ]
   resources :media_mentions, only: [ :index, :show ]
 
