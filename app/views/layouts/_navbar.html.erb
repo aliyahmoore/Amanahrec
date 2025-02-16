@@ -9,16 +9,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <!-- Navigation Links -->
-      <ul class="navbar-nav lead d-flex align-items-center mx-auto">
+      <ul class="navbar-nav lead fs-2 d-flex align-items-center mx-auto">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             About
           </a>
           <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-            <li><%= link_to "About Us", about_path, class: "dropdown-item" %></li>
-            <li><%= link_to "Meet Our Board", boards_path, class: "dropdown-item" %></li>
-            <li><%= link_to "Our Partners", partners_path, class: "dropdown-item" %></li>
-            <li><%= link_to "Our Sponsors", sponsors_path, class: "dropdown-item" %></li>
+            <li><%= link_to "About Us", about_path, class: "dropdown-item fs-4" %></li>
+            <li><%= link_to "Meet Our Board", boards_path, class: "dropdown-item fs-4" %></li>
+            <li><%= link_to "Our Partners", partners_path, class: "dropdown-item fs-4" %></li>
+            <li><%= link_to "Our Sponsors", sponsors_path, class: "dropdown-item fs-4" %></li>
           </ul>
         </li>
         <li class="nav-item"><%= link_to "Activities", activities_path, class: "nav-link" %></li>
@@ -29,32 +29,32 @@
         <li class="nav-item"><%= link_to "Donate", "https://kindful.com/", class: "nav-link", id: "donate" %></li>
       </ul>
       <!-- User Links -->
-      <ul class="navbar-nav lead d-flex align-items-center ms-auto">
+      <ul class="navbar-nav lead d-flex align-items-center ms-auto fs-2">
         <% if user_signed_in? %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa-solid fa-user"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <li class="dropdown-header">
+              <li class="dropdown-header fs-4">
                 Hi, <%= current_user.first_name %>!
               </li>
-              <li class="nav-item"><%= link_to "My Registrations", my_registrations_path, class: "dropdown-item" %></li>
-              <li><%= link_to "Edit Profile", edit_user_registration_path, class: "dropdown-item" %></li>
-              <li><%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
+              <li class="nav-item"><%= link_to "My Registrations", my_registrations_path, class: "dropdown-item fs-4" %></li>
+              <li><%= link_to "Edit Profile", edit_user_registration_path, class: "dropdown-item fs-4" %></li>
+              <li><%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item fs-4" %></li>
               <% if current_user.membership&.active? %>
                 <!-- Active Subscription -->
-                <li class="dropdown-item">
-                  <span class="btn btn-outline-success btn-sm" style="pointer-events: none; opacity: 0.65; cursor: default;">
-                    Active <i class="fas fa-gem"></i>
+                <li class="dropdown-item fs-4">
+                  <span class="btn btn-outline-success btn-sm fs-5" style="pointer-events: none; opacity: 0.65; cursor: default;">
+                    Active <i class="fas fa-gem fs-5"></i>
                   </span>
                 </li>
                 <%= button_to 'Cancel Subscription', cancel_subscription_payments_path, 
-                method: :post, class: "custom-danger-btn", data: { turbo: false } %>
+                method: :post, class: "custom-danger-btn fs-5", data: { turbo: false } %>
               <% else %>
                 <!-- Inactive Subscription -->
                 <li class="dropdown-item">
-                  <button class="btn btn-outline-secondary d-inline" disabled>Inactive <i class="fa-regular fa-gem"></i></button>
+                  <button class="btn btn-outline-secondary d-inline fs-5" disabled>Inactive <i class="fa-regular fa-gem fs-5"></i></button>
                 </li>
               <% end %>
             </ul>
