@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   devise_for :users
 
   # Static pages
-  get "pages/home", "pages/about", "pages/calendar", "pages/partners", "pages/board"
+  get "pages/home"
+  get "pages/about"
+  get "pages/calendar"
+  get "pages/partners"
+  get "pages/board"
   root "pages#home"
 
   # User-specific routes
