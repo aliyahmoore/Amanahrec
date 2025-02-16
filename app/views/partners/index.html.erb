@@ -1,12 +1,17 @@
-<h1>Our Partners</h1>
-<div class="partner-logos">
-  <% @partners.each do |partner| %>
-    <div class="partner-logo">
-      <% if partner.logo.attached? %>
-        <%= image_tag partner.logo, size: "100x100", alt: "Partner Logo" %>
-      <% else %>
-        <p>No Logo Available</p>
-      <% end %>
-    </div>
-  <% end %>
+<% content_for :title, "Our Partners" %>
+<h1 class="text-center mt-3">Our Partners</h1>
+<div class="container mt-5">
+  <div class="row justify-content-center gap-3">
+    <% @partners.each do |partner| %>
+      <div class="col-auto d-flex justify-content-center">
+        <div class="partner-logo">
+          <% if partner.logo.attached? %>
+            <%= image_tag partner.logo, alt: "Partner Logo", class: "img-fluid", style: "height: 100px;" %>
+          <% else %>
+            <p>No Logo Available</p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
