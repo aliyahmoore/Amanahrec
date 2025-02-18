@@ -1,0 +1,33 @@
+<div class="col-md-6 d-flex">
+  <%= link_to polymorphic_path(item), class: 'card flex-fill item-card mb-4 text-decoration-none' do %>
+    <% if item.respond_to?(:images) && item.images.attached? %>
+      <%= image_tag item.images.first, class: 'card-img-top item-image-preview', alt: item.title %>
+    <% elsif item.respond_to?(:image) && item.image.attached? %>
+      <%= image_tag item.image, class: 'card-img-top item-image-preview', alt: item.title %>
+    <% end %>
+    <div class="card-body d-flex flex-column">
+      <h4 class="card-title text-center fs-2">
+        <%= item.title %>
+      </h4>
+      <p class="card-text fs-4">
+        <i class="fas fa-calendar-alt"></i> <strong>:</strong> 
+        <% if item.respond_to?(:end_date) && item.end_date.present? %>
+          <%= item.start_date.strftime("%B %d, %Y") %> - <%= item.end_date.strftime("%B %d, %Y") %>
+        <% else %>
+          <%= item.start_date.strftime("%B %d, %Y %I:%M %p") %> - <%= item.end_date.strftime("%I:%M %p") %>
+        <% end %>
+      </p>
+      <p class="card-text fs-4">
+        <i class="fa-solid fa-location-dot"></i> <strong>:</strong> <%= item.location %>
+      </p>
+      <p class="card-text fs-4">
+        <i class="fa-sharp-duotone fa-solid fa-money-bill"></i> <strong>:</strong>
+        <%= item.cost.present? && item.cost > 0 ? number_to_currency(item.cost) : "Free" %>
+      </p>
+      <!-- Member Early Access Badge -->
+      <%= render 'shared/early_access_badge', item: item %>
+      <!-- Countdown Timer -->
+      <%= render 'shared/countdown', item: item %>
+    </div>
+  <% end %>
+</div>
