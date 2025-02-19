@@ -1,7 +1,7 @@
 <h1 class="text-center mt-3">My Registrations</h1>
 <div class="container mt-5">
   <!-- Display Activities -->
-  <h3 class="mt-3">Activities</h3>
+  <h3 class="mt-3">Activities & Events</h3>
   <% if @grouped_registrations["Activity"].present? %>
     <div class="row">
       <% @grouped_registrations["Activity"].each do |registration| %>
@@ -13,17 +13,17 @@
   <% else %>
     <p>You have no registered activities.</p>
   <% end %>
-  <!-- Display Events -->
-  <h3 class="mt-3">Events</h3>
-  <% if @grouped_registrations["Event"].present? %>
+  <!-- Display Trips -->
+  <h3 class="mt-3">Trips</h3>
+  <% if @grouped_registrations["Trip"].present? %>
     <div class="row">
-      <% @grouped_registrations["Event"].each do |registration| %>
+      <% @grouped_registrations["Trip"].each do |registration| %>
         <div class="col-md-4">
           <%= render 'registration', registration: registration %>
         </div>
       <% end %>
     </div>
   <% else %>
-    <p>You have no registered events.</p>
+    <p>You have no registered trips.</p>
   <% end %>
 </div>

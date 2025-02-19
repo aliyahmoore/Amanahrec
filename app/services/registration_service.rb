@@ -6,7 +6,7 @@ class RegistrationService
 
   def register_user
     # Check if the user is already registered
-    raise RegistrationError, "You are already registered for this event or activity." if already_registered?
+    raise RegistrationError, "You are already registered for this trip or activity/event." if already_registered?
 
     # Check if the capacity is full and prevent registration creation if true
     if capacity_reached?
@@ -21,10 +21,10 @@ class RegistrationService
   end
 
   def capacity_reached?
-    # Handle capacity check for both Activity and Event
+    # Handle capacity check for both Activity and Trip
     if @registrable.is_a?(Activity)
       @registrable.registrations.count >= @registrable.capacity
-    elsif @registrable.is_a?(Event)
+    elsif @registrable.is_a?(Trip)
       @registrable.registrations.count >= @registrable.capacity
     else
       false

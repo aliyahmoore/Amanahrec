@@ -48,8 +48,8 @@ class PaymentService
     end
 
     def cancel_url
-      if @paymentable.is_a?(Event)
-        "#{@root_url}events/#{@paymentable.id}"
+      if @paymentable.is_a?(Trip)
+        "#{@root_url}trips/#{@paymentable.id}"
       else
         "#{@root_url}activities/#{@paymentable.id}"
       end
@@ -72,7 +72,7 @@ class PaymentService
       @paymentable.is_a?(Membership) ? { interval: "month" } : nil
     end
 
-    # Product data for non-Membership types (event, activity)
+    # Product data for non-Membership types (trip, activity)
     def payment_product_data
       return nil if @paymentable.is_a?(Membership) # Membership is handled by product_id
 

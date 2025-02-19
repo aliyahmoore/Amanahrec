@@ -1,4 +1,4 @@
-ActiveAdmin.register Event do
+ActiveAdmin.register Trip do
   permit_params :title, :description, :start_date, :end_date, :location, :capacity,
                 :rsvp_deadline, :childcare, :sponsors, :cost, :early_access_for_members,
                 :early_access_days, :general_registration_start, :user_id, images: []
@@ -6,19 +6,19 @@ ActiveAdmin.register Event do
   # Find the slug
   controller do
     def resource
-      @event ||= Event.friendly.find(params[:id])
+      @trip ||= Trip.friendly.find(params[:id])
     end
   end
 
   member_action :duplicate, method: :get do
-    new_event = resource.dup
+    new_trip = resource.dup
 
     # Set new start_date and end_date (modify as needed)
-    new_event.start_date = new_event.start_date + 1.day if new_event.start_date
-    new_event.end_date = new_event.end_date + 1.day if new_event.end_date
+    new_trip.start_date = new_trip.start_date + 1.day if new_trip.start_date
+    new_trip.end_date = new_trip.end_date + 1.day if new_trip.end_date
 
-    # Save the new event
-    redirect_to new_admin_event_path(event: new_event.attributes)
+    # Save the new trip
+    redirect_to new_admin_trip_path(trip: new_trip.attributes)
   end
 
   # Index
@@ -26,28 +26,28 @@ ActiveAdmin.register Event do
     selectable_column
     id_column
     column :title
-    column :start_date do |event|
-      event.start_date.strftime("%B %d, %Y %I:%M %p") if event.start_date
+    column :start_date do |trip|
+      trip.start_date.strftime("%B %d, %Y %I:%M %p") if trip.start_date
     end
-    column :end_date do |event|
-      event.end_date.strftime("%B %d, %Y %I:%M %p") if event.end_date
+    column :end_date do |trip|
+      trip.end_date.strftime("%B %d, %Y %I:%M %p") if trip.end_date
     end
     column :location
-    column :cost do |event|
-      number_to_currency(event.cost, unit: "$", precision: 2)
+    column :cost do |trip|
+      number_to_currency(trip.cost, unit: "$", precision: 2)
     end
     column :capacity
-    column :general_registration_start do |event|
-      event.general_registration_start.strftime("%B %d, %Y %I:%M %p") if event.general_registration_start
+    column :general_registration_start do |trip|
+      trip.general_registration_start.strftime("%B %d, %Y %I:%M %p") if trip.general_registration_start
     end
-    column :rsvp_deadline do |event|
-      event.rsvp_deadline.strftime("%B %d, %Y %I:%M %p") if event.rsvp_deadline
+    column :rsvp_deadline do |trip|
+      trip.rsvp_deadline.strftime("%B %d, %Y %I:%M %p") if trip.rsvp_deadline
     end
     column :early_access_for_members
     column :early_access_days
-    actions do |event|
+    actions do |trip|
       # Add the duplicate link
-      link_to "Duplicate", duplicate_admin_event_path(event), method: :get
+      link_to "Duplicate", duplicate_admin_trip_path(trip), method: :get
     end
   end
 
@@ -56,31 +56,31 @@ ActiveAdmin.register Event do
     attributes_table do
       row :title
       row :description
-      row :start_date do |event|
-        event.start_date.strftime("%B %d, %Y %I:%M %p") if event.start_date
+      row :start_date do |trip|
+        trip.start_date.strftime("%B %d, %Y %I:%M %p") if trip.start_date
       end
-      row :end_date do |event|
-        event.end_date.strftime("%B %d, %Y %I:%M %p") if event.end_date
+      row :end_date do |trip|
+        trip.end_date.strftime("%B %d, %Y %I:%M %p") if trip.end_date
       end
       row :location
-      row :cost do |event|
-        number_to_currency(event.cost, unit: "$", precision: 2)
+      row :cost do |trip|
+        number_to_currency(trip.cost, unit: "$", precision: 2)
       end
       row :capacity
-      row :general_registration_start do |event|
-        event.general_registration_start.strftime("%B %d, %Y %I:%M %p") if event.general_registration_start
+      row :general_registration_start do |trip|
+        trip.general_registration_start.strftime("%B %d, %Y %I:%M %p") if trip.general_registration_start
       end
-      row :rsvp_deadline do |event|
-        event.rsvp_deadline.strftime("%B %d, %Y %I:%M %p") if event.rsvp_deadline
+      row :rsvp_deadline do |trip|
+        trip.rsvp_deadline.strftime("%B %d, %Y %I:%M %p") if trip.rsvp_deadline
       end
       row :early_access_for_members
       row :early_access_days
       row :childcare
       row :sponsors
-      row :images do |event|
-        if event.images.attached?
-          div class: "event-images" do
-            event.images.each do |img|
+      row :images do |trip|
+        if trip.images.attached?
+          div class: "trip-images" do
+            trip.images.each do |img|
               span do
                 image_tag url_for(img), size: "200x200", style: "margin: 5px;"
               end
@@ -98,7 +98,7 @@ ActiveAdmin.register Event do
 
   # Form
   form do |f|
-    f.inputs "Event Details" do
+    f.inputs "Trip Details" do
       f.input :title
       f.input :description
       f.input :start_date, as: :datetime_picker

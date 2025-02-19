@@ -8,7 +8,7 @@ class PaymentsController < ApplicationController
     # Ensure user is signed in
     return redirect_to new_user_session_path, alert: "You must be signed in to register." unless user_signed_in?
 
-    # Check if the user has already registered or if the activity/event is full
+    # Check if the user has already registered or if the trip or activity/event is full
     registration_service = RegistrationService.new(current_user, @paymentable)
 
     if registration_service.capacity_reached?
@@ -20,8 +20,8 @@ class PaymentsController < ApplicationController
       return
     end
 
-    # Handle payment for Event or Activity
-    if @paymentable.is_a?(Event) || @paymentable.is_a?(Activity)
+    # Handle payment for Trip or Activity/Event
+    if @paymentable.is_a?(Trip) || @paymentable.is_a?(Activity)
       stripe_session = PaymentService.new(current_user, @paymentable, root_url).create_stripe_session
       redirect_to stripe_session.url, allow_other_host: true
     # Handle payment for Membership
@@ -49,8 +49,8 @@ class PaymentsController < ApplicationController
 
     # Process payment
     if PaymentProcessingService.new(current_user, @paymentable, session_id).process_payment
-      if @paymentable.is_a?(Event) || @paymentable.is_a?(Activity)
-        register_user_for_event_or_activity
+      if @paymentable.is_a?(Trip) || @paymentable.is_a?(Activity)
+        register_user_for_trip_or_activity
       elsif @paymentable.is_a?(Membership)
         # For Membership, just confirm the subscription/payment
         confirm_membership_subscription
@@ -84,7 +84,7 @@ class PaymentsController < ApplicationController
     polymorphic_path(@paymentable)
   end
 
-  def register_user_for_event_or_activity
+  def register_user_for_trip_or_activity
     registration_service = RegistrationService.new(current_user, @paymentable)
 
     if registration_service.register_user

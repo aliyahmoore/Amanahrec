@@ -1,4 +1,4 @@
-class Event < ApplicationRecord
+class Trip < ApplicationRecord
     include EarlyAccessable
     extend FriendlyId
     friendly_id :custom_slug, use: :slugged

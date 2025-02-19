@@ -2,19 +2,19 @@
 <div class="container my-4">
   <!-- Calendar Wrapper -->
   <div class="calendar">
-    <%= month_calendar events: @events do |date, events| %>
+    <%= month_calendar events: @trips do |date, trips| %>
       <!-- Display Date -->
       <div class="border p-2 text-center">
         <strong class="d-block"><%= date.day %></strong>
       </div>
-      <!-- Events Section -->
-      <% if events.any? %>
-        <div class="event-container">
-          <% events.each do |event| %>
-            <div class="event">
-              <%= link_to event.title, event_path(event), class: "event-title" %><br>
-              <small class="event-time">
-                <%= event.start_time.strftime("%I:%M %p") %>
+      <!-- Trips Section -->
+      <% if trips.any? %>
+        <div class="trip-container">
+          <% trips.each do |trip| %>
+            <div class="trip">
+              <%= link_to trip.title, trip_path(trip), class: "trip-title" %><br>
+              <small class="trip-time">
+                <%= trip.start_time.strftime("%I:%M %p") %>
               </small>
             </div>
           <% end %>

@@ -38,8 +38,8 @@ html, body {
     border: none !important;
   }
   
-  /* Event and Activity image styling */
-  .event-image-preview,
+  /* Trip and Activity image styling */
+  .trip-image-preview,
   .activity-image-preview {
     height: 300px !important;
     display: block;
@@ -47,7 +47,7 @@ html, body {
     object-fit: cover; /* Ensures consistent sizing without distortion */
   }
 
-  .media-image-preview {
+  .item-image-preview {
     height: 500px;
     display: block;
     margin: 0 auto; /* Centers the image */
