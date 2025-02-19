@@ -10,11 +10,13 @@
         <%= item.title %>
       </h4>
       <p class="card-text fs-4">
-        <i class="fas fa-calendar-alt"></i> <strong>:</strong> 
-        <% if item.respond_to?(:end_date) && item.end_date.present? %>
-          <%= item.start_date.strftime("%B %d, %Y") %> - <%= item.end_date.strftime("%B %d, %Y") %>
-        <% else %>
+        <i class="fas fa-calendar-alt"></i> <strong>:</strong>
+        <% if item.start_date.to_date == item.end_date.to_date %>
+          <!-- Single-day event (Show time) -->
           <%= item.start_date.strftime("%B %d, %Y %I:%M %p") %> - <%= item.end_date.strftime("%I:%M %p") %>
+        <% else %>
+          <!-- Multi-day event (Show only dates) -->
+          <%= item.start_date.strftime("%B %d, %Y") %> - <%= item.end_date.strftime("%B %d, %Y") %>
         <% end %>
       </p>
       <p class="card-text fs-4">

@@ -29,13 +29,14 @@ ActiveAdmin.register Payment do
     column :is_recurring
     column :recurring_type
     column :paymentable_type
-    column "Activity/Event Name" do |payment|
-      if payment.paymentable_type == "Event" && payment.paymentable.present?
-        payment.paymentable.title  # Access the title from Event
-      elsif payment.paymentable_type == "Activity" && payment.paymentable.present?
-        payment.paymentable.title  # Access the title from Activity
+    column "Payment Item" do |payment|
+      case payment.paymentable_type
+      when "Trip", "Activity"
+        payment.paymentable.title
+      when "Membership"
+        "Membership Payment"  # General label for membership payments
       else
-        "No associated Event or Activity"
+        "No associated Payment Item"
       end
     end
     column :created_at
@@ -53,13 +54,13 @@ ActiveAdmin.register Payment do
       row :is_recurring
       row :recurring_type
       row :paymentable_type
-      row  "Activity/Event Name" do |payment|
-        if payment.paymentable_type == "Event" && payment.paymentable.present?
-          payment.paymentable.title  # Access the title from Event
+      row  "Payment Category" do |payment|
+        if payment.paymentable_type == "Trip" && payment.paymentable.present?
+          payment.paymentable.title  # Access the title from Trip
         elsif payment.paymentable_type == "Activity" && payment.paymentable.present?
           payment.paymentable.title  # Access the title from Activity
         else
-          "No associated Event or Activity"
+          "No associated Payment Category"
         end
       end
       row :created_at

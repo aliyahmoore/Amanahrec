@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   end
 
   def calendar
-    @events = Event.all
+    @trips = Trip.all
     @activities = Activity.all
   end
 
@@ -19,5 +19,4 @@ class PagesController < ApplicationController
   def sponsors
     @sponsors = Sponsor.all
   end
-  
 end

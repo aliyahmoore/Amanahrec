@@ -1,6 +1,6 @@
 class RegistrationsController < ApplicationController
   before_action :set_registrable, only: [ :create ]
-  ALLOWED_REGISTRABLE_TYPES = [ "Activity", "Event" ]
+  ALLOWED_REGISTRABLE_TYPES = [ "Activity", "Trip" ]
 
   def create
     # Use RegistrationService to handle registration logic
@@ -33,7 +33,7 @@ class RegistrationsController < ApplicationController
 
   # Sets the registrable (Event or Activity) based on the provided params
   def set_registrable
-    valid_types = [ "Activity", "Event" ]
+    valid_types = [ "Activity", "Trip" ]
     if valid_types.include?(params[:registrable_type])
       @registrable = params[:registrable_type].constantize.find_by!(id: params[:registrable_id])
     end

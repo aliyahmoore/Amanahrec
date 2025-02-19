@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_16_205929) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_19_171708) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -106,26 +106,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_16_205929) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "events", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.datetime "start_date"
-    t.datetime "end_date"
-    t.string "location"
-    t.datetime "rsvp_deadline"
-    t.boolean "childcare"
-    t.string "sponsors"
-    t.decimal "cost", precision: 8, scale: 2
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "early_access_for_members", default: false, null: false
-    t.integer "early_access_days"
-    t.datetime "general_registration_start"
-    t.integer "capacity"
-    t.string "slug"
-    t.index ["slug"], name: "index_events_on_slug", unique: true
-  end
-
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -210,6 +190,26 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_16_205929) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_testimonials_on_user_id"
+  end
+
+  create_table "trips", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "location"
+    t.datetime "rsvp_deadline"
+    t.boolean "childcare"
+    t.string "sponsors"
+    t.decimal "cost", precision: 8, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "early_access_for_members", default: false, null: false
+    t.integer "early_access_days"
+    t.datetime "general_registration_start"
+    t.integer "capacity"
+    t.string "slug"
+    t.index ["slug"], name: "index_trips_on_slug", unique: true
   end
 
   create_table "users", force: :cascade do |t|

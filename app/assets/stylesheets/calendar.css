@@ -15,8 +15,8 @@
   border-radius: 5px; /* Optional: Rounded corners for the date box */
 }
 
-/* Event and activity styling */
-.event {
+/* trip and activity styling */
+.trip {
   background-color: #E9E2D8;
   padding: 8px;
   border-radius: 5px;
@@ -30,27 +30,27 @@
   margin-top: 5px;
 }
 
-/* Containers for events and activities */
-.event-container, .activity-container {
+/* Containers for trips and activities */
+.trip-container, .activity-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center; /* Centers child elements */
-  gap: 10px; /* Adds spacing between event/activity boxes */
+  gap: 10px; /* Adds spacing between trip/activity boxes */
 }
 
-.event, .activity {
-  width: 180px; /* Fixed width for event/activity boxes */
+.trip, .activity {
+  width: 180px; /* Fixed width for trip/activity boxes */
 }
 
-/* Styling for event and activity titles */
-.event-title, .activity-title {
+/* Styling for trip and activity titles */
+.trip-title, .activity-title {
   color: #363636;
   text-decoration: none;
   font-size: 1.2rem;
   font-weight: bold;
 }
 
-.event-time, .activity-time {
+.trip-time, .activity-time {
   color: #5c5c5c;
   font-size: 0.9rem;
 }
@@ -63,8 +63,8 @@
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Hover effects for event/activity boxes */
-.event:hover, .activity:hover {
+/* Hover effects for trip/activity boxes */
+.trip:hover, .activity:hover {
   transform: scale(1.05);
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
 }

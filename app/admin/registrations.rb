@@ -22,13 +22,13 @@ ActiveAdmin.register Registration do
       "#{membership.user.first_name} #{membership.user.last_name}" # Concatenate first and last names
     end
     column :registrable_type
-    column "Activity/Event Name" do |registration|
-      if registration.registrable_type == "Event" && registration.registrable.present?
+    column "Registered Item" do |registration|
+      if registration.registrable_type == "Trip" && registration.registrable.present?
         registration.registrable.title  # Access the title from Event
       elsif registration.registrable_type == "Activity" && registration.registrable.present?
         registration.registrable.title  # Access the title from Activity
       else
-        "No associated Event or Activity"
+        "No associated Registered Item"
       end
     end
     column :status

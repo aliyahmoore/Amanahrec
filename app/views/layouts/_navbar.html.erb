@@ -21,8 +21,8 @@
             <li><%= link_to "Our Sponsors", sponsors_path, class: "dropdown-item fs-4" %></li>
           </ul>
         </li>
-        <li class="nav-item"><%= link_to "Activities", activities_path, class: "nav-link" %></li>
-        <li class="nav-item"><%= link_to "Events", events_path, class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to "Activities & Events", activities_path, class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to "Trips", trips_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "Calendar", calendar_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "Latest News", media_mentions_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "Eco Jariyah", "https://www.ecojariyah.com/", class: "nav-link", target: "_blank" %></li>
@@ -45,7 +45,7 @@
               <% if current_user.membership&.active? %>
                 <!-- Active Subscription -->
                 <li class="dropdown-item fs-4">
-                  <span class="btn btn-outline-success btn-sm fs-5" style="pointer-events: none; opacity: 0.65; cursor: default;">
+                  <span class="btn btn-outline-success btn-sm fs-5" style="pointer-trips: none; opacity: 0.65; cursor: default;">
                     Active <i class="fas fa-gem fs-5"></i>
                   </span>
                 </li>

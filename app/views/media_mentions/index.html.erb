@@ -1,35 +1,35 @@
 <h1 class="text-center mt-3">Latest News</h1>
-  <div class="row row-cols-1 row-cols-md-2 g-4">
-    <% if @media_mentions.present? %>
-      <% @media_mentions.each do |media_mention| %>
-        <div class="col">
-          <div class="card mb-3">
-            <% if media_mention.image.attached? %>
-              <img class="card-img-top media-image-preview" src="<%= media_mention.image.url %>" alt="<%= media_mention.name %>">
-            <% end %>
-            <div class="card-body">
-              <h5 class="card-title"><%= media_mention.name %></h5>
-              <p class="card-text">
-                <%= truncate(media_mention.description.presence || "No description available.", length: 500) %>
-              </p>
-              <p class="card-text text-muted">
-                Published Date: <%= media_mention.published_date.strftime("%B %d, %Y") %>
-              </p>
-              <p class="card-text text-muted">
-                News Organization: <%= media_mention.organization_name %>
-              </p>
-              <div class="d-flex flex-column align-items-center">
-                <% if media_mention.link.present? %>
-                  <%= link_to "View Full Article", media_mention.link, target: "_blank", class: "btn btn-primary" %>
-                <% else %>
-                  <p class="text-muted">No link available</p>
-                <% end %>
-              </div>
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  <% if @media_mentions.present? %>
+    <% @media_mentions.each do |media_mention| %>
+      <div class="col">
+        <div class="card mb-3">
+          <% if media_mention.image.attached? %>
+            <img class="card-img-top media-image-preview" src="<%= media_mention.image.url %>" alt="<%= media_mention.name %>">
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= media_mention.name %></h5>
+            <p class="card-text">
+              <%= truncate(media_mention.description.presence || "No description available.", length: 500) %>
+            </p>
+            <p class="card-text text-muted">
+              Published Date: <%= media_mention.published_date.strftime("%B %d, %Y") %>
+            </p>
+            <p class="card-text text-muted">
+              News Organization: <%= media_mention.organization_name %>
+            </p>
+            <div class="d-flex flex-column align-items-center">
+              <% if media_mention.link.present? %>
+                <%= link_to "View Full Article", media_mention.link, target: "_blank", class: "btn btn-primary" %>
+              <% else %>
+                <p class="text-muted">No link available</p>
+              <% end %>
             </div>
           </div>
         </div>
-      <% end %>
-    <% else %>
-      <p class="text-center text-muted fs-5">No Updates Available At This Time.</p>
+      </div>
     <% end %>
-  </div>
+  <% else %>
+    <p class="text-center text-muted fs-5">No Updates Available At This Time.</p>
+  <% end %>
+</div>

@@ -45,7 +45,7 @@ module EarlyAccessable
 
     def general_registration_start_before_start_date
       return if general_registration_start.nil? || start_date.blank?
-      if self.is_a?(Event) && general_registration_start > start_date
+      if self.is_a?(Trip) && general_registration_start > start_date
         errors.add(:general_registration_start, "date can't be later than the event start date")
       elsif self.is_a?(Activity) && general_registration_start > start_date
         errors.add(:general_registration_start, "date can't be later than the activity start date")

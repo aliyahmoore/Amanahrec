@@ -4,15 +4,15 @@ ActiveAdmin.register_page "Dashboard" do
   menu priority: 1, label: proc { I18n.t("active_admin.dashboard") }
 
   content title: proc { I18n.t("active_admin.dashboard") } do
-    # Section for Events and Activities
-    section "Events and Activities" do
+    # Section for Trips and Activities & Events
+    section "Trips and Activities & Events" do
       columns do
         column do
-          panel "Upcoming Events" do
-            table_for Event.order(start_date: :desc).limit(5) do
-              column("Event Title") { |event| link_to event.title, admin_event_path(event) }
-              column("Registrations") { |event| event.registrations.count }
-              column("Capacity") { |event| event.capacity }
+          panel "Upcoming Trips" do
+            table_for Trip.order(start_date: :desc).limit(5) do
+              column("Trip Title") { |trip| link_to trip.title, admin_trip_path(trip) }
+              column("Registrations") { |trip| trip.registrations.count }
+              column("Capacity") { |trip| trip.capacity }
             end
           end
         end

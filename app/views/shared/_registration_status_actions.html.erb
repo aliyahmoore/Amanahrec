@@ -1,7 +1,7 @@
 <div class="registration-actions text-center mt-3">
   <% if registrable.end_date.present? && Time.current > registrable.end_date %>
     <p class="registration-info text-center">
-      <span class="btn btn-outline-danger" style="pointer-events: none;">
+      <span class="btn btn-outline-danger" style="pointer-trips: none;">
         Registration Closed
       </span>
     </p>
@@ -21,7 +21,7 @@
     <% end %>
   <% else %>
     <p class="registration-info text-center">
-      <span class="btn btn-outline-secondary" style="pointer-events: none;">
+      <span class="btn btn-outline-secondary" style="pointer-trips: none;">
         Registration Not Yet Open
       </span>
     </p>

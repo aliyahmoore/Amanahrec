@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   end
 
   resources :activities, param: :slug, concerns: :registrable
-  resources :events, param: :slug, concerns: :registrable
+  resources :trips, param: :slug, concerns: :registrable
 
   # Membership payments (handled at the top level)
   resources :payments, only: [ :create ] do
