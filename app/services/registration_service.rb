@@ -5,37 +5,33 @@ class RegistrationService
     end
 
   def register_user
-    # Check if the user is already registered
     raise RegistrationError, "You are already registered for this trip or activity/event." if already_registered?
-
-    # Check if the capacity is full and prevent registration creation if true
-    if capacity_reached?
-      raise RegistrationError, "Registration is full. Sorry, the capacity has been reached."
-    end
+    raise RegistrationError, "Registration is full. Sorry, the capacity has been reached." if capacity_reached?
 
     # Proceed with the registration if no errors
-    registration = Registration.create!(user: @user, registrable: @registrable, status: :successful)
-    registration
-  rescue ActiveRecord::RecordInvalid => e
-    false
-  end
+    Registration.create!(user: @user, registrable: @registrable, status: :successful)
 
-  def capacity_reached?
-    # Handle capacity check for both Activity and Trip
-    if @registrable.is_a?(Activity)
-      @registrable.registrations.count >= @registrable.capacity
-    elsif @registrable.is_a?(Trip)
-      @registrable.registrations.count >= @registrable.capacity
+    if @registrable.requires_payment?
+      registration # Payment is required, status remains "pending"
     else
-      false
+      registration.update!(status: "successful")
+      registration
     end
+
+    rescue ActiveRecord::RecordInvalid
+    raise RegistrationError, "Registration failed due to invalid data."
   end
 
   private
 
-    def already_registered?
-      Registration.exists?(user: @user, registrable: @registrable)
-    end
+  def capacity_reached?
+      # Handle capacity check for both Activity and Trip
+      @registrable.registrations.count >= @registrable.capacity
+  end
+
+  def already_registered?
+    Registration.exists?(user: @user, registrable: @registrable)
+  end
 end
 
-  class RegistrationError < StandardError; end
+class RegistrationError < StandardError; end

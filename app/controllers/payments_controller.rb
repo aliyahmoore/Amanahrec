@@ -5,60 +5,24 @@ class PaymentsController < ApplicationController
   include Findable
 
   def create
-    # Ensure user is signed in
-    return redirect_to new_user_session_path, alert: "You must be signed in to register." unless user_signed_in?
+    return redirect_to root_url, alert: "Invalid paymentable type." unless valid_paymentable?
 
-    # Check if the user has already registered or if the trip or activity/event is full
-    registration_service = RegistrationService.new(current_user, @paymentable)
-
-    if registration_service.capacity_reached?
-      return redirect_to @paymentable, alert: "Registration is full. Sorry, the capacity has been reached."
-    end
-
-    if current_user.has_paid_for?(@paymentable)
-      redirect_to paymentable_success_path, alert: paymentable_alert_message
-      return
-    end
-
-    # Handle payment for Trip or Activity/Event
-    if @paymentable.is_a?(Trip) || @paymentable.is_a?(Activity)
-      stripe_session = PaymentService.new(current_user, @paymentable, root_url).create_stripe_session
-      redirect_to stripe_session.url, allow_other_host: true
-    # Handle payment for Membership
-    elsif @paymentable.is_a?(Membership)
-      stripe_session = PaymentService.new(current_user, @paymentable, root_url).create_stripe_session
-      redirect_to stripe_session.url, allow_other_host: true
-    else
-      redirect_to root_url, alert: "Invalid paymentable type."
-    end
+    stripe_session = PaymentService.new(current_user, @paymentable, root_url).create_stripe_session
+    redirect_to stripe_session.url, allow_other_host: true
   end
 
   def success
     session_id = params[:session_id]
 
-    if session_id.blank?
-      return redirect_to @paymentable, alert: "Session ID is missing."
-    end
+    return redirect_to @paymentable, alert: "Session ID is missing." if session_id.blank?
 
-    # Ensure the paymentable exists
     @paymentable = find_paymentable(params[:paymentable_type], params[:paymentable_id])
+    return redirect_to root_url, alert: "Invalid paymentable type or ID." unless @paymentable
 
-    unless @paymentable
-      return redirect_to root_url, alert: "Invalid paymentable type or ID."
-    end
-
-    # Process payment
     if PaymentProcessingService.new(current_user, @paymentable, session_id).process_payment
-      if @paymentable.is_a?(Trip) || @paymentable.is_a?(Activity)
-        register_user_for_trip_or_activity
-      elsif @paymentable.is_a?(Membership)
-        # For Membership, just confirm the subscription/payment
-        confirm_membership_subscription
-      else
-        redirect_to root_url, alert: "Invalid paymentable type."
-      end
+      handle_success
     else
-      redirect_to @paymentable, alert: "Payment was not completed. Please try again."
+      handle_failure
     end
   end
 
@@ -72,30 +36,28 @@ class PaymentsController < ApplicationController
 
   private
 
-  def paymentable_path
-    polymorphic_path(@paymentable)
+  def valid_paymentable?
+    @paymentable.is_a?(Trip) || @paymentable.is_a?(Activity) || @paymentable.is_a?(Membership)
   end
 
-  def paymentable_alert_message
-    "You have already registered for this #{@paymentable.class.name.downcase}."
-  end
-
-  def paymentable_success_path
-    polymorphic_path(@paymentable)
-  end
-
-  def register_user_for_trip_or_activity
-    registration_service = RegistrationService.new(current_user, @paymentable)
-
-    if registration_service.register_user
-      redirect_to my_registrations_path, notice: "Registration successful."
-    else
-      redirect_to @paymentable, alert: "Registration failed."
+  def handle_success
+    if @paymentable.is_a?(Membership)
+      confirm_membership_subscription
+    elsif @paymentable.is_a?(Trip) || @paymentable.is_a?(Activity)
+      registration = Registration.create(user: current_user, registrable: @paymentable, status: "successful")
+      if registration.persisted?
+        redirect_to my_registrations_path, notice: "Payment successful. Your registration is confirmed."
+      else
+        redirect_to @paymentable, alert: "Failed to create registration."
+      end
     end
   end
 
+  def handle_failure
+    redirect_to @paymentable, alert: "Payment failed or was not completed. Please try again."
+  end
+
   def confirm_membership_subscription
-    # For Membership, after payment, simply acknowledge the subscription
     redirect_to root_url, notice: "Thank you for subscribing to our membership."
   end
 end
