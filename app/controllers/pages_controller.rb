@@ -19,4 +19,12 @@ class PagesController < ApplicationController
   def sponsors
     @sponsors = Sponsor.all
   end
+
+  def boards
+    @boards = Board.all
+  end
+
+  def media_mentions
+    @media_mentions = MediaMention.order(published_date: :desc)
+  end
 end

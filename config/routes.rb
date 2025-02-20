@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get "calendar", to: "pages#calendar"
   get "partners", to: "pages#partners"
   get "sponsors", to: "pages#sponsors"
+  get "media_mentions", to: "pages#media_mentions"
+  get "boards", to: "pages#boards"
   root "pages#home"
 
   # User-specific routes
@@ -22,9 +24,6 @@ Rails.application.routes.draw do
   # Render dynamic PWA files from app/views/pwa/*
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-
-  resources :boards, only: [ :index, :show ]
-  resources :media_mentions, only: [ :index, :show ]
 
   resources :testimonials, only: [ :index, :new, :create ]
 
