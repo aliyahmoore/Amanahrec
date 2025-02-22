@@ -21,7 +21,17 @@ class PaymentService
             unit_amount: payment_amount,
             product: product_id, # This will return the product ID for Membership or nil for others
             recurring: recurring_data, # Will be nil unless it's a Membership
-            product_data: payment_product_data # For non-Membership types
+            product_data: {
+              name: @paymentable.title,
+            description: @paymentable.description,
+          images: [
+            if @paymentable.is_a?(Trip)
+              @paymentable.images.attached? ? @paymentable.images.first.url : nil
+            else
+              @paymentable.image.attached? ? @paymentable.image.url : nil 
+            end
+          ].compact
+        }
           },
           quantity: 1
         } ]

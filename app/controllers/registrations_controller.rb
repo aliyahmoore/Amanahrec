@@ -8,10 +8,10 @@ class RegistrationsController < ApplicationController
 
     begin
       # Register the user through the service
-      registration = registration_service.register_user
+      @registration = registration_service.register_user
 
       # If the registration is successful, check for payment
-      if registration.requires_payment?
+      if @registration.requires_payment?
         # Redirect to the payment page if payment is required
         redirect_to new_payment_path(paymentable: @registrable), notice: "Please proceed with payment."
       else
