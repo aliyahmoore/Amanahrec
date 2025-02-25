@@ -1,6 +1,7 @@
 class Registration < ApplicationRecord
   belongs_to :user
   belongs_to :registrable, polymorphic: true
+  delegate :requires_payment?, to: :registrable
 
   enum :status, { pending: "pending", successful: "successful", failed: "failed" }
 
@@ -16,7 +17,4 @@ class Registration < ApplicationRecord
   end
 
   # Returns true if the registrable requires payment (i.e., it has a cost)
-  def requires_payment?
-    registrable&.cost.to_f.positive?
-  end
 end

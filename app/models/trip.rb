@@ -20,8 +20,11 @@ class Trip < ApplicationRecord
       start_date
     end
 
-    private
+    def requires_payment?
+      cost.to_f > 0
+    end
 
+    private
 
 
     def rsvp_deadline_must_be_valid
