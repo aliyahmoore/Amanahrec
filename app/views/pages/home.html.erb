@@ -29,5 +29,10 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
+        <div class="text-center mt-4">
+      <% if user_signed_in?  %>
+        <%= link_to 'Submit a Testimonial', new_testimonial_path, class: 'btn btn-primary' %>
+      <% end %>
+    </div>
   </div>
 </div>

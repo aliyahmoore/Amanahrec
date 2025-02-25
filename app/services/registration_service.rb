@@ -9,7 +9,7 @@ class RegistrationService
     raise RegistrationError, "Registration is full. Sorry, the capacity has been reached." if capacity_reached?
 
     # Proceed with the registration if no errors
-    Registration.create!(user: @user, registrable: @registrable, status: :successful)
+    registration = Registration.create!(user: @user, registrable: @registrable, status: :successful)
 
     if @registrable.requires_payment?
       registration # Payment is required, status remains "pending"
