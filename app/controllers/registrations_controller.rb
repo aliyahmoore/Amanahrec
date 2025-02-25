@@ -5,10 +5,12 @@ class RegistrationsController < ApplicationController
   def create
     # Use RegistrationService to handle registration logic
     registration_service = RegistrationService.new(current_user, @registrable)
+    number_of_adults = params[:number_of_adults].to_i
+    number_of_kids = params[:number_of_kids].to_i
 
     begin
       # Register the user through the service
-      @registration = registration_service.register_user
+      @registration = registration_service.register_user(number_of_adults, number_of_kids)
 
       # If the registration is successful, check for payment
       if @registration.requires_payment?
