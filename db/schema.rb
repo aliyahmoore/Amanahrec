@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_19_171708) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_25_221232) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -167,6 +167,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_19_171708) do
     t.string "status", default: "pending", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "number_of_adults", default: 0
+    t.integer "number_of_kids", default: 0
     t.index ["registrable_type", "registrable_id"], name: "index_registrations_on_registrable"
     t.index ["user_id"], name: "index_registrations_on_user_id"
   end

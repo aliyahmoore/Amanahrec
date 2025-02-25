@@ -5,6 +5,7 @@ class Registration < ApplicationRecord
   enum :status, { pending: "pending", successful: "successful", failed: "failed" }
 
   validates :user_id, :registrable_id, :registrable_type, presence: true
+  validates :number_of_adults, :number_of_kids, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   def self.ransackable_associations(auth_object = nil)
     [ "registrable", "registrations", "user" ]
