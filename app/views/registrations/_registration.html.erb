@@ -13,12 +13,36 @@
       <i class="fa-solid fa-money-bill"></i> <strong>:</strong>
       <%= registration.registrable.cost.present? && registration.registrable.cost > 0 ? number_to_currency(registration.registrable.cost) : "Free" %>
     </p>
+
     <% if registration.registrable.present? %>
-      <%= link_to "View #{registration.registrable_type}", 
+      <%= link_to "View Details", 
                   polymorphic_path(registration.registrable), 
                   class: 'btn btn-primary' %>
     <% else %>
       <p>Registration details are missing or unavailable.</p>
     <% end %>
   </div>
-</div>
+
+  <!-- Accordion for Order Details -->
+  <div class="accordion accordion-flush custom-accordion" id="orderDetailsAccordion<%= registration.id %>">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOrder<%= registration.id %>">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          data-bs-target="#collapseOrder<%= registration.id %>" aria-expanded="false"
+          aria-controls="collapseOrder<%= registration.id %>"><i class="fas fa-receipt me-1"></i> 
+          Order Details
+        </button>
+      </h2>
+      <div id="collapseOrder<%= registration.id %>" class="accordion-collapse collapse"
+        aria-labelledby="headingOrder<%= registration.id %>" data-bs-parent="#orderDetailsAccordion<%= registration.id %>">
+        <div class="accordion-body">
+          <p><strong>Order Number:</strong> <%= registration.id %></p>
+          <p><strong>Order Date:</strong> <%= registration.created_at.strftime("%B %d, %Y") %></p>
+          <p><strong>Adults:</strong> <%= registration.number_of_adults %> </p>
+          <p><strong>Kids:</strong> <%= registration.number_of_kids %></p>
+          <p><strong>Total:</strong> <%= number_to_currency(registration.registrable.cost) %></p>
+        </div>
+      </div>
+    </div>
+  </div> <!-- End Accordion -->
+</div> <!-- End Card -->

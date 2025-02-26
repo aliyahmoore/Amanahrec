@@ -113,3 +113,16 @@ h4.card-title a {
     object-fit: contain;
   }
   
+  .custom-accordion .accordion-button {
+    background-color: #daccb1; 
+    color:#403f2b;
+  }
+  
+  .custom-accordion .accordion-button:not(.collapsed) {
+    background-color: #daccb1; 
+    color:#403f2b;
+  }
+  
+  .custom-accordion .accordion-body {
+    background-color: #fff; 
+  }
