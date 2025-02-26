@@ -1,24 +1,56 @@
-<div class="card registration-card mb-3">
-  <div class="card-body">
-    <h5 class="card-title"><%= registration.registrable&.title %></h5>
-    <p>
-      <i class="fas fa-calendar-alt"></i> <strong>:</strong>
-      <%= formatted_start_date(registration.registrable) %>
-      <%= registration.registrable.start_date.strftime("%I:%M %p") %> - <%= registration.registrable.end_date.strftime("%I:%M %p") %>
-    </p>
-    <p>
-      <i class="fas fa-map-marker-alt"></i> <strong>:</strong> <%= registration.registrable.location %>
-    </p>
-    <p>
-      <i class="fa-solid fa-money-bill"></i> <strong>:</strong>
-      <%= registration.registrable.cost.present? && registration.registrable.cost > 0 ? number_to_currency(registration.registrable.cost) : "Free" %>
-    </p>
-    <% if registration.registrable.present? %>
-      <%= link_to "View #{registration.registrable_type}", 
-                  polymorphic_path(registration.registrable), 
-                  class: 'btn btn-primary' %>
-    <% else %>
-      <p>Registration details are missing or unavailable.</p>
-    <% end %>
-  </div>
-</div>
+<% @registrations.each_with_index do |registration, index| %>
+  <div class="card registration-card mb-3">
+    <div class="card-body">
+      <h5 class="card-title"><%= registration.registrable&.title %></h5>
+      <p>
+        <i class="fas fa-calendar-alt"></i> <strong>Date & Time:</strong>
+        <%= formatted_start_date(registration.registrable) %>
+        <%= registration.registrable.start_date.strftime("%I:%M %p") %> - <%= registration.registrable.end_date.strftime("%I:%M %p") %>
+      </p>
+      <p>
+        <i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> <%= registration.registrable.location %>
+      </p>
+      <p>
+        <i class="fa-solid fa-money-bill"></i> <strong>Cost:</strong>
+        <%= registration.registrable.cost.present? && registration.registrable.cost > 0 ? number_to_currency(registration.registrable.cost) : "Free" %>
+      </p>
+
+      <% if registration.registrable.present? %>
+        <%= link_to "#{registration.registrable_type} Details", 
+                    polymorphic_path(registration.registrable), 
+                    class: 'btn btn-primary' %>
+      <% else %>
+        <p>Registration details are missing or unavailable.</p>
+      <% end %>
+    </div>
+
+    <!-- Accordion for Order Details -->
+    <div class="accordion accordion-flush custom-accordion" id="orderDetailsAccordion<%= index %>">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOrder<%= index %>">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseOrder<%= index %>" aria-expanded="false"
+            aria-controls="collapseOrder<%= index %>"><i class="fas fa-receipt me-1"></i> 
+            Order Details
+          </button>
+        </h2>
+        <div id="collapseOrder<%= index %>" class="accordion-collapse collapse"
+          aria-labelledby="headingOrder<%= index %>" data-bs-parent="#orderDetailsAccordion<%= index %>">
+          <div class="accordion-body">
+            <p><strong>Order Number:</strong> <%= registration.id %></p>
+            <p><strong>Order Date:</strong> <%= registration.created_at.strftime("%B %d, %Y") %></p>
+            <p><strong>Adults:</strong> <%= registration.number_of_adults %> </p>
+      <p><strong>Kids:</strong> <%= registration.number_of_kids %></p>
+            <p><strong>Total:</strong> <%= number_to_currency(registration.registrable.cost) %></p>
+          </div>
+        </div>
+      </div>
+    </div> <!-- End Accordion -->
+
+  </div> <!-- End Card -->
+<% end %>
+
+<!-- If no registrations exist -->
+<% if @registrations.empty? %>
+  <p>You have no registrations.</p>
+<% end %>
