@@ -28,7 +28,7 @@ class PaymentService
             if @paymentable.is_a?(Trip)
               @paymentable.images.attached? ? @paymentable.images.first.url : nil
             else
-              @paymentable.image.attached? ? @paymentable.image.url : nil 
+              @paymentable.image.attached? ? @paymentable.image.url : nil
             end
           ].compact
         }

@@ -21,7 +21,7 @@ class Activity < ApplicationRecord
   def requires_payment?
     cost.to_f > 0
   end
-  
+
   # Simple start_time method that returns the start_date
   def start_time
     start_date

@@ -10,8 +10,8 @@ class RegistrationService
 
     # Proceed with the registration if no errors
     registration = Registration.create!(
-      user: @user, 
-      registrable: @registrable, 
+      user: @user,
+      registrable: @registrable,
       status: "pending",
       number_of_adults: number_of_adults,
       number_of_kids: number_of_kids)
