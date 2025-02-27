@@ -43,7 +43,7 @@ class PaymentProcessingService
     def retrieve_stripe_session
       Stripe::Checkout::Session.retrieve(
         @session_id,
-        expand: ['line_items']
+        expand: [ "line_items" ]
       )
     end
 
@@ -53,11 +53,13 @@ class PaymentProcessingService
 
       line_items = Stripe::Checkout::Session.list_line_items(session.id)
       total_adults = 0
-  total_kids = 0
+      total_kids = 0
+
+      total_cost = session.amount_total / 100.0
 
   line_items.data.each do |item|
     quantity = item.quantity
-    unit_amount = item.price.unit_amount / 100.0  # Convert cents to dollars
+
 
     # Determine if item corresponds to adults or kids (this depends on your Stripe setup)
     if item.description.downcase.include?("adult")
@@ -74,7 +76,8 @@ class PaymentProcessingService
       registrable: @paymentable,
       number_of_adults: total_adults,
       number_of_kids: total_kids,
-      status: "successful"
+      status: "successful",
+      cost: total_cost
     )
   end
       update_membership_status(session) if @paymentable.is_a?(Membership)
@@ -97,7 +100,7 @@ class PaymentProcessingService
 
     # Create a payment record with the given status
     def create_payment_record(session, status)
-      total_cost = session.amount_total / 100.0 
+      total_cost = session.amount_total / 100.0
       Payment.create!(
         stripe_payment_id: session.id,
         amount: @paymentable.is_a?(Membership) ? 10.0 : total_cost,

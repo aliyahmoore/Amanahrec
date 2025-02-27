@@ -40,7 +40,8 @@
           <p><strong>Order Date:</strong> <%= registration.created_at.strftime("%B %d, %Y") %></p>
           <p><strong>Adults:</strong> <%= registration.number_of_adults %> </p>
           <p><strong>Kids:</strong> <%= registration.number_of_kids %></p>
-          <p><strong>Total:</strong> <%= number_to_currency(registration.registrable.cost) %></p>
+          <p><strong>Total:</strong> <%= number_to_currency(registration.cost) %></p>
+     
         </div>
       </div>
     </div>

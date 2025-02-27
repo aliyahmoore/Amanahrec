@@ -14,7 +14,7 @@ class PaymentService
     mode = @paymentable.is_a?(Membership) ? "subscription" : "payment"
 
     Stripe::Checkout::Session.create(
-      payment_method_types: ["card"],
+      payment_method_types: [ "card" ],
       customer: customer.id,
       line_items: line_items,
       mode: mode,
@@ -44,7 +44,7 @@ class PaymentService
 
   def line_items
     items = []
-    items << adult_line_item 
+    items << adult_line_item
     items << kid_line_item
     items
   end
@@ -95,9 +95,9 @@ class PaymentService
 
   def payment_image
     if @paymentable.is_a?(Trip)
-      @paymentable.images.attached? ? [@paymentable.images.first.url] : []
+      @paymentable.images.attached? ? [ @paymentable.images.first.url ] : []
     else
-      @paymentable.image.attached? ? [@paymentable.image.url] : []
+      @paymentable.image.attached? ? [ @paymentable.image.url ] : []
     end
   end
 end

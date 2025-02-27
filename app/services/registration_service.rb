@@ -8,13 +8,14 @@ class RegistrationService
     raise RegistrationError, "You are already registered for this trip or activity/event." if already_registered?
     raise RegistrationError, "Registration is full. Sorry, the capacity has been reached." if capacity_reached?
 
-    # Proceed with the registration if no errors
+    # Proceed with the registration for free activities and events
     registration = Registration.create!(
       user: @user,
       registrable: @registrable,
       status: "pending",
       number_of_adults: number_of_adults,
-      number_of_kids: number_of_kids)
+      number_of_kids: number_of_kids,
+      cost: 0.0)
 
     if @registrable.requires_payment?
       registration # Payment is required, status remains "pending"
