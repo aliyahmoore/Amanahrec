@@ -44,12 +44,7 @@ class PaymentsController < ApplicationController
     if @paymentable.is_a?(Membership)
       confirm_membership_subscription
     elsif @paymentable.is_a?(Trip) || @paymentable.is_a?(Activity)
-      registration = Registration.create(user: current_user, registrable: @paymentable, status: "successful")
-      if registration.persisted?
         redirect_to my_registrations_path, notice: "Payment successful. Your registration is confirmed."
-      else
-        redirect_to @paymentable, alert: "Failed to create registration."
-      end
     end
   end
 

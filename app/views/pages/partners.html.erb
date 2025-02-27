@@ -1,15 +1,15 @@
 <% content_for :title, "Our Partners" %>
 <h1 class="text-center mt-3">Our Partners</h1>
-  <div class="row justify-content-center gap-3 mt-5">
-    <% @partners.each do |partner| %>
-      <div class="col-auto d-flex justify-content-center">
-        <div class="partner-logo">
-          <% if partner.logo.attached? %>
-            <%= image_tag partner.logo, alt: "Partner Logo", class: "img-fluid", style: "height: 100px;" %>
-          <% else %>
-            <p>No Logo Available</p>
-          <% end %>
-        </div>
+<div class="row justify-content-center gap-3 mt-5">
+  <% @partners.each do |partner| %>
+    <div class="col-auto d-flex justify-content-center">
+      <div class="partner-logo">
+        <% if partner.logo.attached? %>
+          <%= image_tag partner.logo, alt: "Partner Logo", class: "img-fluid", style: "height: 100px;" %>
+        <% else %>
+          <p>No Logo Available</p>
+        <% end %>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
+</div>

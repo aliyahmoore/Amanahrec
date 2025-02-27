@@ -1,100 +1,103 @@
 class PaymentService
-    def initialize(user, paymentable, root_url)
-      @user = user
-      @paymentable = paymentable
-      @root_url = root_url
-    end
+  def initialize(user, paymentable, root_url)
+    @user = user
+    @paymentable = paymentable
+    @root_url = root_url
+  end
 
-    # Create the stripe session with customer info
-    def create_stripe_session
-      customer = Stripe::Customer.create(
-        email: @user.email,
-        name: "#{@user.first_name} #{@user.last_name}"
-      )
+  def create_stripe_session
+    customer = Stripe::Customer.create(
+      email: @user.email,
+      name: "#{@user.first_name} #{@user.last_name}"
+    )
 
-      # Membership payment is a subscription
-      mode = @paymentable.is_a?(Membership) ? "subscription" : "payment"
-      def line_items
-        [ {
-          price_data: {
-            currency: "usd",
-            unit_amount: payment_amount,
-            product: product_id, # This will return the product ID for Membership or nil for others
-            recurring: recurring_data, # Will be nil unless it's a Membership
-            product_data: {
-              name: @paymentable.title,
-            description: @paymentable.description,
-          images: [
-            if @paymentable.is_a?(Trip)
-              @paymentable.images.attached? ? @paymentable.images.first.url : nil
-            else
-              @paymentable.image.attached? ? @paymentable.image.url : nil
-            end
-          ].compact
-        }
-          },
-          quantity: 1
-        } ]
-      end
+    mode = @paymentable.is_a?(Membership) ? "subscription" : "payment"
 
-      # Stripe third party for payment checkout
-      Stripe::Checkout::Session.create(
-        payment_method_types: [ "card" ],
-        customer: customer.id,
-        line_items: line_items,
-        mode: mode,
-        success_url: success_url,
-        cancel_url: cancel_url,
-        metadata: {
-          user_id: @user.id,
-          paymentable_id: @paymentable.id,
-          paymentable_type: @paymentable.class.name
-        }
-      )
-    end
-
-    def success_url
-      "#{@root_url}payments/success?paymentable_type=#{@paymentable.class.name}&paymentable_id=#{@paymentable.id}&session_id={CHECKOUT_SESSION_ID}"
-    end
-
-    def cancel_url
-      if @paymentable.is_a?(Trip)
-        "#{@root_url}trips/#{@paymentable.id}"
-      else
-        "#{@root_url}activities/#{@paymentable.id}"
-      end
-    end
-
-    private
-
-    # Payment amount
-    def payment_amount
-      @paymentable.is_a?(Membership) ? 1000 : (@paymentable.cost * 100).to_i
-    end
-
-    # Product ID for Membership or nil for others
-    def product_id
-      @paymentable.is_a?(Membership) ? ENV["STRIPE_MEMBERSHIP_PRODUCT_ID"] : nil
-    end
-
-    # Recurring data for Membership or nil for others
-    def recurring_data
-      @paymentable.is_a?(Membership) ? { interval: "month" } : nil
-    end
-
-    # Product data for non-Membership types (trip, activity)
-    def payment_product_data
-      return nil if @paymentable.is_a?(Membership) # Membership is handled by product_id
-
-      formatted_date = if @paymentable.is_a?(Activity)
-                        "#{@paymentable.start_date.strftime('%B %d, %Y %I:%M %p')} - #{@paymentable.end_date.strftime('%I:%M %p')}"
-      else
-                        "#{@paymentable.start_date.strftime('%B %d, %Y')} - #{@paymentable.end_date.strftime('%B %d, %Y')}"
-      end
-
-      {
-        name: "#{@paymentable.title} | #{formatted_date}",
-        description: @paymentable.description
+    Stripe::Checkout::Session.create(
+      payment_method_types: [ "card" ],
+      customer: customer.id,
+      line_items: line_items,
+      mode: mode,
+      success_url: success_url,
+      cancel_url: cancel_url,
+      metadata: {
+        user_id: @user.id,
+        paymentable_id: @paymentable.id,
+        paymentable_type: @paymentable.class.name
       }
+    )
+  end
+
+  def success_url
+    "#{@root_url}payments/success?paymentable_type=#{@paymentable.class.name}&paymentable_id=#{@paymentable.id}&session_id={CHECKOUT_SESSION_ID}"
+  end
+
+  def cancel_url
+    if @paymentable.is_a?(Trip)
+      "#{@root_url}trips/#{@paymentable.id}"
+    else
+      "#{@root_url}activities/#{@paymentable.id}"
     end
+  end
+
+  private
+
+  def line_items
+    items = []
+    items << adult_line_item
+    items << kid_line_item
+    items
+  end
+
+  def adult_line_item
+    {
+      price_data: {
+        currency: "usd",
+        unit_amount: (payment_amount * 100).to_i, # Full price
+        product_data: {
+          name: "Adult Ticket",
+          description: "Full-priced ticket for an adult",
+          images: payment_image
+        }
+      },
+      adjustable_quantity: {
+        enabled: true,
+        minimum: 1,
+        maximum: 99
+      },
+      quantity: 1
+    }
+  end
+
+  def kid_line_item
+    {
+      price_data: {
+        currency: "usd",
+        unit_amount: (payment_amount * 0.7 * 100).to_i, # 30% discount
+        product_data: {
+          name: "Child Ticket",
+          description: "Discounted ticket for a child",
+          images: payment_image
+        }
+      },
+      adjustable_quantity: {
+        enabled: true,
+        minimum: 0,
+        maximum: 99
+      },
+      quantity: 1
+    }
+  end
+
+  def payment_amount
+    @paymentable.is_a?(Membership) ? 1000 : @paymentable.cost
+  end
+
+  def payment_image
+    if @paymentable.is_a?(Trip)
+      @paymentable.images.attached? ? [ @paymentable.images.first.url ] : []
+    else
+      @paymentable.image.attached? ? [ @paymentable.image.url ] : []
+    end
+  end
 end
