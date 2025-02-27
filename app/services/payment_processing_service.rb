@@ -41,12 +41,42 @@ class PaymentProcessingService
 
     # Retrieve the Stripe session
     def retrieve_stripe_session
-      Stripe::Checkout::Session.retrieve(@session_id)
+      Stripe::Checkout::Session.retrieve(
+        @session_id,
+        expand: ['line_items']
+      )
     end
 
     # Handle a successful payment
     def handle_successful_payment(session)
       create_payment_record(session, PAYMENT_STATUS_SUCCEEDED)
+
+      line_items = Stripe::Checkout::Session.list_line_items(session.id)
+      total_adults = 0
+  total_kids = 0
+
+  line_items.data.each do |item|
+    quantity = item.quantity
+    unit_amount = item.price.unit_amount / 100.0  # Convert cents to dollars
+
+    # Determine if item corresponds to adults or kids (this depends on your Stripe setup)
+    if item.description.downcase.include?("adult")
+      total_adults += quantity
+    elsif item.description.downcase.include?("kid") || item.description.downcase.include?("child")
+      total_kids += quantity
+    end
+  end
+
+  # Create or update the registration record
+  if @paymentable.is_a?(Trip) || @paymentable.is_a?(Activity)
+    registration = Registration.create!(
+      user: @user,
+      registrable: @paymentable,
+      number_of_adults: total_adults,
+      number_of_kids: total_kids,
+      status: "successful"
+    )
+  end
       update_membership_status(session) if @paymentable.is_a?(Membership)
       true
     end
