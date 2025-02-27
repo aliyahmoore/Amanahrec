@@ -30,11 +30,15 @@ ActiveAdmin.register Payment do
     column :recurring_type
     column :paymentable_type
     column "Payment Item" do |payment|
-      case payment.paymentable_type
-      when "Trip", "Activity"
-        payment.paymentable.title
-      when "Membership"
-        "Membership Payment"  # General label for membership payments
+      if payment.paymentable.present?
+        case payment.paymentable_type
+        when "Trip", "Activity"
+          payment.paymentable.title
+        when "Membership"
+          "Membership Payment"  # Memberships don't have a title, so use a generic label
+        else
+          "No associated Payment Item"
+        end
       else
         "No associated Payment Item"
       end
