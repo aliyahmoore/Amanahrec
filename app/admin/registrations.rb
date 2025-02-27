@@ -36,7 +36,7 @@ ActiveAdmin.register Registration do
     column :number_of_kids
     column :created_at
     column :updated_at
-    
+
     actions
   end
 

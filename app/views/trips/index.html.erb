@@ -1,6 +1,6 @@
 <% content_for :title, "Upcoming Trips" %>
 <h1 class="mt-3 text-center">Upcoming Trips</h1>
-<div class="row d-flex justify-content-center g-3 mt-5">
+<div class="row d-flex justify-content-center row-cols-2 row-cols-lg-3 row-cols-xl-4 g-3 mt-5">
   <% @trips.each do |trip| %>
     <%= render 'shared/item_card', item: trip %>
   <% end %>
