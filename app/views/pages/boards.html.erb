@@ -3,18 +3,18 @@
 <div class="row row-cols-1 row-cols-lg-2 g-4 mb-3">
   <% @boards.each do |board| %>
     <div class="col">
-  <div class="card h-100">
-    <% if board.image.attached? %>
-      <%= image_tag board.image.variant(resize_to_limit: [300, 200]), class: "card-img-top", alt: board.name %>
-    <% else %>
-      <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Default Image">
-    <% end %>
-    <div class="card-body">
-      <h5 class="card-title fs-3"><%= board.name %></h5>
-      <p class="card-subtitle text-muted fs-4"><%= board.position %></p>
-      <p class="card-text fs-4"><%= board.description %></p>
+      <div class="card h-100">
+        <% if board.image.attached? %>
+          <%= image_tag board.image.variant(resize_to_limit: [300, 200]), class: "card-img-top", alt: board.name %>
+        <% else %>
+          <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Default Image">
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title fs-3"><%= board.name %></h5>
+          <p class="card-subtitle text-muted fs-4"><%= board.position %></p>
+          <p class="card-text fs-4"><%= board.description %></p>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
   <% end %>
 </div>
