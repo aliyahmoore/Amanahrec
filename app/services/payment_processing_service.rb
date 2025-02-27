@@ -67,9 +67,10 @@ class PaymentProcessingService
 
     # Create a payment record with the given status
     def create_payment_record(session, status)
+      total_cost = session.amount_total / 100.0 
       Payment.create!(
         stripe_payment_id: session.id,
-        amount: @paymentable.is_a?(Membership) ? 10.0 : @paymentable.cost,
+        amount: @paymentable.is_a?(Membership) ? 10.0 : total_cost,
         status: status,
         user_id: @user.id,
         paymentable: @paymentable,
