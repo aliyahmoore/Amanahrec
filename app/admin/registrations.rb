@@ -32,8 +32,11 @@ ActiveAdmin.register Registration do
       end
     end
     column :status
+    column :number_of_adults
+    column :number_of_kids
     column :created_at
     column :updated_at
+    
     actions
   end
 
@@ -45,6 +48,9 @@ ActiveAdmin.register Registration do
       row :registrable_type
       row :registrable_id
       row :status
+      row :cost
+      row :number_of_adults
+      row :number_of_kids
       row :created_at
       row :updated_at
     end

@@ -13,7 +13,7 @@ class Registration < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    [ "created_at", "id", "id_value", "registrable_id", "registrable_type", "status", "updated_at", "user_id" ]
+    [ "created_at", "id", "id_value", "registrable_id", "registrable_type", "status", "updated_at", "user_id", "number_of_adults", "number_of_kids", "cost" ]
   end
 
   # Returns true if the registrable requires payment (i.e., it has a cost)
