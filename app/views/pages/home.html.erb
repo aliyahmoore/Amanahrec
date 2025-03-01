@@ -1,37 +1,35 @@
 <div class="background-image" style="background-image: url('<%= asset_path('BigBend.jpg') %>'); background-size: cover; background-position: center; height: 1500px; padding: 50px 0; position: relative;">
-  <div class="container">
-  </div>
 </div>
 <div class="mt-2"></div>
 <!-- Testimonials Section -->
 <div class="testimonials-section">
-  <div class="container py-5">
+  <div class="container-fluid py-5">
     <h2 class="text-center">What People Are Saying:</h2>
-    <div id="testimonialCarousel" class="carousel carousel-dark slide col-md-6 mx-auto" data-bs-ride="carousel">
+    <div id="testimonialCarousel" class="carousel carousel-dark slide mx-auto" data-bs-ride="carousel">
       <!-- Carousel Items -->
       <div class="carousel-inner">
         <% @testimonials.each_with_index do |testimonial, index| %>
           <div class="carousel-item <%= index == 0 ? 'active' : '' %>" data-bs-interval="<%= index == 0 ? '10000' : '2000' %>">
-            <div class="d-block w-100 text-center p-5 testimonial-content">
-              <p class="lead"><em><%= testimonial.text %></em></p>
-              <h6><%= testimonial.user.first_name %> <%= testimonial.user.last_name %></h6>
+            <div class="d-block w-100 text-center p-5">
+              <p class="lead fs-3"><em><%= testimonial.text %></em></p>
+              <h6 class = "fs-3"><%= testimonial.user.first_name %> <%= testimonial.user.last_name.first %>.</h6>
             </div>
           </div>
         <% end %>
       </div>
       <!-- Carousel Controls -->
       <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="carousel-control-prev-icon me-5 " aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
       </button>
       <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="carousel-control-next-icon ms-5" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>
     </div>
     <div class="text-center mt-4">
       <% if user_signed_in?  %>
-        <%= link_to 'Submit a Testimonial', new_testimonial_path, class: 'btn btn-primary' %>
+        <%= link_to 'Submit a Testimonial', new_testimonial_path, class: 'btn btn-primary fs-4' %>
       <% end %>
     </div>
   </div>

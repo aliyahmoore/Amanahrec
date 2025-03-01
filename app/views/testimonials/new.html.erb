@@ -1,14 +1,24 @@
 <div class="container my-5">
-  <h1 class="text-center mb-4" style="color: #57573F;">Submit a Testimonial</h1>
-  <div class="card mx-auto p-4 testimonial-new-card">
-    <%= form_with model: @testimonial, local: true do |f| %>
-      <div class="form-group mb-3">
-        <%= f.label :text, "Your Testimonial", class: "form-label", style: "color: #57573F;" %>
-        <%= f.text_area :text, rows: 5, class: "form-control", style: "border-color: #DACCB1; background-color: #E9E2D8;" %>
+  <h1 class="text-center mb-4 " style="color: #57573F;">Share Your Experience</h1>
+  <p class="text-center fs-3">We would love to hear about your experience with us!</p>
+
+  <div class="card mx-auto p-4 testimonial-new-card shadow-lg" style="max-width: 800px; border-radius: 12px; border: none;">
+    <%= form_with model: @testimonial, local: true, class: "needs-validation" do |f| %>
+    <div class="form-group mb-4">
+  <%= f.label :name, "Name:", class: "form-label fs-3", style: "color: #403f2b;" %>
+  <%= f.text_field :name, value: "#{current_user.first_name} #{current_user.last_name.first}.", 
+      class: "form-control p-3 fs-3", 
+      style: "border: 1px solid #DACCB1; background-color: #F8F5F0; border-radius: 8px;" %>
+</div>
+
+      <div class="form-group mb-4">
+        <%= f.label :text, "Testimonial:", class: "form-label fs-3", style: "color:  #403f2b;" %>
+        <%= f.text_area :text, rows: 5, class: "form-control p-3 fs-3", style: "border: 1px solid #DACCB1; background-color: #F8F5F0; border-radius: 8px;" %>
       </div>
+      
       <div class="form-actions text-center">
-        <%= f.submit "Submit", class: "btn custom-btn-success" %>
-        <%= link_to "Cancel", root_path, class: "btn custom-btn-secondary" %>
+        <%= f.submit "Submit", class: "btn btn-primary px-4 py-2 fs-4", style: "background-color: #e9e2d8; border: none; border-radius: 8px;" %>
+        <%= link_to "Cancel", root_path, class: "btn btn-light px-4 py-2 ms-2 fs-4", style: "border-radius: 8px; border: 1px solid #DACCB1;" %>
       </div>
     <% end %>
   </div>
