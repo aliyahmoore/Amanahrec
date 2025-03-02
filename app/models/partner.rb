@@ -1,6 +1,8 @@
 class Partner < ApplicationRecord
     has_one_attached :logo
 
+    validates :link, presence: true
+
     def self.ransackable_attributes(auth_object = nil)
         [ "created_at", "id", "name", "url", "updated_at" ]
       end
