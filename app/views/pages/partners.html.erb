@@ -5,7 +5,13 @@
     <div class="col-auto d-flex justify-content-center">
       <div class="partner-logo">
         <% if partner.logo.attached? %>
-          <%= image_tag partner.logo, alt: "Partner Logo", class: "img-fluid", style: "height: 100px;" %>
+          <% if partner.url.present? %>
+            <%= link_to partner.url, target: "_blank", rel: "noopener" do %>
+              <%= image_tag partner.logo, alt: partner.name, class: "img-fluid", style: "height: 100px;" %>
+            <% end %>
+          <% else %>
+            <%= image_tag partner.logo, alt: partner.name, class: "img-fluid", style: "height: 100px;" %>
+          <% end %>
         <% else %>
           <p>No Logo Available</p>
         <% end %>

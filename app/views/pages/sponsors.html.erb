@@ -6,7 +6,13 @@
       <div class="col-auto d-flex justify-content-center">
         <div class="sponsor-logo">
           <% if sponsor.logo.attached? %>
-            <%= image_tag sponsor.logo, alt: "Sponsor Logo", class: "img-fluid", style: "height: 200px;" %>
+            <% if sponsor.url.present? %>
+              <%= link_to sponsor.url, target: "_blank", rel: "noopener" do %>
+                <%= image_tag sponsor.logo, alt: sponsor.name, class: "img-fluid", style: "height: 200px;" %>
+              <% end %>
+            <% else %>
+              <%= image_tag sponsor.logo, alt: sponsor.name, class: "img-fluid", style: "height: 200px;" %>
+            <% end %>
           <% else %>
             <p>No Logo Available</p>
           <% end %>
