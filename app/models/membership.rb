@@ -17,6 +17,9 @@ class Membership < ApplicationRecord
     )
   end
 
+  validate :user_cannot_have_multiple_memberships, on: :create
+
+
   def self.ransackable_attributes(auth_object = nil)
     [ "end_date", "start_date", "status", "user_id" ]
   end
@@ -24,4 +27,12 @@ class Membership < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     [ "payments", "user" ]
   end
+
+  private
+  def user_cannot_have_multiple_memberships
+    if user&.memberships&.exists?
+      errors.add(:base, "You already have an active membership.")
+    end
+  end
+
 end

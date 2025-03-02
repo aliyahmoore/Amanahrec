@@ -1,6 +1,7 @@
 class PaymentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_paymentable, only: [ :create, :success ]
+  before_action :prevent_duplicate_membership, only: [:create]
 
   include Findable
 
@@ -54,5 +55,12 @@ class PaymentsController < ApplicationController
 
   def confirm_membership_subscription
     redirect_to root_url, notice: "Thank you for subscribing to our membership."
+  end
+
+  def prevent_duplicate_membership
+    if params[:paymentable_type] == "Membership" && current_user.membership_active?
+      flash[:alert] = "You already have an active membership."
+      redirect_to root_path
+    end
   end
 end

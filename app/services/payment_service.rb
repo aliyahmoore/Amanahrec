@@ -6,6 +6,9 @@ class PaymentService
   end
 
   def create_stripe_session
+    if membership_already_active?
+      raise "User already has an active membership subscription."
+    end
     customer = Stripe::Customer.create(
       email: @user.email,
       name: "#{@user.first_name} #{@user.last_name}"
@@ -14,9 +17,9 @@ class PaymentService
     mode = @paymentable.is_a?(Membership) ? "subscription" : "payment"
 
     Stripe::Checkout::Session.create(
-      payment_method_types: [ "card" ],
+      payment_method_types: ["card"],
       customer: customer.id,
-      line_items: line_items,
+      line_items: line_items(mode),  # Pass mode into line_items
       mode: mode,
       success_url: success_url,
       cancel_url: cancel_url,
@@ -42,11 +45,30 @@ class PaymentService
 
   private
 
-  def line_items
-    items = []
-    items << adult_line_item
-    items << kid_line_item
-    items
+  def membership_already_active?
+    return false unless @paymentable.is_a?(Membership)
+
+    Payment.exists?(
+      user_id: @user.id,
+      paymentable: @paymentable,
+      status: "succeeded" # Adjust this based on your Stripe webhook implementation
+    )
+  end
+
+  def line_items(mode)
+    if @paymentable.is_a?(Membership)
+      [{
+        price_data: {
+          currency: "usd",
+          unit_amount: 1000,  # Membership price (in cents)
+          product: product_id,
+          recurring: { interval: "month" } # Recurring for subscriptions
+        },
+        quantity: 1
+      }]
+    else
+      [adult_line_item, kid_line_item]
+    end
   end
 
   def adult_line_item
@@ -95,9 +117,15 @@ class PaymentService
 
   def payment_image
     if @paymentable.is_a?(Trip)
-      @paymentable.images.attached? ? [ @paymentable.images.first.url ] : []
+      @paymentable.images.attached? ? [@paymentable.images.first.url] : []
+    elsif @paymentable.is_a?(Activity)
+      @paymentable.image.attached? ? [@paymentable.image.url] : []
     else
-      @paymentable.image.attached? ? [ @paymentable.image.url ] : []
+      [] # Membership payments have no images
     end
+  end
+
+  def product_id
+    @paymentable.is_a?(Membership) ? ENV["STRIPE_MEMBERSHIP_PRODUCT_ID"] : nil
   end
 end
