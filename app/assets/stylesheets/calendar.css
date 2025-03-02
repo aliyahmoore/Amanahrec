@@ -1,42 +1,16 @@
-/* Container for each date */
-.date-wrapper {
-  position: relative;
-  display: inline-block;
-  width: 120px; /* Adjust the width to fit your design */
-  margin: 5px; /* Space between dates */
-  text-align: center; /* Centers content inside each date wrapper */
-}
-
-/* Border around each date */
-.date-box {
-  border: 2px solid #000; /* Black border around each date */
-  padding: 10px;
-  background-color: #fff; /* Optional: Background color for the date box */
-  border-radius: 5px; /* Optional: Rounded corners for the date box */
-}
-
 /* trip and activity styling */
 .trip {
   background-color: #E9E2D8;
   padding: 8px;
-  border-radius: 5px;
   margin-top: 5px;
 }
 
 .activity {
   background-color: #9cb691;
   padding: 8px;
-  border-radius: 5px;
   margin-top: 5px;
 }
 
-/* Containers for trips and activities */
-.trip-container, .activity-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; /* Centers child elements */
-  gap: 10px; /* Adds spacing between trip/activity boxes */
-}
 
 .trip, .activity {
   width: 180px; /* Fixed width for trip/activity boxes */
@@ -59,7 +33,6 @@
 .calendar {
   background-color: #DACCB1;
   padding: 10px;
-  border-radius: 30px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -73,16 +46,16 @@
 .today-link {
   position: relative;
   top: -10px;
-  color: #5C5C5C;
+  color: #40402e;
   text-decoration: none;
-  font-weight: bold;
+
   display: block;
   text-align: center;
   transition: color 0.3s ease;
 }
 
 .today-link:hover {
-  color: #333;
+  color: #928c73;
 }
 
 /* Styling for the today calendar container */
