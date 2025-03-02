@@ -11,7 +11,6 @@ index do
     else
       "No Logo Uploaded"
     end
-
   end
   actions
 end

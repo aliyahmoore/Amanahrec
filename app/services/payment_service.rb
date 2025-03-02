@@ -17,7 +17,7 @@ class PaymentService
     mode = @paymentable.is_a?(Membership) ? "subscription" : "payment"
 
     Stripe::Checkout::Session.create(
-      payment_method_types: ["card"],
+      payment_method_types: [ "card" ],
       customer: customer.id,
       line_items: line_items(mode),  # Pass mode into line_items
       mode: mode,
@@ -57,7 +57,7 @@ class PaymentService
 
   def line_items(mode)
     if @paymentable.is_a?(Membership)
-      [{
+      [ {
         price_data: {
           currency: "usd",
           unit_amount: 1000,  # Membership price (in cents)
@@ -65,9 +65,9 @@ class PaymentService
           recurring: { interval: "month" } # Recurring for subscriptions
         },
         quantity: 1
-      }]
+      } ]
     else
-      [adult_line_item, kid_line_item]
+      [ adult_line_item, kid_line_item ]
     end
   end
 
@@ -117,9 +117,9 @@ class PaymentService
 
   def payment_image
     if @paymentable.is_a?(Trip)
-      @paymentable.images.attached? ? [@paymentable.images.first.url] : []
+      @paymentable.images.attached? ? [ @paymentable.images.first.url ] : []
     elsif @paymentable.is_a?(Activity)
-      @paymentable.image.attached? ? [@paymentable.image.url] : []
+      @paymentable.image.attached? ? [ @paymentable.image.url ] : []
     else
       [] # Membership payments have no images
     end

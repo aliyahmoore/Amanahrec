@@ -34,5 +34,4 @@ class Membership < ApplicationRecord
       errors.add(:base, "You already have an active membership.")
     end
   end
-
 end
