@@ -113,7 +113,7 @@ config.action_mailer.smtp_settings = {
   domain: 'amanahrec.org',
   authentication: 'plain',
   user_name: 'apikey', # This must be 'apikey'
-  password: ENV['SENDGRID_API_KEY']
+  password: ENV['SENDGRID_API_KEY'],
   enable_starttls_auto: true
 }
 
