@@ -3,7 +3,7 @@ class Sponsor < ApplicationRecord
 
     validates :link, presence: true
     def self.ransackable_attributes(auth_object = nil)
-        [ "created_at", "id", "name", "url", "updated_at" ]
+        [ "created_at", "id", "name", "link", "updated_at" ]
       end
 
     def self.ransackable_associations(auth_object = nil)
