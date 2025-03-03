@@ -10,7 +10,7 @@
           <div class="card-body">
             <h5 class="card-title"><%= media_mention.name %></h5>
             <p class="card-text">
-              <%= truncate(media_mention.description.presence || "No description available.", length: 500) %>
+              <%= truncate(media_mention.description.presence || "No description available.", length: 200) %>
             </p>
             <p class="card-text text-muted">
               Published Date: <%= media_mention.published_date.strftime("%B %d, %Y") %>
