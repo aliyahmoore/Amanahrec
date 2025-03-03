@@ -1,4 +1,4 @@
-<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top footer-custom fs-3">
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top footer-custom">
   <div class="col-md-4 d-flex align-items-center ms-3">
     <span class="mb-3 mb-md-0">© 2025 Amanah Recreation Project</span>
   </div>
@@ -11,9 +11,9 @@
       <%= button_to "Become a Member!", 
                 payments_path(paymentable_type: "Membership", paymentable_id: current_user.id), 
                 method: :post, 
-                class: "btn become-member fs-4",  data: { turbo: false } %>
+                class: "btn become-member",  data: { turbo: false } %>
     <% else %>
-      <%= link_to "Become a Member!", new_user_session_path, class: "btn become-member fs-4" %>
+      <%= link_to "Become a Member!", new_user_session_path, class: "btn become-member" %>
     <% end %>
   </div>
   <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
