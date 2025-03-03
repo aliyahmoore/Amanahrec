@@ -6,7 +6,7 @@
       <div class="col-auto d-flex justify-content-center">
         <div class="sponsor-logo">
           <% if sponsor.logo.attached? %>
-            <% if sponsor.link.present? %>
+            <% if sponsor.link.present? && sponsor.link =~ /\A#{URI::regexp(['http', 'https'])}\z/ %>
               <%= link_to sponsor.link, target: "_blank" do %>
                 <%= image_tag sponsor.logo, alt: sponsor.name, class: "img-fluid", style: "height: 200px;" %>
               <% end %>
