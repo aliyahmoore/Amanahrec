@@ -11,10 +11,10 @@
         <!-- Paid: Redirect to Payments -->
         <%= button_to "Register and Pay", 
                   polymorphic_path([registrable, :payments], paymentable_type: registrable.class.name, paymentable_id: registrable.id), 
-                  method: :post, class: "btn btn-primary mb-3 fs-3", data: { turbo: false } %>
+                  method: :post, class: "btn btn-primary mb-3", data: { turbo: false } %>
       <% else %>
         <!-- Free: Direct Registration -->
-        <button type="button" class="btn btn-primary fs-3" data-bs-toggle="modal" data-bs-target="#registrationModal">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrationModal">
           Register
         </button>
       <% end %>
