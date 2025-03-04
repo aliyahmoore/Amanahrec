@@ -1,3 +1,9 @@
-<p>Welcome <%= @email %>!</p>
-<p>You can confirm your account email through the link below:</p>
+<p>Welcome <%= @resource.first_name %>!</p>
+<p>Please verify your email address.</p>
+<p>Use the following link to confirm your email address:</p>
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p>If you did not sign up for an account with Amanah Rec, please ignore this email.</p>
+
+<p>This is an automated message. Please do NOT reply to this email.</p>
+
+<p>Thanks!</p>
