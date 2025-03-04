@@ -1,9 +1,9 @@
 class User < ApplicationRecord
   has_many :testimonials, dependent: :destroy
-  has_one :membership
-  has_many :payments
+  has_one :membership, dependent: :destroy
+  has_many :payments, dependent: :destroy
 
-  has_many :registrations
+  has_many :registrations, dependent: :destroy
   has_many :activities, through: :registrations
   has_many :trips, through: :registrations
 

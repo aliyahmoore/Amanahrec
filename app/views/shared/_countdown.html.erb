@@ -1,12 +1,12 @@
 <% if item.general_registration_start.present? %>
   <% if Time.current > item.end_date %>
     <p class="registration-info text-center">
-      <span class="btn btn-outline-danger fs-5" style="pointer-trips: none;">
+      <span class="btn btn-outline-danger" style="pointer-trips: none;">
         Registration Closed
       </span>
     </p>
   <% elsif Time.current < item.general_registration_start %>
-    <p class="registration-info text-center fs-5">
+    <p class="registration-info text-center">
       <% if item.early_access_for_members %>
         Member Registrations Now Open </br> General Registration Opens In:
     <% else %>
@@ -18,13 +18,13 @@
 <% else %>
   <% if item.registrations.count >= item.capacity %>
     <p class="registration-info text-center ">
-      <span class="btn btn-outline-primary fs-5" style="pointer-trips: none;">
+      <span class="btn btn-outline-primary " style="pointer-trips: none;">
         SOLD OUT
       </span>
     </p>
   <% else %>
     <p class="registration-info text-center">
-      <span class="btn btn-outline-success fs-5" style="pointer-trips: none;">
+      <span class="btn btn-outline-success " style="pointer-trips: none;">
         General Registration Open!
       </span>
     </p>
