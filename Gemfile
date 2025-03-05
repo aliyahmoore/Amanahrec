@@ -82,3 +82,5 @@ gem "activestorage-cloudinary-service"
 gem "active_admin_datetimepicker", "~> 1.1"
 
 gem "chronic_duration", "~> 0.10.6"
+
+gem "devise-security", "~> 0.18.0"

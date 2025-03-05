@@ -10,7 +10,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable
+         :recoverable, :rememberable, :validatable, :confirmable,
+         :secure_validatable, :password_archivable
 
 
 
@@ -18,7 +19,9 @@ class User < ApplicationRecord
 
 
 
-  validates :first_name, :last_name, :email, :phone_number, :gender, :ethnicity, presence: true
+
+  validates :first_name, :last_name, :phone_number, :gender, :ethnicity, presence: true
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: "is not a valid email"}
 
 
   def has_paid_for?(paymentable)
