@@ -132,3 +132,36 @@ h4.card-title a {
   #activity-tabs .nav-link {
   color: #403f2b !important; /* Set your preferred color for inactive tabs */
 }
+
+/* Default form styles */
+.form-container {
+  border: 2px solid #808080;
+  padding: 15px;
+  border-radius: 5px;
+  width: 100%; /* Full width by default */
+  max-width: 300px; /* Default max width */
+}
+
+/* Medium screens (Tablets, 768px and up) */
+@media (min-width: 768px) {
+  .form-container {
+    max-width: 500px; /* Slightly larger */
+    padding: 20px;
+  }
+}
+
+/* Large screens (Desktops, 992px and up) */
+@media (min-width: 992px) {
+  .form-container {
+    max-width: 600px; /* More width on bigger screens */
+    padding: 25px;
+  }
+}
+
+/* Extra large screens (1200px and up) */
+@media (min-width: 1200px) {
+  .form-container {
+    max-width: 500px; /* Even wider for large screens */
+    padding: 30px;
+  }
+}

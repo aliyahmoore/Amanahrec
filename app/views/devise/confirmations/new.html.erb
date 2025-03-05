@@ -1,5 +1,5 @@
 <h2 class="text-center my-4" class="text-center mb-4">Resend confirmation instructions</h2>
-<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: "w-25 mx-auto form-container", style: "border: 2px solid #808080; padding: 15px; border-radius: 5px;" }) do |f| %>
+<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: "mx-auto form-container", style: "border: 2px solid #808080; padding: 15px; border-radius: 5px;" }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
   <!-- Email Field -->
   <div class="mb-3">
@@ -8,7 +8,7 @@
   </div>
   <!-- Submit Button -->
   <div class="mb-3 text-center">
-    <%= f.submit "Resend confirmation instructions", class: "btn btn-primary px-4" %>
+    <%= f.submit "Send", class: "btn btn-secondary px-4" %>
   </div>
 
  <div class="text-center">

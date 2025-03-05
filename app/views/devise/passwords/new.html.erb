@@ -1,5 +1,5 @@
  <h2 class="text-center my-3">Forgot Your Password?</h2>
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "w-25 mx-auto form-container", style: "border: 2px solid #808080; padding: 15px; border-radius: 5px;" }) do |f| %>
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "mx-auto form-container", style: "border: 2px solid #808080; padding: 15px; border-radius: 5px;" }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
   <!-- Email -->
   <div class="mb-3">
