@@ -20,8 +20,9 @@ class User < ApplicationRecord
 
 
 
-  validates :first_name, :last_name, :phone_number, :gender, :ethnicity, presence: true
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: "is not a valid email"}
+  validates :first_name, :last_name, :gender, :ethnicity, presence: true
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: "is not a valid email"}, uniqueness: true
+  validates :phone_number, phone: { possible: true, allow_blank: false, types: [:mobile, :fixed_line] }
 
 
   def has_paid_for?(paymentable)
@@ -30,6 +31,16 @@ class User < ApplicationRecord
 
   def membership_active?
     membership&.active?
+  end
+
+  def format_phone_number
+    parsed_number = Phonelib.parse(phone_number)
+    if parsed_number.valid?
+      # Store in international format
+      self.phone_number = parsed_number.international
+    else
+      errors.add(:phone_number, "is invalid")
+    end
   end
 
   def self.ransackable_attributes(auth_object = nil)
