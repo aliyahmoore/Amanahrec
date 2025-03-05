@@ -39,14 +39,6 @@ html, body {
   }
   
   /* Trip and Activity image styling */
-  .trip-image-preview,
-  .activity-image-preview {
-    height: 300px !important;
-    display: block;
-    margin: 0 auto; /* Centers the image */
-    object-fit: cover; /* Ensures consistent sizing without distortion */
-  }
-
   .item-image-preview {
     height: 500px;
     display: block;
@@ -64,19 +56,12 @@ html, body {
     color: #403F2B !important;
   }
 
-  /* Ensure consistent card styling */
-  .custom-card {
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  
-
   .about p {
     margin-bottom: 30px;
     line-height: 2;
     text-align: center;
 }
-h4.card-title a {
+  h4.card-title a {
     color: #403F2B;
     text-decoration: none;
     transition: color 0.3s ease;
@@ -86,31 +71,12 @@ h4.card-title a {
     color: #57573F;
   }
 
-
-  .card-text {
-    color: #403f2b !important;
-  }
-  
-  .card-title {
-    color: #403f2b !important;
-  }
-  
+  .card-text,
+  .card-title,
   .card-body .fa-calendar-alt, 
   .card-body .fa-map-marker-alt, 
   .card-body .fa-money-bill {
     color: #403f2b !important;
-  }
-
-  .activity-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .centered-image {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
   }
   
   .custom-accordion .accordion-button {

@@ -1,19 +1,17 @@
 /* trip and activity styling */
 .trip {
   background-color: #E9E2D8;
-  padding: 8px;
-  margin-top: 5px;
 }
 
 .activity {
   background-color: #9cb691;
-  padding: 8px;
-  margin-top: 5px;
 }
 
 
 .trip, .activity {
   width: 180px; /* Fixed width for trip/activity boxes */
+  padding: 8px;
+  margin-top: 5px;
 }
 
 /* Styling for trip and activity titles */
