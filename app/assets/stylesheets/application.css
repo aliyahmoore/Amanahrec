@@ -128,6 +128,7 @@ h4.card-title a {
   }
 
   /* Remove blue color for inactive tabs under #activity-tabs */
-#activity-tabs .nav-link {
+  #trip-tabs .nav-link,
+  #activity-tabs .nav-link {
   color: #403f2b !important; /* Set your preferred color for inactive tabs */
 }

@@ -1,7 +1,8 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: [ :show ]
     def index
-        @trips = Trip.order(start_date: :desc)
+      @current_trips = Trip.where('start_date >= ?', Date.today).order(:start_date)
+      @past_trips = Trip.where('start_date < ?', Date.today).order(:start_date)
     end
 
     def show
