@@ -14,15 +14,32 @@
       </div>
     </div>
     <!-- Email and Phone Number on the Same Line -->
-    <div class="row mb-3">
-      <div class="col-md-6">
+    <div class="mb-3">
+      <div class="col-md-12">
         <%= f.label :email, class: "form-label" %><span style="color: red;">*</span>
         <%= f.email_field :email, autocomplete: "email", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
       </div>
-      <div class="col-md-6">
-        <%= f.label :phone_number, class: "form-label" %><span style="color: red;">*</span>
-        <%= f.text_field :phone_number, placeholder: "e.g., +1 (123) 456-7890", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
-      </div>
+      
+
+
+<div class="mb-3 row">
+  <div class="col-md-4">
+    <% country_codes = Country.all.map { |c| c[1] } %>
+
+    <%= f.label :country_code, "Country Code" %>
+    <%= f.select :country_code, 
+        country_codes.map { |code| 
+            country = ISO3166::Country[code]
+            ["+#{country.country_code} #{country.name}", country.alpha2] 
+        }, 
+        {}, class: "form-select" %>
+  </div>
+
+  <div class="col-md-8">
+    <%= f.label :phone_number, "Phone Number" %>
+    <%= f.text_field :phone_number, class: "form-control", placeholder: "Enter your number" %>
+  </div>
+</div>
     </div>
     <!-- Password -->
     <div class="mb-3">

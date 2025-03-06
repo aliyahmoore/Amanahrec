@@ -14,15 +14,23 @@
       </div>
     </div>
     <!-- Email and Phone Number -->
-    <div class="row mb-3">
-      <div class="col-md-6">
+    
+      <div class="col-md-6 mb-3">
         <%= f.label :email, class: "form-label" %><span class="text-danger">*</span>
         <%= f.email_field :email, autocomplete: "email", required: true, class: "form-control bg-light" %>
       </div>
-      <div class="col-md-6">
-        <%= f.label :phone_number, class: "form-label" %><span class="text-danger">*</span>
-        <%= f.text_field :phone_number, placeholder: "e.g., +1 (123) 456-7890", required: true, class: "form-control bg-light" %>
-      </div>
+     <div class="mb-3 row">
+  <div class="col-md-4">
+    <% country_codes = Country.all.map { |c| c[1] } %>
+
+    <%= f.label :country_code, "Country Code" %>
+    <%= f.select :country_code, 
+        country_codes.map { |code| 
+            country = ISO3166::Country[code]
+            ["+#{country.country_code} #{country.name}", country.alpha2] 
+        }, 
+        {}, class: "form-select" %>
+  </div>
     </div>
     <div class="row mb-3">
       <div class="col-md-6">

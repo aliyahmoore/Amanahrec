@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  attr_accessor :country_code
+  before_save :format_phone_number
   has_many :testimonials, dependent: :destroy
   has_one :membership, dependent: :destroy
   has_many :payments, dependent: :destroy
@@ -11,7 +13,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable,
-         :secure_validatable, :password_archivable
+         :secure_validatable
 
 
 
@@ -21,7 +23,7 @@ class User < ApplicationRecord
 
 
   validates :first_name, :last_name, :gender, :ethnicity, presence: true
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: "is not a valid email"}, uniqueness: true
+  validates :email, email: true, uniqueness: true
   validates :phone_number, phone: { possible: true, allow_blank: false, types: [:mobile, :fixed_line] }
 
 
@@ -34,12 +36,8 @@ class User < ApplicationRecord
   end
 
   def format_phone_number
-    parsed_number = Phonelib.parse(phone_number)
-    if parsed_number.valid?
-      # Store in international format
-      self.phone_number = parsed_number.international
-    else
-      errors.add(:phone_number, "is invalid")
+    if country_code.present? && phone_number.present?
+      self.phone_number = "+#{country_code}#{phone_number}"
     end
   end
 

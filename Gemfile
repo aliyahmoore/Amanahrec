@@ -85,3 +85,6 @@ gem "chronic_duration", "~> 0.10.6"
 
 gem "devise-security", "~> 0.18.0"
 gem "phonelib", "~> 0.10.5"
+
+gem 'countries'
+
