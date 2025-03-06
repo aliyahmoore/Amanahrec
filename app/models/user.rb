@@ -15,16 +15,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable,
          :secure_validatable
 
-
-
-
-
-
-
-
   validates :first_name, :last_name, :gender, :ethnicity, presence: true
   validates :email, email: true, uniqueness: true
-  validates :phone_number, phone: { possible: true, allow_blank: false, types: [:mobile, :fixed_line] }
+  validates :phone_number, phone: { possible: true, allow_blank: false, types: [ :mobile, :fixed_line ] }
   validate :validate_phone_number
 
   def validate_phone_number
@@ -49,7 +42,7 @@ class User < ApplicationRecord
       self.phone_number = "+#{country_code}#{phone_number.gsub(/\D/, '')}"
     end
   end
-  
+
 
   def self.ransackable_attributes(auth_object = nil)
     [ "age_range", "email", "ethnicity", "first_name", "gender", "last_name", "phone_number", "role_id" ]

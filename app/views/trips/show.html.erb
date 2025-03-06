@@ -1,5 +1,4 @@
 <% content_for :title, @trip.title %>
-
 <div class="row align-items-center">
   <!-- Trip Image Section (Carousel) -->
   <div class="col-md-6 text-center">
@@ -21,7 +20,6 @@
       </button>
     </div>
   </div>
-
   <!-- Trip Details -->
   <div class="col-md-6">
     <h3 class="trip-title mt-3 text-center display-3"><%= @trip.title %></h3>
@@ -33,7 +31,6 @@
     <p><i class="fa-solid fa-money-bill"></i> <strong>:</strong>
       <%= @trip.cost.present? && @trip.cost > 0 ? number_to_currency(@trip.cost) : "Free" %>
     </p>
-
     <div class="trip-description">
       <h5><i class="fas fa-info-circle"></i> Description</h5>
       <p><%= @trip.description %></p>
@@ -45,12 +42,10 @@
         <p><strong>Sponsor(s):</strong> <%= @trip.sponsors %></p>
       <% end %>
       <p><strong>RSVP Deadline:</strong> <%= @trip.rsvp_deadline.strftime("%B %d, %Y %I:%M %p") %></p>
-
       <% if @trip.capacity.present? && @trip.registrations.count >= @trip.capacity %>
         <div class="btn btn-outline-primary" style="pointer-events: none;">SOLD OUT</div>
       <% end %>
     </div>
-
     <%= render 'shared/registration_status_actions', registrable: @trip %>
   </div>
 </div>

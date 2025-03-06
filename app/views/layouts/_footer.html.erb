@@ -2,12 +2,10 @@
   <div class="col-md-4 d-flex align-items-center ms-md-3 mb-2 mb-md-0">
     <span>© 2025 Amanah Recreation Project</span>
   </div>
-  
   <div class="d-flex align-items-center justify-content-center mb-2 mb-md-0">
     <i class="fa-solid fa-envelope me-2"></i>
     <a href="mailto:info@amanahrec.org">info@amanahrec.org</a>
   </div>
-
   <div class="mb-2 mb-md-0 text-center">
     <% if user_signed_in? %>
       <%= button_to "Become a Member!", 
@@ -18,7 +16,6 @@
       <%= link_to "Become a Member!", new_user_session_path, class: "btn become-member" %>
     <% end %>
   </div>
-
   <ul class="nav col-md-4 justify-content-center justify-content-md-end list-unstyled d-flex">
     <li class="me-2">Follow us:</li>
     <li class="mx-2"><a href="https://www.instagram.com/amanahrec/" role="button">

@@ -81,8 +81,7 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.default_options = {
-  from: 'no-reply@amanahrec.org',
+  from: "no-reply@amanahrec.org",
   reply_to: nil  # This ensures the "Reply-To" is removed
 }
-
 end
