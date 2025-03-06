@@ -1,5 +1,5 @@
 <% content_for :title, "Activities & Events" %>
-<h1 class="mt-3 text-center">Activities & Events</h1>
+<h1 class="my-3 text-center">Activities & Events</h1>
 <!-- Tab Navigation -->
 <div class="d-flex justify-content-center">
   <ul class="nav nav-underline" id="activity-tabs">
@@ -15,7 +15,7 @@
 <div class="tab-content" id="activity-tabs-content">
   <!-- Current Activities Tab -->
   <div class="tab-pane fade show active" id="current">
-    <div class="row d-flex justify-content-center g-3 row-cols-2 row-cols-lg-3 row-cols-xl-4 mt-5">
+    <div class="row d-flex justify-content-center g-3 row-cols-2 row-cols-lg-3 row-cols-xl-4 mt-2">
       <% @current_activities.each do |activity| %>
         <%= render 'shared/item_card', item: activity %>
       <% end %>
