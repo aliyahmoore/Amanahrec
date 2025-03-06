@@ -25,6 +25,4 @@ class Membership < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     [ "payments", "user" ]
   end
-
-
 end

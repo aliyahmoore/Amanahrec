@@ -64,7 +64,7 @@ ActiveAdmin.register User do
 
     # Add a custom action item for approving users
     action_item :approve, only: :show do
-        link_to 'Approve User', approve_admin_user_path(user), method: :put unless user.approved?
+        link_to "Approve User", approve_admin_user_path(user), method: :put unless user.approved?
     end
 
   # Adding filters
