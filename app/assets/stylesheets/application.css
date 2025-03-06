@@ -127,7 +127,7 @@ html, body {
 /* Extra large screens (1200px and up) */
 @media (min-width: 1200px) {
   .form-container {
-    max-width: 500px; /* Even wider for large screens */
+    max-width: 650px; /* Even wider for large screens */
     padding: 30px;
   }
 }
