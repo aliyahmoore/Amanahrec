@@ -23,6 +23,20 @@ ActiveAdmin.register User do
     end
   end
 
+  batch_action :approve, form: true do |ids|
+    batch_action_collection.find(ids).each do |user|
+      user.update(approved: true)
+    end
+    redirect_to collection_path, notice: "Selected users have been approved."
+  end
+
+  batch_action :unapprove, form: true do |ids|
+    batch_action_collection.find(ids).each do |user|
+      user.update(approved: false)
+    end
+    redirect_to collection_path, notice: "Selected users have been unapproved."
+  end
+
   # Customizing the index page
   index do
   selectable_column
@@ -34,10 +48,24 @@ ActiveAdmin.register User do
   column :gender
   column :age_range
   column :ethnicity
+  column :confirmed_at
+  column :approved
   column :created_at
   column :updated_at
   actions
   end
+
+      # Add an action to approve individual users
+      member_action :approve, method: :put do
+        user = User.find(params[:id])
+        user.update(approved: true)
+        redirect_to admin_user_path(user), notice: "User has been approved."
+    end
+
+    # Add a custom action item for approving users
+    action_item :approve, only: :show do
+        link_to 'Approve User', approve_admin_user_path(user), method: :put unless user.approved?
+    end
 
   # Adding filters
   filter :first_name
@@ -59,10 +87,18 @@ ActiveAdmin.register User do
   row :gender
   row :age_range
   row :ethnicity
+  row :confirmed_at
+  row :approved
   row :created_at
   row :updated_at
   end
   active_admin_comments
+  end
+
+  member_action :approve, method: :put do
+    user = User.find(params[:id])
+    user.update(approved: true)
+    redirect_to resource_path(user), notice: "User approved."
   end
 
   # Form for creating and editing a user

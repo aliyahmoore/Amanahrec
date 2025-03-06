@@ -1,6 +1,5 @@
 class User < ApplicationRecord
   attr_accessor :country_code
-  before_save :format_phone_number
   has_many :testimonials, dependent: :destroy
   has_one :membership, dependent: :destroy
   has_many :payments, dependent: :destroy
