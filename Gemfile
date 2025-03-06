@@ -50,6 +50,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem "letter_opener"
 end
 
 group :test do
@@ -81,3 +82,8 @@ gem "activestorage-cloudinary-service"
 gem "active_admin_datetimepicker", "~> 1.1"
 
 gem "chronic_duration", "~> 0.10.6"
+
+gem "devise-security", "~> 0.18.0"
+gem "phonelib", "~> 0.10.5"
+
+gem "countries"

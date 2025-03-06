@@ -1,4 +1,5 @@
 class TestimonialsController < ApplicationController
+    before_action :check_approval, only: [ :create, :new ]
     before_action :authenticate_user!, only: [ :new, :create ]
 
     def index

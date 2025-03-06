@@ -1,4 +1,5 @@
 class RegistrationsController < ApplicationController
+  before_action :check_approval
   before_action :set_registrable, only: [ :create ]
   ALLOWED_REGISTRABLE_TYPES = [ "Activity", "Trip" ].freeze
 

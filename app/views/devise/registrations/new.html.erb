@@ -14,42 +14,52 @@
       </div>
     </div>
     <!-- Email and Phone Number on the Same Line -->
-    <div class="row mb-3">
+    <div class="mb-3 row">
       <div class="col-md-6">
         <%= f.label :email, class: "form-label" %><span style="color: red;">*</span>
         <%= f.email_field :email, autocomplete: "email", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
       </div>
       <div class="col-md-6">
-        <%= f.label :phone_number, class: "form-label" %><span style="color: red;">*</span>
-        <%= f.text_field :phone_number, placeholder: "e.g., +1 (123) 456-7890", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
+        <%= f.label :phone_number, "Phone Number" , class: "form-label"%>
+        <div class="input-group d-flex">
+          <% country_codes = Country.all.map { |c| c[1] } %>
+          <!-- Country Code Dropdown -->
+          <%= f.select :country_code, 
+        country_codes.map { |code| 
+            country = ISO3166::Country[code]
+            ["+#{country.country_code} #{country.name}", country.country_code] 
+        }, 
+        {}, class: "form-select input-group country-code-select" %>
+          <!-- Phone Number Input -->
+          <%= f.text_field :phone_number, class: "form-control flex-grow-2", style: "background-color: #f0f0f0;"%>
+        </div>
       </div>
-    </div>
-    <!-- Password -->
-    <div class="mb-3">
-      <%= f.label :password, class: "form-label" %><span style="color: red;">*</span>
-      <% if @minimum_password_length %>
-        <em class="text-muted">(Minimum <%= @minimum_password_length %> characters)</em>
-      <% end %><br />
-      <%= f.password_field :password, autocomplete: "new-password", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
-    </div>
-    <!-- Password Confirmation -->
-    <div class="mb-3">
-      <%= f.label :password_confirmation, class: "form-label" %><span style="color: red;">*</span>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
-    </div>
-    <!-- Gender, Age Range, and Ethnicity on the Same Line -->
-    <div class="row mb-3">
-      <div class="col-md-4">
-        <%= f.label :gender, class: "form-label" %><span style="color: red;">*</span>
-        <%= f.select :gender, options_for_select([["Male", "Male"], ["Female", "Female"]]), { prompt: "Select Gender" }, required: true, class: "form-select", style: "background-color: #f0f0f0;" %>
+      <!-- Password -->
+      <div class="mb-3">
+        <%= f.label :password, class: "form-label" %><span style="color: red;">*</span>
+        <% if @minimum_password_length %>
+          <em class="text-muted">(Minimum <%= @minimum_password_length %> characters)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "new-password", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
       </div>
-      <div class="col-md-4">
-        <%= f.label :age_range, class: "form-label" %><span style="color: red;">*</span>
-        <%= f.select :age_range, options_for_select([["18-25", "18-25"], ["26-35", "26-35"], ["36-45", "36-45"], ["46-55", "46-55"], ["56+", "56+"]]), { prompt: "Select Age Range" }, required: true, class: "form-select", style: "background-color: #f0f0f0;" %>
+      <!-- Password Confirmation -->
+      <div class="mb-3">
+        <%= f.label :password_confirmation, class: "form-label" %><span style="color: red;">*</span>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
       </div>
-      <div class="col-md-4">
-        <%= f.label :ethnicity, class: "form-label" %><span style="color: red;">*</span>
-        <%= f.select :ethnicity, options_for_select([
+      <!-- Gender, Age Range, and Ethnicity on the Same Line -->
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <%= f.label :gender, class: "form-label" %><span style="color: red;">*</span>
+          <%= f.select :gender, options_for_select([["Male", "Male"], ["Female", "Female"]]), { prompt: "Select Gender" }, required: true, class: "form-select", style: "background-color: #f0f0f0;" %>
+        </div>
+        <div class="col-md-4">
+          <%= f.label :age_range, class: "form-label" %><span style="color: red;">*</span>
+          <%= f.select :age_range, options_for_select([["18-25", "18-25"], ["26-35", "26-35"], ["36-45", "36-45"], ["46-55", "46-55"], ["56+", "56+"]]), { prompt: "Select Age Range" }, required: true, class: "form-select", style: "background-color: #f0f0f0;" %>
+        </div>
+        <div class="col-md-4">
+          <%= f.label :ethnicity, class: "form-label" %><span style="color: red;">*</span>
+          <%= f.select :ethnicity, options_for_select([
           ["White", "White"],
           ["Black or African American", "Black or African American"],
           ["Asian", "Asian"],
@@ -59,11 +69,11 @@
           ["Other", "Other"],
           ["Prefer not to say", "Prefer not to say"]
         ]), { prompt: "Select Ethnicity" }, required: true, class: "form-select", style: "background-color: #f0f0f0;" %>
+        </div>
       </div>
-    </div>
-    <!-- Submit Button -->
-    <div class="mb-3 text-center">
-      <%= f.submit "Sign up", class: "btn btn-secondary text-white px-4" %>
-    </div>
-  <% end %>
-</div>
+      <!-- Submit Button -->
+      <div class="mb-3 text-center">
+        <%= f.submit "Sign up", class: "btn btn-secondary text-white px-4" %>
+      </div>
+    <% end %>
+  </div>
