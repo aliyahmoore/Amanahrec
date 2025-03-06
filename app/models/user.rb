@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   attr_accessor :country_code
+  before_save :format_phone_number
   has_many :testimonials, dependent: :destroy
   has_one :membership, dependent: :destroy
   has_many :payments, dependent: :destroy
@@ -14,7 +15,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable,
          :secure_validatable
 
-  validates :first_name, :last_name, :gender, :ethnicity, presence: true
+  validates :gender, inclusion: { in: ['Male', 'Female']}, presence: true
+  validates :age_range, inclusion: { in: ['18-25', '26-35', '36-45', '46-55', '56+'], message: "%{value} is not a valid age range" }, presence: true
+  validates :ethnicity, inclusion: { in: ['White', 'Black or African American', 'Asian', 'American Indian or Alaska Native', 'Native Hawaiian or Other Pacific Islander', 'Hispanic or Latino', 'Other', 'Prefer not to say'], message: "%{value} is not a valid ethnicity" }, presence: true
+  validates :first_name, :last_name, presence: true
   validates :email, email: true, uniqueness: true
   validates :phone_number, phone: { possible: true, allow_blank: false, types: [ :mobile, :fixed_line ] }
   validate :validate_phone_number
