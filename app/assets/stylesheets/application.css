@@ -131,3 +131,7 @@ html, body {
     padding: 30px;
   }
 }
+
+.country-code-select {
+  max-width: 90px; 
+}

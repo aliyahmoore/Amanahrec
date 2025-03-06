@@ -30,7 +30,7 @@ class User < ApplicationRecord
   def validate_phone_number
     # Format the phone number with country code
     full_number = "+#{country_code}#{phone_number.gsub(/\D/, '')}" if country_code.present? && phone_number.present?
-
+    puts full_number
     if full_number && !Phonelib.valid?(full_number)
       errors.add(:phone_number, "is not a valid phone number")
     end
@@ -45,7 +45,6 @@ class User < ApplicationRecord
   end
 
   def format_phone_number
-    puts "Country Code: #{country_code}"  # Debugging output
     if country_code.present? && phone_number.present? && !phone_number.start_with?("+")
       self.phone_number = "+#{country_code}#{phone_number.gsub(/\D/, '')}"
     end

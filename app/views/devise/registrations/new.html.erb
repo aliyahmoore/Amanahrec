@@ -22,17 +22,18 @@
       
 <div class="col-md-6">
   <%= f.label :phone_number, "Phone Number" , class: "form-label"%>
-  <div class="input-group" id="country-code">
+  <div class="input-group d-flex">
+    <% country_codes = Country.all.map { |c| c[1] } %>
     <!-- Country Code Dropdown -->
     <%= f.select :country_code, 
-        Country.all.map { |c| 
-          country = ISO3166::Country[c[1]]  # Assuming you have ISO3166 Country codes
-          ["+#{country.country_code} #{country.name}", country.alpha2] 
+        country_codes.map { |code| 
+            country = ISO3166::Country[code]
+            ["+#{country.country_code} #{country.name}", country.country_code] 
         }, 
-        {}, class: "form-select flex-grow-0 w-auto" %>
-
-    <!-- Phone Number Input Field -->
-    <%= f.text_field :phone_number, class: 'form-control flex-grow-1', placeholder: 'Enter your phone number',  style: "background-color: #f0f0f0;" %>
+        {}, class: "form-select input-group country-code-select" %>
+    
+    <!-- Phone Number Input -->
+    <%= f.text_field :phone_number, class: "form-control flex-grow-2", style: "background-color: #f0f0f0;"%>
   </div>
 </div>
     <!-- Password -->
