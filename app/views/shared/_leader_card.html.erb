@@ -1,7 +1,7 @@
 <div class="col">
   <div class="card h-100">
     <% if leader.image.attached? %>
-  <%= image_tag leader.image, class: "card-img-top", alt: leader.name %>
+  <%= image_tag leader.image, class: "card-img-top", id: "leader-image", alt: leader.name %>
     <% end %>
     <div class="card-body">
       <h5 class="card-title"><%= leader.name %></h5>

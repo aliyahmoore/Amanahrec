@@ -135,3 +135,8 @@ html, body {
 .country-code-select {
   max-width: 90px; 
 }
+.media-image-preview,
+#leader-image{
+  height: 500px; /* Fixed height for all images */
+  object-fit: cover;
+}
