@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   def home
     @testimonials = Testimonial.where(approved: true).order(created_at: :desc)
+    @gallery_images = Dir.glob("app/assets/images/gallery/*").map { |img| ActionController::Base.helpers.asset_path(img.gsub("app/assets/images/", "")) }
   end
 
   def calendar
