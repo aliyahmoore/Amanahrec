@@ -41,7 +41,7 @@ ActiveAdmin.register Leader do
       f.input :name
       f.input :position
       f.input :description
-      f.input :role, as: :select, collection: ['Board', 'Team'], prompt: 'Select Role Type'
+      f.input :role, as: :select, collection: [ "Board", "Team" ], prompt: "Select Role Type"
       f.input :order
       f.input :image, as: :file
     end
