@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_06_154947) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_07_175349) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -98,14 +98,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_06_154947) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "boards", force: :cascade do |t|
-    t.string "name"
-    t.string "position"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -115,6 +107,17 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_06_154947) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "leaders", force: :cascade do |t|
+    t.string "name"
+    t.string "position"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "role"
+    t.integer "order"
+    t.index ["role", "position"], name: "index_leaders_on_role_and_position", unique: true
   end
 
   create_table "media_mentions", force: :cascade do |t|
@@ -173,12 +176,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_06_154947) do
     t.decimal "cost"
     t.index ["registrable_type", "registrable_id"], name: "index_registrations_on_registrable"
     t.index ["user_id"], name: "index_registrations_on_user_id"
-  end
-
-  create_table "roles", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "sponsors", force: :cascade do |t|

@@ -21,8 +21,9 @@ class PagesController < ApplicationController
     @sponsors = Sponsor.all
   end
 
-  def boards
-    @boards = Board.all
+  def leaders
+    @board_members = Leader.where(role: "Board").order(:order)
+    @team_members = Leader.where(role: "Team").order(:order)
   end
 
   def media_mentions

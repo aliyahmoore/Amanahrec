@@ -1,0 +1,14 @@
+<div class="col">
+  <div class="card h-100">
+    <% if leader.image.attached? %>
+      <%= image_tag leader.image.variant(resize_to_fill: [300, 300]), class: "card-img-top", alt: leader.name %>
+    <% else %>
+      <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Default Image">
+    <% end %>
+    <div class="card-body">
+      <h5 class="card-title"><%= leader.name %></h5>
+      <p class="card-subtitle text-muted"><%= leader.position %></p>
+      <p class="card-text"><%= leader.description %></p>
+    </div>
+  </div>
+</div>

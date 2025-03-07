@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get "partners", to: "pages#partners"
   get "sponsors", to: "pages#sponsors"
   get "media_mentions", to: "pages#media_mentions"
-  get "boards", to: "pages#boards"
+  get "leaders", to: "pages#leaders"
   root "pages#home"
 
   # User-specific routes

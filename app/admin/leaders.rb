@@ -1,5 +1,5 @@
-ActiveAdmin.register Board do
-  permit_params :name, :position, :description, :image
+ActiveAdmin.register Leader do
+  permit_params :name, :position, :description, :image, :role, :order
 
   # Index view customization
   index do
@@ -8,6 +8,8 @@ ActiveAdmin.register Board do
     column :name
     column :position
     column :description
+    column :role
+    column :order
     column :created_at
     column :updated_at
     actions
@@ -19,9 +21,11 @@ ActiveAdmin.register Board do
       row :name
       row :position
       row :description
-      row :image do |board|
-        if board.image.attached?
-          image_tag board.image.variant(resize_to_limit: [ 300, 300 ])
+      row :role
+      row :order
+      row :image do |leader|
+        if leader.image.attached?
+          image_tag leader.image.variant(resize_to_limit: [ 300, 300 ])
         else
           "No image uploaded"
         end
@@ -37,6 +41,8 @@ ActiveAdmin.register Board do
       f.input :name
       f.input :position
       f.input :description
+      f.input :role, as: :select, collection: ['Board', 'Team'], prompt: 'Select Role Type'
+      f.input :order
       f.input :image, as: :file
     end
     f.actions
