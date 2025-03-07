@@ -15,7 +15,7 @@
 <div class="tab-content" id="trip-tabs-content">
   <!-- Current trips Tab -->
   <div class="tab-pane fade show active" id="current">
-    <div class="row d-flex justify-content-center g-3 row-cols-2 row-cols-lg-3 row-cols-xl-4 mt-2">
+    <div class="row d-flex justify-content-center g-3 row-cols-1 row-cols-lg-3 row-cols-xl-4 mt-2">
       <% @current_trips.each do |trip| %>
         <%= render 'shared/item_card', item: trip %>
       <% end %>
