@@ -15,11 +15,15 @@
 <div class="tab-content" id="activity-tabs-content">
   <!-- Current Activities Tab -->
   <div class="tab-pane fade show active" id="current">
+   <% if @current_activities.any? %>
     <div class="row d-flex justify-content-center g-3 row-cols-1 row-cols-lg-3 row-cols-xl-4 mt-2">
       <% @current_activities.each do |activity| %>
         <%= render 'shared/item_card', item: activity %>
       <% end %>
     </div>
+    <% else %>
+    <p class="text-center mt-4">No upcoming activities or events at the moment. Check back soon!</p>
+  <% end %>
   </div>
   <!-- Past Activities Tab -->
   <div class="tab-pane fade" id="past">

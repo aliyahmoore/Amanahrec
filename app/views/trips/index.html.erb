@@ -15,11 +15,15 @@
 <div class="tab-content" id="trip-tabs-content">
   <!-- Current trips Tab -->
   <div class="tab-pane fade show active" id="current">
+    <% if @current_trips.any? %>
     <div class="row d-flex justify-content-center g-3 row-cols-1 row-cols-lg-3 row-cols-xl-4 mt-2">
       <% @current_trips.each do |trip| %>
         <%= render 'shared/item_card', item: trip %>
       <% end %>
     </div>
+  <% else %>
+    <p class="text-center mt-4">No upcoming trips at the moment. Check back soon!</p>
+  <% end %>
   </div>
   <!-- Past trips Tab -->
   <div class="tab-pane fade" id="past">
