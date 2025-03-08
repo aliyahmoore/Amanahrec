@@ -27,7 +27,7 @@
   </div>
   <!-- Past trips Tab -->
   <div class="tab-pane fade" id="past">
-    <div class="row d-flex justify-content-center g-3 row-cols-2 row-cols-lg-3 row-cols-xl-4 mt-5">
+    <div class="row d-flex justify-content-center g-3 row-cols-1 row-cols-lg-3 row-cols-xl-4 mt-5">
       <% @past_trips.each do |activity| %>
         <%= render 'shared/item_card', item: activity %>
       <% end %>
