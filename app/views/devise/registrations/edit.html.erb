@@ -14,22 +14,27 @@
       </div>
     </div>
     <!-- Email and Phone Number -->
+    <div class="row"> 
     <div class="col-md-6 mb-3">
       <%= f.label :email, class: "form-label" %><span class="text-danger">*</span>
       <%= f.email_field :email, autocomplete: "email", required: true, class: "form-control bg-light" %>
     </div>
-    <div class="mb-3 row">
-      <div class="col-md-4">
-        <% country_codes = Country.all.map { |c| c[1] } %>
-        <%= f.label :country_code, "Country Code" %>
-        <%= f.select :country_code, 
+    <div class="col-md-6">
+        <%= f.label :phone_number, "Phone Number" , class: "form-label"%>
+        <div class="input-group d-flex">
+          <% country_codes = Country.all.map { |c| c[1] } %>
+          <!-- Country Code Dropdown -->
+          <%= f.select :country_code, 
         country_codes.map { |code| 
             country = ISO3166::Country[code]
-            ["+#{country.country_code} #{country.name}", country.alpha2] 
+            ["+#{country.country_code} #{country.name}", country.country_code] 
         }, 
-        {}, class: "form-select" %>
+        {}, class: "form-select input-group country-code-select" %>
+          <!-- Phone Number Input -->
+          <%= f.text_field :phone_number, class: "form-control flex-grow-2", style: "background-color: #f0f0f0;"%>
+        </div>
       </div>
-    </div>
+      </div>
     <div class="row mb-3">
       <div class="col-md-6">
         <%= f.label :current_password, class: "form-label" %><span class="text-danger">*</span>
