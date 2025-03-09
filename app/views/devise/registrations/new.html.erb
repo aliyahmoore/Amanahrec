@@ -23,13 +23,22 @@
         <%= f.label :phone_number, "Phone Number" , class: "form-label"%>
         <div class="input-group d-flex">
           <% country_codes = Country.all.map { |c| c[1] } %>
+          <% default_country= ISO3166::Country['US'] %>
           <!-- Country Code Dropdown -->
           <%= f.select :country_code, 
-        country_codes.map { |code| 
-            country = ISO3166::Country[code]
-            ["+#{country.country_code} #{country.name}", country.country_code] 
-        }, 
-        {}, class: "form-select input-group country-code-select" %>
+      country_codes.map { |code| 
+        country = ISO3166::Country[code]
+        # Manually ensure that "United States" appears for +1
+        if country.country_code == '1' && country.alpha2 != 'US'
+          # Skip US territories with the same country code (like Virgin Islands)
+          nil
+        else
+          ["+#{country.country_code} #{country.name}", country.country_code]
+        end
+      }.compact,
+      { selected: default_country.country_code }, 
+      class: "form-select input-group country-code-select" 
+    %>
           <!-- Phone Number Input -->
           <%= f.text_field :phone_number, class: "form-control flex-grow-2", style: "background-color: #f0f0f0;"%>
         </div>
