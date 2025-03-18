@@ -1,88 +1,90 @@
-<h2 class="text-center mt-3 mb-4">Sign Up</h2>
-<div class="d-flex justify-content-center mb-3">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "form-container", style: "border: 2px solid #808080; padding: 20px; border-radius: 5px;" }) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
-    <!-- First and Last Name on the Same Line -->
-    <div class="row mb-3">
-      <div class="col-md-6">
-        <%= f.label :first_name, class: "form-label" %><span style="color: red;">*</span>
-        <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
-      </div>
-      <div class="col-md-6">
-        <%= f.label :last_name, class: "form-label" %><span style="color: red;">*</span>
-        <%= f.text_field :last_name, autocomplete: "last_name", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
+<h2 class="text-center my-3">Sign Up</h2>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "mx-auto form-container mb-3" }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <!-- First and Last Name -->
+  <div class="row mb-3">
+    <div class="col-md-6 col-12">
+      <%= f.label :first_name, class: "form-label" %><span class="text-danger">*</span>
+      <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", required: true, class: "form-control bg-light" %>
+    </div>
+    <div class="col-md-6 col-12">
+      <%= f.label :last_name, class: "form-label" %><span class="text-danger">*</span>
+      <%= f.text_field :last_name, autocomplete: "last_name", required: true, class: "form-control bg-light" %>
+    </div>
+  </div>
+
+  <!-- Email and Phone Number -->
+  <div class="row mb-3">
+    <div class="col-md-6 col-12">
+      <%= f.label :email, class: "form-label" %><span class="text-danger">*</span>
+      <%= f.email_field :email, autocomplete: "email", required: true, class: "form-control bg-light" %>
+    </div>
+    <div class="col-md-6 col-12">
+      <%= f.label :phone_number, "Phone Number", class: "form-label" %>
+      <div class="input-group d-flex">
+        <% country_codes = Country.all.map { |c| c[1] } %>
+        <% default_country = ISO3166::Country['US'] %>
+        <!-- Country Code Dropdown -->
+        <%= f.select :country_code, 
+          country_codes.map { |code| 
+            country = ISO3166::Country[code]
+            if country.country_code == '1' && country.alpha2 != 'US'
+              nil
+            else
+              ["+#{country.country_code} #{country.name}", country.country_code]
+            end
+          }.compact,
+          { selected: default_country.country_code }, 
+          class: "form-select input-group country-code-select" 
+        %>
+        <%= f.text_field :phone_number, class: "form-control flex-grow-2 bg-light" %>
       </div>
     </div>
-    <!-- Email and Phone Number on the Same Line -->
-    <div class="mb-3 row">
-      <div class="col-md-6">
-        <%= f.label :email, class: "form-label" %><span style="color: red;">*</span>
-        <%= f.email_field :email, autocomplete: "email", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
-      </div>
-      <div class="col-md-6">
-        <%= f.label :phone_number, "Phone Number" , class: "form-label"%>
-        <div class="input-group d-flex">
-          <% country_codes = Country.all.map { |c| c[1] } %>
-          <% default_country= ISO3166::Country['US'] %>
-          <!-- Country Code Dropdown -->
-          <%= f.select :country_code, 
-      country_codes.map { |code| 
-        country = ISO3166::Country[code]
-        # Manually ensure that "United States" appears for +1
-        if country.country_code == '1' && country.alpha2 != 'US'
-          # Skip US territories with the same country code (like Virgin Islands)
-          nil
-        else
-          ["+#{country.country_code} #{country.name}", country.country_code]
-        end
-      }.compact,
-      { selected: default_country.country_code }, 
-      class: "form-select input-group country-code-select" 
-    %>
-          <!-- Phone Number Input -->
-          <%= f.text_field :phone_number, class: "form-control flex-grow-2", style: "background-color: #f0f0f0;"%>
-        </div>
-      </div>
-      <!-- Password -->
-      <div class="mb-3">
-        <%= f.label :password, class: "form-label" %><span style="color: red;">*</span>
-        <% if @minimum_password_length %>
-          <em class="text-muted">(Minimum <%= @minimum_password_length %> characters)</em>
-        <% end %><br />
-        <%= f.password_field :password, autocomplete: "new-password", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
-      </div>
-      <!-- Password Confirmation -->
-      <div class="mb-3">
-        <%= f.label :password_confirmation, class: "form-label" %><span style="color: red;">*</span>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, class: "form-control", style: "background-color: #f0f0f0;" %>
-      </div>
-      <!-- Gender, Age Range, and Ethnicity on the Same Line -->
-      <div class="row mb-3">
-        <div class="col-md-4">
-          <%= f.label :gender, class: "form-label" %><span style="color: red;">*</span>
-          <%= f.select :gender, options_for_select([["Male", "Male"], ["Female", "Female"]]), { prompt: "Select Gender" }, required: true, class: "form-select", style: "background-color: #f0f0f0;" %>
-        </div>
-        <div class="col-md-4">
-          <%= f.label :age_range, class: "form-label" %><span style="color: red;">*</span>
-          <%= f.select :age_range, options_for_select([["18-25", "18-25"], ["26-35", "26-35"], ["36-45", "36-45"], ["46-55", "46-55"], ["56+", "56+"]]), { prompt: "Select Age Range" }, required: true, class: "form-select", style: "background-color: #f0f0f0;" %>
-        </div>
-        <div class="col-md-4">
-          <%= f.label :ethnicity, class: "form-label" %><span style="color: red;">*</span>
-          <%= f.select :ethnicity, options_for_select([
-          ["White", "White"],
-          ["Black or African American", "Black or African American"],
-          ["Asian", "Asian"],
-          ["American Indian or Alaska Native", "American Indian or Alaska Native"],
-          ["Native Hawaiian or Other Pacific Islander", "Native Hawaiian or Other Pacific Islander"],
-          ["Hispanic or Latino", "Hispanic or Latino"],
-          ["Other", "Other"],
-          ["Prefer not to say", "Prefer not to say"]
-        ]), { prompt: "Select Ethnicity" }, required: true, class: "form-select", style: "background-color: #f0f0f0;" %>
-        </div>
-      </div>
-      <!-- Submit Button -->
-      <div class="mb-3 text-center">
-        <%= f.submit "Sign up", class: "btn btn-secondary text-white px-4" %>
-      </div>
-    <% end %>
   </div>
+
+  <!-- Password -->
+  <div class="row">
+    <div class="col-md-6 col-12 mb-3">
+      <%= f.label :password, class: "form-label" %><span class="text-danger">*</span>
+      <% if @minimum_password_length %>
+        <em class="text-muted">(Minimum <%= @minimum_password_length %> characters)</em>
+      <% end %>
+      <%= f.password_field :password, autocomplete: "new-password", required: true, class: "form-control bg-light" %>
+    </div>
+    <div class="col-md-6 col-12 mb-3">
+      <%= f.label :password_confirmation, class: "form-label" %><span class="text-danger">*</span>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, class: "form-control bg-light" %>
+    </div>
+  </div>
+
+  <!-- Gender, Age Range, and Ethnicity -->
+  <div class="row">
+    <div class="col-md-4 col-12 mb-3">
+      <%= f.label :gender, class: "form-label" %><span class="text-danger">*</span>
+      <%= f.select :gender, options_for_select([["Male", "Male"], ["Female", "Female"]]), { prompt: "Select Gender" }, required: true, class: "form-select bg-light" %>
+    </div>
+    <div class="col-md-4 col-12 mb-3">
+      <%= f.label :age_range, class: "form-label" %><span class="text-danger">*</span>
+      <%= f.select :age_range, options_for_select([["18-25", "18-25"], ["26-35", "26-35"], ["36-45", "36-45"], ["46-55", "46-55"], ["56+", "56+"]]), { prompt: "Select Age Range" }, required: true, class: "form-select bg-light" %>
+    </div>
+    <div class="col-md-4 col-12 mb-3">
+      <%= f.label :ethnicity, class: "form-label" %><span class="text-danger">*</span>
+      <%= f.select :ethnicity, options_for_select([
+        ["White", "White"],
+        ["Black or African American", "Black or African American"],
+        ["Asian", "Asian"],
+        ["American Indian or Alaska Native", "American Indian or Alaska Native"],
+        ["Native Hawaiian or Other Pacific Islander", "Native Hawaiian or Other Pacific Islander"],
+        ["Hispanic or Latino", "Hispanic or Latino"],
+        ["Other", "Other"],
+        ["Prefer not to say", "Prefer not to say"]
+      ]), { prompt: "Select Ethnicity" }, required: true, class: "form-select bg-light" %>
+    </div>
+  </div>
+
+  <!-- Submit Button -->
+  <div class="mb-3 text-center">
+    <%= f.submit "Sign Up", class: "btn btn-secondary text-white px-4" %>
+  </div>
+<% end %>

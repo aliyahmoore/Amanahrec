@@ -9,13 +9,11 @@
       <small class="text-muted d-block">(<%= @minimum_password_length %> characters minimum)</small>
     <% end %>
     <%= f.password_field :password, autofocus: true, autocomplete: "new-password", required: true, placeholder: "Enter new password", class: "form-control" %>
-    <small class="text-danger">Password is a required field</small>
   </div>
   <!-- Confirm New Password -->
   <div class="mb-3">
     <%= f.label :password_confirmation, "Confirm new password", class: "form-label" %>
     <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, placeholder: "Re-enter new password", class: "form-control" %>
-    <small class="text-danger">Password confirmation is a required field</small>
   </div>
   <!-- Submit Button -->
   <div class="mb-3 text-center">
