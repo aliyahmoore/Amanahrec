@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   def home
     @testimonials = Testimonial.where(approved: true).order(created_at: :desc)
     @gallery_images = Dir.glob("app/assets/images/gallery/*")
-                     .sort_by { |img| File.basename(img).split('_').first.to_i } 
+                     .sort_by { |img| File.basename(img).split("_").first.to_i }
                      .map { |img| ActionController::Base.helpers.asset_path(img.gsub("app/assets/images/", "")) }
 end
 

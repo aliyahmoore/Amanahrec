@@ -7,7 +7,6 @@
       <div class="d-flex align-items-center justify-content-center text-center mb-2">
         <p class="mb-0"><%= date.day %></p>
       </div>
-      
       <!-- Trips Section -->
       <% trips = events.select { |e| e.is_a?(Trip) } %>
       <% if trips.any? %>
@@ -22,7 +21,6 @@
           <% end %>
         </div>
       <% end %>
-      
       <!-- Activities Section -->
       <% activities = events.select { |e| e.is_a?(Activity) } %>
       <% if activities.any? %>
@@ -37,7 +35,6 @@
           <% end %>
         </div>
       <% end %>
-      
     <% end %>
   </div>
 </div>

@@ -1,7 +1,6 @@
 <h2 class="text-center my-3">Sign Up</h2>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "mx-auto form-container mb-3" }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-
   <!-- First and Last Name -->
   <div class="row mb-3">
     <div class="col-md-6 col-12">
@@ -13,7 +12,6 @@
       <%= f.text_field :last_name, autocomplete: "last_name", required: true, class: "form-control bg-light" %>
     </div>
   </div>
-
   <!-- Email and Phone Number -->
   <div class="row mb-3">
     <div class="col-md-6 col-12">
@@ -42,7 +40,6 @@
       </div>
     </div>
   </div>
-
   <!-- Password -->
   <div class="row">
     <div class="col-md-6 col-12 mb-3">
@@ -57,7 +54,6 @@
       <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, class: "form-control bg-light" %>
     </div>
   </div>
-
   <!-- Gender, Age Range, and Ethnicity -->
   <div class="row">
     <div class="col-md-4 col-12 mb-3">
@@ -82,7 +78,6 @@
       ]), { prompt: "Select Ethnicity" }, required: true, class: "form-select bg-light" %>
     </div>
   </div>
-
   <!-- Submit Button -->
   <div class="mb-3 text-center">
     <%= f.submit "Sign Up", class: "btn btn-secondary text-white px-4" %>

@@ -8,14 +8,12 @@
           <span class="visually-hidden"><%= t('simple_calendar.previous', default: 'Previous') %></span>
         <% end %>
       </div>
-      
       <!-- Current Month and Year -->
       <h1 class="mx-2 mb-0">
         <time datetime="<%= start_date.strftime('%Y-%m') %>">
           <%= t('date.month_names')[start_date.month] %> <%= start_date.year %>
         </time>
       </h1>
-
       <!-- Next Month Link -->
       <div class="next-link-container">
         <%= link_to calendar.url_for_next_view, class: 'next-link text-decoration-none' do %>
@@ -25,12 +23,10 @@
       </div>
     </div>
   </div>
-
   <!-- Today Button -->
   <div class="calendar-today-container">
     <%= link_to t('simple_calendar.today', default: 'Today'), calendar.url_for_today_view, class: 'today-link' %>
   </div>
-
   <!-- Calendar Table -->
   <div class="table-responsive">
     <table class="table table-striped">
