@@ -39,6 +39,13 @@ html, body {
     border: none !important;
   }
   
+  .carousel-item img {
+    object-fit: cover; /* Ensures images fill the space without distortion */
+    height: 1200px;      /* Adjust this value based on your design */
+    width: 100%;        /* Ensures full width within the carousel */
+    aspect-ratio: 16 / 9; /* Maintains consistent aspect ratio */
+  }
+
   /* Trip and Activity image styling */
   .item-image-preview {
     height: 500px;
