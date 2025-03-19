@@ -1,23 +1,21 @@
 <% content_for :title, "Our Sponsors" %>
 <h1 class="text-center my-3">Our Sponsors</h1>
-<div class="container">
-  <div class="row justify-content-center gap-3 mb-3">
-    <% @sponsors.each do |sponsor| %>
-      <div class="col-auto d-flex justify-content-center">
-        <div class="sponsor-logo">
-          <% if sponsor.logo.attached? %>
-            <% if sponsor.link.present?%>
-              <%= link_to sponsor.link, target: "_blank" do %>
-                <%= image_tag sponsor.logo, alt: sponsor.name, class: "img-fluid", style: "height: 150px;" %>
-              <% end %>
-            <% else %>
+<div class="row justify-content-center gap-3 mb-3">
+  <% @sponsors.each do |sponsor| %>
+    <div class="col-auto d-flex justify-content-center">
+      <div class="sponsor-logo">
+        <% if sponsor.logo.attached? %>
+          <% if sponsor.link.present? %>
+            <%= link_to sanitize(sponsor.link), target: "_blank", rel: "noopener noreferrer" do %>
               <%= image_tag sponsor.logo, alt: sponsor.name, class: "img-fluid", style: "height: 150px;" %>
             <% end %>
           <% else %>
-            <p>No Logo Available</p>
+            <%= image_tag sponsor.logo, alt: sponsor.name, class: "img-fluid", style: "height: 150px;" %>
           <% end %>
-        </div>
+        <% else %>
+          <p>No Logo Available</p>
+        <% end %>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>
