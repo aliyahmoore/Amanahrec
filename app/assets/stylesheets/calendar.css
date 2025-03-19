@@ -7,24 +7,15 @@
   background-color: #9cb691;
 }
 
-
-.trip, .activity {
-  width: 180px; /* Fixed width for trip/activity boxes */
-  padding: 8px;
-  margin-top: 5px;
-}
-
 /* Styling for trip and activity titles */
 .trip-title, .activity-title {
   color: #363636;
   text-decoration: none;
-  font-size: 1.2rem;
   font-weight: bold;
 }
 
 .trip-time, .activity-time {
   color: #5c5c5c;
-  font-size: 0.9rem;
 }
 
 /* Calendar container styling */
@@ -60,4 +51,15 @@
 .calendar-today-container {
   text-align: center;
   margin-top: 10px;
+}
+
+.calendar-heading {
+  display: flex;
+  align-items: center; /* Vertically center the items */
+  justify-content: center; /* Horizontally center the items */
+}
+
+.prev-link-container, .next-link-container {
+  display: flex;
+  align-items: center; /* Vertically center the arrows */
 }

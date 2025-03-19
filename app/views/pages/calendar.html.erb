@@ -2,14 +2,16 @@
 <div class="container my-4">
   <!-- Calendar Wrapper -->
   <div class="calendar">
-    <%= month_calendar events: @trips do |date, trips| %>
+    <%= month_calendar events: (@trips + @activities) do |date, events| %>
       <!-- Display Date -->
-      <div class="border p-2 text-center">
-        <strong class="d-block"><%= date.day %></strong>
+      <div class="d-flex align-items-center justify-content-center text-center mb-2">
+        <p class="mb-0"><%= date.day %></p>
       </div>
+      
       <!-- Trips Section -->
+      <% trips = events.select { |e| e.is_a?(Trip) } %>
       <% if trips.any? %>
-        <div class="trip-container">
+        <div class="trip-container text-center">
           <% trips.each do |trip| %>
             <div class="trip">
               <%= link_to trip.title, trip_path(trip), class: "trip-title" %><br>
@@ -20,11 +22,12 @@
           <% end %>
         </div>
       <% end %>
+      
       <!-- Activities Section -->
-      <% activities_on_date = @activities.select { |activity| activity.start_date.to_date == date } %>
-      <% if activities_on_date.any? %>
-        <div class="activity-container">
-          <% activities_on_date.each do |activity| %>
+      <% activities = events.select { |e| e.is_a?(Activity) } %>
+      <% if activities.any? %>
+        <div class="activity-container text-center">
+          <% activities.each do |activity| %>
             <div class="activity">
               <%= link_to activity.title, activity_path(activity), class: "activity-title" %><br>
               <small class="activity-time">
@@ -34,6 +37,7 @@
           <% end %>
         </div>
       <% end %>
+      
     <% end %>
   </div>
 </div>
