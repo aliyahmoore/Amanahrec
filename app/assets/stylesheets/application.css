@@ -38,12 +38,20 @@ html, body {
     color: #e9e2d8 !important; /* Light Beige */
     border: none !important;
   }
+  .carousel-inner {
+    height: 1200px;       /* Default height for desktop */
+    overflow: hidden;    /* Ensures no overflow issues */
+  }
   
-  .carousel-item img {
-    object-fit: cover; /* Ensures images fill the space without distortion */
-    height: 1200px;      /* Adjust this value based on your design */
-    width: 100%;        /* Ensures full width within the carousel */
-    aspect-ratio: 16 / 9; /* Maintains consistent aspect ratio */
+  @media (max-width: 768px) {
+    .carousel-inner {
+      height: 250px;     /* Fixed height for mobile */
+    }
+  
+    .carousel-item img {
+      height: auto;      /* Maintain original image dimensions */
+      width: 100%;       /* Ensures full width */
+    }
   }
 
   /* Trip and Activity image styling */
