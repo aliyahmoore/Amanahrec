@@ -45,13 +45,18 @@
 .navbar-toggler:focus,
 .navbar-toggler:active {
   outline: none !important;
-  border: 1px solid #403F2B; /* Optional: Customize the border here */
+  border: none !important; /* Optional: Customize the border here */
   box-shadow: none !important; /* Removes the thick shadow effect */
 }
 
 /* Dropdown Menu */
-.navbar .dropdown-menu {
-  left: auto;
+
+.dropdown-menu {
+  position: absolute !important;
+  top: 100% !important;  /* Ensures it appears below the button */
+  left: 0;
+  z-index: 1050; /* Ensures it appears above other elements */
+  display: none; /* Keeps it hidden by default */
 }
 
 .dropdown-item {
@@ -59,6 +64,18 @@
   font-size: 1rem;
   padding: 0.5rem 1rem;
   transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+@media (max-width: 768px) { /* Adjust breakpoint if needed */
+  .dropdown-menu {
+    right: auto !important; /* Resets the end alignment */
+    left: 0 !important; /* Aligns it normally */
+  }
+}
+
+.dropdown-toggle:focus, .dropdown-toggle:active {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .dropdown-item:hover,
