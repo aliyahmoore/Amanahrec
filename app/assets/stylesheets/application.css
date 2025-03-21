@@ -38,19 +38,27 @@ html, body {
     color: #e9e2d8 !important; /* Light Beige */
     border: none !important;
   }
-  .carousel-inner {
-    height: 1200px;       /* Default height for desktop */
-    overflow: hidden;    /* Ensures no overflow issues */
+  
+  #galleryCarousel .carousel-inner {
+    width: 100%; /* Set the width of the carousel container */
+    height: 1000px; /* Set the desired height for the carousel */
+    overflow: hidden; /* Ensure the overflow is hidden */
   }
   
-  @media (max-width: 768px) {
-    .carousel-inner {
-      height: 250px;     /* Fixed height for mobile */
-    }
+  #galleryCarousel .carousel-item {
+    width: 100%;
+    height: 100%;
+  }
   
-    .carousel-item img {
-      height: auto;      /* Maintain original image dimensions */
-      width: 100%;       /* Ensures full width */
+  #galleryCarousel .carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the container without distortion */
+  }
+  
+  @media (max-width: 767.98px) {
+    #galleryCarousel .carousel-inner {
+      height: 300px; /* Adjust height for mobile screens */
     }
   }
 

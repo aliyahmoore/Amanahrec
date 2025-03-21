@@ -2,7 +2,7 @@
   <div class="carousel-inner">
     <% @gallery_images.each_with_index do |image, index| %>
       <div class="carousel-item <%= 'active' if index == 0 %>">
-        <img src="<%= image %>" class="d-block w-100 shadow" alt="Gallery Image">
+        <img src="<%= image %>" class="d-block w-100 shadow carousel-image" alt="Gallery Image">
       </div>
     <% end %>
   </div>
