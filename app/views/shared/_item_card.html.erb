@@ -16,7 +16,7 @@
           <%= item.start_date.strftime("%B %d, %Y %I:%M %p") %> - <%= item.end_date.strftime("%I:%M %p") %>
         <% else %>
           <!-- Multi-day event (Show only dates) -->
-          <%= item.start_date.strftime("%B %d, %Y") %> - <%= item.end_date.strftime("%B %d, %Y") %>
+          <%= item.start_date.strftime("%B %d, %Y %I:%M %p") %> - <%= item.end_date.strftime("%B %d, %Y %I:%M %p") %>
         <% end %>
       </p>
       <p class="card-text">

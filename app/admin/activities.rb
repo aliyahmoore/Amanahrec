@@ -59,7 +59,9 @@ ActiveAdmin.register Activity do
   show do
     attributes_table do
       row :title
-      row :description
+      row :description do |resource|
+        simple_format(resource.description)
+      end
       row :start_date do |activity|
         activity.start_date.strftime("%B %d, %Y %I:%M %p") if activity.start_date
       end
