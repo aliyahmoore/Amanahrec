@@ -98,7 +98,7 @@ ActiveAdmin.register Activity do
   form do |f|
     f.inputs "Activity Details" do
       f.input :title
-      f.input :description
+      f.input :description, as: :quill_editor
       f.input :start_date, as: :datetime_picker
       f.input :end_date, as: :datetime_picker
       f.input :location

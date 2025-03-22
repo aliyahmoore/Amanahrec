@@ -87,3 +87,5 @@ gem "devise-security", "~> 0.18.0"
 gem "phonelib", "~> 0.10.5"
 
 gem "countries"
+
+gem "activeadmin_quill_editor", "~> 1.3"
