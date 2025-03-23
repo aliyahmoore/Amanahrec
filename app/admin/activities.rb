@@ -99,8 +99,8 @@ ActiveAdmin.register Activity do
     f.inputs "Activity Details" do
       f.input :title
       f.input :description, as: :quill_editor
-      f.input :start_date, as: :datetime_picker
-      f.input :end_date, as: :datetime_picker
+      f.input :start_date, as: :date_time_picker, datepicker_options: {step: 15} 
+      f.input :end_date, as: :date_time_picker, datepicker_options: {step: 15}
       f.input :location
       f.input :capacity
       f.input :cost do |activity|
@@ -109,7 +109,7 @@ ActiveAdmin.register Activity do
       f.input :what_to_bring
       f.input :rules
       f.input :notes
-      f.input :general_registration_start, as: :datetime_picker
+      f.input :general_registration_start, as: :date_time_picker, datepicker_options: {step: 15}
       f.input :early_access_for_members
       f.input :early_access_days
     end

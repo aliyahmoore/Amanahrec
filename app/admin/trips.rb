@@ -101,15 +101,15 @@ ActiveAdmin.register Trip do
     f.inputs "Trip Details" do
       f.input :title
       f.input :description, as: :quill_editor
-      f.input :start_date, as: :datetime_picker
-      f.input :end_date, as: :datetime_picker
+      f.input :start_date, as: :date_time_picker, datepicker_options: {step: 15}
+      f.input :end_date, as: :date_time_picker, datepicker_options: {step: 15}
       f.input :location
       f.input :capacity
       f.input :cost
       f.input :childcare
       f.input :sponsors
-      f.input :general_registration_start, as: :datetime_picker
-      f.input :rsvp_deadline, as: :datetime_picker
+      f.input :general_registration_start, as: :date_time_picker, datepicker_options: {step: 15}
+      f.input :rsvp_deadline, as: :date_time_picker, datepicker_options: {step: 15}
       f.input :early_access_for_members
       f.input :early_access_days
     end
