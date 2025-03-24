@@ -10,7 +10,7 @@ class Trip < ApplicationRecord
     has_many_attached :images
 
     validates :title, :description, :start_date, :end_date, :capacity, :location, :rsvp_deadline, presence: true
-    validates :cost, numericality: { greater_than_or_equal_to: 0 }
+    validates :adult_cost, :kid_cost, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
     validate :rsvp_deadline_must_be_valid
 
     has_many :registrations, as: :registrable
@@ -40,7 +40,7 @@ class Trip < ApplicationRecord
     end
 
     def self.ransackable_attributes(auth_object = nil)
-      [ "capacity", "childcare", "cost", "early_access_for_members", "end_date", "general_registration_start", "location", "rsvp_deadline", "start_date", "title" ]
+      [ "capacity", "childcare", "adult_cost", "kid_cost", "early_access_for_members", "end_date", "general_registration_start", "location", "rsvp_deadline", "start_date", "title" ]
     end
 
     def self.ransackable_associations(auth_object = nil)

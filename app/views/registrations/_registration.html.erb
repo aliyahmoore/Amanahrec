@@ -11,7 +11,7 @@
     </p>
     <p>
       <i class="fa-solid fa-money-bill"></i> <strong>:</strong>
-      <%= registration.registrable.cost.present? && registration.registrable.cost > 0 ? number_to_currency(registration.registrable.cost) : "Free" %>
+      <%= registration.registrable.adult_cost.present? && registration.registrable.adult_cost > 0 ? number_to_currency(registration.registrable.adult_cost) : "Free" %>
     </p>
     <% if registration.registrable.present? %>
       <%= link_to "View Details", 

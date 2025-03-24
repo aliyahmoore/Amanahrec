@@ -1,6 +1,6 @@
 ActiveAdmin.register Trip do
   permit_params :title, :description, :start_date, :end_date, :location, :capacity,
-                :rsvp_deadline, :childcare, :sponsors, :cost, :early_access_for_members,
+                :rsvp_deadline, :childcare, :sponsors, :adult_cost, :kid_cost, :early_access_for_members,
                 :early_access_days, :general_registration_start, :user_id, images: []
 
   # Find the slug
@@ -33,8 +33,11 @@ ActiveAdmin.register Trip do
       trip.end_date.strftime("%B %d, %Y %I:%M %p") if trip.end_date
     end
     column :location
-    column :cost do |trip|
-      number_to_currency(trip.cost, unit: "$", precision: 2)
+    column :adult_cost do |trip|
+      number_to_currency(trip.adult_cost, unit: "$", precision: 2)
+    end
+    column :kid_cost do |trip|
+      number_to_currency(trip.kid_cost, unit: "$", precision: 2)
     end
     column :capacity
     column :general_registration_start do |trip|
@@ -63,8 +66,11 @@ ActiveAdmin.register Trip do
         trip.end_date.strftime("%B %d, %Y %I:%M %p") if trip.end_date
       end
       row :location
-      row :cost do |trip|
-        number_to_currency(trip.cost, unit: "$", precision: 2)
+      row :adult_cost do |trip|
+        number_to_currency(trip.adult_cost, unit: "$", precision: 2)
+      end
+      row :kid_cost do |trip|
+        number_to_currency(trip.kid_cost, unit: "$", precision: 2)
       end
       row :capacity
       row :general_registration_start do |trip|
@@ -101,15 +107,20 @@ ActiveAdmin.register Trip do
     f.inputs "Trip Details" do
       f.input :title
       f.input :description, as: :quill_editor
-      f.input :start_date, as: :date_time_picker, datepicker_options: {step: 15}
-      f.input :end_date, as: :date_time_picker, datepicker_options: {step: 15}
+      f.input :start_date, as: :date_time_picker, datepicker_options: { step: 15 }
+      f.input :end_date, as: :date_time_picker, datepicker_options: { step: 15 }
       f.input :location
       f.input :capacity
-      f.input :cost
+      f.input :adult_cost do |trip|
+        number_to_currency(trip.cost, unit: "$", precision: 2)
+      end
+      f.input :kid_cost do |trip|
+        number_to_currency(trip.cost, unit: "$", precision: 2)
+      end
       f.input :childcare
       f.input :sponsors
-      f.input :general_registration_start, as: :date_time_picker, datepicker_options: {step: 15}
-      f.input :rsvp_deadline, as: :date_time_picker, datepicker_options: {step: 15}
+      f.input :general_registration_start, as: :date_time_picker, datepicker_options: { step: 15 }
+      f.input :rsvp_deadline, as: :date_time_picker, datepicker_options: { step: 15 }
       f.input :early_access_for_members
       f.input :early_access_days
     end

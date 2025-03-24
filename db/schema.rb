@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_07_175349) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_23_023137) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -74,13 +74,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_07_175349) do
     t.text "what_to_bring"
     t.text "rules"
     t.text "notes"
-    t.decimal "cost", precision: 8, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "early_access_for_members"
     t.integer "early_access_days"
     t.datetime "general_registration_start"
     t.string "slug"
+    t.decimal "adult_cost", precision: 8, scale: 2, default: "0.0", null: false
+    t.decimal "kid_cost", precision: 8, scale: 2
     t.index ["slug"], name: "index_activities_on_slug", unique: true
   end
 
@@ -203,7 +204,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_07_175349) do
     t.datetime "rsvp_deadline"
     t.boolean "childcare"
     t.string "sponsors"
-    t.decimal "cost", precision: 8, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "early_access_for_members", default: false, null: false
@@ -211,6 +211,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_07_175349) do
     t.datetime "general_registration_start"
     t.integer "capacity"
     t.string "slug"
+    t.decimal "adult_cost", precision: 8, scale: 2, default: "0.0", null: false
+    t.decimal "kid_cost", precision: 8, scale: 2
     t.index ["slug"], name: "index_trips_on_slug", unique: true
   end
 

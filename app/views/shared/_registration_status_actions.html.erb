@@ -7,7 +7,7 @@
     </p>
   <% elsif (registrable.early_access_for_members? && current_user&.membership_active?) || registrable.general_registration_open? %>
     <% if registrable.present? %>  <!-- Check if registrable is present -->
-      <% if registrable.cost.to_i > 0 %>
+      <% if registrable.adult_cost.to_i > 0 %>
         <!-- Paid: Redirect to Payments -->
         <%= button_to "Register and Pay", 
                   polymorphic_path([registrable, :payments], paymentable_type: registrable.class.name, paymentable_id: registrable.id), 

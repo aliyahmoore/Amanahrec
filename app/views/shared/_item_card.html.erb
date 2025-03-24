@@ -24,7 +24,16 @@
       </p>
       <p class="card-text">
         <i class="fa-sharp-duotone fa-solid fa-money-bill"></i> <strong>:</strong>
-        <%= item.cost.present? && item.cost > 0 ? number_to_currency(item.cost) : "Free" %>
+        <% if item.adult_cost.present? && item.adult_cost > 0 %>
+          Adult: <%= number_to_currency(item.adult_cost) %>,
+        <% else %>
+          Adult: Free,
+        <% end %>
+        <% if item.kid_cost.present? && item.kid_cost > 0 %>
+          Kids: <%= number_to_currency(item.kid_cost) %><br>
+        <% else %>
+          Kids: Free<br>
+        <% end %>
       </p>
       <!-- Member Early Access Badge -->
       <%= render 'shared/early_access_badge', item: item %>

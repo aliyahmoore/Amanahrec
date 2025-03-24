@@ -67,7 +67,10 @@ class PaymentService
         quantity: 1
       } ]
     else
-      [ adult_line_item, kid_line_item ]
+      items = []
+      items << adult_line_item if @paymentable.adult_cost.present?
+      items << kid_line_item if @paymentable.kid_cost.present?
+      items
     end
   end
 
@@ -75,7 +78,7 @@ class PaymentService
     {
       price_data: {
         currency: "usd",
-        unit_amount: (payment_amount * 100).to_i, # Full price
+        unit_amount: (@paymentable.adult_cost * 100).to_i, # Full price
         product_data: {
           name: "Adult Ticket",
           description: "Full-priced ticket for an adult",
@@ -95,7 +98,7 @@ class PaymentService
     {
       price_data: {
         currency: "usd",
-        unit_amount: (payment_amount * 0.7 * 100).to_i, # 30% discount
+        unit_amount: (@paymentable.kid_cost  * 100).to_i,
         product_data: {
           name: "Child Ticket",
           description: "Discounted ticket for a child",
@@ -109,10 +112,6 @@ class PaymentService
       },
       quantity: 1
     }
-  end
-
-  def payment_amount
-    @paymentable.is_a?(Membership) ? 1000 : @paymentable.cost
   end
 
   def payment_image

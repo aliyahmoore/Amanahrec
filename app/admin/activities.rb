@@ -1,6 +1,6 @@
 ActiveAdmin.register Activity do
   permit_params :title, :description, :start_date, :end_date, :location, :capacity,
-                :what_to_bring, :rules, :notes, :cost, :early_access_for_members,
+                :what_to_bring, :rules, :notes, :adult_cost, :kid_cost, :early_access_for_members,
                 :early_access_days, :general_registration_start, :user_id, :image
 
   # Find the slug
@@ -34,8 +34,11 @@ ActiveAdmin.register Activity do
     end
     column :location
     column :capacity
-    column :cost do |activity|
-      number_to_currency(activity.cost, unit: "$", precision: 2)
+    column :adult_cost do |activity|
+      number_to_currency(activity.adult_cost, unit: "$", precision: 2)
+    end
+    column :kid_cost do |activity|
+      number_to_currency(activity.kid_cost, unit: "$", precision: 2)
     end
     column :general_registration_start do |activity|
       activity.general_registration_start.strftime("%B %d, %Y %I:%M %p") if activity.general_registration_start
@@ -69,8 +72,11 @@ ActiveAdmin.register Activity do
         activity.end_date.strftime("%B %d, %Y %I:%M %p") if activity.end_date
       end
       row :location
-      row :cost do |activity|
-        number_to_currency(activity.cost, unit: "$", precision: 2)
+      row :adult_cost do |activity|
+        number_to_currency(activity.adult_cost, unit: "$", precision: 2)
+      end
+      row :kid_cost do |activity|
+        number_to_currency(activity.kid_cost, unit: "$", precision: 2)
       end
       row :capacity
       row :general_registration_start do |activity|
@@ -99,17 +105,20 @@ ActiveAdmin.register Activity do
     f.inputs "Activity Details" do
       f.input :title
       f.input :description, as: :quill_editor
-      f.input :start_date, as: :date_time_picker, datepicker_options: {step: 15} 
-      f.input :end_date, as: :date_time_picker, datepicker_options: {step: 15}
+      f.input :start_date, as: :date_time_picker, datepicker_options: { step: 15 }
+      f.input :end_date, as: :date_time_picker, datepicker_options: { step: 15 }
       f.input :location
       f.input :capacity
-      f.input :cost do |activity|
+      f.input :adult_cost do |activity|
+        number_to_currency(activity.cost, unit: "$", precision: 2)
+      end
+      f.input :kid_cost do |activity|
         number_to_currency(activity.cost, unit: "$", precision: 2)
       end
       f.input :what_to_bring
       f.input :rules
       f.input :notes
-      f.input :general_registration_start, as: :date_time_picker, datepicker_options: {step: 15}
+      f.input :general_registration_start, as: :date_time_picker, datepicker_options: { step: 15 }
       f.input :early_access_for_members
       f.input :early_access_days
     end
@@ -125,7 +134,6 @@ ActiveAdmin.register Activity do
   filter :start_date
   filter :end_date
   filter :location
-  filter :cost
   filter :early_access_for_members
   filter :general_registration_start
 end

@@ -48,7 +48,6 @@ ActiveAdmin.register Registration do
       row :registrable_type
       row :registrable_id
       row :status
-      row :cost
       row :number_of_adults
       row :number_of_kids
       row :created_at

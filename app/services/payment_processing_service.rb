@@ -57,16 +57,14 @@ class PaymentProcessingService
 
       total_cost = session.amount_total / 100.0
 
-  line_items.data.each do |item|
-    quantity = item.quantity
-
-
-    # Determine if item corresponds to adults or kids (this depends on your Stripe setup)
-    if item.description.downcase.include?("adult")
-      total_adults += quantity
-    elsif item.description.downcase.include?("kid") || item.description.downcase.include?("child")
-      total_kids += quantity
-    end
+      line_items.data.each do |item|
+        quantity = item.quantity
+        # Determine if item corresponds to adults or kids (this depends on your Stripe setup)
+        if item.description.downcase.include?("adult")
+          total_adults += quantity
+        elsif item.description.downcase.include?("kid") || item.description.downcase.include?("child")
+          total_kids += quantity
+        end
   end
 
   # Create or update the registration record

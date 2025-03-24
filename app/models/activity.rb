@@ -13,7 +13,7 @@ class Activity < ApplicationRecord
 
   validates :title, :description, :start_date, :end_date, :location, presence: true
   validates :capacity, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-  validates :cost, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
+  validates :adult_cost, :kid_cost, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
 
   has_many :registrations, as: :registrable
   has_many :payments, as: :paymentable
@@ -28,6 +28,6 @@ class Activity < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    [ "capacity", "cost", "early_access_for_members", "end_date", "general_registration_start", "location", "start_date", "title" ]
+    [ "capacity", "adult_cost",  "kid_cost", "early_access_for_members", "end_date", "general_registration_start", "location", "start_date", "title" ]
   end
 end
