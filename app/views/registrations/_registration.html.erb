@@ -1,18 +1,7 @@
 <div class="card registration-card mb-3">
   <div class="card-body">
     <h5 class="card-title"><%= registration.registrable&.title %></h5>
-    <p>
-      <i class="fas fa-calendar-alt"></i> <strong>:</strong>
-      <%= formatted_start_date(registration.registrable) %>
-      <%= registration.registrable.start_date.strftime("%I:%M %p") %> - <%= registration.registrable.end_date.strftime("%I:%M %p") %>
-    </p>
-    <p>
-      <i class="fas fa-map-marker-alt"></i> <strong>:</strong> <%= registration.registrable.location %>
-    </p>
-    <p>
-      <i class="fa-solid fa-money-bill"></i> <strong>:</strong>
-      <%= registration.registrable.adult_cost.present? && registration.registrable.adult_cost > 0 ? number_to_currency(registration.registrable.adult_cost) : "Free" %>
-    </p>
+    <%= render 'shared/item_details', item: registration.registrable %>
     <% if registration.registrable.present? %>
       <%= link_to "View Details", 
                   polymorphic_path(registration.registrable), 
@@ -36,8 +25,8 @@
         <div class="accordion-body">
           <p><strong>Order Number:</strong> <%= registration.id %></p>
           <p><strong>Order Date:</strong> <%= registration.created_at.strftime("%B %d, %Y") %></p>
-          <p><strong>Adults:</strong> <%= registration.number_of_adults %> </p>
-          <p><strong>Kids:</strong> <%= registration.number_of_kids %></p>
+          <p><strong><%= "Adult".pluralize(registration.number_of_adults) %>:</strong> <%= registration.number_of_adults %></p>
+          <p><strong><%= "Child".pluralize(registration.number_of_kids) %>:</strong> <%= registration.number_of_kids %></p>
           <p><strong>Total:</strong> <%= number_to_currency(registration.cost) %></p>
         </div>
       </div>

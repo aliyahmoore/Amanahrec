@@ -9,32 +9,8 @@
       <h4 class="card-title text-center">
         <%= item.title %>
       </h4>
-      <p class="card-text">
-        <i class="fas fa-calendar-alt"></i> <strong>:</strong>
-        <% if item.start_date.to_date == item.end_date.to_date %>
-          <!-- Single-day event (Show time) -->
-          <%= item.start_date.strftime("%B %d, %Y %I:%M %p") %> - <%= item.end_date.strftime("%I:%M %p") %>
-        <% else %>
-          <!-- Multi-day event (Show only dates) -->
-          <%= item.start_date.strftime("%B %d, %Y %I:%M %p") %> - <%= item.end_date.strftime("%B %d, %Y %I:%M %p") %>
-        <% end %>
-      </p>
-      <p class="card-text">
-        <i class="fa-solid fa-location-dot"></i> <strong>:</strong> <%= item.location %>
-      </p>
-      <p class="card-text">
-        <i class="fa-sharp-duotone fa-solid fa-money-bill"></i> <strong>:</strong>
-        <% if item.adult_cost.present? && item.adult_cost > 0 %>
-          Adult: <%= number_to_currency(item.adult_cost) %>,
-        <% else %>
-          Adult: Free,
-        <% end %>
-        <% if item.kid_cost.present? && item.kid_cost > 0 %>
-          Kids: <%= number_to_currency(item.kid_cost) %><br>
-        <% else %>
-          Kids: Free<br>
-        <% end %>
-      </p>
+      <!-- Render the shared item details partial -->
+      <%= render 'shared/item_details', item: item %>
       <!-- Member Early Access Badge -->
       <%= render 'shared/early_access_badge', item: item %>
       <!-- Countdown Timer -->

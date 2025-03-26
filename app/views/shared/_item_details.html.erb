@@ -1,0 +1,24 @@
+<p class="card-text">
+  <i class="fas fa-calendar-alt"></i> <strong>:</strong>
+  <% if item.start_date.to_date == item.end_date.to_date %>
+    <%= item.start_date.strftime("%B %d, %Y %I:%M %p") %> - <%= item.end_date.strftime("%I:%M %p") %>
+  <% else %>
+    <%= item.start_date.strftime("%B %d, %Y %I:%M %p") %> - <%= item.end_date.strftime("%B %d, %Y %I:%M %p") %>
+  <% end %>
+</p>
+<p class="card-text">
+  <i class="fa-solid fa-location-dot"></i> <strong>:</strong> <%= item.location %>
+</p>
+<p class="card-text">
+  <i class="fa-solid fa-money-bill"></i> <strong>:</strong>
+  <% if item.adult_cost.present? && item.adult_cost > 0 %>
+    Adult: <%= number_to_currency(item.adult_cost) %>,
+  <% else %>
+    Adult: Free,
+  <% end %>
+  <% if item.kid_cost.present? && item.kid_cost > 0 %>
+    Child: <%= number_to_currency(item.kid_cost) %>
+  <% else %>
+    Child: Free
+  <% end %>
+</p>
