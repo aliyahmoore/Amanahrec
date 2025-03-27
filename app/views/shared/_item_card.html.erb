@@ -9,12 +9,12 @@
       <h4 class="card-title text-center">
         <%= item.title %>
       </h4>
-      <!-- Render the shared item details partial -->
+      <!-- Item details -->
       <%= render 'shared/item_details', item: item %>
       <!-- Member Early Access Badge -->
       <%= render 'shared/early_access_badge', item: item %>
-      <!-- Countdown Timer -->
-      <%= render 'shared/countdown', item: item %>
+      <!-- Registration Status -->
+      <%= render 'shared/registration_status_actions', item: item %>
     </div>
   <% end %>
 </div>

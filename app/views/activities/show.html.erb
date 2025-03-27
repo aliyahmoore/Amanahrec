@@ -23,10 +23,7 @@
       <% if @activity.rules.present? %>
         <p><i class="fas fa-exclamation-triangle"></i> <strong>Rules:</strong> <%= @activity.rules %></p>
       <% end %>
-      <%= render 'shared/registration_status_actions', registrable: @activity %>
-      <% if @activity.registrations.count >= @activity.capacity %>
-        <div class="btn btn-outline-primary" style="pointer-events: none;">SOLD OUT</div>
-      <% end %>
+      <%= render 'shared/registration_status_actions', item: @activity %>
     </div>
   </div>
 </div>

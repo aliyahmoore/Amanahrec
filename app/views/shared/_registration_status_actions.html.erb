@@ -1,16 +1,40 @@
 <div class="registration-actions text-center mt-3">
-  <% if registrable.end_date.present? && Time.current > registrable.end_date %>
+  <% if item.end_date.present? && Time.current > item.end_date %>
     <p class="registration-info text-center">
-      <span class="btn btn-outline-danger" style="pointer-trips: none;">
+      <span class="btn btn-outline-danger" style="pointer-events: none;">
         Registration Closed
       </span>
     </p>
-  <% elsif (registrable.early_access_for_members? && current_user&.membership_active?) || registrable.general_registration_open? %>
-    <% if registrable.present? %>  <!-- Check if registrable is present -->
-      <% if registrable.adult_cost.to_i > 0 %>
+  <% elsif Registration.reached_capacity?(item) %>
+    <p class="registration-info text-center">
+      <span class="btn btn-outline-primary" style="pointer-events: none;">
+        SOLD OUT
+      </span>
+    </p>
+  <% elsif Time.current < item.general_registration_start %>
+    <p class="registration-info text-center">
+      <% if item.early_access_for_members %>
+        Member Registrations Now Open </br> General Registration Opens In:
+      <% else %>
+        General Registration Opens In:
+      <% end %>
+      <% time_remaining = item.general_registration_start - Time.current %>
+      <strong><%= ChronicDuration.output(time_remaining, days: true, units: 2) %></strong>
+    </p>
+  <% else %>
+    <!-- Registration is open -->
+    <p class="registration-info text-center">
+      <span class="btn btn-outline-success" style="pointer-events: none;">
+        General Registration Open!
+      </span>
+    </p>
+
+    <!-- Registration Actions -->
+    <% if (item.early_access_for_members? && current_user&.membership_active?) || item.general_registration_open? %>
+      <% if item.adult_cost.to_i > 0 %>
         <!-- Paid: Redirect to Payments -->
         <%= button_to "Register and Pay", 
-                  polymorphic_path([registrable, :payments], paymentable_type: registrable.class.name, paymentable_id: registrable.id), 
+                  polymorphic_path([item, :payments], paymentable_type: item.class.name, paymentable_id: item.id), 
                   method: :post, class: "btn btn-primary mb-3", data: { turbo: false } %>
       <% else %>
         <!-- Free: Direct Registration -->
@@ -19,22 +43,18 @@
         </button>
       <% end %>
     <% end %>
-  <% else %>
-    <p class="registration-info text-center">
-      <span class="btn btn-outline-secondary" style="pointer-trips: none;">
-        Registration Not Yet Open
-      </span>
-    </p>
   <% end %>
 </div>
+
+<!-- Registration Modal -->
 <div class="modal fade" id="registrationModal" tabindex="-1" role="dialog" aria-labelledby="registrationModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="registrationModalLabel">Register for <%= registrable.title %></h5>
+        <h5 class="modal-title" id="registrationModalLabel">Register for <%= item.title %></h5>
       </div>
       <div class="modal-body">
-        <%= form_with url: polymorphic_path([registrable, :registrations]), method: :post, local: true do |form| %>
+        <%= form_with url: polymorphic_path([item, :registrations]), method: :post, local: true do |form| %>
           <div class="form-group d-flex justify-content-between my-2">
             <label for="number_of_adults" class="mr-2">
               <dt>Adults:</dt>
@@ -47,8 +67,8 @@
             </label>
             <%= form.number_field :number_of_kids, in: 0..10, class: "form-control w-auto", value: 0 %>
           </div>
-          <%= form.hidden_field :registrable_type, value: registrable.class.name %>
-          <%= form.hidden_field :registrable_id, value: registrable.id %>
+          <%= form.hidden_field :registrable_type, value: item.class.name %>
+          <%= form.hidden_field :registrable_id, value: item.id %>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <%= form.submit "Register", class: "btn btn-primary" %>

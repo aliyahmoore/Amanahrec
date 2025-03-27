@@ -16,5 +16,11 @@ class Registration < ApplicationRecord
     [ "created_at", "id", "id_value", "registrable_id", "registrable_type", "status", "updated_at", "user_id", "number_of_adults", "number_of_kids", "cost" ]
   end
 
-  # Returns true if the registrable requires payment (i.e., it has a cost)
+  def self.reached_capacity?(registrable)
+    total_adults = registrable.registrations.sum(:number_of_adults)
+    total_kids = registrable.registrations.sum(:number_of_kids)
+    total_registrations = total_adults + total_kids
+
+    total_registrations >= registrable.capacity
+  end
 end
