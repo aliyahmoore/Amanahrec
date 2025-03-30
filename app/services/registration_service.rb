@@ -5,9 +5,6 @@ class RegistrationService
     end
 
   def register_user(number_of_adults, number_of_kids)
-    raise RegistrationError, "You are already registered for this trip or activity/event." if already_registered?
-    raise RegistrationError, "Registration is full. Sorry, the capacity has been reached." if Registration.reached_capacity?(@registrable)
-
     # Proceed with the registration for free activities and events
     registration = Registration.create!(
       user: @user,
@@ -29,10 +26,6 @@ class RegistrationService
   end
 
   private
-
-  def already_registered?
-    Registration.exists?(user: @user, registrable: @registrable)
-  end
 end
 
 class RegistrationError < StandardError; end

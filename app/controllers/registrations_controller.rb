@@ -4,7 +4,12 @@ class RegistrationsController < ApplicationController
   ALLOWED_REGISTRABLE_TYPES = [ "Activity", "Trip" ].freeze
 
   def create
-    # Use RegistrationService to handle registration logic
+    if Registration.exists?(user: current_user, registrable: @registrable)
+      flash[:alert] = "You are already registered for this event."
+      redirect_to @registrable
+      return
+    end
+
     registration_service = RegistrationService.new(current_user, @registrable)
     number_of_adults = params[:number_of_adults].to_i
     number_of_kids = params[:number_of_kids].to_i
@@ -38,6 +43,7 @@ class RegistrationsController < ApplicationController
   def set_registrable
     if ALLOWED_REGISTRABLE_TYPES.include?(params[:registrable_type])
       @registrable = params[:registrable_type].constantize.find_by!(id: params[:registrable_id])
+       Rails.logger.debug "Registrable found: #{@registrable.inspect}"
     end
   rescue ActiveRecord::RecordNotFound
     # Handle case where the record is not found

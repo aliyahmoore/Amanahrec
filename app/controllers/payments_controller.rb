@@ -1,12 +1,17 @@
 class PaymentsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_approval, only: [ :create ]
-  before_action :set_paymentable, only: [ :create, :success ]
   before_action :prevent_duplicate_membership, only: [ :create ]
 
   include Findable
 
   def create
+    if Registration.exists?(user: current_user, registrable: @paymentable)
+      flash[:alert] = "You are already registered for this event."
+      redirect_to @paymentable
+      return
+    end
+
     return redirect_to root_url, alert: "Invalid paymentable type." unless valid_paymentable?
 
     stripe_session = PaymentService.new(current_user, @paymentable, root_url).create_stripe_session

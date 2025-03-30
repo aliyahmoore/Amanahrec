@@ -7,6 +7,7 @@ class Registration < ApplicationRecord
 
   validates :user_id, :registrable_id, :registrable_type, presence: true
   validates :number_of_adults, :number_of_kids, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validate :user_not_already_registered
 
   def self.ransackable_associations(auth_object = nil)
     [ "registrable", "registrations", "user" ]
@@ -22,5 +23,17 @@ class Registration < ApplicationRecord
     total_registrations = total_adults + total_kids
 
     total_registrations >= registrable.capacity
+  end
+
+  def user_not_already_registered
+    return unless new_record?
+    
+    exists = Registration.where(
+      user_id: user_id,
+      registrable_id: registrable_id,
+      registrable_type: registrable_type
+    ).exists?
+  
+    errors.add(:base, "You are already registered for this event.") if exists
   end
 end
