@@ -27,13 +27,13 @@ class Registration < ApplicationRecord
 
   def user_not_already_registered
     return unless new_record?
-    
+
     exists = Registration.where(
       user_id: user_id,
       registrable_id: registrable_id,
       registrable_type: registrable_type
     ).exists?
-  
+
     errors.add(:base, "You are already registered for this event.") if exists
   end
 end
