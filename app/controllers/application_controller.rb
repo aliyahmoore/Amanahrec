@@ -14,5 +14,5 @@ class ApplicationController < ActionController::Base
       flash[:alert] =  "Your account is pending approval."
       redirect_to request.referer || root_path
     end
-end
+  end
 end

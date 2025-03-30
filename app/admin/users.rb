@@ -56,7 +56,7 @@ ActiveAdmin.register User do
   end
 
       # Add an action to approve individual users
-      member_action :approve, method: :put do
+      member_action :approve_user, method: :put do
         user = User.find(params[:id])
         user.update(approved: true)
         redirect_to admin_user_path(user), notice: "User has been approved."
