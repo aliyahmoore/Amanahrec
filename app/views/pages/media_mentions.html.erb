@@ -20,7 +20,7 @@
             </p>
             <div class="d-flex flex-column align-items-center">
               <% if media_mention.link.present? %>
-                <%= link_to "View Full Article", media_mention.link, target: "_blank", class: "btn btn-primary" %>
+                <%= link_to "View Full Article", strip_links(media_mention.link), target: "_blank", class: "btn btn-primary" %>
               <% else %>
                 <p class="text-muted">No link available</p>
               <% end %>

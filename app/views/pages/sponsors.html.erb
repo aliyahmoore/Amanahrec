@@ -6,7 +6,7 @@
       <div class="sponsor-logo">
         <% if sponsor.logo.attached? %>
           <% if sponsor.link.present? %>
-            <%= link_to sponsor.link, target: "_blank" do %>
+            <%= link_to strip_links(sponsor.link), target: "_blank" do %>
               <%= image_tag sponsor.logo, alt: sponsor.name, class: "img-fluid", style: "height: 150px;" %>
             <% end %>
           <% else %>
