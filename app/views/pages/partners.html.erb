@@ -6,7 +6,7 @@
       <div class="partner-logo">
         <% if partner.logo.attached? %>
           <% if partner.link.present? %>
-            <%= link_to sanitize(partner.link), target: "_blank", rel: "noopener noreferrer" do %>
+            <%= link_to partner.link, target: "_blank" do %>
               <%= image_tag partner.logo, alt: partner.name, class: "img-fluid", style: "height: 150px;" %>
             <% end %>
           <% else %>
