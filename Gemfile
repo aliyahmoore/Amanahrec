@@ -63,7 +63,7 @@ gem "devise", "~> 4.9"
 
 gem "htmlbeautifier", "~> 1.4"
 
-gem "stripe", "~> 13.3"
+gem "stripe", "~> 14.0"
 
 gem "dotenv-rails", groups: [ :development, :test ]
 
