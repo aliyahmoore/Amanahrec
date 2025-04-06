@@ -30,17 +30,19 @@
   </p>
 <% end %>
 <!-- Registration Actions -->
-<% if (item.early_access_for_members? && current_user&.membership_active?) || item.general_registration_open? %>
-  <% if item.adult_cost.to_i > 0 %>
-    <!-- Paid: Redirect to Payments -->
-    <%= button_to "Register and Pay", 
+<% unless item.end_date.present? && Time.current > item.end_date || Registration.reached_capacity?(item) %>
+  <% if (item.early_access_for_members? && current_user&.membership_active?) || item.general_registration_open? %>
+    <% if item.adult_cost.to_i > 0 %>
+      <!-- Paid: Redirect to Payments -->
+      <%= button_to "Register and Pay", 
                   polymorphic_path([item, :payments], paymentable_type: item.class.name, paymentable_id: item.id), 
                   method: :post, class: "btn btn-primary mb-3", data: { turbo: false } %>
-  <% else %>
-    <!-- Free: Direct Registration -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrationModal">
-      Register
-    </button>
+    <% else %>
+      <!-- Free: Direct Registration -->
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrationModal">
+        Register
+      </button>
+    <% end %>
   <% end %>
 <% end %>
 </div>
