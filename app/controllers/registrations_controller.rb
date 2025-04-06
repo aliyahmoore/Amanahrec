@@ -2,6 +2,7 @@ class RegistrationsController < ApplicationController
   before_action :check_approval
   before_action :set_registrable, only: [ :create ]
   ALLOWED_REGISTRABLE_TYPES = [ "Activity", "Trip" ].freeze
+  before_action :authenticate_user!
 
   def create
     if Registration.exists?(user: current_user, registrable: @registrable)
