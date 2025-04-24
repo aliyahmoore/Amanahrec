@@ -111,12 +111,8 @@ ActiveAdmin.register Trip do
       f.input :end_date, as: :date_time_picker, datepicker_options: { step: 15 }
       f.input :location
       f.input :capacity
-      f.input :adult_cost do |trip|
-        number_to_currency(trip.cost, unit: "$", precision: 2)
-      end
-      f.input :kid_cost do |trip|
-        number_to_currency(trip.cost, unit: "$", precision: 2)
-      end
+      f.input :adult_cost, input_html: { value: number_with_precision(trip.adult_cost, precision: 2) }
+      f.input :kid_cost, input_html: { value: number_with_precision(trip.kid_cost, precision: 2) }
       f.input :childcare
       f.input :sponsors
       f.input :general_registration_start, as: :date_time_picker, datepicker_options: { step: 15 }

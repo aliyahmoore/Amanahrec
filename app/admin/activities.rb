@@ -23,6 +23,10 @@ ActiveAdmin.register Activity do
 
   # Index Page
   index do
+    div class: "admin-instructions" do
+      para "Use the actions on the right to view, edit, delete, or duplicate any activity"
+    end
+
     selectable_column
     id_column
     column :title
@@ -102,6 +106,16 @@ ActiveAdmin.register Activity do
 
   # Form
   form do |f|
+    div class: "admin-instructions" do
+      para raw("Notes for creating an Activity:<br>
+      1. Description uses rich text formatting.<br>
+      2. Admin uses 24-hour time, users see 12-hour time.<br>
+      3. Date order must be:<br>
+      &nbsp;&nbsp;- General Registration Start Date must be before Activity Start Date<br>
+      &nbsp;&nbsp;- Start Date must be before End Date. Similarly, End Date cannot be before the Start Date. 
+      4. If early access for members is enabled, must include the number of days ahead of the General Registration Start Date for early access
+      5. Upload an image")
+    end
     f.inputs "Activity Details" do
       f.input :title
       f.input :description, as: :quill_editor
@@ -109,15 +123,11 @@ ActiveAdmin.register Activity do
       f.input :end_date, as: :date_time_picker, datepicker_options: { step: 15 }
       f.input :location
       f.input :capacity
-      f.input :adult_cost do |activity|
-        number_to_currency(activity.cost, unit: "$", precision: 2)
-      end
-      f.input :kid_cost do |activity|
-        number_to_currency(activity.cost, unit: "$", precision: 2)
-      end
-      f.input :what_to_bring
-      f.input :rules
-      f.input :notes
+      f.input :adult_cost, input_html: { value: number_with_precision(activity.adult_cost, precision: 2) }
+      f.input :kid_cost, input_html: { value: number_with_precision(activity.kid_cost, precision: 2) }
+      f.input :what_to_bring, as: :quill_editor
+      f.input :rules, as: :quill_editor
+      f.input :notes, as: :quill_editor
       f.input :general_registration_start, as: :date_time_picker, datepicker_options: { step: 15 }
       f.input :early_access_for_members
       f.input :early_access_days
