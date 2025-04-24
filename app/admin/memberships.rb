@@ -2,6 +2,9 @@ ActiveAdmin.register Membership do
   actions :index, :show
 
   index do
+    div class: "admin-instructions" do
+      para "This section displays a summary of all user memberships. Memberships are view-only and cannot be created or edited from the admin panel."
+    end
     selectable_column
     id_column
     column "User" do |membership|

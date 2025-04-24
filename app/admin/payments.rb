@@ -2,6 +2,9 @@ ActiveAdmin.register Payment do
   actions :index, :show
 
   index do
+    div class: "admin-instructions" do
+      para "This section displays a summary of all membership and activity/event/trip payments. Payments are view-only and cannot be modified from the admin panel."
+    end
     selectable_column
     id_column
     column "User" do |membership|

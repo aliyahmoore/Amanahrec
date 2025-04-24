@@ -104,6 +104,16 @@ ActiveAdmin.register Trip do
 
   # Form
   form do |f|
+    div class: "admin-instructions" do
+      para raw("Notes for creating a Trip:<br>
+      1. Description uses rich text formatting.<br>
+      2. Admin uses 24-hour time, users see 12-hour time.<br>
+      3. Date order must be:<br>
+      &nbsp;&nbsp;- General Registration Start Date must be before Activity Start Date<br>
+      &nbsp;&nbsp;- Start Date must be before End Date. Similarly, End Date cannot be before the Start Date. <br>
+      4. If early access for members is enabled, must include the number of days ahead of the General Registration Start Date for early access <br>
+      5. Upload an image")
+    end
     f.inputs "Trip Details" do
       f.input :title
       f.input :description, as: :quill_editor

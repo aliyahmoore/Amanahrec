@@ -24,6 +24,9 @@ ActiveAdmin.register User do
 
   # Customizing the index page
   index do
+    div class: "admin-instructions" do
+      para "Users must be approved to register for trips, events, and activities, submit testimonials, or become members."
+    end
   selectable_column
   id_column
   column :first_name

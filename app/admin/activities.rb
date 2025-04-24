@@ -23,10 +23,6 @@ ActiveAdmin.register Activity do
 
   # Index Page
   index do
-    div class: "admin-instructions" do
-      para "Use the actions on the right to view, edit, delete, or duplicate any activity"
-    end
-
     selectable_column
     id_column
     column :title
@@ -112,8 +108,8 @@ ActiveAdmin.register Activity do
       2. Admin uses 24-hour time, users see 12-hour time.<br>
       3. Date order must be:<br>
       &nbsp;&nbsp;- General Registration Start Date must be before Activity Start Date<br>
-      &nbsp;&nbsp;- Start Date must be before End Date. Similarly, End Date cannot be before the Start Date. 
-      4. If early access for members is enabled, must include the number of days ahead of the General Registration Start Date for early access
+      &nbsp;&nbsp;- Start Date must be before End Date. Similarly, End Date cannot be before the Start Date. <br>
+      4. If early access for members is enabled, must include the number of days ahead of the General Registration Start Date for early access <br>
       5. Upload an image")
     end
     f.inputs "Activity Details" do

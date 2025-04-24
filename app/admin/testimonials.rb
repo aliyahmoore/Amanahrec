@@ -12,6 +12,9 @@ ActiveAdmin.register Testimonial do
 
   # Index view customization
   index do
+    div class: "admin-instructions" do
+      para "Testimonials must be approved before appearing on the homepage."
+    end
     selectable_column
     id_column
     column "User" do |testimonial|
