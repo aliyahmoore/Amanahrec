@@ -3,14 +3,6 @@ ActiveAdmin.register User do
   :ethnicity, :password, :password_confirmation
 
   controller do
-    def update
-      if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
-        params[:user].delete(:password)
-        params[:user].delete(:password_confirmation)
-      end
-      super
-    end
-    
     def show
       @page_title = "#{resource.first_name} #{resource.last_name}"
     end
@@ -113,8 +105,6 @@ f.input :ethnicity, as: :select, collection: [ [ "White", "White" ], [ "Black or
 [ "Hispanic or Latino", "Hispanic or Latino" ], [ "Other", "Other" ],
 [ "Prefer not to say", "Prefer not to say" ] ],
 prompt: "Select Ethnicity", input_html: { required: true }
-  f.input :password
-  f.input :password_confirmation
   end
   f.actions
   end
