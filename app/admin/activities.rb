@@ -84,9 +84,15 @@ ActiveAdmin.register Activity do
       end
       row :early_access_for_members
       row :early_access_days
-      row :what_to_bring
-      row :rules
-      row :notes
+      row :what_to_bring do |resource|
+        simple_format(resource.what_to_bring)
+      end
+      row :rules do |resource|
+        simple_format(resource.rules)
+      end
+      row :notes do |resource|
+        simple_format(resource.notes)
+      end
       row :image do |activity|
         if activity.image.attached?
           image_tag url_for(activity.image), size: "300x300"
