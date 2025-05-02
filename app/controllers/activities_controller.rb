@@ -1,7 +1,7 @@
 class ActivitiesController < ApplicationController
   before_action :set_activity, only: [ :show ]
     def index
-      @current_activities = Activity.where("start_date >= ?", Time.current).order(start_date: :desc)
+      @current_activities = Activity.where("start_date >= ?", Time.current).order(start_date: :asc)
       @past_activities = Activity.where("start_date < ?", Time.current).order(start_date: :desc)
     end
 
