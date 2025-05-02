@@ -1,6 +1,6 @@
 ActiveAdmin.register Activity do
   permit_params :title, :description, :start_date, :end_date, :location, :capacity,
-                :what_to_bring, :rules, :notes, :adult_cost, :kid_cost, :early_access_for_members,
+                :what_to_bring, :rules, :adult_cost, :kid_cost, :early_access_for_members,
                 :early_access_days, :general_registration_start, :user_id, :image
 
   # Find the slug
@@ -90,9 +90,6 @@ ActiveAdmin.register Activity do
       row :rules do |resource|
         simple_format(resource.rules)
       end
-      row :notes do |resource|
-        simple_format(resource.notes)
-      end
       row :image do |activity|
         if activity.image.attached?
           image_tag url_for(activity.image), size: "300x300"
@@ -129,7 +126,6 @@ ActiveAdmin.register Activity do
       f.input :kid_cost, input_html: { value: number_with_precision(activity.kid_cost, precision: 2) }
       f.input :what_to_bring, as: :quill_editor
       f.input :rules, as: :quill_editor
-      f.input :notes, as: :quill_editor
       f.input :general_registration_start, as: :date_time_picker, datepicker_options: { step: 15 }
       f.input :early_access_for_members
       f.input :early_access_days
