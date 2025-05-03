@@ -1,0 +1,21 @@
+<% content_for :title, "Amanah House" %>
+<h1 class="text-center my-3">Amanah House</h1>
+<div class="container about">
+  <div class="col-lg-8 offset-lg-2">
+    <div class="mission mb-5">
+      <p class="lead text-center">
+        <i class="fa-solid fa-location-dot"></i> <%=@amanah_house.location %>
+      </p>
+      <div class="d-flex justify-content-center my-4">
+        <% if @amanah_house.image.attached? %>
+          <%= image_tag @amanah_house.image, class: "img-fluid" %>
+        <% else %>
+          <p>No image uploaded yet.</p>
+        <% end %>
+      </div>
+      <p class="lead text-center">
+        <%=@amanah_house.description %>
+      </p>
+    </div>
+  </div>
+</div>
