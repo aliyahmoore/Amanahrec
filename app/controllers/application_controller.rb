@@ -9,10 +9,4 @@ class ApplicationController < ActionController::Base
   end
 
   private
-  def check_approval
-    if current_user && !current_user.approved?
-      flash[:alert] =  "Your account is pending approval."
-      redirect_to request.referer || root_path
-    end
-  end
 end

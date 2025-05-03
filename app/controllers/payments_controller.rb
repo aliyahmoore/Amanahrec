@@ -1,6 +1,5 @@
 class PaymentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_approval, only: [ :create ]
   before_action :prevent_duplicate_membership, only: [ :create ]
 
   include Findable
