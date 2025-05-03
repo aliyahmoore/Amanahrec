@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get "calendar", to: "pages#calendar"
   get "partners", to: "pages#partners"
   get "sponsors", to: "pages#sponsors"
+  get "amanah_house", to: "pages#amanah_house"
   get "media_mentions", to: "pages#media_mentions"
   get "leaders", to: "pages#leaders"
   root "pages#home"

@@ -31,4 +31,8 @@ end
   def media_mentions
     @media_mentions = MediaMention.order(published_date: :desc)
   end
+
+  def amanah_house
+    @amanah_house = AmanahHouse.first
+  end
 end

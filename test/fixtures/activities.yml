@@ -9,7 +9,6 @@ one:
   capacity: 1
   what_to_bring: MyText
   rules: MyText
-  notes: MyText
   cost: 9.99
 
 
@@ -22,5 +21,4 @@ two:
   capacity: 1
   what_to_bring: MyText
   rules: MyText
-  notes: MyText
   cost: 9.99

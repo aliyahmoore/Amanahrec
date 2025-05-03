@@ -18,10 +18,10 @@
       <p><%= simple_format(@activity.description) %></p>
       <p><i class="fa-solid fa-users"></i><strong> Registration Limit:</strong> <%= @activity.capacity %></p>
       <% if @activity.what_to_bring.present? %>
-        <p><i class="fas fa-suitcase"></i> <strong>What to Bring:</strong> <%= @activity.what_to_bring %></p>
+        <p><i class="fas fa-suitcase"></i> <strong>What to Bring:</strong> <%= simple_format(@activity.what_to_bring) %></p>
       <% end %>
       <% if @activity.rules.present? %>
-        <p><i class="fas fa-exclamation-triangle"></i> <strong>Rules:</strong> <%= @activity.rules %></p>
+        <p><i class="fas fa-exclamation-triangle"></i> <strong>Rules:</strong> <%= simple_format(@activity.rules) %></p>
       <% end %>
       <%= render 'shared/registration_status_actions', item: @activity %>
     </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_23_023137) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_02_030031) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -73,7 +73,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_23_023137) do
     t.integer "capacity"
     t.text "what_to_bring"
     t.text "rules"
-    t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "early_access_for_members"
@@ -97,6 +96,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_23_023137) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "amanah_houses", force: :cascade do |t|
+    t.text "location"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|

@@ -1,6 +1,6 @@
 ActiveAdmin.register Activity do
   permit_params :title, :description, :start_date, :end_date, :location, :capacity,
-                :what_to_bring, :rules, :notes, :adult_cost, :kid_cost, :early_access_for_members,
+                :what_to_bring, :rules, :adult_cost, :kid_cost, :early_access_for_members,
                 :early_access_days, :general_registration_start, :user_id, :image
 
   # Find the slug
@@ -45,13 +45,6 @@ ActiveAdmin.register Activity do
     end
     column :early_access_for_members
     column :early_access_days
-    column :image do |activity|
-      if activity.image.attached?
-        image_tag url_for(activity.image), size: "50x50"
-      else
-        "No Image"
-      end
-    end
     actions do |activity|
       # Add the duplicate link
       link_to "Duplicate", duplicate_admin_activity_path(activity), method: :get
@@ -84,9 +77,12 @@ ActiveAdmin.register Activity do
       end
       row :early_access_for_members
       row :early_access_days
-      row :what_to_bring
-      row :rules
-      row :notes
+      row :what_to_bring do |resource|
+        simple_format(resource.what_to_bring)
+      end
+      row :rules do |resource|
+        simple_format(resource.rules)
+      end
       row :image do |activity|
         if activity.image.attached?
           image_tag url_for(activity.image), size: "300x300"
@@ -110,7 +106,8 @@ ActiveAdmin.register Activity do
       &nbsp;&nbsp;- General Registration Start Date must be before Activity Start Date<br>
       &nbsp;&nbsp;- Start Date must be before End Date. Similarly, End Date cannot be before the Start Date. <br>
       4. If early access for members is enabled, must include the number of days ahead of the General Registration Start Date for early access <br>
-      5. Upload an image")
+      5. Upload an image <br>
+      6. Comments are in place of notes")
     end
     f.inputs "Activity Details" do
       f.input :title
@@ -123,7 +120,6 @@ ActiveAdmin.register Activity do
       f.input :kid_cost, input_html: { value: number_with_precision(activity.kid_cost, precision: 2) }
       f.input :what_to_bring, as: :quill_editor
       f.input :rules, as: :quill_editor
-      f.input :notes, as: :quill_editor
       f.input :general_registration_start, as: :date_time_picker, datepicker_options: { step: 15 }
       f.input :early_access_for_members
       f.input :early_access_days
